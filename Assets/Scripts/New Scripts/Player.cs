@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     private Box actualBox1;
     [SerializeField] private float speed = 3f;
     public bool isSelectingPath = false;
+    Box newBox = null;
 
     // Información del jugador
     private string name = "Player1";
@@ -19,12 +20,21 @@ public class Player : MonoBehaviour
 
     public CasillaEvent onInNewBox;
 
+    //Rotacion Valores
+    public bool smooth = true;
+    public float velocidadDeRotacion = 5f;
+
+
     void Start()
     {
         actualBox1 = board.GetCasilla(0);
         transform.position = actualBox1.GetThisBoxTransf().position + upToBox;
     }
 
+    private void Update()
+    {
+        Look();
+    }
     public void Move(int steps)
     {
         StartCoroutine(MoveCharacterBoard(steps));
@@ -32,8 +42,6 @@ public class Player : MonoBehaviour
 
     private IEnumerator MoveCharacterBoard(int steps)
     {
-        Box newBox = null;
-
         for (int i = 0; i < steps; i++)
         {
             newBox = actualBox1.GetNewBox(0);
@@ -79,6 +87,8 @@ public class Player : MonoBehaviour
     {
         destination1 += upToBox;
 
+        newBox = box;
+
         while (Vector3.Distance(transform.position, destination1) > 0.05f)
         {
             transform.position = Vector3.MoveTowards(transform.position, destination1, speed * Time.deltaTime);
@@ -87,6 +97,7 @@ public class Player : MonoBehaviour
         actualBox1 = box;
         isSelectingPath = false;
     }
+
 
     public string GetPlayerName()
     {
@@ -102,4 +113,27 @@ public class Player : MonoBehaviour
     {
         coins = newCoins;
     }
+
+    private void Look()
+    {
+        if (newBox == null)
+            return;
+
+        Vector3 direction = new Vector3(newBox.gameObject.transform.position.x - transform.position.x, 0f, newBox.gameObject.transform.position.z - transform.position.z);
+
+        if (direction.sqrMagnitude > 0.001f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
+
+            if (smooth)
+            {
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * velocidadDeRotacion);
+            }
+            else
+            {
+                transform.rotation = targetRotation;
+            }
+        }
+    }
 }
+
