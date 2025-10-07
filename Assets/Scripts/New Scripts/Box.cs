@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Box : MonoBehaviour
 {
@@ -15,26 +16,29 @@ public class Box : MonoBehaviour
 
     [SerializeField] private BoxType type;
     [SerializeField] private int rewardCoins = 3;
-    [SerializeField] private int starPrize = 5;
     [SerializeField] private List<Box> possiblesBoxes;
+    [SerializeField] private UnityEvent doBoxAction;
 
     public void ActiveEffect(Player player)
     {
         switch (type)
         {
             case BoxType.Coin:
-                Debug.Log(player.GetPlayerName() + " cayo en casilla monedas");
-                StartCoroutine(UIManager.instance.UpdateTextCoins(rewardCoins, player));
+                Debug.Log("Player cayo en casilla monedas");
+                UIManager.instance.SetActualPlayer(player);
+                StartCoroutine(UIManager.instance.UpdateTextCoins(rewardCoins));
                 break;
             case BoxType.Trap:
-                Debug.Log(player.GetPlayerName() + " cayo en casilla trampa");
+                Debug.Log("Player cayo en casilla trampa");
                 break;
             case BoxType.Path:
                 break;
             case BoxType.Star:
-                Debug.Log(player.GetPlayerName() + " cayo en casilla estrella");
+                Debug.Log("Player cayo en casilla estrella");
                 break;
         }
+
+        doBoxAction.Invoke();
     }
 
     public Transform GetNewBoxTransf()
