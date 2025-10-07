@@ -100,14 +100,9 @@ public class Player : MonoBehaviour
         isSelectingPath = false;
     }
 
-<<<<<<< HEAD
-
-    public string GetPlayerName()
-=======
     // -- Getters y Setters --
 
     public Sprite GetPlayerImage()
->>>>>>> main
     {
         return playerImage;
     }
@@ -122,7 +117,6 @@ public class Player : MonoBehaviour
         coins = newCoins;
     }
 
-<<<<<<< HEAD
     private void Look()
     {
         if (newBox == null)
@@ -143,7 +137,7 @@ public class Player : MonoBehaviour
                 transform.rotation = targetRotation;
             }
         }
-=======
+
     public void GetStar()
     {
         stars++;
@@ -152,7 +146,6 @@ public class Player : MonoBehaviour
     public int GetPlayerStars()
     {
         return stars;
->>>>>>> main
     }
 }
 
