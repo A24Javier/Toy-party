@@ -14,8 +14,9 @@ public class Player : MonoBehaviour
     public bool isSelectingPath = false;
 
     // Información del jugador
-    private string name = "Player1";
+    private Sprite playerImage = null;
     private int coins = 0;
+    private int stars = 0;
 
     public CasillaEvent onInNewBox;
 
@@ -54,7 +55,8 @@ public class Player : MonoBehaviour
                 Debug.Log("Esta en encrucijada");
                 isSelectingPath = true;
 
-                UIManager.instance.CreateSelectionPath(newBox, this);
+                UIManager.instance.SetActualPlayer(this);
+                UIManager.instance.CreateSelectionPath(newBox);
 
                 // Es una encrucijada
                 // Desactivar movimiento
@@ -88,9 +90,11 @@ public class Player : MonoBehaviour
         isSelectingPath = false;
     }
 
-    public string GetPlayerName()
+    // -- Getters y Setters --
+
+    public Sprite GetPlayerImage()
     {
-        return name;
+        return playerImage;
     }
 
     public int GetPlayerCoins()
@@ -101,5 +105,15 @@ public class Player : MonoBehaviour
     public void SetPlayerCoins(int newCoins)
     {
         coins = newCoins;
+    }
+
+    public void GetStar()
+    {
+        stars++;
+    }
+
+    public int GetPlayerStars()
+    {
+        return stars;
     }
 }
