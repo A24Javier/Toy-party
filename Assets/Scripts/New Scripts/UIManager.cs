@@ -4,16 +4,19 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using UnityEngine.TextCore.Text;
+using System;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
 
-    // Players Texts
-    [SerializeField] private TMP_Text playerTextCoins;
-    [SerializeField] private TMP_Text playerTextStars;
-    [SerializeField] private Image playerImage;
+    // Character Texts
+    [SerializeField] private TMP_Text characterTextCoins;
+    [SerializeField] private TMP_Text characterTextStars;
+    [SerializeField] private Image characterImage;
     public Player actualPlayer;
+    public Character actualCharacter;
 
     [Header("Cosas encrucijada")]
     private Board board;
@@ -23,6 +26,12 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text textoPrecioEstrella;
     [SerializeField] private CanvasGroup UI_buyStar;
     private bool canBuyStar = false;
+
+    [Header("Cosas selección de minijuego")]
+    [SerializeField] private GameObject prefabMinigameObjList;
+    [SerializeField] private CanvasGroup panelMinigameSelection;
+
+    [SerializeField] private CanvasGroup panelFadeInOut;
 
     void Awake()
     {
@@ -116,9 +125,15 @@ public class UIManager : MonoBehaviour
         actualPlayer = player;
     }
 
-    public IEnumerator UpdateTextCoins(int coins)
+    public void SetActualCharacter(Character character)
     {
-        int actualCoins = actualPlayer.GetPlayerCoins();
+        actualCharacter = character;
+    }
+
+    public IEnumerator UpdateTextCoins(Character character, int coins)
+    {
+        ChangeCharacterUI(character);
+        int actualCoins = character.GetCoins();
 
         for(int i = 0; i < Mathf.Abs(coins); i++)
         {
@@ -135,32 +150,34 @@ public class UIManager : MonoBehaviour
             }
 
             yield return new WaitForSeconds(0.25f);
-            playerTextCoins.text = actualCoins.ToString("Coins: 0");
+            characterTextCoins.text = actualCoins.ToString("Coins: 0");
         }
 
-        actualPlayer.SetPlayerCoins(actualCoins);
+        character.SetCoins(actualCoins);
     }
 
     private void UpdateStarsText()
     {
-        playerTextStars.text = actualPlayer.GetPlayerStars().ToString("Stars: 0");
+        characterTextStars.text = actualPlayer.GetStars().ToString("Stars: 0");
     }
 
     private void UIStarShopControl(bool open)
     {
         UI_buyStar.alpha = open ? 1 : 0;
         UI_buyStar.blocksRaycasts = open;
+        UI_buyStar.interactable = actualCharacter.isPlayer;
     }
 
     /// <summary>
     /// Abre el panel de control para comprar la estrella. Pide de valor el costo en monedas
     /// </summary>
     /// <param name="precio">Precio de la estrella</param>
-    public void OpenStarShop(int precio)
+    public void OpenStarShop(Character character, int precio)
     {
+        ChangeCharacterUI(character);
         UIStarShopControl(true);
         textoPrecioEstrella.text = precio.ToString("Precio: 0 coins");
-        if(actualPlayer.GetPlayerCoins() >= precio)
+        if(character.GetCoins() >= precio)
         {
             canBuyStar = true;
         }
@@ -170,22 +187,60 @@ public class UIManager : MonoBehaviour
     {
         if(!canBuyStar)
         {
-            Debug.Log("El jugador no tiene las suficientes monedas para comprar la estrella");
+            Debug.Log("El personaje no tiene las suficientes monedas para comprar la estrella");
             NotBuyStar();
         }
         else
         {
-            actualPlayer.GetStar();
+            actualCharacter.GetStars();
             UIStarShopControl(false);
-            StartCoroutine(UpdateTextCoins(-5));
+            StartCoroutine(UpdateTextCoins(actualCharacter, -5));
             UpdateStarsText();
             canBuyStar = false;
-            Debug.Log("El jugador compro una estrella");
+            Debug.Log("El personaje compro una estrella");
         }
     }
     
     public void NotBuyStar()
     {
         UIStarShopControl(false);
+    }
+
+    public void ChangeCharacterUI(Character character)
+    {
+        characterTextCoins.text = character.GetCoins().ToString("Coins: 0");
+        characterTextStars.text = character.GetStars().ToString("Stars: 0");
+        characterImage.sprite = character.GetCharImage();
+    }
+
+    // FadeIn es de luminoso a oscuro, fadeOut es de oscuro a luminoso
+    public IEnumerator FadeInOut(bool fadeIn, Action onFadeComplete)
+    {
+        float elapsedTime = 0;
+
+        panelFadeInOut.alpha = fadeIn ? 0 : 1;
+        panelFadeInOut.blocksRaycasts = true;
+
+        float initialValue = panelFadeInOut.alpha;
+        float finalFadeValue = fadeIn ? 1 : 0;
+
+        while(elapsedTime < 1)
+        {
+            elapsedTime += Time.deltaTime;
+            panelFadeInOut.alpha = Mathf.Lerp(initialValue, finalFadeValue, elapsedTime / 1);
+            yield return null;
+        }
+
+        panelFadeInOut.alpha = finalFadeValue;
+
+        if(onFadeComplete != null)
+        {
+            onFadeComplete();
+        }
+    }
+
+    public void ShowPossibleMinigamesList()
+    {
+
     }
 }
