@@ -28,12 +28,18 @@ public class InputHandler : MonoBehaviour
         jumpDice = playerInputAction.FindActionMap("Player").FindAction("TouchDice");
         jumpDice.Enable();
 
-        jumpDice.performed += ctx => spacePressed = true;
+        jumpDice.performed += ctx => StartCoroutine(SpaceBarControl());
     }
 
     void Start()
     {
         
+    }
+
+    private IEnumerator SpaceBarControl()
+    {
+        yield return new WaitForSeconds(0.2f);
+        spacePressed = false;
     }
 
     public bool IsSpacebarTouched()
