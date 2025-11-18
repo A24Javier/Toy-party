@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 3140342345623320870}
   - component: {fileID: 4634883532199971135}
   - component: {fileID: 5446551571750143576}
-  - component: {fileID: 6301762915416021097}
   - component: {fileID: -2682193999045717577}
+  - component: {fileID: 8758626568705475264}
   m_Layer: 7
   m_Name: "Palad\xEDn"
   m_TagString: Untagged
@@ -78,25 +78,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.57, y: 2.0123894, z: 0.52}
   m_Center: {x: 0, y: 0.99880534, z: 0}
---- !u!114 &6301762915416021097
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1830928126585884430}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90c83773118b357408fe2571069e7b9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterId: 0
-  coins: 0
-  stars: 0
-  characterImage: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  isPlayer: 0
-  speed: 3
-  isSelectingPath: 0
 --- !u!54 &-2682193999045717577
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -124,6 +105,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 1
+--- !u!114 &8758626568705475264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1830928126585884430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e635f7fc3233a74880f3b88d2c4174b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterId: 0
+  coins: 0
+  stars: 0
+  characterImage: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  isPlayer: 0
+  speed: 3
+  isSelectingPath: 0
 --- !u!1001 &765671290560443305
 PrefabInstance:
   m_ObjectHideFlags: 0

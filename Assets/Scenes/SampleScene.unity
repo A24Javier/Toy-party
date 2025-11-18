@@ -271,7 +271,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &80278566
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3583,6 +3583,8 @@ MonoBehaviour:
   downArrow: {fileID: 416573952}
   textoPrecioEstrella: {fileID: 748333014}
   UI_buyStar: {fileID: 1648682322}
+  prefabMinigameObjList: {fileID: 0}
+  panelMinigameSelection: {fileID: 0}
   panelFadeInOut: {fileID: 1813844015}
 --- !u!4 &1274365526
 Transform:
@@ -7193,7 +7195,7 @@ PrefabInstance:
     - target: {fileID: 2575557982321505783, guid: 093a6055900b1cd47ae2989ac0fa2652,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2575557982321505783, guid: 093a6055900b1cd47ae2989ac0fa2652,
         type: 3}
@@ -7203,7 +7205,7 @@ PrefabInstance:
     - target: {fileID: 2575557982321505783, guid: 093a6055900b1cd47ae2989ac0fa2652,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2575557982321505783, guid: 093a6055900b1cd47ae2989ac0fa2652,
         type: 3}
@@ -7253,12 +7255,12 @@ PrefabInstance:
     - target: {fileID: 2575557982321505783, guid: 093a6055900b1cd47ae2989ac0fa2652,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 210
       objectReference: {fileID: 0}
     - target: {fileID: 2575557982321505783, guid: 093a6055900b1cd47ae2989ac0fa2652,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -269.40002
       objectReference: {fileID: 0}
     - target: {fileID: 2575557982321505783, guid: 093a6055900b1cd47ae2989ac0fa2652,
         type: 3}
