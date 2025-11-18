@@ -96,6 +96,8 @@ MonoBehaviour:
   characterImage: {fileID: 21300000, guid: 13495d2b7206383459c4a7a3a3070ed7, type: 3}
   isPlayer: 0
   speed: 3
+  smooth: 1
+  velocidadDeRotacion: 5
 --- !u!54 &-2682193999045717577
 Rigidbody:
   m_ObjectHideFlags: 0

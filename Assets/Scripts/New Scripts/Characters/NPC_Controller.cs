@@ -16,6 +16,11 @@ public class NPC_Controller : Character
     private const float MIN_TIME_ROLL = 1f;
     private const float MAX_TIME_ROLL = 2.6f;
 
+    private Box newBox = null;  // Casilla a la que está mirando
+    public bool smooth = true;
+    public float velocidadDeRotacion = 5f;
+
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -25,8 +30,9 @@ public class NPC_Controller : Character
 
     void Update()
     {
-        
+        Look();
     }
+
 
     public IEnumerator doRolling(DiceScript dice)
     {
@@ -39,12 +45,39 @@ public class NPC_Controller : Character
         StartCoroutine(MoveCharacterBoard(steps));
     }
 
+    private void Look()
+    {
+        if (newBox == null)
+            return;
+
+        Vector3 direction = new Vector3(
+            newBox.transform.position.x - transform.position.x,
+            0f,
+            newBox.transform.position.z - transform.position.z
+        );
+
+        if (direction.sqrMagnitude > 0.001f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
+
+            if (smooth)
+            {
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * velocidadDeRotacion);
+            }
+            else
+            {
+                transform.rotation = targetRotation;
+            }
+        }
+    }
+
+
     protected override IEnumerator MoveCharacterBoard(int steps)
     {
         animator.SetBool("isRunning", true);
         for (int i = 0; i < steps; i++)
         {
-            Box newBox = actualBox.GetNewBox(0);
+            newBox = actualBox.GetNewBox(0);
 
             Vector3 destination = newBox.GetThisBoxTransf().position; //+ upToBox;
 
@@ -85,6 +118,8 @@ public class NPC_Controller : Character
                         {
                             if (pathPass == randPathStarSelected)
                             {
+                                newBox = actualBox.GetBoxTransf(j).GetComponent<Box>();
+
                                 while (Vector3.Distance(transform.position, actualBox.GetBoxTransf(j).position) > 0.05f)
                                 {
                                     transform.position = Vector3.MoveTowards(transform.position, actualBox.GetBoxTransf(j).position, speed * Time.deltaTime);
@@ -108,7 +143,8 @@ public class NPC_Controller : Character
             yield return null;
         }
         actualBox.ActivateEffect(this);
-        
+        UIManager.instance.DeactivatePathDecision();
+
     }
 
     public IEnumerator ProcessBuyStar(int price)

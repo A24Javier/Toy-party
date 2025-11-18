@@ -11,6 +11,9 @@ public class Player : Character
     private Box actualBox1;
     public bool isSelectingPath = false;
     private Animator animator;
+    Box newBox = null;
+    public bool smooth = true;
+    public float velocidadDeRotacion = 5f;
 
     // Inventario (por hacer) (tal vez merezca hacer polimorfismo para el inventario)
     private Dice specialDice;
@@ -23,18 +26,44 @@ public class Player : Character
         transform.position = actualBox1.GetThisBoxTransf().position + upToBox;
     }
 
+    private void Update()
+    {
+        Look();
+    }
     public override void Move(int steps)
     {
         StartCoroutine(MoveCharacterBoard(steps));
     }
 
+    private void Look()
+    {
+        if (newBox == null)
+            return;
+
+        Vector3 direction = new Vector3(newBox.gameObject.transform.position.x - transform.position.x, 0f, newBox.gameObject.transform.position.z - transform.position.z);
+
+        if (direction.sqrMagnitude > 0.001f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
+
+            if (smooth)
+            {
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * velocidadDeRotacion);
+            }
+            else
+            {
+                transform.rotation = targetRotation;
+            }
+        }
+    }
+
     protected override IEnumerator MoveCharacterBoard(int steps)
     {
-        Box newBox = null;
         animator.SetBool("isRunning", true);
 
         for (int i = 0; i < steps; i++)
         {
+            // Asignamos directamente al campo de la clase para Look()
             newBox = actualBox1.GetNewBox(0);
 
             Vector3 destination = newBox.GetThisBoxTransf().position + upToBox;
@@ -50,42 +79,41 @@ public class Player : Character
 
             if (actualBox1.PossiblesBoxesCount() >= 2)
             {
-                Debug.Log("Esta en encrucijada");
+                // Pausamos el movimiento y dejamos que el jugador elija
                 animator.SetBool("isRunning", false);
                 isSelectingPath = true;
 
                 UIManager.instance.SetActualPlayer(this);
-                UIManager.instance.CreateSelectionPath(newBox);
+                UIManager.instance.CreateSelectionPath(actualBox1);
 
-                // Es una encrucijada
-                // Desactivar movimiento
-
+                // Esperamos a que PathSelected() se encargue de actualizar newBox
                 while (isSelectingPath)
                 {
                     yield return null;
                 }
-                UIManager.instance.DeactivatePathDecision();
-                newBox = actualBox1;
 
-                // Activar movimiento
+                // Reanudamos movimiento
                 animator.SetBool("isRunning", true);
             }
-
-            //yield return new WaitForSeconds(0.2f);
         }
 
-        // Nos aseguramos de que "isRunning" se desactiva (ya que sin esto a veces no lo hace)
+        // Activamos efectos de la última casilla
         while (animator.GetBool("isRunning"))
         {
             animator.SetBool("isRunning", false);
             yield return null;
         }
-        
+
         newBox.ActivateEffect(this);
     }
 
+
     public IEnumerator PathSelected(Vector3 destination1, Box box)
     {
+        UIManager.instance.DeactivatePathDecision();
+
+        newBox = box;
+
         destination1 += upToBox;
 
         while (Vector3.Distance(transform.position, destination1) > 0.05f)
@@ -93,9 +121,11 @@ public class Player : Character
             transform.position = Vector3.MoveTowards(transform.position, destination1, speed * Time.deltaTime);
             yield return null;
         }
+
         actualBox1 = box;
         isSelectingPath = false;
     }
+
 
     public override IEnumerator DoAnim(string animationKey)
     {
