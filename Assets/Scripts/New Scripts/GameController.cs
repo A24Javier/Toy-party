@@ -130,6 +130,9 @@ public class GameController : MonoBehaviour
     /// </summary>
     private void StartMovement()
     {
+        //Resetea el espacio
+        InputHandler.instance.ResetSpace();
+
         isPlayerRolling = false;
         // Hacemos una operación para saber a que jugador/npc le toca ahora dependiendo el turno actual
         int thisCharTurn = idOrder[actualTurn % 4];

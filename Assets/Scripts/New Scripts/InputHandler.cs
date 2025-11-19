@@ -28,13 +28,23 @@ public class InputHandler : MonoBehaviour
         jumpDice = playerInputAction.FindActionMap("Player").FindAction("TouchDice");
         jumpDice.Enable();
 
-        jumpDice.performed += ctx => StartCoroutine(SpaceBarControl());
+        jumpDice.performed += ctx =>
+        {
+            // Solo registrar si el jugador PUEDE tirar el dado, INORANDO si no es tu turno
+            if (GameController.instance.IsPlayerRolling())
+            {
+                spacePressed = true;
+                StartCoroutine(SpaceBarControl());
+            }
+        };
+
+    }
+    //Resetea el espacio
+    public void ResetSpace()
+    {
+        spacePressed = false;
     }
 
-    void Start()
-    {
-        
-    }
 
     private IEnumerator SpaceBarControl()
     {
