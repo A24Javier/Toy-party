@@ -6,17 +6,19 @@ using UnityEngine.SceneManagement;
 
 public class MinigameController : MonoBehaviour
 {
+    // Enumeración para los tipos de minijuegos
     private enum MinigameType { AllVSAll, TwoVSTwo, ThreeVSOne }
 
     [Header("Minijuegos")]
     [SerializeField] private MinigameType[] minigameType;
     [SerializeField] private string[] sceneName;
-    private string minigameToLoad;
 
+    private string minigameToLoad;
     private Dictionary<string, MinigameType> minigames = new Dictionary<string, MinigameType>();
 
     public static MinigameController instance;
 
+    // Método Awake para implementar el patrón Singleton
     private void Awake()
     {
         if (instance == null)
@@ -30,13 +32,15 @@ public class MinigameController : MonoBehaviour
         }
     }
 
+    // Start se encarga de crear el diccionario de minijuegos
     void Start()
     {
         CreateMinigamesDictionary();
     }
 
+    #region Creación del Diccionario de Minijuegos
     /// <summary>
-    /// Función para crear el diccionario
+    /// Función para crear el diccionario que relaciona cada escena con su tipo de minijuego.
     /// </summary>
     private void CreateMinigamesDictionary()
     {
@@ -45,44 +49,49 @@ public class MinigameController : MonoBehaviour
             minigames.Add(sceneName[i], minigameType[i]);
         }
 
-        /*foreach(KeyValuePair<string, MinigameType> kvp in minigames)
-        {
-            Debug.Log("Minigame: " + kvp.Key);
-            Debug.Log("MinigameType: " + kvp.Value + "\n------------");
-        }*/
-
+        // Limpiar los arrays, ya que ya no son necesarios después de llenar el diccionario
         Array.Clear(minigameType, 0, minigameType.Length);
         Array.Clear(sceneName, 0, sceneName.Length);
     }
+    #endregion
 
+    #region Selección y Carga del Minijuego
     /// <summary>
-    /// Función para seleccionar minijuego de manera aleatoria pasando un valor que es el tipo de minijuego que quieres
+    /// Función para seleccionar un minijuego de manera aleatoria según el tipo de minijuego proporcionado.
     /// </summary>
-    /// <param name="strMinigameType"></param>
+    /// <param name="strMinigameType">Tipo de minijuego (como string).</param>
     public void SelectMinigame(string strMinigameType)
     {
+        // Convertir el tipo de minijuego desde string a enum
         MinigameType minType = (MinigameType)Enum.Parse(typeof(MinigameType), strMinigameType);
         Debug.Log("MinType: " + minType.ToString());
+
+        // Lista de posibles minijuegos que coinciden con el tipo
         List<string> possibleMinigames = new List<string>();
 
-        foreach(KeyValuePair<string, MinigameType> kvp in minigames)
+        foreach (KeyValuePair<string, MinigameType> kvp in minigames)
         {
-            // Dentro de la iteración 'Key' se refiere a string, y 'Value' se refiere a MinigameType
-            if(kvp.Value == minType)
+            if (kvp.Value == minType)
             {
-                Debug.Log("Encuentra escena");
+                Debug.Log("Escena encontrada: " + kvp.Key);
                 possibleMinigames.Add(kvp.Key);
             }
         }
 
+        // Seleccionar aleatoriamente un minijuego de la lista posible
         int rand = UnityEngine.Random.Range(0, possibleMinigames.Count);
         minigameToLoad = possibleMinigames[rand];
 
+        // Iniciar la transición de UI antes de cargar el minijuego
         StartCoroutine(UIManager.instance.FadeInOut(true, LoadMinigame));
     }
+    #endregion
 
+    #region Carga del Minijuego
     private void LoadMinigame()
     {
+        // Cargar la escena seleccionada
         SceneManager.LoadScene(minigameToLoad);
     }
+    #endregion
 }

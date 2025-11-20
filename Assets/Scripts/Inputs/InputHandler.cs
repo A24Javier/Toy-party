@@ -1,5 +1,5 @@
-using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine;
 
 public class InputHandler : MonoBehaviour
 {
@@ -23,41 +23,36 @@ public class InputHandler : MonoBehaviour
             return;
         }
 
-        //Nos suscribimos
         touchDiceAction.action.performed += OnTouchDicePerformed;
         touchDiceAction.action.Enable();
     }
 
     private void OnDestroy()
     {
-        //Desuscribirse para evitar múltiples llamadas si cambia de escena
         if (touchDiceAction != null)
             touchDiceAction.action.performed -= OnTouchDicePerformed;
     }
 
+    #region Gestión de Input
+
     private void OnTouchDicePerformed(InputAction.CallbackContext ctx)
     {
-        //Ignorar toques si NO es turno del jugador
         if (!GameController.instance.IsPlayerRolling())
             return;
 
         spacePressed = true;
 
-        // Restablecimiento automático
         StartCoroutine(ResetInputDelayed());
     }
 
     private System.Collections.IEnumerator ResetInputDelayed()
     {
-        //Evita spam y multi-activaciones del input
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.25f);
         spacePressed = false;
     }
 
-
     public bool IsSpacebarTouched()
     {
-        // Funciona igual que antes, pero más seguro
         if (spacePressed)
         {
             spacePressed = false;
@@ -69,7 +64,8 @@ public class InputHandler : MonoBehaviour
 
     public void ResetSpace()
     {
-        //Función para limpiar input al iniciar turno
         spacePressed = false;
     }
+
+    #endregion
 }

@@ -11,31 +11,39 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
 
-    // Character Texts
+    // Elementos de la UI
+    [Header("Elementos de la UI")]
     [SerializeField] private TMP_Text characterTextCoins;
     [SerializeField] private TMP_Text characterTextStars;
     [SerializeField] private Image characterImage;
+
+    // Jugador y personaje actuales
     public Player actualPlayer;
     public Character actualCharacter;
 
+    // Elementos UI para selección de camino
     [Header("Cosas encrucijada")]
     private Board board;
     [SerializeField] private CanvasGroup leftArrow, rightArrow, forwardArrow, downArrow;
 
+    // Elementos UI para la compra de estrella
     [Header("Cosas comprar estrella")]
     [SerializeField] private TMP_Text textoPrecioEstrella;
     [SerializeField] private CanvasGroup UI_buyStar;
     private bool canBuyStar = false;
 
+    // Elementos UI para selección de minijuego
     [Header("Cosas selección de minijuego")]
     [SerializeField] private GameObject prefabMinigameObjList;
     [SerializeField] private CanvasGroup panelMinigameSelection;
 
+    // Elementos UI para Fade in/out
     [SerializeField] private CanvasGroup panelFadeInOut;
 
+    // Patrón Singleton (asegura que solo haya una instancia)
     void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
@@ -45,11 +53,12 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    #region Selección de Camino
     public void CreateSelectionPath(Box pathBox)
     {
         Vector3 pathTransf = pathBox.transform.position;
 
-        for(int i = 0; i < (pathBox.PossiblesBoxesCount()); i++)
+        for (int i = 0; i < pathBox.PossiblesBoxesCount(); i++)
         {
             Vector3 possBoxTransf = pathBox.GetBoxTransf(i).position;
             Box possBox = pathBox.GetNewBox(i);
@@ -61,6 +70,7 @@ public class UIManager : MonoBehaviour
 
             bool arrowActivated = false;
 
+            // Verificar dirección y activar la flecha correspondiente
             if (xDif > 0 && Mathf.Abs(zDif) < Mathf.Abs(xDif) && rightArrow.alpha == 0 && !arrowActivated)
             {
                 ActivateArrow(rightArrow, angle, possBoxTransf, possBox);
@@ -105,9 +115,7 @@ public class UIManager : MonoBehaviour
     private float CalculateAngle(Vector3 P1, Vector3 P2)
     {
         Vector3 direction = (P2 - P1);
-
         float angle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg;
-
         Debug.Log(angle);
         return angle;
     }
@@ -119,7 +127,9 @@ public class UIManager : MonoBehaviour
         DeactivateArrow(leftArrow);
         DeactivateArrow(rightArrow);
     }
+    #endregion
 
+    #region Gestión del Jugador y Personaje
     public void SetActualPlayer(Player player)
     {
         actualPlayer = player;
@@ -130,12 +140,19 @@ public class UIManager : MonoBehaviour
         actualCharacter = character;
     }
 
+    public void ChangeCharacterUI(Character character)
+    {
+        characterTextCoins.text = character.GetCoins().ToString("Coins: 0");
+        characterTextStars.text = character.GetStars().ToString("Stars: 0");
+        characterImage.sprite = character.GetCharImage();
+    }
+
     public IEnumerator UpdateTextCoins(Character character, int coins)
     {
         ChangeCharacterUI(character);
         int actualCoins = character.GetCoins();
 
-        for(int i = 0; i < Mathf.Abs(coins); i++)
+        for (int i = 0; i < Mathf.Abs(coins); i++)
         {
             if (coins > 0)
             {
@@ -143,7 +160,7 @@ public class UIManager : MonoBehaviour
             }
             else
             {
-                if((actualCoins - 1) >= 0)
+                if ((actualCoins - 1) >= 0)
                 {
                     actualCoins--;
                 }
@@ -160,7 +177,9 @@ public class UIManager : MonoBehaviour
     {
         characterTextStars.text = actualPlayer.GetStars().ToString("Stars: 0");
     }
+    #endregion
 
+    #region Gestión de la Tienda de Estrellas
     private void UIStarShopControl(bool open)
     {
         UI_buyStar.alpha = open ? 1 : 0;
@@ -168,16 +187,12 @@ public class UIManager : MonoBehaviour
         UI_buyStar.interactable = actualCharacter.isPlayer;
     }
 
-    /// <summary>
-    /// Abre el panel de control para comprar la estrella. Pide de valor el costo en monedas
-    /// </summary>
-    /// <param name="precio">Precio de la estrella</param>
     public void OpenStarShop(Character character, int precio)
     {
         ChangeCharacterUI(character);
         UIStarShopControl(true);
         textoPrecioEstrella.text = precio.ToString("Precio: 0 coins");
-        if(character.GetCoins() >= precio)
+        if (character.GetCoins() >= precio)
         {
             canBuyStar = true;
         }
@@ -185,7 +200,7 @@ public class UIManager : MonoBehaviour
 
     public void BuyStar()
     {
-        if(!canBuyStar)
+        if (!canBuyStar)
         {
             Debug.Log("El personaje no tiene las suficientes monedas para comprar la estrella");
             NotBuyStar();
@@ -197,34 +212,27 @@ public class UIManager : MonoBehaviour
             StartCoroutine(UpdateTextCoins(actualCharacter, -5));
             UpdateStarsText();
             canBuyStar = false;
-            Debug.Log("El personaje compro una estrella");
+            Debug.Log("El personaje compró una estrella");
         }
     }
-    
+
     public void NotBuyStar()
     {
         UIStarShopControl(false);
     }
+    #endregion
 
-    public void ChangeCharacterUI(Character character)
-    {
-        characterTextCoins.text = character.GetCoins().ToString("Coins: 0");
-        characterTextStars.text = character.GetStars().ToString("Stars: 0");
-        characterImage.sprite = character.GetCharImage();
-    }
-
-    // FadeIn es de luminoso a oscuro, fadeOut es de oscuro a luminoso
+    #region Efectos de Fade
     public IEnumerator FadeInOut(bool fadeIn, Action onFadeComplete)
     {
         float elapsedTime = 0;
-
         panelFadeInOut.alpha = fadeIn ? 0 : 1;
         panelFadeInOut.blocksRaycasts = true;
 
         float initialValue = panelFadeInOut.alpha;
         float finalFadeValue = fadeIn ? 1 : 0;
 
-        while(elapsedTime < 1)
+        while (elapsedTime < 1)
         {
             elapsedTime += Time.deltaTime;
             panelFadeInOut.alpha = Mathf.Lerp(initialValue, finalFadeValue, elapsedTime / 1);
@@ -233,14 +241,15 @@ public class UIManager : MonoBehaviour
 
         panelFadeInOut.alpha = finalFadeValue;
 
-        if(onFadeComplete != null)
+        if (onFadeComplete != null)
         {
             onFadeComplete();
         }
     }
+    #endregion
 
+    // Método vacío para la selección de minijuegos (por implementar más tarde)
     public void ShowPossibleMinigamesList()
     {
-
     }
 }
