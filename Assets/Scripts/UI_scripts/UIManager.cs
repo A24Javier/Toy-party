@@ -259,7 +259,7 @@ public class UIManager : MonoBehaviour
     public void ShowPossibleMinigamesList(List<string> possibleMinigames)
     {
         int[] selectedMinigames = new int[MAX_MINIGAMES_SELECTION];
-        panelMinigameSelection.gameObject.SetActive(true);
+        panelMinigameSelection.alpha = 1;
 
         // Quitar minijuegos hasta quedarnos solo con 5 seleccionados aleatoriamente
         if (possibleMinigames.Count > MAX_MINIGAMES_SELECTION)
@@ -303,7 +303,7 @@ public class UIManager : MonoBehaviour
 
         for(int i = 0; i < maxRounds; i++)
         {
-            for(int j = 0; j < images.Length; i++)
+            for(int j = 0; j < images.Length; j++)
             {
                 if((float)i % images.Length == 0)
                 {
