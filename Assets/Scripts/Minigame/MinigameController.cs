@@ -12,8 +12,8 @@ public class MinigameController : MonoBehaviour
     [Header("Minijuegos")]
     [SerializeField] private MinigameType[] minigameType;
     [SerializeField] private string[] sceneName;
-
     private string minigameToLoad;
+
     private Dictionary<string, MinigameType> minigames = new Dictionary<string, MinigameType>();
 
     public static MinigameController instance;
@@ -78,20 +78,28 @@ public class MinigameController : MonoBehaviour
             }
         }
 
+        /*
         // Seleccionar aleatoriamente un minijuego de la lista posible
         int rand = UnityEngine.Random.Range(0, possibleMinigames.Count);
         minigameToLoad = possibleMinigames[rand];
 
         // Iniciar la transición de UI antes de cargar el minijuego
         StartCoroutine(UIManager.instance.FadeInOut(true, LoadMinigame));
+        */
+        UIManager.instance.ShowPossibleMinigamesList(possibleMinigames);
     }
     #endregion
 
     #region Carga del Minijuego
-    private void LoadMinigame()
+    public void LoadMinigame()
     {
         // Cargar la escena seleccionada
         SceneManager.LoadScene(minigameToLoad);
     }
     #endregion
+
+    public void SetMinigameToLoad(string newMinigameToLoad)
+    {
+        minigameToLoad = newMinigameToLoad;
+    }
 }

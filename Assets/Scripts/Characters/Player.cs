@@ -23,7 +23,7 @@ public class Player : Character
         animator = GetComponent<Animator>();
         board = GameObject.FindObjectOfType<Board>();
         actualBox1 = board.GetCasilla(0);
-        transform.position = actualBox1.GetThisBoxTransf().position + upToBox;
+        //transform.position = actualBox1.GetThisBoxTransf().position + upToBox;
     }
 
     private void Update()
@@ -98,11 +98,7 @@ public class Player : Character
         }
 
         // Activamos efectos de la última casilla
-        while (animator.GetBool("isRunning"))
-        {
-            animator.SetBool("isRunning", false);
-            yield return null;
-        }
+        animator.SetBool("isRunning", false);
 
         newBox.ActivateEffect(this);
     }
@@ -127,16 +123,16 @@ public class Player : Character
     }
 
 
-    public override IEnumerator DoAnim(string animationKey)
+    public override IEnumerator DoAnim(string animationKey, string animationName)
     {
         // Hacemos que haga la animación
         animator.SetBool(animationKey, true);
         yield return null;
 
         AnimatorStateInfo animatorState = animator.GetCurrentAnimatorStateInfo(0);
-
+        
         // Nos aseguramos de que se esta ejecutando esta animación
-        while (!animatorState.IsName(animationKey))
+        while (!animatorState.IsName(animationName))
         {
             animatorState = animator.GetCurrentAnimatorStateInfo(0);
             yield return null;
@@ -153,5 +149,7 @@ public class Player : Character
 
         // Hacemos que su bool vuelva a ser false
         animator.SetBool(animationKey, false);
+        yield return null;
+        Debug.Log($"La animationKey {animationKey} esta en {animator.GetBool(animationKey)}");
     }
 }

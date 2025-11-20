@@ -120,7 +120,7 @@ MonoBehaviour:
   characterId: 0
   coins: 0
   stars: 0
-  characterImage: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  characterImage: {fileID: 21300000, guid: 2340e80fba76a6e42af2cb6f6c4468a4, type: 3}
   isPlayer: 0
   speed: 3
   isSelectingPath: 0

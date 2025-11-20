@@ -151,22 +151,24 @@ public class NPC_Controller : Character
     {
         // Si el NPC tiene las monedas necesarias para comprar la estrella la comprará
         bool buyStar = coins >= price;
-        yield return new WaitForSeconds(5f);
+        Debug.Log("Decidiendo si comprar la estrella...");
+        yield return new WaitForSeconds(3.5f);
         if(buyStar) { UIManager.instance.BuyStar(); }
         else { UIManager.instance.NotBuyStar(); }
         
     }
 
-    public override IEnumerator DoAnim(string animationKey)
+    public override IEnumerator DoAnim(string animationKey, string animationName)
     {
         // Hacemos que haga la animación
         animator.SetBool(animationKey, true);
         yield return null;
 
         AnimatorStateInfo animatorState = animator.GetCurrentAnimatorStateInfo(0);
-
+        yield return null;
+        
         // Nos aseguramos de que se esta ejecutando esta animación
-        while (!animatorState.IsName(animationKey))
+        while (!animatorState.IsName(animationName))
         {
             animatorState = animator.GetCurrentAnimatorStateInfo(0);
             yield return null;
@@ -177,7 +179,6 @@ public class NPC_Controller : Character
         {
             // Vamos actualizando el AnimatorState
             animatorState = animator.GetCurrentAnimatorStateInfo(0);
-            Debug.Log(animatorState.normalizedTime);
             yield return null;
         }
 

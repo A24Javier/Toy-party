@@ -11,6 +11,8 @@ public class GameController : MonoBehaviour
     [SerializeField] private GameObject dicePrefab;
     [SerializeField] private Dice normalDice;
 
+    [SerializeField] private Transform[] spawns;
+
     private Player[] players;
     private NPC_Controller[] npcs;
     private Player playerOfTurn;
@@ -72,6 +74,7 @@ public class GameController : MonoBehaviour
             GameObject newPlayerGO = Instantiate(playerPrefab, initialPos + (Vector3.left * (i * 3)), Quaternion.identity);
             Player newPlayer = newPlayerGO.GetComponent<Player>();
             newPlayer.isPlayer = true;
+            newPlayerGO.transform.position = spawns[setId].position;
 
             // Asigna un character id al jugador instanciado
             newPlayer.SetCharId(setId);
@@ -90,6 +93,7 @@ public class GameController : MonoBehaviour
                 GameObject newNPCGO = Instantiate(npcPrefab, initialPos + (Vector3.right * (i * 3)), Quaternion.identity);
                 NPC_Controller newNPC = newNPCGO.GetComponent<NPC_Controller>();
                 newNPC.isPlayer = false;
+                newNPCGO.transform.position = spawns[setId].position;
 
                 // Asigna un character id al NPC instanciado
                 newNPC.SetCharId(setId);

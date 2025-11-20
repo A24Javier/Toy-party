@@ -24,6 +24,9 @@ public class Box : MonoBehaviour
     private const string ANIM_KEY_WIN_COINS = "isCelebrating";
     private const string ANIM_KEY_LOSE_COINS = "isMourning";
 
+    private const string ANIM_NAME_WIN_COINS = "Victory";
+    private const string ANIM_NAME_LOSE_COINS = "Defeat";
+
     /*public void ActiveEffect(Player player)
     {
         switch (type)
@@ -79,7 +82,7 @@ public class Box : MonoBehaviour
                 UIManager.instance.SetActualCharacter(character);
                 StartCoroutine(UIManager.instance.UpdateTextCoins(character, coins));
 
-                StartCoroutine(character.DoAnim((coins > 0) ? ANIM_KEY_WIN_COINS : ANIM_KEY_LOSE_COINS));
+                StartCoroutine(character.DoAnim((coins > 0) ? ANIM_KEY_WIN_COINS : ANIM_KEY_LOSE_COINS, (coins > 0) ? ANIM_NAME_WIN_COINS : ANIM_NAME_LOSE_COINS));
 
                 break;
             case BoxType.Trap:

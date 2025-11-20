@@ -16,7 +16,7 @@ public abstract class Character : MonoBehaviour
 
     public abstract void Move(int steps);
     protected abstract IEnumerator MoveCharacterBoard(int steps);
-    public abstract IEnumerator DoAnim(string animationKey);
+    public abstract IEnumerator DoAnim(string animationKey, string animationName);
 
     // Getters y setters
     public virtual int GetCharId() { return characterId; }

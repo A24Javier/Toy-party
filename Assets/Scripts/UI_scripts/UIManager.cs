@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.TextCore.Text;
 using System;
+using System.IO;
 
 public class UIManager : MonoBehaviour
 {
@@ -36,6 +37,10 @@ public class UIManager : MonoBehaviour
     [Header("Cosas selección de minijuego")]
     [SerializeField] private GameObject prefabMinigameObjList;
     [SerializeField] private CanvasGroup panelMinigameSelection;
+    [SerializeField] private Transform minigameVerticalLayout;
+    private const int MAX_MINIGAMES_SELECTION = 5;
+    private Color unselectedColor = new Color(1, 1, 1, 0.5f);
+    private Color selectedColor = new Color(1, 1, 1, 1);
 
     // Elementos UI para Fade in/out
     [SerializeField] private CanvasGroup panelFadeInOut;
@@ -51,6 +56,7 @@ public class UIManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        panelMinigameSelection.alpha = 0;
     }
 
     #region Selección de Camino
@@ -189,6 +195,7 @@ public class UIManager : MonoBehaviour
 
     public void OpenStarShop(Character character, int precio)
     {
+        actualCharacter = character;
         ChangeCharacterUI(character);
         UIStarShopControl(true);
         textoPrecioEstrella.text = precio.ToString("Precio: 0 coins");
@@ -249,7 +256,79 @@ public class UIManager : MonoBehaviour
     #endregion
 
     // Método vacío para la selección de minijuegos (por implementar más tarde)
-    public void ShowPossibleMinigamesList()
+    public void ShowPossibleMinigamesList(List<string> possibleMinigames)
     {
+        panelMinigameSelection.alpha = 1;
+        int[] selectedMinigames = new int[5];
+
+        // Quitar minijuegos hasta quedarnos solo con 5 seleccionados aleatoriamente
+        if(possibleMinigames.Count > MAX_MINIGAMES_SELECTION)
+        {
+            for(int i = 0; i < MAX_MINIGAMES_SELECTION; i++)
+            {
+                selectedMinigames[i] = UnityEngine.Random.Range(0, possibleMinigames.Count);
+            }
+
+            for(int i = 0; i < possibleMinigames.Count; i++)
+            {
+                for(int j = 0; j < selectedMinigames.Length; j++)
+                {
+                    if (selectedMinigames[j] != i)
+                    {
+                        possibleMinigames.RemoveAt(i);
+                    }
+                }
+            }
+        }
+
+        Image[] images = new Image[possibleMinigames.Count];
+        // Creamos la lista de posibles minijuegos
+        for(int i = 0; i < possibleMinigames.Count; i++)
+        {
+            GameObject go = Instantiate(prefabMinigameObjList, Vector3.zero, Quaternion.identity, minigameVerticalLayout.transform);
+            go.GetComponentInChildren<TMP_Text>().text = possibleMinigames[i];
+            images[i] = go.GetComponent<Image>();
+        }
+
+        int end = UnityEngine.Random.Range(0, possibleMinigames.Count);
+        MinigameController.instance.SetMinigameToLoad(possibleMinigames[end]);
+
+        StartCoroutine(MinigameRoulette(end, images));
+    }
+
+    private IEnumerator MinigameRoulette(int end, Image[] images)
+    {
+        int maxRounds = UnityEngine.Random.Range(15, 25);
+
+        for(int i = 0; i < maxRounds; i++)
+        {
+            for(int j = 0; j < images.Length; i++)
+            {
+                if((float)i % images.Length == 0)
+                {
+                    images[j].color = selectedColor;
+                }
+                else
+                {
+                    images[j].color = unselectedColor;
+                }
+            }
+
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        for(int i = 0; i < images.Length; i++)
+        {
+            if(i != end)
+            {
+                images[i].color = unselectedColor;
+            }
+        }
+
+        images[end].color = selectedColor;
+        RectTransform selectedImage = images[end].GetComponent<RectTransform>();
+        selectedImage.sizeDelta = new Vector2(selectedImage.sizeDelta.x * 1.25f, selectedImage.sizeDelta.y * 1.25f);
+        yield return new WaitForSeconds(2f);
+        StartCoroutine(FadeInOut(true, MinigameController.instance.LoadMinigame));
     }
 }
