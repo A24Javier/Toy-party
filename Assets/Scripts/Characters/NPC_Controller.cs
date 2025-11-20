@@ -137,11 +137,8 @@ public class NPC_Controller : Character
         }
 
         // Nos aseguramos de que "isRunning" se desactiva (ya que sin esto a veces no lo hace)
-        while (animator.GetBool("isRunning"))
-        {
-            animator.SetBool("isRunning", false);
-            yield return null;
-        }
+        animator.SetBool("isRunning", false);
+        yield return null;
         actualBox.ActivateEffect(this);
         UIManager.instance.DeactivatePathDecision();
 
@@ -165,8 +162,9 @@ public class NPC_Controller : Character
         yield return null;
 
         AnimatorStateInfo animatorState = animator.GetCurrentAnimatorStateInfo(0);
-        yield return null;
-        
+        Debug.Log("Antes de comprobacion animationName");
+
+
         // Nos aseguramos de que se esta ejecutando esta animación
         while (!animatorState.IsName(animationName))
         {
@@ -184,5 +182,6 @@ public class NPC_Controller : Character
 
         // Hacemos que su bool vuelva a ser false
         animator.SetBool(animationKey, false);
+        yield return null;
     }
 }

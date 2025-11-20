@@ -56,7 +56,7 @@ public class UIManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        panelMinigameSelection.alpha = 0;
+        //panelMinigameSelection.alpha = 0;
     }
 
     #region Selección de Camino
@@ -258,12 +258,13 @@ public class UIManager : MonoBehaviour
     // Método vacío para la selección de minijuegos (por implementar más tarde)
     public void ShowPossibleMinigamesList(List<string> possibleMinigames)
     {
-        panelMinigameSelection.alpha = 1;
-        int[] selectedMinigames = new int[5];
+        int[] selectedMinigames = new int[MAX_MINIGAMES_SELECTION];
+        panelMinigameSelection.gameObject.SetActive(true);
 
         // Quitar minijuegos hasta quedarnos solo con 5 seleccionados aleatoriamente
-        if(possibleMinigames.Count > MAX_MINIGAMES_SELECTION)
+        if (possibleMinigames.Count > MAX_MINIGAMES_SELECTION)
         {
+            Debug.Log("Entra en quitar minijuegos");
             for(int i = 0; i < MAX_MINIGAMES_SELECTION; i++)
             {
                 selectedMinigames[i] = UnityEngine.Random.Range(0, possibleMinigames.Count);
