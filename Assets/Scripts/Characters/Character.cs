@@ -9,6 +9,7 @@ public abstract class Character : MonoBehaviour
     public int coins;
     public int stars;
     public Sprite characterImage;
+    protected Inventory inventory = new Inventory();
     public bool isPlayer;
 
     // Character values
@@ -41,5 +42,21 @@ public abstract class Character : MonoBehaviour
     public virtual void SetCharImage(Sprite characterImage)
     {
         this.characterImage = characterImage;
+    }
+
+    public virtual Inventory GetInventory()
+    {
+        return inventory;
+    }
+
+    public virtual void DeleteInventory()
+    {
+        inventory = null;
+        inventory = new Inventory();
+    }
+
+    public virtual void UseItem(int index)
+    {
+        GetInventory().GetItem(index);
     }
 }

@@ -9,7 +9,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private GameObject npcPrefab;
     [SerializeField] private GameObject dicePrefab;
-    [SerializeField] private Dice normalDice;
+    private Dice diceToUse;
 
     [SerializeField] private Transform[] spawns;
 
@@ -156,17 +156,6 @@ public class GameController : MonoBehaviour
                     // PlayerOfTurn será el jugador que tiene el mismo char id que el del turno actual
                     playerOfTurn = players[i];
                     UIManager.instance.ChangeCharacterUI(playerOfTurn);
-
-                    isPlayerRolling = true;
-                    // Instanciamos el dado encima del jugador
-                    GameObject dice = Instantiate(dicePrefab, playerOfTurn.transform.position + (Vector3.up * 3), Quaternion.identity);
-
-                    // Hacemos que el dado actual sea un dado normal (en futuro cambiará)
-                    DiceScript diceScr = dice.GetComponentInChildren<DiceScript>();
-                    diceScr.ChangeScriptableDice(normalDice); // De momento solo con dados normales
-
-                    // Hacemos que empiece la corutina del rolling del dado del jugador
-                    StartCoroutine(diceScr.DiceRolling(playerOfTurn));
                 }
             }
         }
@@ -187,7 +176,7 @@ public class GameController : MonoBehaviour
 
                     // Hacemos que el dado actual sea un dado normal (en un futuro cambiará)
                     DiceScript diceScr = dice.GetComponentInChildren<DiceScript>();
-                    diceScr.ChangeScriptableDice(normalDice); // De momento solo con dados normales
+                    diceScr.ChangeScriptableDice(diceToUse); // De momento solo con dados normales
 
                     // Hacemos que empiece la corutina del rolling del dado del NPC
                     StartCoroutine(diceScr.DiceRolling(npcOfTurn));
@@ -197,6 +186,20 @@ public class GameController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void ThrowPlayerDice()
+    {
+        isPlayerRolling = true;
+
+        // Instanciamos el dado encima del jugador
+        GameObject dice = Instantiate(dicePrefab, playerOfTurn.transform.position + (Vector3.up * 3), Quaternion.identity);
+
+        DiceScript diceScr = dice.GetComponentInChildren<DiceScript>();
+        diceScr.ChangeScriptableDice(diceToUse);
+
+        // Hacemos que empiece la corutina del rolling del dado del jugador
+        StartCoroutine(diceScr.DiceRolling(playerOfTurn));
     }
 
     /// <summary>
@@ -229,5 +232,15 @@ public class GameController : MonoBehaviour
     public bool IsPlayerRolling()
     {
         return isPlayerRolling;
+    }
+
+    public void ChangeDiceToUse(Dice newDice)
+    {
+        diceToUse = newDice;
+    }
+
+    public Player GetPlayerOfTurn()
+    {
+        return playerOfTurn;
     }
 }

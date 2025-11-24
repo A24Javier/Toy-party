@@ -25,4 +25,10 @@ public class Board : MonoBehaviour
         if (index < 0 || index >= boxes.Length) return null;
         return boxes[index];
     }
+
+    public Box GetRandomBox()
+    {
+        int rand = Random.Range(0, boxes.Length);
+        return boxes[rand];
+    }
 }

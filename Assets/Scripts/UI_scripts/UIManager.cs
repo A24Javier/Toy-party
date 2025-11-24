@@ -18,6 +18,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text characterTextStars;
     [SerializeField] private Image characterImage;
 
+    [Header("Elementos Inventario")]
+    [SerializeField] private Image actualDiceImage;
+    [SerializeField] private Button[] itemsButtons;
+
     // Jugador y personaje actuales
     public Player actualPlayer;
     public Character actualCharacter;
@@ -331,5 +335,22 @@ public class UIManager : MonoBehaviour
         selectedImage.sizeDelta = new Vector2(selectedImage.sizeDelta.x * 1.25f, selectedImage.sizeDelta.y * 1.25f);
         yield return new WaitForSeconds(2f);
         StartCoroutine(FadeInOut(true, MinigameController.instance.LoadMinigame));
+    }
+
+    public void AddItem(Item newItem)
+    {
+        for(int i = 0; i < itemsButtons.Length; i++)
+        {
+            if (itemsButtons[i].onClick == null)
+            {
+                itemsButtons[i].image.sprite = newItem.itemSpr;
+                itemsButtons[i].onClick.AddListener(delegate { });
+            }
+        }
+    }
+
+    public void UseItem(Item item)
+    {
+
     }
 }
