@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public List<Dice> dices;
     public List<Item> items;
 
     public int totalObjLoaded;
@@ -11,7 +10,6 @@ public class Inventory : MonoBehaviour
 
     public Inventory()
     {
-        dices = new List<Dice>();
         items = new List<Item>();
 
         totalObjLoaded = 0;
@@ -25,7 +23,7 @@ public class Inventory : MonoBehaviour
 
     public virtual void AddItem(Item newItem)
     {
-        if((items.Count + dices.Count) < maxObjects)
+        if(items.Count < maxObjects)
         {
             items.Add(newItem);
             UIManager.instance.AddItem(newItem);
@@ -40,30 +38,6 @@ public class Inventory : MonoBehaviour
     public virtual void DeleteItem(Item itemDelete)
     {
         items.Remove(itemDelete);
-        totalObjLoaded--;
-    }
-
-    public virtual Dice GetDice(int index)
-    {
-        return dices[index];
-    }
-
-    public virtual void AddDice(Dice newDice)
-    {
-        if((items.Count + dices.Count) < maxObjects)
-        {
-            dices.Add(newDice);
-            totalObjLoaded++;
-        }
-        else
-        {
-            Debug.Log("No puedes llevar más objetos");
-        }
-    }
-
-    public virtual void DeleteDice(Dice diceDelete)
-    {
-        dices.Remove(diceDelete);
         totalObjLoaded--;
     }
 }

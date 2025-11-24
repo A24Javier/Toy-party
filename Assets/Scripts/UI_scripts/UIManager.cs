@@ -344,13 +344,8 @@ public class UIManager : MonoBehaviour
             if (itemsButtons[i].onClick == null)
             {
                 itemsButtons[i].image.sprite = newItem.itemSpr;
-                itemsButtons[i].onClick.AddListener(delegate { });
+                itemsButtons[i].onClick.AddListener(delegate { newItem.itemFunction.UseItem(); });
             }
         }
-    }
-
-    public void UseItem(Item item)
-    {
-
     }
 }

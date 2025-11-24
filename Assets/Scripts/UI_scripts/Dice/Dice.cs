@@ -13,4 +13,7 @@ public class Dice : ScriptableObject
     public float changeNumSpeed;
     public int minNumber;
     public int maxNumber;
+
+    [Header("Dice function")]
+    public ItemFunction itemFunction;
 }

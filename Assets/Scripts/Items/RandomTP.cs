@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "RandomTP.asset", menuName = ("Item functions/Create RandomTP"))]
 public class RandomTP : ItemFunction
 {
     public override void UseItem()
