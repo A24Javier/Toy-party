@@ -201,7 +201,7 @@ public class GameController : MonoBehaviour
         isPlayerRolling = true;
 
         // Instanciamos el dado encima del jugador
-        GameObject dice = Instantiate(dicePrefab, playerOfTurn.transform.position + (Vector3.up * 3), Quaternion.identity);
+        GameObject dice = Instantiate(dicePrefab, playerOfTurn.transform.position + (Vector3.up * (3 * playerOfTurn.transform.localScale.x)), Quaternion.identity);
 
         DiceScript diceScr = dice.GetComponentInChildren<DiceScript>();
         diceScr.ChangeScriptableDice(diceToUse);
