@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,6 +17,16 @@ public class Inventory : MonoBehaviour
         maxObjects = 3;
     }
 
+    public virtual int GetTotalObjLoaded()
+    {
+        return totalObjLoaded;
+    }
+
+    public virtual int GetMaxObjects()
+    {
+        return maxObjects;
+    }
+
     public virtual Item GetItem(int index)
     {
         return items[index];
@@ -26,7 +37,9 @@ public class Inventory : MonoBehaviour
         if(items.Count < maxObjects)
         {
             items.Add(newItem);
-            UIManager.instance.AddItem(newItem);
+            //UIManager.instance.AddItem(newItem);
+            newItem.inventoryAssociated = this;
+            newItem.itemFunction.item = newItem;
             totalObjLoaded++;
         }
         else

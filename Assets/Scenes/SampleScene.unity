@@ -501,8 +501,8 @@ CanvasGroup:
   m_GameObject: {fileID: 139844777}
   m_Enabled: 1
   m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &139844780
 MonoBehaviour:
@@ -4149,8 +4149,14 @@ MonoBehaviour:
   characterTextCoins: {fileID: 1814440078}
   characterTextStars: {fileID: 1862221536}
   characterImage: {fileID: 564859192}
-  actualDiceImage: {fileID: 0}
-  itemsButtons: []
+  actionPanel: {fileID: 479572114}
+  itemsPanel: {fileID: 139844779}
+  actualDiceImage: {fileID: 614612662}
+  itemsButtons:
+  - {fileID: 1777973268}
+  - {fileID: 1553693357}
+  - {fileID: 471350908}
+  nullObjSpr: {fileID: 21300000, guid: c1d7bce50e8a92a4489224fc71ee15d7, type: 3}
   actualPlayer: {fileID: 0}
   actualCharacter: {fileID: 0}
   leftArrow: {fileID: 1083080750}
@@ -4447,7 +4453,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1386917397}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1274365525}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: ControlItemPanel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1386917397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5417,6 +5435,7 @@ MonoBehaviour:
     type: 3}
   dicePrefab: {fileID: 1296695963405092170, guid: f04e19f2b6f6de84bb73a9203910dbac,
     type: 3}
+  normalDice: {fileID: 11400000, guid: 3750882279889e345b122e3ab20dbd73, type: 2}
   spawns:
   - {fileID: 621015595}
   - {fileID: 685039909}

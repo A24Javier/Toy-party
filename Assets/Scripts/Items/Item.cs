@@ -5,4 +5,5 @@ public class Item : ScriptableObject
 {
     public Sprite itemSpr;
     public ItemFunction itemFunction;
+    public Inventory inventoryAssociated;
 }

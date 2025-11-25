@@ -5,11 +5,7 @@ using UnityEngine;
 public class NPC_Controller : Character
 {
     private Board board;
-    private Box actualBox;
     private Animator animator;
-
-    // Inventario (por hacer) (tal vez merezca hacer polimorfismo para el inventario)
-    private Dice specialDice;
 
     //private Vector3 upToBox = new Vector3(0, 0.4f, 0);
     private const float TIME_WAIT_PATH = 2.5f;

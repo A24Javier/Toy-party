@@ -1,28 +1,25 @@
 ﻿using System.Collections;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Events;
 
 
 public class Player : Character
 {
     private Board board;
     private Vector3 upToBox = new Vector3 (0f, 0.07f, 0f);
-    private Box actualBox1;
     public bool isSelectingPath = false;
     private Animator animator;
     Box newBox = null;
     public bool smooth = true;
     public float velocidadDeRotacion = 5f;
-
-    // Inventario (por hacer) (tal vez merezca hacer polimorfismo para el inventario)
-    private Dice specialDice;
+    [SerializeField] private Item randomTP;
 
     void Start()
     {
+        inventory.AddItem(randomTP);
         animator = GetComponent<Animator>();
         board = GameObject.FindObjectOfType<Board>();
-        actualBox1 = board.GetCasilla(0);
+        actualBox = board.GetCasilla(0);
         //transform.position = actualBox1.GetThisBoxTransf().position + upToBox;
     }
 
@@ -64,7 +61,7 @@ public class Player : Character
         for (int i = 0; i < steps; i++)
         {
             // Asignamos directamente al campo de la clase para Look()
-            newBox = actualBox1.GetNewBox(0);
+            newBox = actualBox.GetNewBox(0);
 
             Vector3 destination = newBox.GetThisBoxTransf().position + upToBox;
 
@@ -75,16 +72,16 @@ public class Player : Character
             }
 
             transform.position = destination;
-            actualBox1 = newBox;
+            actualBox = newBox;
 
-            if (actualBox1.PossiblesBoxesCount() >= 2)
+            if (actualBox.PossiblesBoxesCount() >= 2)
             {
                 // Pausamos el movimiento y dejamos que el jugador elija
                 animator.SetBool("isRunning", false);
                 isSelectingPath = true;
 
                 UIManager.instance.SetActualPlayer(this);
-                UIManager.instance.CreateSelectionPath(actualBox1);
+                UIManager.instance.CreateSelectionPath(actualBox);
 
                 // Esperamos a que PathSelected() se encargue de actualizar newBox
                 while (isSelectingPath)
@@ -118,7 +115,7 @@ public class Player : Character
             yield return null;
         }
 
-        actualBox1 = box;
+        actualBox = box;
         isSelectingPath = false;
     }
 
@@ -143,7 +140,6 @@ public class Player : Character
         {
             // Vamos actualizando el AnimatorState
             animatorState = animator.GetCurrentAnimatorStateInfo(0);
-            Debug.Log(animatorState.normalizedTime);
             yield return null;
         }
 

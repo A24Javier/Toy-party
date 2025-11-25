@@ -7,11 +7,15 @@ public class RandomTP : ItemFunction
 {
     public override void UseItem()
     {
-        Transform newPos = Board.instance.GetRandomBox().transform;
+        Box newBox = Board.instance.GetRandomBox();
 
         // Hacer que pegue una explosión de particulas o algo
 
-        GameController.instance.GetPlayerOfTurn().transform.position = newPos.position;
+        GameController.instance.GetPlayerOfTurn().transform.position = newBox.transform.position;
+        GameController.instance.GetPlayerOfTurn().actualBox = newBox;
         GameController.instance.FinishTurn();
+
+        // Quitar objeto del inventario del player
+        item.inventoryAssociated.DeleteItem(item);
     }
 }

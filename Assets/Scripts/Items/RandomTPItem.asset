@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: RandomTPItem
   m_EditorClassIdentifier: 
   itemSpr: {fileID: 21300000, guid: 406fb50b4ce4cad40a38f635dfa3ea35, type: 3}
-  itemGO: {fileID: 0}
+  itemFunction: {fileID: 11400000, guid: 6d985a6acc2ff7e49ad6df4ec4f5d21c, type: 2}

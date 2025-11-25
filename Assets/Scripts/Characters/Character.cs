@@ -9,6 +9,7 @@ public abstract class Character : MonoBehaviour
     public int coins;
     public int stars;
     public Sprite characterImage;
+    public Box actualBox;
     protected Inventory inventory = new Inventory();
     public bool isPlayer;
 

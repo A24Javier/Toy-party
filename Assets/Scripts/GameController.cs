@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private GameObject npcPrefab;
     [SerializeField] private GameObject dicePrefab;
     private Dice diceToUse;
+    [SerializeField] private Dice normalDice;
 
     [SerializeField] private Transform[] spawns;
 
@@ -156,6 +157,9 @@ public class GameController : MonoBehaviour
                     // PlayerOfTurn será el jugador que tiene el mismo char id que el del turno actual
                     playerOfTurn = players[i];
                     UIManager.instance.ChangeCharacterUI(playerOfTurn);
+                    UIManager.instance.SetActualCharacter(playerOfTurn);
+                    diceToUse = normalDice;
+                    UIManager.instance.ControlActionPanel(true);
                 }
             }
         }
@@ -167,15 +171,18 @@ public class GameController : MonoBehaviour
                 // Cuando el npc actual de la lista tenga el mismo char id que el del turno actual...
                 if (npcs[i].GetCharId() == idOrder[thisCharTurn])
                 {
+                    UIManager.instance.ControlActionPanel(false);
                     // NpcOfTurn será el npc que tiene el mismo char id que el del turno actual
                     npcOfTurn = npcs[i];
                     UIManager.instance.ChangeCharacterUI(npcOfTurn);
+                    UIManager.instance.SetActualCharacter(npcOfTurn);
 
                     // Instanciamos el dado encima del npc
                     GameObject dice = Instantiate(dicePrefab, npcOfTurn.transform.position + (Vector3.up * 3), Quaternion.identity);
 
                     // Hacemos que el dado actual sea un dado normal (en un futuro cambiará)
                     DiceScript diceScr = dice.GetComponentInChildren<DiceScript>();
+                    diceToUse = normalDice;
                     diceScr.ChangeScriptableDice(diceToUse); // De momento solo con dados normales
 
                     // Hacemos que empiece la corutina del rolling del dado del NPC
@@ -190,6 +197,7 @@ public class GameController : MonoBehaviour
 
     public void ThrowPlayerDice()
     {
+        UIManager.instance.ControlActionPanel(false);
         isPlayerRolling = true;
 
         // Instanciamos el dado encima del jugador

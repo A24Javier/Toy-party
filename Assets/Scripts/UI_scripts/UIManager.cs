@@ -19,8 +19,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image characterImage;
 
     [Header("Elementos Inventario")]
+    [SerializeField] private CanvasGroup actionPanel;
+    [SerializeField] private CanvasGroup itemsPanel;
     [SerializeField] private Image actualDiceImage;
     [SerializeField] private Button[] itemsButtons;
+    [SerializeField] private Sprite nullObjSpr;
 
     // Jugador y personaje actuales
     public Player actualPlayer;
@@ -49,7 +52,6 @@ public class UIManager : MonoBehaviour
     // Elementos UI para Fade in/out
     [SerializeField] private CanvasGroup panelFadeInOut;
 
-    // Patrón Singleton (asegura que solo haya una instancia)
     void Awake()
     {
         if (instance == null)
@@ -60,7 +62,9 @@ public class UIManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        //panelMinigameSelection.alpha = 0;
+        panelMinigameSelection.alpha = 0;
+        ControlActionPanel(false);
+        itemsPanel.alpha = 0;
     }
 
     #region Selección de Camino
@@ -341,11 +345,64 @@ public class UIManager : MonoBehaviour
     {
         for(int i = 0; i < itemsButtons.Length; i++)
         {
-            if (itemsButtons[i].onClick == null)
+            if (itemsButtons[i].onClick.GetPersistentEventCount() <= 0)
             {
                 itemsButtons[i].image.sprite = newItem.itemSpr;
                 itemsButtons[i].onClick.AddListener(delegate { newItem.itemFunction.UseItem(); });
+                break;
             }
+            
+        }
+    }
+
+    public void ControlActionPanel(bool open)
+    {
+        actionPanel.alpha = open ? 1 : 0;
+        actionPanel.interactable = open;
+        actionPanel.blocksRaycasts = open;
+
+        if (open)
+        {
+            LoadInventory();
+        }
+    }
+
+    public void ControlItemPanel()
+    {
+        if(itemsPanel.alpha >= 1f)
+        {
+            itemsPanel.alpha = 0f;
+        }
+        else
+        {
+            itemsPanel.alpha = 1f;
+        }
+
+        itemsPanel.interactable = !itemsPanel.interactable;
+        itemsPanel.blocksRaycasts = !itemsPanel.blocksRaycasts;
+    }
+
+    private void LoadInventory()
+    {
+        Inventory characterInventory = actualCharacter.GetInventory();
+        Debug.Log(characterInventory.GetTotalObjLoaded());
+
+        for(int i = 0; i < itemsButtons.Length; i++)
+        {
+            itemsButtons[i].onClick.RemoveAllListeners();
+        }
+
+        // Cargar objetos
+        for(int i = 0; i < characterInventory.GetTotalObjLoaded(); i++)
+        {
+            Debug.Log($"Item cargado: {characterInventory.GetItem(i).name}");
+            AddItem(characterInventory.GetItem(i));
+        }
+
+        // Ponerlo vacio
+        for(int i = characterInventory.GetTotalObjLoaded(); i < characterInventory.GetMaxObjects(); i++)
+        {
+            itemsButtons[i].image.sprite = nullObjSpr;
         }
     }
 }
