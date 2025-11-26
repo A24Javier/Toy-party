@@ -26,7 +26,7 @@ public class Box : MonoBehaviour
     [SerializeField] private AnimToThis animToThis = AnimToThis.NoAnim;
     [SerializeField] private bool[] isPathToStar;
     [SerializeField] private UnityEvent trapActions;
-    public float cRotation;
+    public float camRotationY;
 
     // Keys de animaciones
     private const string ANIM_KEY_WIN_COINS = "isCelebrating";

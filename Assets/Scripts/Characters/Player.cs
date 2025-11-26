@@ -13,6 +13,7 @@ public class Player : Character
     Box newBox = null;
     public bool smooth = true;
     public float velocidadDeRotacion = 5f;
+    public CameraFollow cameraFollow;
     [SerializeField] private Item randomTP;
 
     void Start()
@@ -21,6 +22,7 @@ public class Player : Character
         animator = GetComponent<Animator>();
         board = GameObject.FindObjectOfType<Board>();
         actualBox = board.GetCasilla(0);
+        cameraFollow = Camera.main.GetComponent<CameraFollow>();
         //transform.position = actualBox1.GetThisBoxTransf().position + upToBox;
     }
 
@@ -88,6 +90,10 @@ public class Player : Character
 
             transform.position = destination;
             actualBox = newBox;
+
+            cameraFollow.cRotation = actualBox.camRotationY;
+            this.savedCameraRotationY = actualBox.camRotationY;
+
 
             if (actualBox.PossiblesBoxesCount() >= 2)
             {

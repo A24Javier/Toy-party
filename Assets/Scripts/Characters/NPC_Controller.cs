@@ -17,9 +17,11 @@ public class NPC_Controller : Character
     public bool smooth = true;
     public float velocidadDeRotacion = 5f;
 
+    public CameraFollow cameraFollow;
 
     void Start()
     {
+        cameraFollow = Camera.main.GetComponent<CameraFollow>();
         animator = GetComponent<Animator>();
         board = FindObjectOfType<Board>();
         actualBox = board.GetCasilla(0);
@@ -102,7 +104,10 @@ public class NPC_Controller : Character
             transform.position = destination;
             actualBox = newBox;
 
-            if(actualBox.PossiblesBoxesCount() >= 2) // Activar sistema encrucijada, pero random
+            cameraFollow.cRotation = actualBox.camRotationY;
+            this.savedCameraRotationY = actualBox.camRotationY;
+
+            if (actualBox.PossiblesBoxesCount() >= 2) // Activar sistema encrucijada, pero random
             {
                 animator.SetBool("isRunning", false);
                 bool[] isPathToStar = actualBox.GetIsPathToStar();

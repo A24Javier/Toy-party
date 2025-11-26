@@ -167,6 +167,8 @@ public class GameController : MonoBehaviour
 
                     // cam sigue jugador
                     camFollow.SetTarget(playerOfTurn.transform);
+                    camFollow.cRotation = playerOfTurn.savedCameraRotationY;
+                    
                 }
 
             }
@@ -187,6 +189,7 @@ public class GameController : MonoBehaviour
 
                     // cam sigue npc
                     camFollow.SetTarget(npcOfTurn.transform);
+                    camFollow.cRotation = npcOfTurn.savedCameraRotationY;
                     // Instanciamos el dado encima del npc
                     GameObject dice = Instantiate(dicePrefab, npcOfTurn.transform.position + (Vector3.up * (3 * npcOfTurn.transform.localScale.x)), Quaternion.identity);
 
