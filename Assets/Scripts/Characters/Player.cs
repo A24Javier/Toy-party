@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using UnityEditor;
 using UnityEngine;
 
@@ -63,12 +64,26 @@ public class Player : Character
             // Asignamos directamente al campo de la clase para Look()
             newBox = actualBox.GetNewBox(0);
 
+            string animToThis = newBox.GetAnimToThis();
             Vector3 destination = newBox.GetThisBoxTransf().position + upToBox;
 
-            while (Vector3.Distance(transform.position, destination) > 0.05f)
+            if (animToThis == "NoAnim")
             {
-                transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
-                yield return null;
+                while (Vector3.Distance(transform.position, destination) > 0.05f)
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
+                    yield return null;
+                }
+            }
+            else if(animToThis == "Jump")
+            {
+                animator.SetBool("isJumping", true);
+                transform.DOJump(destination, 1f, 1, 1f);
+                while (Vector3.Distance(transform.position, destination) > 0.05f)
+                {
+                    yield return null;
+                }
+                animator.SetBool("isJumping", false);
             }
 
             transform.position = destination;
@@ -108,11 +123,25 @@ public class Player : Character
         newBox = box;
 
         destination1 += upToBox;
+        string animToThis = newBox.GetAnimToThis();
 
-        while (Vector3.Distance(transform.position, destination1) > 0.05f)
+        if(animToThis == "NoAnim")
         {
-            transform.position = Vector3.MoveTowards(transform.position, destination1, speed * Time.deltaTime);
-            yield return null;
+            while (Vector3.Distance(transform.position, destination1) > 0.05f)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, destination1, speed * Time.deltaTime);
+                yield return null;
+            }
+        }
+        else if(animToThis == "Jump")
+        {
+            animator.SetBool("isJumping", true);
+            transform.DOJump(destination1, 1f, 1, 1f);
+            while (Vector3.Distance(transform.position, destination1) > 0.05f)
+            {
+                yield return null;
+            }
+            animator.SetBool("isJumping", false);
         }
 
         actualBox = box;
