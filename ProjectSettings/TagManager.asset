@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CoinBox
   - NPC
+  - Cam_C
   layers:
   - Default
   - TransparentFX

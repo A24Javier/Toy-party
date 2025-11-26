@@ -18,6 +18,8 @@ public class GameController : MonoBehaviour
     private NPC_Controller[] npcs;
     private Player playerOfTurn;
     private NPC_Controller npcOfTurn;
+    [SerializeField]private CameraFollow camFollow;
+
 
     // Orden y control
     private int actualTurn = 0;
@@ -154,13 +156,19 @@ public class GameController : MonoBehaviour
                 // Cuando el jugador actual de la lista tenga el mismo Char id que el del turno actual...
                 if (players[i].GetCharId() == idOrder[thisCharTurn])
                 {
-                    // PlayerOfTurn será el jugador que tiene el mismo char id que el del turno actual
                     playerOfTurn = players[i];
+
+                    // Actualiza UI
                     UIManager.instance.ChangeCharacterUI(playerOfTurn);
                     UIManager.instance.SetActualCharacter(playerOfTurn);
+
                     diceToUse = normalDice;
                     UIManager.instance.ControlActionPanel(true);
+
+                    // cam sigue jugador
+                    camFollow.SetTarget(playerOfTurn.transform);
                 }
+
             }
         }
         else
@@ -172,11 +180,13 @@ public class GameController : MonoBehaviour
                 if (npcs[i].GetCharId() == idOrder[thisCharTurn])
                 {
                     UIManager.instance.ControlActionPanel(false);
-                    // NpcOfTurn será el npc que tiene el mismo char id que el del turno actual
+
                     npcOfTurn = npcs[i];
                     UIManager.instance.ChangeCharacterUI(npcOfTurn);
                     UIManager.instance.SetActualCharacter(npcOfTurn);
 
+                    // cam sigue npc
+                    camFollow.SetTarget(npcOfTurn.transform);
                     // Instanciamos el dado encima del npc
                     GameObject dice = Instantiate(dicePrefab, npcOfTurn.transform.position + (Vector3.up * 3), Quaternion.identity);
 

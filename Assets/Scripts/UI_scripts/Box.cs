@@ -19,6 +19,7 @@ public class Box : MonoBehaviour
     [SerializeField] private List<Box> possiblesBoxes;
     [SerializeField] private bool[] isPathToStar;
     [SerializeField] private UnityEvent trapActions;
+    public float cRotation;
 
     // Keys de animaciones
     private const string ANIM_KEY_WIN_COINS = "isCelebrating";
