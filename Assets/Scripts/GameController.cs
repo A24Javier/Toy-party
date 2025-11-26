@@ -178,7 +178,7 @@ public class GameController : MonoBehaviour
                     UIManager.instance.SetActualCharacter(npcOfTurn);
 
                     // Instanciamos el dado encima del npc
-                    GameObject dice = Instantiate(dicePrefab, npcOfTurn.transform.position + (Vector3.up * 3), Quaternion.identity);
+                    GameObject dice = Instantiate(dicePrefab, npcOfTurn.transform.position + (Vector3.up * (3 * npcOfTurn.transform.localScale.x)), Quaternion.identity);
 
                     // Hacemos que el dado actual sea un dado normal (en un futuro cambiará)
                     DiceScript diceScr = dice.GetComponentInChildren<DiceScript>();

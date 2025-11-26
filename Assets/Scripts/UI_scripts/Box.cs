@@ -1,4 +1,3 @@
-using JetBrains.Annotations;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -14,9 +13,17 @@ public class Box : MonoBehaviour
         Star
     }
 
+    public enum AnimToThis
+    {
+        NoAnim,
+        Jump,
+        SpecialAnim
+    }
+
     [SerializeField] private BoxType type;
     [SerializeField] private int coins = 3;
     [SerializeField] private List<Box> possiblesBoxes;
+    [SerializeField] private AnimToThis animToThis = AnimToThis.NoAnim;
     [SerializeField] private bool[] isPathToStar;
     [SerializeField] private UnityEvent trapActions;
 
@@ -134,5 +141,10 @@ public class Box : MonoBehaviour
     public bool[] GetIsPathToStar()
     {
         return isPathToStar;
+    }
+
+    public string GetAnimToThis()
+    {
+        return animToThis.ToString();
     }
 }

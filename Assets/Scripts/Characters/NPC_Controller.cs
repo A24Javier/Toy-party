@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -76,11 +77,26 @@ public class NPC_Controller : Character
             newBox = actualBox.GetNewBox(0);
 
             Vector3 destination = newBox.GetThisBoxTransf().position; //+ upToBox;
+            string animToThis = newBox.GetAnimToThis();
 
-            while (Vector3.Distance(transform.position, destination) > 0.05f)
+            if (animToThis == "NoAnim")
             {
-                transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
-                yield return null;
+                while (Vector3.Distance(transform.position, destination) > 0.05f)
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
+                    yield return null;
+                }
+            }
+            else if (animToThis == "Jump")
+            {
+                animator.SetBool("isJumping", true);
+                transform.DOJump(destination, 1f, 1, 1f);
+
+                while(Vector3.Distance(transform.position, destination) > 0.05f)
+                {
+                    yield return null;
+                }
+                animator.SetBool("isJumping", false);
             }
 
             transform.position = destination;
@@ -115,12 +131,29 @@ public class NPC_Controller : Character
                             if (pathPass == randPathStarSelected)
                             {
                                 newBox = actualBox.GetBoxTransf(j).GetComponent<Box>();
+                                destination = newBox.GetThisBoxTransf().position;
+                                animToThis = newBox.GetAnimToThis();
 
-                                while (Vector3.Distance(transform.position, actualBox.GetBoxTransf(j).position) > 0.05f)
+                                if (animToThis == "NoAnim")
                                 {
-                                    transform.position = Vector3.MoveTowards(transform.position, actualBox.GetBoxTransf(j).position, speed * Time.deltaTime);
-                                    yield return null;
+                                    while (Vector3.Distance(transform.position, destination) > 0.05f)
+                                    {
+                                        transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
+                                        yield return null;
+                                    }
                                 }
+                                else if (animToThis == "Jump")
+                                {
+                                    animator.SetBool("isJumping", true);
+                                    transform.DOJump(destination, 1f, 1, 1f);
+
+                                    while (Vector3.Distance(transform.position, destination) > 0.05f)
+                                    {
+                                        yield return null;
+                                    }
+                                    animator.SetBool("isJumping", false);
+                                }
+
                                 transform.position = actualBox.GetBoxTransf(j).position;
                             }
                             else { pathPass++; }
