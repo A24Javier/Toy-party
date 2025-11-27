@@ -226,7 +226,7 @@ public class GameController : MonoBehaviour
     /// <summary>
     /// Función que se inicia cuando un turno debe terminar
     /// </summary>
-    public void FinishTurn()
+    public IEnumerator FinishTurn()
     {
         Debug.Log("Entra en Finish Turn. Resultado: " + actualTurn % 4);
 
@@ -242,11 +242,13 @@ public class GameController : MonoBehaviour
             //MinigameController.instance.SelectMinigame("AllVSAll");
 
             actualRound++;
+            yield return new WaitForSeconds(2f);
             StartMovement();
         }
         else
         {
             // Que tire el siguiente jugador
+            yield return new WaitForSeconds(2f);
             StartMovement();
         }
     }

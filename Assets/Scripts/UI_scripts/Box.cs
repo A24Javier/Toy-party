@@ -118,7 +118,7 @@ public class Box : MonoBehaviour
                 break;
         }
 
-        GameController.instance.FinishTurn();
+        StartCoroutine(GameController.instance.FinishTurn());
     }
 
     public Transform GetNewBoxTransf()
