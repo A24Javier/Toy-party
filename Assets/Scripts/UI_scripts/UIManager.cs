@@ -62,6 +62,7 @@ public class UIManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
         panelMinigameSelection.alpha = 0;
         ControlActionPanel(false);
         itemsPanel.alpha = 0;
@@ -77,31 +78,29 @@ public class UIManager : MonoBehaviour
             Vector3 possBoxTransf = pathBox.GetBoxTransf(i).position;
             Box possBox = pathBox.GetNewBox(i);
 
-            float xDif = possBoxTransf.x - pathTransf.x;
-            float zDif = possBoxTransf.z - pathTransf.z;
-
             float angle = CalculateAngle(pathTransf, possBoxTransf);
+            angle += Camera.main.transform.eulerAngles.y;
 
             bool arrowActivated = false;
 
             // Verificar dirección y activar la flecha correspondiente
-            if (xDif > 0 && Mathf.Abs(zDif) < Mathf.Abs(xDif) && rightArrow.alpha == 0 && !arrowActivated)
+            if ((angle <= 45f && angle > -45f || angle >= 360f && angle > 45f) && rightArrow.alpha == 0 && !arrowActivated)
             {
                 ActivateArrow(rightArrow, angle, possBoxTransf, possBox);
                 arrowActivated = true;
             }
-            else if (xDif < 0 && Mathf.Abs(zDif) < Mathf.Abs(xDif) && leftArrow.alpha == 0 && !arrowActivated)
+            else if ((angle > 135f && angle < 225f) && leftArrow.alpha == 0 && !arrowActivated)
             {
                 ActivateArrow(leftArrow, angle, possBoxTransf, possBox);
                 arrowActivated = true;
             }
 
-            if (zDif > 0 && Mathf.Abs(zDif) > Mathf.Abs(xDif) && forwardArrow.alpha == 0 && !arrowActivated)
+            if ((angle < 135f && angle > 45f) && forwardArrow.alpha == 0 && !arrowActivated)
             {
                 ActivateArrow(forwardArrow, angle, possBoxTransf, possBox);
                 arrowActivated = true;
             }
-            else if (zDif < 0 && Mathf.Abs(zDif) > Mathf.Abs(xDif) && downArrow.alpha == 0 && !arrowActivated)
+            else if ((angle < 315f && angle > 225f || angle < -45f && angle > -135f) && downArrow.alpha == 0 && !arrowActivated)
             {
                 ActivateArrow(downArrow, angle, possBoxTransf, possBox);
                 arrowActivated = true;
