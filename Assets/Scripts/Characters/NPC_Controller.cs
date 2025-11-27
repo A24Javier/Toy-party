@@ -110,61 +110,37 @@ public class NPC_Controller : Character
             if (actualBox.PossiblesBoxesCount() >= 2) // Activar sistema encrucijada, pero random
             {
                 animator.SetBool("isRunning", false);
-                bool[] isPathToStar = actualBox.GetIsPathToStar();
-                int pathesStar = 0;
+                
+                int randPath = Random.Range(0, actualBox.PossiblesBoxesCount());
 
-                for(int j = 0; j < isPathToStar.Length; j++) // Averiguamos cuantos caminos pueden llevar a la estrella
+                yield return new WaitForSeconds(TIME_WAIT_PATH); // Hace como que esta eligiendo
+
+                animator.SetBool("isRunning", true);
+                newBox = actualBox.GetBoxTransf(randPath).GetComponent<Box>();
+                destination = newBox.GetThisBoxTransf().position;
+                animToThis = newBox.GetAnimToThis();
+
+                if (animToThis == "NoAnim")
                 {
-                    if (isPathToStar[j]) {pathesStar++;}
-                }
-
-                // 90% de ir por el camino de la estrella, 10% que no
-                int randStarPath = Random.Range(0, 101); // Saca un numero entre 0 y 100
-
-                if (randStarPath <= 90) // Ir camino estrella
-                {
-                    int randPathStarSelected = Random.Range(0, pathesStar); // Elije uno de los posibles caminos que puede llevar a la estrella
-                    int pathPass = 0;
-
-                    yield return new WaitForSeconds(TIME_WAIT_PATH); // Hace como que esta eligiendo
-
-                    for (int j = 0; j < actualBox.PossiblesBoxesCount(); j++)
+                    while (Vector3.Distance(transform.position, destination) > 0.05f)
                     {
-                        animator.SetBool("isRunning", true);
-                        if (isPathToStar[j])
-                        {
-                            if (pathPass == randPathStarSelected)
-                            {
-                                newBox = actualBox.GetBoxTransf(j).GetComponent<Box>();
-                                destination = newBox.GetThisBoxTransf().position;
-                                animToThis = newBox.GetAnimToThis();
-
-                                if (animToThis == "NoAnim")
-                                {
-                                    while (Vector3.Distance(transform.position, destination) > 0.05f)
-                                    {
-                                        transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
-                                        yield return null;
-                                    }
-                                }
-                                else if (animToThis == "Jump")
-                                {
-                                    animator.SetBool("isJumping", true);
-                                    transform.DOJump(destination, 1f, 1, 1f);
-
-                                    while (Vector3.Distance(transform.position, destination) > 0.05f)
-                                    {
-                                        yield return null;
-                                    }
-                                    animator.SetBool("isJumping", false);
-                                }
-
-                                transform.position = actualBox.GetBoxTransf(j).position;
-                            }
-                            else { pathPass++; }
-                        }
+                        transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
+                        yield return null;
                     }
                 }
+                else if (animToThis == "Jump")
+                {
+                    animator.SetBool("isJumping", true);
+                    transform.DOJump(destination, 1f, 1, 1f);
+
+                    while (Vector3.Distance(transform.position, destination) > 0.05f)
+                    {
+                        yield return null;
+                    }
+                    animator.SetBool("isJumping", false);
+                }
+
+                transform.position = actualBox.GetBoxTransf(randPath).position;
             }
             //yield return new WaitForSeconds(0.05f);
 

@@ -239,9 +239,11 @@ public class GameController : MonoBehaviour
         {
             Debug.Log("Ronda de minijuego");
             // Ronda de minijuego
-            MinigameController.instance.SelectMinigame("AllVSAll");
+            //MinigameController.instance.SelectMinigame("AllVSAll");
 
             actualRound++;
+            StartMovement();
+
         }
         else
         {
