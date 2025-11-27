@@ -13,9 +13,9 @@ public class RandomTP : ItemFunction
 
         GameController.instance.GetPlayerOfTurn().transform.position = newBox.transform.position;
         GameController.instance.GetPlayerOfTurn().actualBox = newBox;
-        GameController.instance.GetPlayerOfTurn().Move(0);
+        newBox.ActivateEffect(GameController.instance.GetPlayerOfTurn());
 
-       // Quitar objeto del inventario del player
-       item.inventoryAssociated.DeleteItem(item);
+        // Quitar objeto del inventario del player
+        item.inventoryAssociated.DeleteItem(item);
     }
 }
