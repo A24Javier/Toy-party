@@ -19,6 +19,9 @@ public class NPC_Controller : Character
 
     public CameraFollow cameraFollow;
 
+    public float powerJump = 1f;
+    public float timeJump = 1f;
+
     void Start()
     {
         cameraFollow = Camera.main.GetComponent<CameraFollow>();
@@ -92,7 +95,9 @@ public class NPC_Controller : Character
             else if (animToThis == "Jump")
             {
                 animator.SetBool("isJumping", true);
-                transform.DOJump(destination, 1f, 1, 1f);
+                powerJump = actualBox.powerJump;
+                timeJump = actualBox.timeJump;
+                transform.DOJump(destination, powerJump, 1, timeJump);
 
                 while(Vector3.Distance(transform.position, destination) > 0.05f)
                 {
@@ -131,7 +136,9 @@ public class NPC_Controller : Character
                 else if (animToThis == "Jump")
                 {
                     animator.SetBool("isJumping", true);
-                    transform.DOJump(destination, 1f, 1, 1f);
+                    powerJump = actualBox.powerJump;
+                    timeJump = actualBox.timeJump;
+                    transform.DOJump(destination, powerJump, 1, timeJump);
 
                     while (Vector3.Distance(transform.position, destination) > 0.05f)
                     {

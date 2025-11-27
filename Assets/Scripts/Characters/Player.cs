@@ -16,6 +16,10 @@ public class Player : Character
     public CameraFollow cameraFollow;
     [SerializeField] private Item randomTP;
 
+    //jump
+    public float powerJump = 1f;
+    public float timeJump = 1f;
+
     void Start()
     {
         inventory.AddItem(randomTP);
@@ -80,7 +84,9 @@ public class Player : Character
             else if(animToThis == "Jump")
             {
                 animator.SetBool("isJumping", true);
-                transform.DOJump(destination, 1f, 1, 1f);
+                powerJump = actualBox.powerJump;
+                timeJump = actualBox.timeJump;
+                transform.DOJump(destination, powerJump, 1, timeJump);
                 while (Vector3.Distance(transform.position, destination) > 0.05f)
                 {
                     yield return null;
@@ -142,7 +148,9 @@ public class Player : Character
         else if(animToThis == "Jump")
         {
             animator.SetBool("isJumping", true);
-            transform.DOJump(destination1, 1f, 1, 1f);
+            powerJump = actualBox.powerJump;
+            timeJump = actualBox.timeJump;
+            transform.DOJump(destination1, powerJump, 1, timeJump);
             while (Vector3.Distance(transform.position, destination1) > 0.05f)
             {
                 yield return null;
@@ -183,4 +191,6 @@ public class Player : Character
         yield return null;
         Debug.Log($"La animationKey {animationKey} esta en {animator.GetBool(animationKey)}");
     }
+
+  
 }
