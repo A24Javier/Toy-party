@@ -18,6 +18,8 @@ public class GameController : MonoBehaviour
     private NPC_Controller[] npcs;
     private Player playerOfTurn;
     private NPC_Controller npcOfTurn;
+    [SerializeField]private CameraFollow camFollow;
+
 
     // Orden y control
     private int actualTurn = 0;
@@ -57,7 +59,7 @@ public class GameController : MonoBehaviour
     }
 
     /// <summary>
-    /// FunciÛn que crea a los jugadores y a los NPCs
+    /// Funci√≥n que crea a los jugadores y a los NPCs
     /// </summary>
     private void CreatePlayers()
     {
@@ -65,10 +67,10 @@ public class GameController : MonoBehaviour
         Box firstBox = Board.instance.GetCasilla(0).GetComponent<Box>();
         Vector3 initialPos = firstBox.GetThisBoxTransf().position;
 
-        // Id que se usar· para asignarles a los jugadores y NPCs
+        // Id que se usar√° para asignarles a los jugadores y NPCs
         int setId = 0;
 
-        // Crear· tantos jugadores (que se puedan controlar) como se hayan especificado en el men˙
+        // Crear√° tantos jugadores (que se puedan controlar) como se hayan especificado en el men√∫
         for(int i = 0; i < playersToCreate; i++)
         {
             // Instancia jugador
@@ -85,7 +87,7 @@ public class GameController : MonoBehaviour
             setId++;
         }
 
-        // Crear· los NPCs necesarios hasta que sean un total de 4 jugadores (sumando players y NPCs)
+        // Crear√° los NPCs necesarios hasta que sean un total de 4 jugadores (sumando players y NPCs)
         if((MAX_PLAYERS - playersToCreate) > 0)
         {
             for (int i = 0; i < (MAX_PLAYERS - playersToCreate); i++)
@@ -131,7 +133,7 @@ public class GameController : MonoBehaviour
     }
 
     /// <summary>
-    /// FunciÛn que se encarga de que el jugador/npc actual pueda tirar dado y moverse
+    /// Funci√≥n que se encarga de que el jugador/npc actual pueda tirar dado y moverse
     /// </summary>
     private void StartMovement()
     {
@@ -139,13 +141,13 @@ public class GameController : MonoBehaviour
         InputHandler.instance.ResetSpace();
 
         isPlayerRolling = false;
-        // Hacemos una operaciÛn para saber a que jugador/npc le toca ahora dependiendo el turno actual
+        // Hacemos una operaci√≥n para saber a que jugador/npc le toca ahora dependiendo el turno actual
         int thisCharTurn = idOrder[actualTurn % 4];
         
         Debug.Log("El charTurn es: " +  thisCharTurn);
         Debug.Log("El turno actual es de un jugador: " + isPlayer[thisCharTurn]);
 
-        // Dependiendo de si es un jugador o npc el movimiento y el llamado a funciones ser· distinto
+        // Dependiendo de si es un jugador o npc el movimiento y el llamado a funciones ser√° distinto
         if (isPlayer[thisCharTurn])
         {
             // Recorre la lista de players
@@ -154,13 +156,21 @@ public class GameController : MonoBehaviour
                 // Cuando el jugador actual de la lista tenga el mismo Char id que el del turno actual...
                 if (players[i].GetCharId() == idOrder[thisCharTurn])
                 {
-                    // PlayerOfTurn ser· el jugador que tiene el mismo char id que el del turno actual
                     playerOfTurn = players[i];
+
+                    // Actualiza UI
                     UIManager.instance.ChangeCharacterUI(playerOfTurn);
                     UIManager.instance.SetActualCharacter(playerOfTurn);
+
                     diceToUse = normalDice;
                     UIManager.instance.ControlActionPanel(true);
+
+                    // cam sigue jugador
+                    camFollow.SetTarget(playerOfTurn.transform);
+                    camFollow.cRotation = playerOfTurn.savedCameraRotationY;
+                    
                 }
+
             }
         }
         else
@@ -172,15 +182,18 @@ public class GameController : MonoBehaviour
                 if (npcs[i].GetCharId() == idOrder[thisCharTurn])
                 {
                     UIManager.instance.ControlActionPanel(false);
-                    // NpcOfTurn ser· el npc que tiene el mismo char id que el del turno actual
+
                     npcOfTurn = npcs[i];
                     UIManager.instance.ChangeCharacterUI(npcOfTurn);
                     UIManager.instance.SetActualCharacter(npcOfTurn);
 
+                    // cam sigue npc
+                    camFollow.SetTarget(npcOfTurn.transform);
+                    camFollow.cRotation = npcOfTurn.savedCameraRotationY;
                     // Instanciamos el dado encima del npc
                     GameObject dice = Instantiate(dicePrefab, npcOfTurn.transform.position + (Vector3.up * (3 * npcOfTurn.transform.localScale.x)), Quaternion.identity);
 
-                    // Hacemos que el dado actual sea un dado normal (en un futuro cambiar·)
+                    // Hacemos que el dado actual sea un dado normal (en un futuro cambiar√°)
                     DiceScript diceScr = dice.GetComponentInChildren<DiceScript>();
                     diceToUse = normalDice;
                     diceScr.ChangeScriptableDice(diceToUse); // De momento solo con dados normales
@@ -188,7 +201,7 @@ public class GameController : MonoBehaviour
                     // Hacemos que empiece la corutina del rolling del dado del NPC
                     StartCoroutine(diceScr.DiceRolling(npcOfTurn));
 
-                    // Iniciamos la corutina para que el NPC pare el dado en alg˙n momento
+                    // Iniciamos la corutina para que el NPC pare el dado en alg√∫n momento
                     StartCoroutine(npcOfTurn.doRolling(diceScr));
                 }
             }
@@ -211,7 +224,7 @@ public class GameController : MonoBehaviour
     }
 
     /// <summary>
-    /// FunciÛn que se inicia cuando un turno debe terminar
+    /// Funci√≥n que se inicia cuando un turno debe terminar
     /// </summary>
     public void FinishTurn()
     {

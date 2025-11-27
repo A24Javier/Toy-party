@@ -12,9 +12,11 @@ public abstract class Character : MonoBehaviour
     public Box actualBox;
     protected Inventory inventory = new Inventory();
     public bool isPlayer;
+    public float savedCameraRotationY = 0f;
+
 
     // Character values
-    public float speed = 3f;
+    public float speed = 0.001f;
 
     public abstract void Move(int steps);
     protected abstract IEnumerator MoveCharacterBoard(int steps);

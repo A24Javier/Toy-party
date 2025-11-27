@@ -13,7 +13,12 @@ public class Player : Character
     Box newBox = null;
     public bool smooth = true;
     public float velocidadDeRotacion = 5f;
+    public CameraFollow cameraFollow;
     [SerializeField] private Item randomTP;
+
+    //jump
+    public float powerJump = 1f;
+    public float timeJump = 1f;
 
     void Start()
     {
@@ -21,6 +26,7 @@ public class Player : Character
         animator = GetComponent<Animator>();
         board = GameObject.FindObjectOfType<Board>();
         actualBox = board.GetCasilla(0);
+        cameraFollow = Camera.main.GetComponent<CameraFollow>();
         //transform.position = actualBox1.GetThisBoxTransf().position + upToBox;
     }
 
@@ -78,7 +84,9 @@ public class Player : Character
             else if(animToThis == "Jump")
             {
                 animator.SetBool("isJumping", true);
-                transform.DOJump(destination, 1f, 1, 1f);
+                powerJump = actualBox.powerJump;
+                timeJump = actualBox.timeJump;
+                transform.DOJump(destination, powerJump, 1, timeJump);
                 while (Vector3.Distance(transform.position, destination) > 0.05f)
                 {
                     yield return null;
@@ -88,6 +96,10 @@ public class Player : Character
 
             transform.position = destination;
             actualBox = newBox;
+
+            cameraFollow.cRotation = actualBox.camRotationY;
+            this.savedCameraRotationY = actualBox.camRotationY;
+
 
             if (actualBox.PossiblesBoxesCount() >= 2)
             {
@@ -136,7 +148,9 @@ public class Player : Character
         else if(animToThis == "Jump")
         {
             animator.SetBool("isJumping", true);
-            transform.DOJump(destination1, 1f, 1, 1f);
+            powerJump = actualBox.powerJump;
+            timeJump = actualBox.timeJump;
+            transform.DOJump(destination1, powerJump, 1, timeJump);
             while (Vector3.Distance(transform.position, destination1) > 0.05f)
             {
                 yield return null;
@@ -177,4 +191,6 @@ public class Player : Character
         yield return null;
         Debug.Log($"La animationKey {animationKey} esta en {animator.GetBool(animationKey)}");
     }
+
+  
 }

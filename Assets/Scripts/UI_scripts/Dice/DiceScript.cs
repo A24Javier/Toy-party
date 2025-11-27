@@ -15,12 +15,15 @@ public class DiceScript : MonoBehaviour
     private bool isRotating = false;
     private bool npcRolled = false;
     private float randomAngle;
-    
+
+
     void Awake()
     {
         meshFilter = GetComponent<MeshFilter>();
         meshRenderer = GetComponent<MeshRenderer>();
     }
+
+    
 
     void OnEnable()
     {
@@ -31,10 +34,15 @@ public class DiceScript : MonoBehaviour
     {
         if (isRotating)
         {
+            
             DiceRotation();
         }
         
     }
+
+
+
+
 
     /// <summary>
     /// Función para que el dado del jugador ruede y que cuando deje de rodar el jugador se mueva

@@ -96,9 +96,11 @@ MonoBehaviour:
   characterImage: {fileID: 21300000, guid: 8a012681bac2fe242b1df864d879d9c1, type: 3}
   actualBox: {fileID: 0}
   isPlayer: 0
-  speed: 3
+  savedCameraRotationY: 0
+  speed: 0.9
   smooth: 1
   velocidadDeRotacion: 5
+  cameraFollow: {fileID: 0}
 --- !u!54 &-2682193999045717577
 Rigidbody:
   m_ObjectHideFlags: 0
