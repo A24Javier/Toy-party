@@ -7,6 +7,15 @@ TagManager:
   - CoinBox
   - NPC
   - Cam_C
+  - Fruta1
+  - Fruta2
+  - Cesta1
+  - Apple
+  - Cherry
+  - Coconut
+  - Peach
+  - Pear
+  - Orange
   layers:
   - Default
   - TransparentFX

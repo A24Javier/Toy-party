@@ -1,0 +1,106 @@
+{
+    "name": "FrutaAlHoyo",
+    "maps": [
+        {
+            "name": "Soltar",
+            "id": "6ceb3c39-504a-4006-8ed2-d0a47c25ae61",
+            "actions": [
+                {
+                    "name": "Fruta",
+                    "type": "Button",
+                    "id": "91f1d14e-8ec5-48ac-bc82-6101ea21d71d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "65e3417e-c6fc-453c-ab2e-56dcdea55a21",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fruta",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Cesta",
+            "id": "f411395e-1baa-4fc3-a885-e5b05c79c1be",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Value",
+                    "id": "baa9f55a-a611-4ab4-993d-1673fd7c6d77",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "2D Vector",
+                    "id": "1a59534f-9ca1-406b-94a5-cc944be05d57",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "48d9e9b4-7298-48e1-8b35-d71c81b9f9c4",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "f3fbf425-7b0c-4381-8874-f787d9d619c4",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "f2e097b7-57bb-4503-82c8-7c6a78fd58c7",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "3897da03-7e01-46e9-a63f-4d3a148a9973",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
