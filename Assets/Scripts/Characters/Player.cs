@@ -27,6 +27,7 @@ public class Player : Character
         board = GameObject.FindObjectOfType<Board>();
         actualBox = board.GetCasilla(0);
         cameraFollow = Camera.main.GetComponent<CameraFollow>();
+        runningParticles = GetComponentInChildren<ParticleSystem>();
         //transform.position = actualBox1.GetThisBoxTransf().position + upToBox;
     }
 
@@ -67,6 +68,7 @@ public class Player : Character
 
         for (int i = 0; i < steps; i++)
         {
+            runningParticles.Play();
             // Asignamos directamente al campo de la clase para Look()
             newBox = actualBox.GetNewBox(0);
 
@@ -83,6 +85,7 @@ public class Player : Character
             }
             else if(animToThis == "Jump")
             {
+                runningParticles.Stop();
                 animator.SetBool("isJumping", true);
                 powerJump = actualBox.powerJump;
                 timeJump = actualBox.timeJump;
@@ -104,6 +107,7 @@ public class Player : Character
             if (actualBox.PossiblesBoxesCount() >= 2)
             {
                 // Pausamos el movimiento y dejamos que el jugador elija
+                runningParticles.Stop();
                 animator.SetBool("isRunning", false);
                 isSelectingPath = true;
 
@@ -119,11 +123,11 @@ public class Player : Character
                 // Reanudamos movimiento
                 animator.SetBool("isRunning", true);
             }
-        }
 
+        }
+        runningParticles.Stop();
         // Activamos efectos de la última casilla
         animator.SetBool("isRunning", false);
-
         newBox.ActivateEffect(this);
     }
 

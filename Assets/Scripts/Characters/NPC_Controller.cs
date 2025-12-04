@@ -28,6 +28,7 @@ public class NPC_Controller : Character
         animator = GetComponent<Animator>();
         board = FindObjectOfType<Board>();
         actualBox = board.GetCasilla(0);
+        runningParticles = GetComponentInChildren<ParticleSystem>();
     }
 
     void Update()
@@ -79,6 +80,7 @@ public class NPC_Controller : Character
         animator.SetBool("isRunning", true);
         for (int i = 0; i < steps; i++)
         {
+            runningParticles.Play();
             newBox = actualBox.GetNewBox(0);
 
             Vector3 destination = newBox.GetThisBoxTransf().position; //+ upToBox;
@@ -94,6 +96,7 @@ public class NPC_Controller : Character
             }
             else if (animToThis == "Jump")
             {
+                runningParticles.Stop();
                 animator.SetBool("isJumping", true);
                 powerJump = actualBox.powerJump;
                 timeJump = actualBox.timeJump;
@@ -114,6 +117,7 @@ public class NPC_Controller : Character
 
             if (actualBox.PossiblesBoxesCount() >= 2) // Activar sistema encrucijada, pero random
             {
+                runningParticles.Stop();
                 animator.SetBool("isRunning", false);
                 
                 int randPath = Random.Range(0, actualBox.PossiblesBoxesCount());
@@ -127,6 +131,7 @@ public class NPC_Controller : Character
 
                 if (animToThis == "NoAnim")
                 {
+                    runningParticles.Stop();
                     while (Vector3.Distance(transform.position, destination) > 0.05f)
                     {
                         transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
@@ -153,6 +158,7 @@ public class NPC_Controller : Character
 
         }
 
+        runningParticles.Stop();
         // Nos aseguramos de que "isRunning" se desactiva (ya que sin esto a veces no lo hace)
         animator.SetBool("isRunning", false);
         yield return null;

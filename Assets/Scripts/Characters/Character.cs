@@ -18,6 +18,9 @@ public abstract class Character : MonoBehaviour
     // Character values
     public float speed = 0.001f;
 
+    // Character things
+    protected ParticleSystem runningParticles;
+
     public abstract void Move(int steps);
     protected abstract IEnumerator MoveCharacterBoard(int steps);
     public abstract IEnumerator DoAnim(string animationKey, string animationName);
