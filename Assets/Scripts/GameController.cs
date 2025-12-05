@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     private const int MAX_PLAYERS = 4;
+    private const int MAX_ROUNDS = 5;
     private int playersToCreate;
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private GameObject npcPrefab;
@@ -32,10 +33,11 @@ public class GameController : MonoBehaviour
 
     void Awake()
     {
+        // Se comenta solo para el prototipo
         if(instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -243,14 +245,43 @@ public class GameController : MonoBehaviour
 
             actualRound++;
             yield return new WaitForSeconds(2f);
-            StartMovement();
+            if(actualRound < MAX_ROUNDS)
+            {
+                StartMovement();
+            }
+            
         }
         else
         {
-            // Que tire el siguiente jugador
-            yield return new WaitForSeconds(2f);
-            StartMovement();
+            if(actualRound < MAX_ROUNDS)
+            {
+                // Que tire el siguiente jugador
+                yield return new WaitForSeconds(2f);
+                StartMovement();
+            }
+            
         }
+
+        if (actualRound >= MAX_ROUNDS)
+        {
+            Character[] chars = new Character[4];
+
+            for (int i = 0; i < players.Length; i++)
+            {
+                chars[i] = players[i];
+                Debug.Log("Insert player");
+            }
+
+            for (int i = 0; i < npcs.Length; i++)
+            {
+                chars[i + players.Length] = npcs[i];
+                Debug.Log("Insert NPC");
+            }
+
+            UIManager.instance.ShowLeaderboard(chars);
+            yield return null;
+        }
+
     }
 
     public bool IsPlayerRolling()

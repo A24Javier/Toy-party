@@ -7,6 +7,8 @@ using UnityEngine.Events;
 using UnityEngine.TextCore.Text;
 using System;
 using System.IO;
+using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -49,6 +51,11 @@ public class UIManager : MonoBehaviour
     private Color unselectedColor = new Color(1, 1, 1, 0.5f);
     private Color selectedColor = new Color(1, 1, 1, 1);
 
+    [Header("Cosas leaderboard")]
+    [SerializeField] private CanvasGroup leaderboardGroup;
+    [SerializeField] private Image[] characterImages;
+    [SerializeField] private TMP_Text[] characterLeadPos;
+
     // Elementos UI para Fade in/out
     [SerializeField] private CanvasGroup panelFadeInOut;
 
@@ -66,6 +73,7 @@ public class UIManager : MonoBehaviour
         panelMinigameSelection.alpha = 0;
         ControlActionPanel(false);
         itemsPanel.alpha = 0;
+        HideLeaderboard();
     }
 
     #region Selección de Camino
@@ -403,5 +411,53 @@ public class UIManager : MonoBehaviour
         {
             itemsButtons[i].image.sprite = nullObjSpr;
         }
+    }
+
+    public void ShowLeaderboard(Character[] chars)
+    {
+        leaderboardGroup.alpha = 1f;
+        leaderboardGroup.interactable = true;
+        leaderboardGroup.blocksRaycasts = true;
+
+        // Ordenar: primero por estrellas (descendiente), luego por monedas (descendiente)
+        Character[] authPos = chars.OrderByDescending(c => c.stars).ThenByDescending(c => c.coins).ToArray();
+
+        int[] playerRanks = new int[authPos.Length];
+
+        int currentRank = 1;
+        playerRanks[0] = currentRank;
+
+        // Calcular posiciones con empates
+        for (int i = 1; i < authPos.Length; i++)
+        {
+            if (authPos[i].stars == authPos[i - 1].stars && authPos[i].coins == authPos[i - 1].coins)
+            {
+                playerRanks[i] = currentRank;
+            }
+            else
+            {
+                currentRank = i + 1;
+                playerRanks[i] = currentRank;
+            }
+        }
+
+        // Setear los textos e imágenes
+        for (int i = 0; i < authPos.Length; i++)
+        {
+            characterImages[i].sprite = authPos[i].characterImage;
+            characterLeadPos[i].text = $"#{playerRanks[i]}";
+        }
+    }
+
+    private void HideLeaderboard()
+    {
+        leaderboardGroup.alpha = 0f;
+        leaderboardGroup.interactable = false;
+        leaderboardGroup.blocksRaycasts = false;
+    }
+
+    public void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

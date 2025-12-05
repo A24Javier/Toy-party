@@ -22,6 +22,10 @@ public class NPC_Controller : Character
     public float powerJump = 1f;
     public float timeJump = 1f;
 
+    // Sounds
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip stepSfx;
+
     void Start()
     {
         cameraFollow = Camera.main.GetComponent<CameraFollow>();
@@ -29,6 +33,8 @@ public class NPC_Controller : Character
         board = FindObjectOfType<Board>();
         actualBox = board.GetCasilla(0);
         runningParticles = GetComponentInChildren<ParticleSystem>();
+        audioSource = GetComponent<AudioSource>();
+        audioSource.clip = stepSfx;
     }
 
     void Update()
@@ -80,6 +86,7 @@ public class NPC_Controller : Character
         animator.SetBool("isRunning", true);
         for (int i = 0; i < steps; i++)
         {
+            audioSource.Play();
             runningParticles.Play();
             newBox = actualBox.GetNewBox(0);
 
@@ -128,6 +135,7 @@ public class NPC_Controller : Character
                 newBox = actualBox.GetBoxTransf(randPath).GetComponent<Box>();
                 destination = newBox.GetThisBoxTransf().position;
                 animToThis = newBox.GetAnimToThis();
+                audioSource.Play();
 
                 if (animToThis == "NoAnim")
                 {

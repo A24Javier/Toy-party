@@ -20,6 +20,10 @@ public class Player : Character
     public float powerJump = 1f;
     public float timeJump = 1f;
 
+    // Sounds
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip stepSfx;
+
     void Start()
     {
         inventory.AddItem(randomTP);
@@ -28,6 +32,8 @@ public class Player : Character
         actualBox = board.GetCasilla(0);
         cameraFollow = Camera.main.GetComponent<CameraFollow>();
         runningParticles = GetComponentInChildren<ParticleSystem>();
+        audioSource = GetComponent<AudioSource>();
+        audioSource.clip = stepSfx;
         //transform.position = actualBox1.GetThisBoxTransf().position + upToBox;
     }
 
@@ -68,6 +74,7 @@ public class Player : Character
 
         for (int i = 0; i < steps; i++)
         {
+            audioSource.Play();
             runningParticles.Play();
             // Asignamos directamente al campo de la clase para Look()
             newBox = actualBox.GetNewBox(0);
@@ -125,6 +132,7 @@ public class Player : Character
             }
 
         }
+
         runningParticles.Stop();
         // Activamos efectos de la última casilla
         animator.SetBool("isRunning", false);
@@ -135,7 +143,7 @@ public class Player : Character
     public IEnumerator PathSelected(Vector3 destination1, Box box)
     {
         UIManager.instance.DeactivatePathDecision();
-
+        audioSource.Play();
         newBox = box;
 
         destination1 += upToBox;
