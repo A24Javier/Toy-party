@@ -7,6 +7,14 @@ TagManager:
   - CoinBox
   - NPC
   - Cam_C
+  - Cesta1
+  - Apple
+  - Cherry
+  - Coconut
+  - Peach
+  - Pear
+  - Orange
+  - Reset
   layers:
   - Default
   - TransparentFX
@@ -16,9 +24,9 @@ TagManager:
   - UI
   - Box
   - Character
-  - 
-  - 
-  - 
+  - Ground
+  - Player
+  - npc
   - 
   - 
   - 
