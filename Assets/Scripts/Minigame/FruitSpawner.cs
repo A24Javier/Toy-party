@@ -40,10 +40,11 @@ public class FruitSpawner : MonoBehaviour
         if (fruta == null) return;
 
         Vector3 pos = PosicionValidaDentroCapsule();
-        fruta.transform.position = pos;
 
+        fruta.transform.position = pos;
         fruta.transform.rotation = usarRotacionAleatoria ? Random.rotation : Quaternion.identity;
         fruta.SetActive(true);
+
     }
 
     void CrearPool()

@@ -4,7 +4,6 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     public float speed = 5f;
-    public float jumpForce = 7f;
     public float rotationSpeed = 10f;
 
     public Transform cameraTransform;  
@@ -12,11 +11,6 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private PlayerInput input;
     private Animator anim;
-
-    private bool isGrounded;
-    public LayerMask groundLayer;
-    private bool jumping = false;
-
 
     private void Awake()
     {
@@ -35,47 +29,10 @@ public class PlayerController : MonoBehaviour
         input.Disable();
     }
 
-    private void CheckGround()
-    {
-        RaycastHit hitInfo = new RaycastHit();
-
-        Debug.DrawRay(transform.position, Vector3.down * 1f, Color.red);
-
-        if (Physics.Raycast(transform.position, -Vector3.up, out hitInfo, 1f, groundLayer))
-        {
-            if (!isGrounded && jumping)
-            {
-                anim.SetBool("IsJumping", false);
-                jumping = false;
-            }
-
-            isGrounded = true;
-        }
-        else
-        {
-            isGrounded = false; 
-        }
-    }
-
-
-
-
     private void FixedUpdate()
     {
-        CheckGround();
         Move();
         Rotate();
-        if (input.PlayerMov.Jump.ReadValue<float>() > 0.1f && isGrounded)
-        {
-            Debug.Log("aaaaaaaaaaaaaa");
-            Jump();
-        }
-        if (!isGrounded && rb.velocity.y < 0)
-        {
-            rb.AddForce(Vector3.down * 20f, ForceMode.Acceleration);
-        }
-        
-
     }
 
     private void Move()
@@ -120,15 +77,6 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
         }
     }
-
-    private void Jump()
-    {
-        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-
-        anim.SetBool("IsJumping", true);
-        jumping = true;
-    }
-
 
     public void Victory()
     {

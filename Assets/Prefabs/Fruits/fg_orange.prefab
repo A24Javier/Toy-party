@@ -75,9 +75,10 @@ GameObject:
   - component: {fileID: -1735535156076394020}
   - component: {fileID: 7339967197547567843}
   - component: {fileID: 5831272315105592803}
+  - component: {fileID: 6423356867331829365}
   m_Layer: 0
   m_Name: fg_orange
-  m_TagString: Orange
+  m_TagString: Pear
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -162,6 +163,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabOriginal: {fileID: 5371318096609958072}
+--- !u!114 &6423356867331829365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5371318096609958072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7e58673592ee7544adb7a7d73e7bdab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  markerPrefab: {fileID: 5288602700470832667, guid: 8b0c194cf06e2914f9a61424808e214c,
+    type: 3}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &7609107251598368959
 GameObject:
   m_ObjectHideFlags: 0

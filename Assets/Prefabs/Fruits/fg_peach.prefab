@@ -31,17 +31,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 95c304702fcf48a46bc586f6f560bd1a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -62.036102
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 95c304702fcf48a46bc586f6f560bd1a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 768.9548
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 95c304702fcf48a46bc586f6f560bd1a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 17.29063
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 95c304702fcf48a46bc586f6f560bd1a,
         type: 3}
@@ -91,7 +91,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 95c304702fcf48a46bc586f6f560bd1a,
         type: 3}
       propertyPath: m_TagString
-      value: Peach
+      value: Pear
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -114,6 +114,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1686677892488796573}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 95c304702fcf48a46bc586f6f560bd1a,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5614016159530293525}
   m_SourcePrefab: {fileID: 100100000, guid: 95c304702fcf48a46bc586f6f560bd1a, type: 3}
 --- !u!1 &3424940399752055967 stripped
 GameObject:
@@ -184,3 +188,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabOriginal: {fileID: 3424940399752055967}
+--- !u!114 &5614016159530293525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3424940399752055967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7e58673592ee7544adb7a7d73e7bdab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  markerPrefab: {fileID: 5288602700470832667, guid: 8b0c194cf06e2914f9a61424808e214c,
+    type: 3}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 256
