@@ -1,12 +1,13 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class LoadingScreenUI : MonoBehaviour
 {
     [Header("UI References")]
-    public Text titleText;
-    public Text descriptionText;
+    public TMP_Text titleText;
+    public TMP_Text descriptionText;
     public Image previewImage;
     public GameObject continueText; // Texto "Click para continuar"
 
