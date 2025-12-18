@@ -7306,12 +7306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a53058dfdb5f1a4e9e86d06881142b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minigameType: 00000000010000000200000000000000
-  sceneName:
-  - SceneTest
-  - SceneTest 1
-  - SceneTest 2
-  - SceneTest 3
+  database: {fileID: 11400000, guid: ee9ce038f1e0abc4ba7dd8d0969867d1, type: 2}
 --- !u!4 &1928719376
 Transform:
   m_ObjectHideFlags: 0

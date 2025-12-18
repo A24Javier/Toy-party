@@ -241,14 +241,14 @@ public class GameController : MonoBehaviour
         {
             Debug.Log("Ronda de minijuego");
             // Ronda de minijuego
-            //MinigameController.instance.SelectMinigame("AllVSAll");
+            MinigameController.instance.SelectMinigame("AllVSAll");
 
             actualRound++;
-            yield return new WaitForSeconds(2f);
+            /*yield return new WaitForSeconds(2f);
             if(actualRound < MAX_ROUNDS)
             {
                 StartMovement();
-            }
+            }*/
             
         }
         else
