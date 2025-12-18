@@ -13,7 +13,6 @@ public class Player : Character
     Box newBox = null;
     public bool smooth = true;
     public float velocidadDeRotacion = 5f;
-    public CameraFollow cameraFollow;
     [SerializeField] private Item randomTP;
 
     //jump
@@ -30,7 +29,6 @@ public class Player : Character
         animator = GetComponent<Animator>();
         board = GameObject.FindObjectOfType<Board>();
         actualBox = board.GetCasilla(0);
-        cameraFollow = Camera.main.GetComponent<CameraFollow>();
         runningParticles = GetComponentInChildren<ParticleSystem>();
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = stepSfx;
@@ -107,8 +105,18 @@ public class Player : Character
             transform.position = destination;
             actualBox = newBox;
 
-            cameraFollow.cRotation = actualBox.camRotationY;
-            this.savedCameraRotationY = actualBox.camRotationY;
+            // Guardamos la rotación de cámara de esta casilla
+            if (actualBox != null)
+            {
+                savedCameraRotationY = actualBox.camRotationY;
+
+                // GIRAMOS LA CÁMARA AL MOMENTO
+                GameController.instance.UpdateCameraRotation(savedCameraRotationY);
+            }
+            else
+            {
+                savedCameraRotationY = 0f;
+            }
 
 
             if (actualBox.PossiblesBoxesCount() >= 2)
@@ -171,6 +179,11 @@ public class Player : Character
         }
 
         actualBox = box;
+        if (actualBox != null)
+        {
+            savedCameraRotationY = actualBox.camRotationY;
+            GameController.instance.UpdateCameraRotation(savedCameraRotationY);
+        }
         isSelectingPath = false;
     }
 

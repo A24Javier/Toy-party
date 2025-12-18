@@ -17,8 +17,6 @@ public class NPC_Controller : Character
     public bool smooth = true;
     public float velocidadDeRotacion = 5f;
 
-    public CameraFollow cameraFollow;
-
     public float powerJump = 1f;
     public float timeJump = 1f;
 
@@ -28,7 +26,6 @@ public class NPC_Controller : Character
 
     void Start()
     {
-        cameraFollow = Camera.main.GetComponent<CameraFollow>();
         animator = GetComponent<Animator>();
         board = FindObjectOfType<Board>();
         actualBox = board.GetCasilla(0);
@@ -119,8 +116,16 @@ public class NPC_Controller : Character
             transform.position = destination;
             actualBox = newBox;
 
-            cameraFollow.cRotation = actualBox.camRotationY;
-            this.savedCameraRotationY = actualBox.camRotationY;
+            // GUARDAR ROTACIÓN DE CÁMARA DE ESTA CASILLA
+            if (actualBox != null)
+            {
+                savedCameraRotationY = actualBox.camRotationY;
+                GameController.instance.UpdateCameraRotation(savedCameraRotationY);
+            }
+            else
+            {
+                savedCameraRotationY = 0f;
+            }
 
             if (actualBox.PossiblesBoxesCount() >= 2) // Activar sistema encrucijada, pero random
             {
@@ -161,6 +166,14 @@ public class NPC_Controller : Character
                 }
 
                 transform.position = actualBox.GetBoxTransf(randPath).position;
+                actualBox = newBox;
+
+                if (actualBox != null)
+                {
+                    savedCameraRotationY = actualBox.camRotationY;
+                    GameController.instance.UpdateCameraRotation(savedCameraRotationY);
+                }
+
             }
             //yield return new WaitForSeconds(0.05f);
 

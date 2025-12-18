@@ -19,7 +19,7 @@ public class GameController : MonoBehaviour
     private NPC_Controller[] npcs;
     private Player playerOfTurn;
     private NPC_Controller npcOfTurn;
-    [SerializeField]private CameraFollow camFollow;
+    [SerializeField] private BoardCameraController camFollow;
 
 
     // Orden y control
@@ -169,8 +169,9 @@ public class GameController : MonoBehaviour
 
                     // cam sigue jugador
                     camFollow.SetTarget(playerOfTurn.transform);
-                    camFollow.cRotation = playerOfTurn.savedCameraRotationY;
-                    
+                    camFollow.SetBoxRotation(playerOfTurn.savedCameraRotationY);
+
+
                 }
 
             }
@@ -191,7 +192,8 @@ public class GameController : MonoBehaviour
 
                     // cam sigue npc
                     camFollow.SetTarget(npcOfTurn.transform);
-                    camFollow.cRotation = npcOfTurn.savedCameraRotationY;
+                    camFollow.SetBoxRotation(npcOfTurn.savedCameraRotationY);
+
                     // Instanciamos el dado encima del npc
                     GameObject dice = Instantiate(dicePrefab, npcOfTurn.transform.position + (Vector3.up * (3 * npcOfTurn.transform.localScale.x)), Quaternion.identity);
 
@@ -298,4 +300,11 @@ public class GameController : MonoBehaviour
     {
         return playerOfTurn;
     }
+
+    // Llamado cuando un personaje pisa una Box
+    public void UpdateCameraRotation(float newRotationY)
+    {
+        camFollow.SetBoxRotation(newRotationY);
+    }
+
 }
