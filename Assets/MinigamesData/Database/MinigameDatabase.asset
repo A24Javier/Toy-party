@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f65c3532289e9234a9fecfe4fb998b4c, type: 3}
   m_Name: MinigameDatabase
   m_EditorClassIdentifier: 
-  minigames: []
+  minigames:
+  - {fileID: 11400000, guid: 3219cf4d7e01eb24e86df3e4d7f6bb98, type: 2}
+  - {fileID: 11400000, guid: 3219cf4d7e01eb24e86df3e4d7f6bb98, type: 2}
+  - {fileID: 11400000, guid: 3219cf4d7e01eb24e86df3e4d7f6bb98, type: 2}

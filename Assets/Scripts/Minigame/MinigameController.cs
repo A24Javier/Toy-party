@@ -14,8 +14,12 @@ public class MinigameController : MonoBehaviour
 
     private MinigameData selectedMinigame;
 
+    private Scene boardScene;
+
     private void Awake()
     {
+        boardScene = SceneManager.GetActiveScene();
+
         if (instance == null)
         {
             instance = this;
@@ -66,6 +70,19 @@ public class MinigameController : MonoBehaviour
 
     public void LoadMinigame()
     {
-        SceneManager.LoadScene(selectedMinigame.sceneName);
+        // Hacemos que la carga sea Aditiva para que la escena del tablero siga cargada
+        SceneManager.LoadScene(selectedMinigame.sceneName, LoadSceneMode.Additive);
+
+        // Cuando carga la escena de minijuego desactivamos todos los objetos del tablero
+        LoadBoardGameObjects(false);
+    }
+
+    private void LoadBoardGameObjects(bool activate)
+    {
+        foreach (GameObject go in boardScene.GetRootGameObjects())
+        {
+            Debug.Log(go.name);
+            go.SetActive(activate);
+        }
     }
 }
