@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum MinigameType { AllVSAll, TwoVSTwo, ThreeVSOne }
+public enum MinigameType { AllVSAll, TwoVSTwo, ThreeVSOne, OneVSOne}
 
 [CreateAssetMenu(fileName = "MinigameData", menuName = "Data/Minigame Data")]
 public class MinigameData : ScriptableObject
