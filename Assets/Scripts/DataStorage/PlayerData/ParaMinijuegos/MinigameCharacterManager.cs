@@ -44,7 +44,7 @@ public class MinigameCharacterManager : MonoBehaviour
             // Añadir IA si es NPC
             if (!c.isPlayer)
             {
-                go.AddComponent<NpcMinigameAI>();
+                //go.AddComponent<NpcMinigameAI>();
             }
 
             spawnedCharacters[i] = c;
