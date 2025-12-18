@@ -8,7 +8,7 @@ public class Box : MonoBehaviour
     {
         Normal,
         Coin,
-        Trap,
+        Event,
         Path,
         Star
     }
@@ -25,7 +25,7 @@ public class Box : MonoBehaviour
     [SerializeField] private List<Box> possiblesBoxes;
     [SerializeField] private AnimToThis animToThis = AnimToThis.NoAnim;
     [SerializeField] private bool[] isPathToStar;
-    [SerializeField] private UnityEvent trapActions;
+    [SerializeField] private UnityEvent EventActions;
     public float camRotationY;
     public float powerJump = 1f;
     public float timeJump = 1f;
@@ -95,9 +95,9 @@ public class Box : MonoBehaviour
                 StartCoroutine(character.DoAnim((coins > 0) ? ANIM_KEY_WIN_COINS : ANIM_KEY_LOSE_COINS, (coins > 0) ? ANIM_NAME_WIN_COINS : ANIM_NAME_LOSE_COINS));
 
                 break;
-            case BoxType.Trap:
-                Debug.Log("Character cayo en casilla trampa");
-                trapActions.Invoke();
+            case BoxType.Event:
+                Debug.Log("Character cayo en casilla event TIME");
+                EventActions.Invoke();
                 break;
             case BoxType.Path:
                 if (character.isPlayer)
