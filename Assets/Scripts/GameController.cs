@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     private const int MAX_PLAYERS = 4;
-    private const int MAX_ROUNDS = 5;
+    private const int MAX_ROUNDS = 10;
     private int playersToCreate;
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private GameObject npcPrefab;
@@ -14,6 +14,8 @@ public class GameController : MonoBehaviour
     [SerializeField] private Dice normalDice;
 
     [SerializeField] private Transform[] spawns;
+    private bool gameEnded = false;
+
 
     private Player[] players;
     private NPC_Controller[] npcs;
@@ -266,6 +268,9 @@ public class GameController : MonoBehaviour
 
         if (actualRound >= MAX_ROUNDS)
         {
+            if (gameEnded) yield break; 
+            gameEnded = true;
+
             Character[] chars = new Character[4];
 
             for (int i = 0; i < players.Length; i++)
@@ -281,8 +286,10 @@ public class GameController : MonoBehaviour
             }
 
             UIManager.instance.ShowLeaderboard(chars);
-            yield return null;
+
+            yield break; 
         }
+
 
     }
 

@@ -13,6 +13,8 @@ public abstract class Character : MonoBehaviour
     protected Inventory inventory = new Inventory();
     public bool isPlayer;
     public float savedCameraRotationY = 0f;
+    public bool waitingStarShop = false;
+    public int pendingStepsAfterShop = 0;
 
 
     // Character values

@@ -138,7 +138,24 @@ public class Player : Character
                 // Reanudamos movimiento
                 animator.SetBool("isRunning", true);
             }
+            if (Box.GetCurrentStarBox() == actualBox)
+            {
+                int remaining = steps - (i + 1);
 
+                if (remaining > 0)
+                {
+                    waitingStarShop = true;
+                    pendingStepsAfterShop = remaining;
+
+                    runningParticles.Stop();
+                    animator.SetBool("isRunning", false);
+
+                    // Abre tienda (y se reanudará desde UIManager)
+                    actualBox.ActivateEffect(this);
+
+                    yield break; // parar movimiento aquí
+                }
+            }
         }
 
         runningParticles.Stop();
