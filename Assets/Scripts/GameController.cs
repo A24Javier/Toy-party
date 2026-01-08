@@ -17,6 +17,9 @@ public class GameController : MonoBehaviour
 
     private Player[] players;
     private NPC_Controller[] npcs;
+    private Character[] characters;
+
+    private Character characterOfTurn;
     private Player playerOfTurn;
     private NPC_Controller npcOfTurn;
     [SerializeField] private BoardCameraController camFollow;
@@ -52,6 +55,7 @@ public class GameController : MonoBehaviour
         // Coge el valor de jugadores a crear almacenado en PlayerPrefs y lo almacena en 'playersToCreate'
         playersToCreate = PlayerPrefs.GetInt("PlayersToCreate");
         playersToCreate = 1; // BORRAR EN UN FUTURO
+        characters = new Character[MAX_PLAYERS];
         CreatePlayers();
     }
 
@@ -85,6 +89,7 @@ public class GameController : MonoBehaviour
             newPlayer.SetCharId(setId);
             idOrder[i] = setId;
             isPlayer[i] = true;
+            characters[i] = newPlayer;
 
             setId++;
         }
@@ -104,6 +109,7 @@ public class GameController : MonoBehaviour
                 newNPC.SetCharId(setId);
                 idOrder[(playersToCreate) + i] = setId;
                 isPlayer[(playersToCreate) + i] = false;
+                characters[setId] = newNPC;
 
                 setId++;
             }
@@ -159,6 +165,7 @@ public class GameController : MonoBehaviour
                 if (players[i].GetCharId() == idOrder[thisCharTurn])
                 {
                     playerOfTurn = players[i];
+                    characterOfTurn = players[i];
 
                     // Actualiza UI
                     UIManager.instance.ChangeCharacterUI(playerOfTurn);
@@ -187,6 +194,7 @@ public class GameController : MonoBehaviour
                     UIManager.instance.ControlActionPanel(false);
 
                     npcOfTurn = npcs[i];
+                    characterOfTurn = npcs[i];
                     UIManager.instance.ChangeCharacterUI(npcOfTurn);
                     UIManager.instance.SetActualCharacter(npcOfTurn);
 
@@ -268,7 +276,7 @@ public class GameController : MonoBehaviour
         {
             Character[] chars = new Character[4];
 
-            for (int i = 0; i < players.Length; i++)
+            /*for (int i = 0; i < players.Length; i++)
             {
                 chars[i] = players[i];
                 Debug.Log("Insert player");
@@ -278,9 +286,9 @@ public class GameController : MonoBehaviour
             {
                 chars[i + players.Length] = npcs[i];
                 Debug.Log("Insert NPC");
-            }
+            }*/
 
-            UIManager.instance.ShowLeaderboard(chars);
+            UIManager.instance.ShowLeaderboard(characters);
             yield return null;
         }
 
@@ -296,9 +304,24 @@ public class GameController : MonoBehaviour
         diceToUse = newDice;
     }
 
+    public Character GetCharacter(int index)
+    {
+        return characters[index];
+    }
+
     public Player GetPlayerOfTurn()
     {
         return playerOfTurn;
+    }
+
+    public Character GetCharacterOfTurn()
+    {
+        return characterOfTurn;
+    }
+
+    public int GetCharactersInParty()
+    {
+        return characters.Length;
     }
 
     // Llamado cuando un personaje pisa una Box

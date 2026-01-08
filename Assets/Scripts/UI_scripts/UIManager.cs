@@ -9,6 +9,8 @@ using System;
 using System.IO;
 using System.Linq;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
+using System.Reflection;
 
 public class UIManager : MonoBehaviour
 {
@@ -56,6 +58,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image[] characterImages;
     [SerializeField] private TMP_Text[] characterLeadPos;
 
+    [Header("Cosas Seleccionar jugador")]
+    [SerializeField] private CanvasGroup selectPlayerGroup;
+    [SerializeField] private Image[] selectPlayerImgs;
+    [SerializeField] private Button[] selectPlayerBtns;
+
     // Elementos UI para Fade in/out
     [SerializeField] private CanvasGroup panelFadeInOut;
 
@@ -72,6 +79,7 @@ public class UIManager : MonoBehaviour
 
         panelMinigameSelection.alpha = 0;
         ControlActionPanel(false);
+        ControlSelectPlayer(false);
         itemsPanel.alpha = 0;
         HideLeaderboard();
     }
@@ -355,11 +363,17 @@ public class UIManager : MonoBehaviour
             if (itemsButtons[i].onClick.GetPersistentEventCount() <= 0)
             {
                 itemsButtons[i].image.sprite = newItem.itemSpr;
-                itemsButtons[i].onClick.AddListener(delegate { newItem.itemFunction.UseItem(); });
+                itemsButtons[i].onClick.AddListener(delegate { newItem.itemFunction.UseItem(); DeleteItem(i); });
                 break;
             }
             
         }
+    }
+
+    private void DeleteItem(int buttonIndex)
+    {
+        itemsButtons[buttonIndex].onClick.RemoveAllListeners();
+        itemsButtons[buttonIndex].image.sprite = null;
     }
 
     public void ControlActionPanel(bool open)
@@ -459,5 +473,70 @@ public class UIManager : MonoBehaviour
     public void ReloadScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    private void ControlSelectPlayer(bool show)
+    {
+        selectPlayerGroup.alpha = show ? 1f : 0f;
+        selectPlayerGroup.interactable = selectPlayerGroup.blocksRaycasts = show;
+    }
+
+    public void ConfigureSelectPlayer(Character charItem, string functionName, int modifierValue = 0)
+    {
+        ControlSelectPlayer(true);
+        ControlActionPanel(false);
+
+        Character[] chars = new Character[3];
+        int addedChars = 0;
+        
+        // Obtenemos los characters
+        for(int i = 0; i < GameController.instance.GetCharactersInParty(); i++)
+        {
+            if(charItem.characterId != GameController.instance.GetCharacter(i).characterId)
+            {
+                chars[addedChars] = GameController.instance.GetCharacter(i);
+                addedChars++;
+            }
+        }
+
+        // Ponemos las imagenes
+        for(int i = 0; i < selectPlayerImgs.Length; i++)
+        {
+            selectPlayerImgs[i].sprite = chars[i].GetCharImage();
+        }
+
+        // Nos aseguramos que los botones no tengan listeners de antes
+        for(int i = 0; i < selectPlayerBtns.Length; i++)
+        {
+            selectPlayerBtns[i].onClick.RemoveAllListeners();
+        }
+
+        // Ponemos los nombres y la función
+        for(int i = 0; i < selectPlayerBtns.Length; i++)
+        {
+            int index = i;
+            selectPlayerBtns[index].GetComponentInChildren<TMP_Text>().SetText("Select " + chars[index].name);
+            selectPlayerBtns[index].onClick.AddListener(delegate { ControlSelectPlayer(false); });
+            if (charItem.isPlayer) { selectPlayerBtns[index].onClick.AddListener(delegate { ControlActionPanel(true); }); }
+
+            switch (functionName)
+            {
+                case "AbstractMovement":
+                    selectPlayerBtns[index].onClick.AddListener(delegate { chars[index].SetExtraStep(modifierValue); });
+                    break;
+                case "Pickpocket":
+                    // Objective coins
+                    int objCoins = chars[index].GetCoins() - modifierValue;
+                    objCoins = Mathf.Max(objCoins, 0);
+
+                    // Player item coins
+                    int itemPlayerCoins = charItem.GetCoins();
+
+                    selectPlayerBtns[index].onClick.AddListener(delegate { chars[index].SetCoins(objCoins); charItem.SetCoins((itemPlayerCoins+modifierValue)); });
+                    break;
+                case "TP_OtherPlayer":
+                    break;
+            }
+        }
     }
 }

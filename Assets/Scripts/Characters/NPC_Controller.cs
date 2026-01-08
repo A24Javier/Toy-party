@@ -48,7 +48,8 @@ public class NPC_Controller : Character
     }
     public override void Move(int steps)
     {
-        StartCoroutine(MoveCharacterBoard(steps));
+        StartCoroutine(MoveCharacterBoard(steps + extraStep));
+        extraStep = 0;
     }
 
     private void Look()

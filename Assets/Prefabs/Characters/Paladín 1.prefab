@@ -127,11 +127,11 @@ MonoBehaviour:
   isPlayer: 0
   savedCameraRotationY: 0
   speed: 0.9
+  extraStep: 0
   isSelectingPath: 0
   smooth: 1
   velocidadDeRotacion: 5
-  cameraFollow: {fileID: 0}
-  randomTP: {fileID: 11400000, guid: 826a46e3cd4268f43bf0feef2570558c, type: 2}
+  randomTP: {fileID: 11400000, guid: 1f43245250761614797a148a07aba18b, type: 2}
   powerJump: 1
   timeJump: 1
   stepSfx: {fileID: 8300000, guid: 86544560de2afd14fbe90bf898a1d226, type: 3}

@@ -17,6 +17,7 @@ public abstract class Character : MonoBehaviour
 
     // Character values
     public float speed = 0.001f;
+    public int extraStep = 0;
 
     // Character things
     protected ParticleSystem runningParticles;
@@ -64,5 +65,10 @@ public abstract class Character : MonoBehaviour
     public virtual void UseItem(int index)
     {
         GetInventory().GetItem(index);
+    }
+
+    public virtual void SetExtraStep(int value)
+    {
+        extraStep += value;
     }
 }

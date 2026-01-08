@@ -7,6 +7,10 @@ public class SumMovementFunction : ItemFunction
 
     public override void UseItem()
     {
-        
+        Character character = GameController.instance.GetCharacterOfTurn();
+        character.SetExtraStep(sumMovement);
+
+        // Quitar objeto del inventario del player
+        item.inventoryAssociated.DeleteItem(item);
     }
 }

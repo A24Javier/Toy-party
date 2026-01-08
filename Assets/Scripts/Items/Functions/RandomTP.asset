@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 919509e094e79284f9a1a56b93dcb3e1, type: 3}
   m_Name: RandomTP
   m_EditorClassIdentifier: 
+  item: {fileID: 0}
