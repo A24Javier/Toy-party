@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: SumMovementItem
   m_EditorClassIdentifier: 
   itemSpr: {fileID: 21300000, guid: 83d3315b14505584aa43f130df195f90, type: 3}
+  itemName: Baterie AAA
   itemFunction: {fileID: 11400000, guid: d91057c6f41141a41bec0c836ea9b361, type: 2}
+  inventoryAssociated: {fileID: 0}

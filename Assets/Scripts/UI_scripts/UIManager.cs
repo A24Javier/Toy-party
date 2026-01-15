@@ -524,7 +524,7 @@ public class UIManager : MonoBehaviour
                 case "AbstractMovement":
                     selectPlayerBtns[index].onClick.AddListener(delegate { chars[index].SetExtraStep(modifierValue); });
                     break;
-                case "Pickpocket":
+                case "StealCoins":
                     // Objective coins
                     int objCoins = chars[index].GetCoins() - modifierValue;
                     objCoins = Mathf.Max(objCoins, 0);
@@ -535,6 +535,14 @@ public class UIManager : MonoBehaviour
                     selectPlayerBtns[index].onClick.AddListener(delegate { chars[index].SetCoins(objCoins); charItem.SetCoins((itemPlayerCoins+modifierValue)); });
                     break;
                 case "TP_OtherPlayer":
+                    Box objBox = chars[index].GetActualBox();
+
+                    selectPlayerBtns[index].onClick.AddListener(delegate{
+                        charItem.actualBox = objBox;
+                        charItem.actualBox.ActivateEffect(charItem);
+                        charItem.transform.position = objBox.transform.position;
+                    });
+
                     break;
             }
         }

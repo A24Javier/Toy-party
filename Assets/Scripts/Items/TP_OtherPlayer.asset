@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 33b7840ce0ee3a54aa709ab1ba26b537, type: 3}
-  m_Name: RandomTPItem
+  m_Name: TP_OtherPlayer
   m_EditorClassIdentifier: 
-  itemSpr: {fileID: 21300000, guid: 406fb50b4ce4cad40a38f635dfa3ea35, type: 3}
-  itemName: Damaged portal
-  itemFunction: {fileID: 11400000, guid: 6d985a6acc2ff7e49ad6df4ec4f5d21c, type: 2}
+  itemSpr: {fileID: 21300000, guid: 643831b410774c440a54032f44424236, type: 3}
+  itemName: Portal
+  itemFunction: {fileID: 11400000, guid: 215c963a6f00c02429498baee2b5eefc, type: 2}
   inventoryAssociated: {fileID: 0}

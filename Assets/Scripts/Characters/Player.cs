@@ -42,7 +42,7 @@ public class Player : Character
     public override void Move(int steps)
     {
         int totalSteps = steps + extraStep;
-        totalSteps = Mathf.Max(totalSteps, 0); // TotalSteps nunca será un numero negativo
+        totalSteps = Mathf.Max(totalSteps, 0); // TotalSteps nunca será un numero negativon 
         Debug.Log($"TotalSteps es: {totalSteps}");
 
         StartCoroutine(MoveCharacterBoard(totalSteps));

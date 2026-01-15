@@ -51,6 +51,8 @@ public abstract class Character : MonoBehaviour
         this.characterImage = characterImage;
     }
 
+    public virtual Box GetActualBox() { return actualBox; }
+
     public virtual Inventory GetInventory()
     {
         return inventory;
