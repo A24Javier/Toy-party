@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 
 
 public class Player : Character
@@ -22,6 +23,27 @@ public class Player : Character
     // Sounds
     private AudioSource audioSource;
     [SerializeField] private AudioClip stepSfx;
+
+    // Debug
+    private bool isDebug = false;
+    [SerializeField] private DebugEvent[] movesWithoutFinish;
+
+    private void OnEnable()
+    {
+        foreach(DebugEvent dgEvent in movesWithoutFinish)
+        {
+            DebugFunctions.instance.AddEvent(dgEvent);
+        }
+        
+    }
+
+    private void OnDisable()
+    {
+        foreach (DebugEvent dgEvent in movesWithoutFinish)
+        {
+            DebugFunctions.instance.RemoveEvent(dgEvent);
+        }
+    }
 
     void Start()
     {
@@ -149,7 +171,8 @@ public class Player : Character
         runningParticles.Stop();
         // Activamos efectos de la última casilla
         animator.SetBool("isRunning", false);
-        newBox.ActivateEffect(this);
+        if (!isDebug) { newBox.ActivateEffect(this); }
+        
     }
 
 
@@ -222,5 +245,12 @@ public class Player : Character
         Debug.Log($"La animationKey {animationKey} esta en {animator.GetBool(animationKey)}");
     }
 
-  
+    #region Debug Functions
+    public void MoveWithoutFinalizeTurn(int steps)
+    {
+        isDebug = true;
+        Move(steps);
+    }
+    #endregion
+
 }

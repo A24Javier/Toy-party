@@ -5,6 +5,12 @@ public class StarCoupon : ItemFunction
 {
     public override void UseItem()
     {
-        // Mostrar mensaje de que el ticket se puede usar cuando compres la estrella
+        UIManager.instance.ControlStarCouponMsg(true);
+    }
+
+    public void DestroyItem()
+    {
+        // Quitar objeto del inventario del player
+        item.inventoryAssociated.DeleteItem(item);
     }
 }

@@ -43,6 +43,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text textoPrecioEstrella;
     [SerializeField] private CanvasGroup UI_buyStar;
     private bool canBuyStar = false;
+    private bool isStarCoupon = false;
+    private int couponInvIndex = -1;
 
     // Elementos UI para selección de minijuego
     [Header("Cosas selección de minijuego")]
@@ -63,6 +65,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image[] selectPlayerImgs;
     [SerializeField] private Button[] selectPlayerBtns;
 
+    [Header("Elementos mensaje cupón estelar")]
+    [SerializeField] private CanvasGroup starCouponMsgGroup;
+
     // Elementos UI para Fade in/out
     [SerializeField] private CanvasGroup panelFadeInOut;
 
@@ -80,6 +85,7 @@ public class UIManager : MonoBehaviour
         panelMinigameSelection.alpha = 0;
         ControlActionPanel(false);
         ControlSelectPlayer(false);
+        ControlStarCouponMsg(false);
         itemsPanel.alpha = 0;
         HideLeaderboard();
     }
@@ -221,11 +227,25 @@ public class UIManager : MonoBehaviour
         actualCharacter = character;
         ChangeCharacterUI(character);
         UIStarShopControl(true);
-        textoPrecioEstrella.text = precio.ToString("Precio: 0 coins");
-        if (character.GetCoins() >= precio)
+        
+        for(int i = 0; i < character.GetInventory().GetTotalObjLoaded(); i++)
         {
+            if(character.GetInventory().GetItem(i).itemName == "Star Coupon")
+            {
+                textoPrecioEstrella.text = precio.ToString("Price: Star Coupon");
+                canBuyStar = true;
+                isStarCoupon = true;
+                couponInvIndex = i;
+                break;
+            }
+        }
+
+        if (character.GetCoins() >= precio && !canBuyStar)
+        {
+            textoPrecioEstrella.text = precio.ToString("Price: 0 coins");
             canBuyStar = true;
         }
+
     }
 
     public void BuyStar()
@@ -238,9 +258,23 @@ public class UIManager : MonoBehaviour
         else
         {
             actualCharacter.GetStars();
+
             UIStarShopControl(false);
-            StartCoroutine(UpdateTextCoins(actualCharacter, -5));
+
+            if (isStarCoupon)
+            {
+                // Quitamos el cupón del inventario del jugador
+                actualCharacter.GetInventory().GetItem(couponInvIndex).itemFunction.GetComponent<StarCoupon>().DestroyItem();
+
+                isStarCoupon = false;
+            }
+            else
+            {
+                StartCoroutine(UpdateTextCoins(actualCharacter, -5));
+            }
+
             UpdateStarsText();
+
             canBuyStar = false;
             Debug.Log("El personaje compró una estrella");
         }
@@ -401,6 +435,13 @@ public class UIManager : MonoBehaviour
 
         itemsPanel.interactable = !itemsPanel.interactable;
         itemsPanel.blocksRaycasts = !itemsPanel.blocksRaycasts;
+    }
+
+    public void ControlStarCouponMsg(bool open)
+    {
+        starCouponMsgGroup.alpha = open ? 1 : 0;
+        starCouponMsgGroup.interactable = open;
+        starCouponMsgGroup.blocksRaycasts = open;
     }
 
     private void LoadInventory()
