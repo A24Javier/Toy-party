@@ -1,6 +1,8 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering.Universal;
 
 public class Box : MonoBehaviour
 {
@@ -30,68 +32,26 @@ public class Box : MonoBehaviour
     public float powerJump = 1f;
     public float timeJump = 1f;
 
-    // Keys de animaciones
     private const string ANIM_KEY_WIN_COINS = "isCelebrating";
     private const string ANIM_KEY_LOSE_COINS = "isMourning";
 
     private const string ANIM_NAME_WIN_COINS = "Victory";
     private const string ANIM_NAME_LOSE_COINS = "Defeat";
 
-    /*public void ActiveEffect(Player player)
-    {
-        switch (type)
-        {
-            case BoxType.Coin:
-                Debug.Log("Player cayo en casilla monedas");
-                UIManager.instance.SetActualPlayer(player);
-                StartCoroutine(UIManager.instance.UpdateTextCoins(player, rewardCoins));
-                break;
-            case BoxType.Trap:
-                Debug.Log("Player cayo en casilla trampa");
-                trapActions.Invoke();
-                break;
-            case BoxType.Path:
-                break;
-            case BoxType.Star:
-                Debug.Log("Player cayo en casilla estrella");
-                break;
-        }
-
-        GameController.instance.FinishTurn();
-    }*/
-
-    /*public void ActiveNPCEffect(NPC_Controller npc)
-    {
-        switch (type)
-        {
-            case BoxType.Coin:
-                Debug.Log("NPC cayo en casilla monedas");
-                // UIManager.instance.SetActualPlayer(player);
-                // StartCoroutine(UIManager.instance.UpdateTextCoins(rewardCoins));
-                break;
-            case BoxType.Trap:
-                Debug.Log("NPC cayo en casilla trampa");
-                trapActions.Invoke();
-                break;
-            case BoxType.Path:
-                break;
-            case BoxType.Star:
-                Debug.Log("NPC cayo en casilla estrella");
-                break;
-        }
-
-        GameController.instance.FinishTurn();
-    }*/
-
-    // ==============================
-    // SISTEMA STAR (SOLO 1 VISIBLE)
-    // ==============================
     [Header("Star System")]
     [SerializeField] private Renderer[] boxRenderers;
 
     private static List<Box> starBoxes = new List<Box>();
     private static Box currentStarBox;
     private static bool starInitialized = false;
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetStarStatics()
+    {
+        starBoxes = new List<Box>();
+        currentStarBox = null;
+        starInitialized = false;
+    }
 
     private void CacheRenderers()
     {
@@ -103,7 +63,10 @@ public class Box : MonoBehaviour
     {
         CacheRenderers();
         foreach (var r in boxRenderers)
-            r.enabled = visible;
+        {
+            if (r != null)
+                r.enabled = visible;
+        }
     }
 
     public static Box GetCurrentStarBox()
@@ -111,10 +74,23 @@ public class Box : MonoBehaviour
         return currentStarBox;
     }
 
+    private void Update()
+    {
+    }
+
     private static void SetStarBox(Box box)
     {
-        if (currentStarBox != null)
-            currentStarBox.SetBoxVisible(false);
+        Debug.Log(box);
+        Debug.Log(box);
+
+        Debug.Log(box);
+
+
+        for (int i = 0; i < starBoxes.Count; i++)
+        {
+            if (starBoxes[i] != null)
+                starBoxes[i].SetBoxVisible(false);
+        }
 
         currentStarBox = box;
 
@@ -126,9 +102,17 @@ public class Box : MonoBehaviour
     {
         if (starBoxes.Count == 0) return;
 
-        List<Box> candidates = new List<Box>(starBoxes);
+        List<Box> candidates = new List<Box>();
+        for (int i = 0; i < starBoxes.Count; i++)
+        {
+            if (starBoxes[i] != null)
+                candidates.Add(starBoxes[i]);
+        }
+
         if (exclude != null && candidates.Count > 1)
             candidates.Remove(exclude);
+
+        if (candidates.Count == 0) return;
 
         SetStarBox(candidates[Random.Range(0, candidates.Count)]);
     }
@@ -137,8 +121,32 @@ public class Box : MonoBehaviour
     {
         CacheRenderers();
 
-        if (type == BoxType.Star && !starBoxes.Contains(this))
-            starBoxes.Add(this);
+        if (type == BoxType.Star)
+        {
+            if (!starBoxes.Contains(this))
+                starBoxes.Add(this);
+
+            if (!starInitialized)
+            {
+                SetBoxVisible(false);
+            }
+            else
+            {
+                SetBoxVisible(currentStarBox == this);
+            }
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (type == BoxType.Star)
+        {
+            starBoxes.Remove(this);
+
+            // Si esta era la estrella actual, la limpiamos
+            if (currentStarBox == this)
+                currentStarBox = null;
+        }
     }
 
     private void Start()
@@ -147,8 +155,11 @@ public class Box : MonoBehaviour
         {
             starInitialized = true;
 
-            foreach (var b in starBoxes)
-                b.SetBoxVisible(false);
+            for (int i = 0; i < starBoxes.Count; i++)
+            {
+                if (starBoxes[i] != null)
+                    starBoxes[i].SetBoxVisible(false);
+            }
 
             SetStarBox(starBoxes[Random.Range(0, starBoxes.Count)]);
         }
@@ -193,7 +204,7 @@ public class Box : MonoBehaviour
                     StartCoroutine(character.gameObject.GetComponent<NPC_Controller>().ProcessBuyStar(coins));
                 }
 
-                return;
+                return; 
         }
 
         StartCoroutine(GameController.instance.FinishTurn());
@@ -227,4 +238,36 @@ public class Box : MonoBehaviour
     {
         return animToThis.ToString();
     }
+
+    public static void InitStarSystemNow()
+    {
+        Box[] all = GameObject.FindObjectsOfType<Box>();
+
+        starBoxes.Clear();
+        currentStarBox = null;
+        starInitialized = true;  
+
+        for (int i = 0; i < all.Length; i++)
+        {
+            if (all[i].type == BoxType.Star)
+            {
+                starBoxes.Add(all[i]);
+                all[i].SetBoxVisible(false);
+            }
+        }
+
+        if (starBoxes.Count > 0)
+        {
+            currentStarBox = starBoxes[Random.Range(0, starBoxes.Count)];
+            currentStarBox.SetBoxVisible(true);
+        }
+    }
+
+    public static IEnumerator InitStarSystemNextFrame()
+    {
+        // Espera a que Unity haya activado todo
+        yield return null;
+        InitStarSystemNow();
+    }
+
 }

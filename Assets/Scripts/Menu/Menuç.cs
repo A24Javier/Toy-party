@@ -18,6 +18,18 @@ public class Logo : MonoBehaviour
     [SerializeField] private RectTransform cor2;
     [SerializeField] private RectTransform corFondo;
 
+    [Header("Movimiento Boton")]
+    [SerializeField] private RectTransform conf;
+    [SerializeField] private RectTransform play;
+    [SerializeField] private RectTransform exit;
+
+    [SerializeField] private float posicionFinalConfig = -223f;
+    [SerializeField] private float posicionFinalpe = -223f;
+
+
+
+
+
 
     public void MoveCortinas()
     {
@@ -51,5 +63,14 @@ public class Logo : MonoBehaviour
         seq.Append(logo.DOAnchorPosY(posicionFinalY + reboteH, duracionReb).SetEase(Ease.OutQuad));
 
         seq.Append(logo.DOAnchorPosY(posicionFinalY, duracionSegundoMov).SetEase(Ease.InQuad));
+
+        seq.Join(conf.DOAnchorPosY(posicionFinalConfig, duracionMov).SetEase(Ease.InQuad));
+
+        seq.Join(play.DOAnchorPosY(posicionFinalpe, duracionMov).SetEase(Ease.InQuad));
+
+        seq.Join(exit.DOAnchorPosY(posicionFinalpe, duracionMov).SetEase(Ease.InQuad));
+
+
+
     }
 }

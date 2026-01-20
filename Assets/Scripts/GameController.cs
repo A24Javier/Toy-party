@@ -55,6 +55,8 @@ public class GameController : MonoBehaviour
         playersToCreate = PlayerPrefs.GetInt("PlayersToCreate");
         playersToCreate = 1; // BORRAR EN UN FUTURO
         CreatePlayers();
+
+        StartCoroutine(Box.InitStarSystemNextFrame());
     }
 
     void Update()
