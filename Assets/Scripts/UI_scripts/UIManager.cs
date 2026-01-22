@@ -230,7 +230,7 @@ public class UIManager : MonoBehaviour
     public void OpenStarShop(Character character, int precio, Box starBox)
     {
         actualCharacter = character;
-        currentStarPrice = precio;
+        currentStarPrice = Mathf.Abs(precio);
         currentStarBox = starBox;
 
         ChangeCharacterUI(character);
@@ -248,20 +248,18 @@ public class UIManager : MonoBehaviour
             }
         }
 
-        if (character.GetCoins() >= precio && !canBuyStar)
+        if (!canBuyStar && !isStarCoupon)
         {
-            textoPrecioEstrella.text = precio.ToString("Price: 0 coins");
+            textoPrecioEstrella.text = precio.ToString($"Price: {currentStarPrice} coins");
             canBuyStar = true;
         }
-
-        textoPrecioEstrella.text = currentStarPrice.ToString("Precio: 0 coins");
 
         canBuyStar = (character.GetCoins() >= currentStarPrice);
     }
 
     public void BuyStar()
     {
-        if (actualCharacter.GetCoins() < currentStarPrice)
+        if (actualCharacter.GetCoins() < currentStarPrice && !isStarCoupon)
         {
             Debug.Log("El personaje no tiene las suficientes monedas para comprar la estrella");
             NotBuyStar();
@@ -274,13 +272,14 @@ public class UIManager : MonoBehaviour
             if (isStarCoupon)
             {
                 // Quitamos el cupón del inventario del jugador
-                actualCharacter.GetInventory().GetItem(couponInvIndex).itemFunction.GetComponent<StarCoupon>().DestroyItem();
+                StarCoupon coupon = actualCharacter.GetInventory().GetItem(couponInvIndex).itemFunction as StarCoupon;
+                coupon.DestroyItem();
 
                 isStarCoupon = false;
             }
             else
             {
-                StartCoroutine(UpdateTextCoins(actualCharacter, -5));
+                StartCoroutine(UpdateTextCoins(actualCharacter, -currentStarPrice));
             }
 
             actualCharacter.SetStars(actualCharacter.GetStars() + 1);

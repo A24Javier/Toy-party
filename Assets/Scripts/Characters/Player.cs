@@ -204,7 +204,7 @@ public class Player : Character
         // Activamos efectos de la última casilla
         animator.SetBool("isRunning", false);
         if (!isDebug) { newBox.ActivateEffect(this); }
-        
+        else { isDebug = false; }
     }
 
 

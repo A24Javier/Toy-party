@@ -31,6 +31,11 @@ public class DebugFunctions : MonoBehaviour
     [Tooltip("Permite que este script funcione en Development builds")]
     private bool workInDevBuild;
 
+    [SerializeField]
+    [TextArea(3, 20)]
+    [Tooltip("Caja de comentarios para el/los desarrollador/es")]
+    private string comments;
+
     // Cola de eventos que se ejecutaran cada x frames (x es igual al valor de 'heavyWaitFrames' que asignes)
     private Queue<UnityEvent> heavyEvents;
 
