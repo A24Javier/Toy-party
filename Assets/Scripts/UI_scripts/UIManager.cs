@@ -47,6 +47,9 @@ public class UIManager : MonoBehaviour
     private bool isStarCoupon = false;
     private int couponInvIndex = -1;
 
+    private int currentStarPrice = 0;
+    private Box currentStarBox = null;
+
     // Elementos UI para selección de minijuego
     [Header("Cosas selección de minijuego")]
     [SerializeField] private GameObject prefabMinigameObjList;
@@ -213,11 +216,10 @@ public class UIManager : MonoBehaviour
 
     private void UpdateStarsText()
     {
-        characterTextStars.text = actualPlayer.GetStars().ToString("Stars: 0");
+        characterTextStars.text = actualCharacter.GetStars().ToString("Stars: 0");
     }
     #endregion
 
-    #region Gestión de la Tienda de Estrellas
     private void UIStarShopControl(bool open)
     {
         UI_buyStar.alpha = open ? 1 : 0;
@@ -225,9 +227,12 @@ public class UIManager : MonoBehaviour
         UI_buyStar.interactable = actualCharacter.isPlayer;
     }
 
-    public void OpenStarShop(Character character, int precio)
+    public void OpenStarShop(Character character, int precio, Box starBox)
     {
         actualCharacter = character;
+        currentStarPrice = precio;
+        currentStarBox = starBox;
+
         ChangeCharacterUI(character);
         UIStarShopControl(true);
         
@@ -249,19 +254,21 @@ public class UIManager : MonoBehaviour
             canBuyStar = true;
         }
 
+        textoPrecioEstrella.text = currentStarPrice.ToString("Precio: 0 coins");
+
+        canBuyStar = (character.GetCoins() >= currentStarPrice);
     }
 
     public void BuyStar()
     {
-        if (!canBuyStar)
+        if (actualCharacter.GetCoins() < currentStarPrice)
         {
             Debug.Log("El personaje no tiene las suficientes monedas para comprar la estrella");
             NotBuyStar();
+            return;
         }
         else
         {
-            actualCharacter.GetStars();
-
             UIStarShopControl(false);
 
             if (isStarCoupon)
@@ -276,20 +283,44 @@ public class UIManager : MonoBehaviour
                 StartCoroutine(UpdateTextCoins(actualCharacter, -5));
             }
 
+            actualCharacter.SetStars(actualCharacter.GetStars() + 1);
+
             UpdateStarsText();
 
             canBuyStar = false;
             Debug.Log("El personaje compró una estrella");
+            Box.MoveStarToRandom(currentStarBox);
+            ContinueAfterStarShopOrFinishTurn();
         }
     }
 
     public void NotBuyStar()
     {
+        canBuyStar = false;
         UIStarShopControl(false);
-    }
-    #endregion
 
-    #region Efectos de Fade
+        ContinueAfterStarShopOrFinishTurn();
+    }
+
+    private void ContinueAfterStarShopOrFinishTurn()
+    {
+        if (actualCharacter != null && actualCharacter.waitingStarShop && actualCharacter.pendingStepsAfterShop > 0)
+        {
+            int remaining = actualCharacter.pendingStepsAfterShop;
+
+            actualCharacter.waitingStarShop = false;
+            actualCharacter.pendingStepsAfterShop = 0;
+
+            actualCharacter.Move(remaining);
+        }
+        else
+        {
+            StartCoroutine(GameController.instance.FinishTurn());
+        }
+    }
+
+
+
     public IEnumerator FadeInOut(bool fadeIn, Action onFadeComplete)
     {
         float elapsedTime = 0;
@@ -313,7 +344,6 @@ public class UIManager : MonoBehaviour
             onFadeComplete();
         }
     }
-    #endregion
 
     // Método vacío para la selección de minijuegos (por implementar más tarde)
     public void ShowPossibleMinigamesList(List<string> possibleMinigames)
@@ -325,14 +355,14 @@ public class UIManager : MonoBehaviour
         if (possibleMinigames.Count > MAX_MINIGAMES_SELECTION)
         {
             Debug.Log("Entra en quitar minijuegos");
-            for(int i = 0; i < MAX_MINIGAMES_SELECTION; i++)
+            for (int i = 0; i < MAX_MINIGAMES_SELECTION; i++)
             {
                 selectedMinigames[i] = UnityEngine.Random.Range(0, possibleMinigames.Count);
             }
 
-            for(int i = 0; i < possibleMinigames.Count; i++)
+            for (int i = 0; i < possibleMinigames.Count; i++)
             {
-                for(int j = 0; j < selectedMinigames.Length; j++)
+                for (int j = 0; j < selectedMinigames.Length; j++)
                 {
                     if (selectedMinigames[j] != i)
                     {
@@ -344,7 +374,7 @@ public class UIManager : MonoBehaviour
 
         Image[] images = new Image[possibleMinigames.Count];
         // Creamos la lista de posibles minijuegos
-        for(int i = 0; i < possibleMinigames.Count; i++)
+        for (int i = 0; i < possibleMinigames.Count; i++)
         {
             GameObject go = Instantiate(prefabMinigameObjList, Vector3.zero, Quaternion.identity, minigameVerticalLayout.transform);
             go.GetComponentInChildren<TMP_Text>().text = possibleMinigames[i];
@@ -361,11 +391,11 @@ public class UIManager : MonoBehaviour
     {
         int maxRounds = UnityEngine.Random.Range(15, 25);
 
-        for(int i = 0; i < maxRounds; i++)
+        for (int i = 0; i < maxRounds; i++)
         {
-            for(int j = 0; j < images.Length; j++)
+            for (int j = 0; j < images.Length; j++)
             {
-                if((float)i % images.Length == 0)
+                if ((float)i % images.Length == 0)
                 {
                     images[j].color = selectedColor;
                 }
@@ -378,9 +408,9 @@ public class UIManager : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
 
-        for(int i = 0; i < images.Length; i++)
+        for (int i = 0; i < images.Length; i++)
         {
-            if(i != end)
+            if (i != end)
             {
                 images[i].color = unselectedColor;
             }
@@ -395,7 +425,7 @@ public class UIManager : MonoBehaviour
 
     public void AddItem(Item newItem)
     {
-        for(int i = 0; i < itemsButtons.Length; i++)
+        for (int i = 0; i < itemsButtons.Length; i++)
         {
             if (itemsButtons[i].image.sprite == nullObjSpr)
             {
@@ -404,7 +434,6 @@ public class UIManager : MonoBehaviour
                 itemsButtons[i].onClick.AddListener(delegate { newItem.itemFunction.UseItem(); if (newItem.itemName != "Star Coupon") { DeleteItem(i); } });
                 break;
             }
-            
         }
     }
 
@@ -428,7 +457,7 @@ public class UIManager : MonoBehaviour
 
     public void ControlItemPanel()
     {
-        if(itemsPanel.alpha >= 1f)
+        if (itemsPanel.alpha >= 1f)
         {
             itemsPanel.alpha = 0f;
         }
@@ -458,14 +487,14 @@ public class UIManager : MonoBehaviour
         Inventory characterInventory = actualCharacter.GetInventory();
         Debug.Log(characterInventory.GetTotalObjLoaded());
 
-        for(int i = 0; i < itemsButtons.Length; i++)
+        for (int i = 0; i < itemsButtons.Length; i++)
         {
             itemsButtons[i].onClick.RemoveAllListeners();
             itemsButtons[i].image.sprite = nullObjSpr;
         }
 
         // Cargar objetos
-        for(int i = 0; i < characterInventory.GetTotalObjLoaded(); i++)
+        for (int i = 0; i < characterInventory.GetTotalObjLoaded(); i++)
         {
             Debug.Log($"Item cargado: {characterInventory.GetItem(i).name}");
             AddItem(characterInventory.GetItem(i));

@@ -176,8 +176,25 @@ public class NPC_Controller : Character
                 }
 
             }
-            //yield return new WaitForSeconds(0.05f);
+            if (Box.GetCurrentStarBox() == actualBox)
+            {
+                int remaining = steps - (i + 1);
 
+                if (remaining > 0)
+                {
+                    waitingStarShop = true;
+                    pendingStepsAfterShop = remaining;
+
+                    runningParticles.Stop();
+                    animator.SetBool("isRunning", false);
+
+                    // Abre tienda (y se reanudará desde UIManager)
+                    actualBox.ActivateEffect(this);
+                    UIManager.instance.DeactivatePathDecision();
+
+                    yield break; // parar movimiento aquí
+                }
+            }
         }
 
         runningParticles.Stop();
