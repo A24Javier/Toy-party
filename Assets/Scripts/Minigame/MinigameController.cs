@@ -85,4 +85,10 @@ public class MinigameController : MonoBehaviour
             go.SetActive(activate);
         }
     }
+
+    public void ReloadBoard()
+    {
+        SceneManager.UnloadSceneAsync(selectedMinigame.sceneName);
+        LoadBoardGameObjects(true);
+    }
 }
