@@ -59,6 +59,8 @@ public class GameController : MonoBehaviour
         playersToCreate = 1; // BORRAR EN UN FUTURO
         characters = new Character[MAX_PLAYERS];
         CreatePlayers();
+
+        StartCoroutine(Box.InitStarSystemNextFrame());
     }
 
     void Update()
