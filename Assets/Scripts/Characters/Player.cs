@@ -14,7 +14,6 @@ public class Player : Character
     Box newBox = null;
     public bool smooth = true;
     public float velocidadDeRotacion = 5f;
-    [SerializeField] private Item randomTP;
 
     //jump
     public float powerJump = 1f;
@@ -27,10 +26,16 @@ public class Player : Character
     // Debug
     private bool isDebug = false;
     [SerializeField] private DebugEvent[] movesWithoutFinish;
+    [SerializeField] private DebugEvent[] addItemsDebug;
 
     private void OnEnable()
     {
         foreach(DebugEvent dgEvent in movesWithoutFinish)
+        {
+            DebugFunctions.instance.AddEvent(dgEvent);
+        }
+
+        foreach(DebugEvent dgEvent in addItemsDebug)
         {
             DebugFunctions.instance.AddEvent(dgEvent);
         }
@@ -43,11 +48,21 @@ public class Player : Character
         {
             DebugFunctions.instance.RemoveEvent(dgEvent);
         }
+
+        foreach (DebugEvent dgEvent in addItemsDebug)
+        {
+            DebugFunctions.instance.RemoveEvent(dgEvent);
+        }
+    }
+
+    public void AddItemToInventory(Item item)
+    {
+        GetInventory().AddItem(item);
     }
 
     void Start()
     {
-        inventory.AddItem(randomTP);
+        //inventory.AddItem(randomTP);
         animator = GetComponent<Animator>();
         board = GameObject.FindObjectOfType<Board>();
         actualBox = board.GetCasilla(0);

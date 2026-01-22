@@ -4357,7 +4357,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b5ef1ad5ee2e3345ba304d72da37033, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugEvents: []
+  debugEvents:
+  - keyCode: 256
+    debugEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1662263262}
+          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+          m_MethodName: LoadInventoryDebug
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    isHeavy: 0
   heavyWaitFrames: 30
   workInDevBuild: 1
 --- !u!4 &808732194

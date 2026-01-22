@@ -11,6 +11,7 @@ using System.Linq;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
 using System.Reflection;
+using JetBrains.Annotations;
 
 public class UIManager : MonoBehaviour
 {
@@ -128,6 +129,8 @@ public class UIManager : MonoBehaviour
                 arrowActivated = true;
             }
         }
+
+        ControlActionPanel(false);
     }
 
     private void ActivateArrow(CanvasGroup arrow, float angle, Vector3 boxTransf, Box box)
@@ -394,10 +397,11 @@ public class UIManager : MonoBehaviour
     {
         for(int i = 0; i < itemsButtons.Length; i++)
         {
-            if (itemsButtons[i].onClick.GetPersistentEventCount() <= 0)
+            if (itemsButtons[i].image.sprite == nullObjSpr)
             {
+                Debug.Log($"Button events: {itemsButtons[i].onClick.GetPersistentEventCount()}, newItem name: {newItem.itemName}, i = {i} ");
                 itemsButtons[i].image.sprite = newItem.itemSpr;
-                itemsButtons[i].onClick.AddListener(delegate { newItem.itemFunction.UseItem(); DeleteItem(i); });
+                itemsButtons[i].onClick.AddListener(delegate { newItem.itemFunction.UseItem(); if (newItem.itemName != "Star Coupon") { DeleteItem(i); } });
                 break;
             }
             
@@ -444,6 +448,11 @@ public class UIManager : MonoBehaviour
         starCouponMsgGroup.blocksRaycasts = open;
     }
 
+    public void LoadInventoryDebug()
+    {
+        LoadInventory();
+    }
+
     private void LoadInventory()
     {
         Inventory characterInventory = actualCharacter.GetInventory();
@@ -452,6 +461,7 @@ public class UIManager : MonoBehaviour
         for(int i = 0; i < itemsButtons.Length; i++)
         {
             itemsButtons[i].onClick.RemoveAllListeners();
+            itemsButtons[i].image.sprite = nullObjSpr;
         }
 
         // Cargar objetos
@@ -459,12 +469,6 @@ public class UIManager : MonoBehaviour
         {
             Debug.Log($"Item cargado: {characterInventory.GetItem(i).name}");
             AddItem(characterInventory.GetItem(i));
-        }
-
-        // Ponerlo vacio
-        for(int i = characterInventory.GetTotalObjLoaded(); i < characterInventory.GetMaxObjects(); i++)
-        {
-            itemsButtons[i].image.sprite = nullObjSpr;
         }
     }
 
@@ -570,10 +574,10 @@ public class UIManager : MonoBehaviour
                     int objCoins = chars[index].GetCoins() - modifierValue;
                     objCoins = Mathf.Max(objCoins, 0);
 
-                    // Player item coins
-                    int itemPlayerCoins = charItem.GetCoins();
+                    // Coins difference
+                    int diffCoins = 0;
 
-                    selectPlayerBtns[index].onClick.AddListener(delegate { chars[index].SetCoins(objCoins); charItem.SetCoins((itemPlayerCoins+modifierValue)); });
+                    selectPlayerBtns[index].onClick.AddListener(delegate { chars[index].SetCoins(objCoins); UpdateTextCoins(charItem, diffCoins); });
                     break;
                 case "TP_OtherPlayer":
                     Box objBox = chars[index].GetActualBox();

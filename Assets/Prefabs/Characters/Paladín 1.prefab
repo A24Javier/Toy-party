@@ -135,8 +135,8 @@ MonoBehaviour:
   powerJump: 1
   timeJump: 1
   stepSfx: {fileID: 8300000, guid: 86544560de2afd14fbe90bf898a1d226, type: 3}
-  moveWithoutFinish:
-    keyCode: 257
+  movesWithoutFinish:
+  - keyCode: 49
     debugEvent:
       m_PersistentCalls:
         m_Calls:
@@ -148,6 +148,200 @@ MonoBehaviour:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    isHeavy: 0
+  - keyCode: 50
+    debugEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2594915527693160189}
+          m_TargetAssemblyTypeName: Player, Assembly-CSharp
+          m_MethodName: MoveWithoutFinalizeTurn
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 2
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    isHeavy: 0
+  - keyCode: 51
+    debugEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2594915527693160189}
+          m_TargetAssemblyTypeName: Player, Assembly-CSharp
+          m_MethodName: MoveWithoutFinalizeTurn
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 3
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    isHeavy: 0
+  - keyCode: 52
+    debugEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2594915527693160189}
+          m_TargetAssemblyTypeName: Player, Assembly-CSharp
+          m_MethodName: MoveWithoutFinalizeTurn
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 4
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    isHeavy: 0
+  - keyCode: 53
+    debugEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2594915527693160189}
+          m_TargetAssemblyTypeName: Player, Assembly-CSharp
+          m_MethodName: MoveWithoutFinalizeTurn
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 5
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    isHeavy: 0
+  - keyCode: 54
+    debugEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2594915527693160189}
+          m_TargetAssemblyTypeName: Player, Assembly-CSharp
+          m_MethodName: MoveWithoutFinalizeTurn
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 6
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    isHeavy: 0
+  addItemsDebug:
+  - keyCode: 257
+    debugEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2594915527693160189}
+          m_TargetAssemblyTypeName: Player, Assembly-CSharp
+          m_MethodName: AddItemToInventory
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: 1f43245250761614797a148a07aba18b,
+              type: 2}
+            m_ObjectArgumentAssemblyTypeName: Item, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    isHeavy: 0
+  - keyCode: 258
+    debugEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2594915527693160189}
+          m_TargetAssemblyTypeName: Player, Assembly-CSharp
+          m_MethodName: AddItemToInventory
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: 826a46e3cd4268f43bf0feef2570558c,
+              type: 2}
+            m_ObjectArgumentAssemblyTypeName: Item, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    isHeavy: 0
+  - keyCode: 259
+    debugEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2594915527693160189}
+          m_TargetAssemblyTypeName: Player, Assembly-CSharp
+          m_MethodName: AddItemToInventory
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: 89743ffb64a5fd84e98295db4d62af34,
+              type: 2}
+            m_ObjectArgumentAssemblyTypeName: Item, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    isHeavy: 0
+  - keyCode: 260
+    debugEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2594915527693160189}
+          m_TargetAssemblyTypeName: Player, Assembly-CSharp
+          m_MethodName: AddItemToInventory
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: 8e260bbd97c90d2448986a0eed7f8cb1,
+              type: 2}
+            m_ObjectArgumentAssemblyTypeName: Item, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    isHeavy: 0
+  - keyCode: 261
+    debugEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2594915527693160189}
+          m_TargetAssemblyTypeName: Player, Assembly-CSharp
+          m_MethodName: AddItemToInventory
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: d9912db494edef14ebea6783e20fb881,
+              type: 2}
+            m_ObjectArgumentAssemblyTypeName: Item, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    isHeavy: 0
+  - keyCode: 262
+    debugEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2594915527693160189}
+          m_TargetAssemblyTypeName: Player, Assembly-CSharp
+          m_MethodName: AddItemToInventory
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: aaeab17d0f6d2dd499a2fe765a90de61,
+              type: 2}
+            m_ObjectArgumentAssemblyTypeName: Item, Assembly-CSharp
+            m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0

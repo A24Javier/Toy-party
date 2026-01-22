@@ -2,7 +2,7 @@ using JetBrains.Annotations;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour
+public class Inventory
 {
     public List<Item> items;
 
@@ -13,13 +13,12 @@ public class Inventory : MonoBehaviour
     {
         items = new List<Item>();
 
-        totalObjLoaded = 0;
         maxObjects = 3;
     }
 
     public virtual int GetTotalObjLoaded()
     {
-        return totalObjLoaded;
+        return items.Count;
     }
 
     public virtual int GetMaxObjects()
@@ -32,25 +31,25 @@ public class Inventory : MonoBehaviour
         return items[index];
     }
 
-    public virtual void AddItem(Item newItem)
+    public virtual void AddItem(Item _item)
     {
         if(items.Count < maxObjects)
         {
-            items.Add(newItem);
+            items.Add(_item);
             //UIManager.instance.AddItem(newItem);
-            newItem.inventoryAssociated = this;
-            newItem.itemFunction.item = newItem;
-            totalObjLoaded++;
+            _item.inventoryAssociated = this;
+            _item.itemFunction.item = _item;
         }
         else
         {
             Debug.Log("No puedes llevar más objetos");
         }
+
+        Debug.Log($"Total items: {items.Count}");
     }
 
     public virtual void DeleteItem(Item itemDelete)
     {
         items.Remove(itemDelete);
-        totalObjLoaded--;
     }
 }
