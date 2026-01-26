@@ -32,12 +32,12 @@ public class Player : Character
     {
         foreach(DebugEvent dgEvent in movesWithoutFinish)
         {
-            DebugFunctions.instance.AddEvent(dgEvent);
+            DebugFunctions.Instance.AddEvent(dgEvent);
         }
 
         foreach(DebugEvent dgEvent in addItemsDebug)
         {
-            DebugFunctions.instance.AddEvent(dgEvent);
+            DebugFunctions.Instance.AddEvent(dgEvent);
         }
         
     }
@@ -46,12 +46,12 @@ public class Player : Character
     {
         foreach (DebugEvent dgEvent in movesWithoutFinish)
         {
-            DebugFunctions.instance.RemoveEvent(dgEvent);
+            DebugFunctions.Instance.RemoveEvent(dgEvent);
         }
 
         foreach (DebugEvent dgEvent in addItemsDebug)
         {
-            DebugFunctions.instance.RemoveEvent(dgEvent);
+            DebugFunctions.Instance.RemoveEvent(dgEvent);
         }
     }
 

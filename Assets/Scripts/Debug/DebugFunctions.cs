@@ -8,52 +8,52 @@ using UnityEngine.Events;
 public class DebugEvent
 {
     [Tooltip("Tecla que debe ser presionada para que se ejecute el evento")]
-    public KeyCode keyCode;
+    public KeyCode KeyCode;
 
     [Tooltip("Evento o eventos que se ejecutaran al presionar la tecla")]
-    public UnityEvent debugEvent;
+    public UnityEvent DebugAction;
 
     [Tooltip("Asignación de si el evento o eventos asignados son pesados (en carga) o no")]
-    public bool isHeavy;
+    public bool IsHeavy;
 }
 
 public class DebugFunctions : MonoBehaviour
 {
     [SerializeField]
     [Tooltip("Añade una KeyCode y un evento para que se ejecute cuando pulses la tecla")]
-    private List<DebugEvent> debugEvents;
+    private List<DebugEvent> _debugEvents;
 
     [SerializeField]
     [Tooltip("Frames de espera entre evento pesado y evento pesado (para optimización)")]
-    private int heavyWaitFrames;
+    private int _heavyWaitFrames;
 
     [SerializeField]
     [Tooltip("Permite que este script funcione en Development builds")]
-    private bool workInDevBuild;
+    private bool _worksInDevBuild;
 
     [SerializeField]
     [TextArea(3, 20)]
     [Tooltip("Caja de comentarios para el/los desarrollador/es")]
-    private string comments;
+    private string _comments;
 
     // Cola de eventos que se ejecutaran cada x frames (x es igual al valor de 'heavyWaitFrames' que asignes)
-    private Queue<UnityEvent> heavyEvents;
+    private Queue<UnityEvent> _heavyEvents;
 
-    public static DebugFunctions instance;
+    public static DebugFunctions Instance;
 
 
     void Awake()
     {
 #if DEVELOPMENT_BUILD
         // Si este script no debe trabajar en DevBuilds se desactiva
-        if (!workInDevBuild)
+        if (!_worksInDevBuild)
         {
             this.enabled = false;
         }
 #endif
-        if(instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
             DontDestroyOnLoad(gameObject);
         }
     }
@@ -62,30 +62,30 @@ public class DebugFunctions : MonoBehaviour
 #if (UNITY_EDITOR || DEVELOPMENT_BUILD)
     void Start()
     {
-        // Inicializamos la cola de heavyEventsaa
-        heavyEvents = new Queue<UnityEvent>();
+        // Inicializamos la cola de heavyEvents
+        _heavyEvents = new Queue<UnityEvent>();
     }
 
     void Update()
     {
-        foreach (DebugEvent dgEvent in debugEvents)
+        foreach (DebugEvent dgEvent in _debugEvents)
         {
-            if (Input.GetKeyDown(dgEvent.keyCode))
+            if (Input.GetKeyDown(dgEvent.KeyCode))
             {
-                if (dgEvent.isHeavy)
+                if (dgEvent.IsHeavy)
                 {
-                    heavyEvents.Enqueue(dgEvent.debugEvent);
+                    _heavyEvents.Enqueue(dgEvent.DebugAction);
                 }
                 else
                 {
-                    dgEvent.debugEvent.Invoke();
+                    dgEvent.DebugAction.Invoke();
                 }
             }
         }
 
-        if (Time.frameCount % heavyWaitFrames == 0 && heavyEvents.Count > 0)
+        if (Time.frameCount % _heavyWaitFrames == 0 && _heavyEvents.Count > 0)
         {
-            heavyEvents.Dequeue().Invoke();
+            _heavyEvents.Dequeue().Invoke();
         }
     }
 #endif
@@ -93,13 +93,13 @@ public class DebugFunctions : MonoBehaviour
     #region Add and remove events
     public void AddEvent(DebugEvent dgEvent)
     {
-        debugEvents.Add(dgEvent);
+        _debugEvents.Add(dgEvent);
     }
 
     public void RemoveEvent(DebugEvent dgEvent)
     {
-        dgEvent.debugEvent.RemoveAllListeners();
-        debugEvents.Remove(dgEvent);
+        dgEvent.DebugAction.RemoveAllListeners();
+        _debugEvents.Remove(dgEvent);
     }
     #endregion
 
