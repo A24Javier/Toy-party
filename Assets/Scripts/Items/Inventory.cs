@@ -26,6 +26,11 @@ public class Inventory
         return maxObjects;
     }
 
+    public virtual bool IsFull()
+    {
+        return items.Count >= maxObjects;
+    }
+
     public virtual Item GetItem(int index)
     {
         return items[index];
