@@ -15,6 +15,11 @@ public class ShopManager : MonoBehaviour
     private List<Button> _shopButtons;
     [SerializeField] private int _extraItemPrice = 0;
 
+    void Start()
+    {
+        CloseShop();
+    }
+
     public void OpenShop()
     {
         // Hacemos visible la tienda
@@ -37,7 +42,7 @@ public class ShopManager : MonoBehaviour
             int randItem = Random.Range(0, _shopItems.Length);
             Item item = _shopItems[randItem];
 
-            itemButton.onClick.AddListener(delegate { BuyItem(item); itemButton.interactable = false; });
+            itemButton.onClick.AddListener(delegate {BuyItem(item, itemButton); });
 
             itemButton.transform.GetChild(1).GetComponent<TMP_Text>().SetText(item.itemPrice.ToString("0"));
             itemButton.transform.GetChild(2).GetComponent<Image>().sprite = item.itemSpr;
@@ -49,7 +54,7 @@ public class ShopManager : MonoBehaviour
         return list;
     }
 
-    private void BuyItem(Item item)
+    private void BuyItem(Item item, Button itemButton)
     {
         int finalPrice = (item.itemPrice + _extraItemPrice);
         Character actualChar = GameController.instance.GetCharacterOfTurn();
@@ -58,6 +63,8 @@ public class ShopManager : MonoBehaviour
         {
             StartCoroutine(UIManager.instance.UpdateTextCoins(actualChar, -finalPrice));
             actualChar.GetInventory().AddItem(item);
+            UIManager.instance.LoadInventory();
+            itemButton.interactable = false;
         }
     }
 
@@ -69,11 +76,15 @@ public class ShopManager : MonoBehaviour
         _shopGroup.blocksRaycasts = false;
 
         // Quitamos los objetos de la tienda
-        for(int i = (_shopButtons.Count-1); i >= 0; i--)
+        if(_shopButtons.Count > 0)
         {
-            Destroy(_shopButtons[i].gameObject);
-        }
+            for (int i = (_shopButtons.Count - 1); i >= 0; i--)
+            {
+                Destroy(_shopButtons[i].gameObject);
+            }
 
-        _shopButtons.Clear();
+            _shopButtons.Clear();
+        }
+        
     }
 }

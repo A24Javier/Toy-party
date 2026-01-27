@@ -476,12 +476,7 @@ public class UIManager : MonoBehaviour
         starCouponMsgGroup.blocksRaycasts = open;
     }
 
-    public void LoadInventoryDebug()
-    {
-        LoadInventory();
-    }
-
-    private void LoadInventory()
+    public void LoadInventory()
     {
         Inventory characterInventory = actualCharacter.GetInventory();
         Debug.Log(characterInventory.GetTotalObjLoaded());
@@ -619,5 +614,10 @@ public class UIManager : MonoBehaviour
                     break;
             }
         }
+    }
+
+    public void AddTenCoinsToActualChar()
+    {
+        StartCoroutine(UpdateTextCoins(actualCharacter, 10));
     }
 }
