@@ -10,7 +10,8 @@ public abstract class Character : MonoBehaviour
     public int stars;
     public Sprite characterImage;
     public Box actualBox;
-    protected Inventory inventory = new Inventory();
+    protected Inventory
+        inventory = new Inventory();
     public bool isPlayer;
     public float savedCameraRotationY = 0f;
     public bool waitingStarShop = false;

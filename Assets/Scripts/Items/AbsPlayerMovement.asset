@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSpr: {fileID: 21300000, guid: 27cc659136db1634fa859abb3cd5eed4, type: 3}
   itemName: Superglue
+  itemPrice: 5
   itemFunction: {fileID: 11400000, guid: f1485d53645240744b2c764515d7180a, type: 2}
-  inventoryAssociated: {fileID: 0}
