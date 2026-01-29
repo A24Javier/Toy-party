@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57dd4173268b5f34a9bb5c07adc36252, type: 3}
   m_Name: MsPage_AbilityFunction
   m_EditorClassIdentifier: 
+  Ability: {fileID: 11400000, guid: cbde40c619dc76b41a18e3af32848b05, type: 2}

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0c1718265556544e9557625fc221e8b, type: 3}
+  m_Name: Princess_ability 1
+  m_EditorClassIdentifier: 
+  AbilityName: Rainbow Trap
+  Description: By paying a set number of coins, this character can place sticky traps
+    that latch onto any player who lands on them, immediately ending their turn.
+    Each trap lasts for two turns, and only up to two can exist at the same time.
+  AbilitySprite: {fileID: 21300000, guid: 25697d1010be42c4c862c43d6d862759, type: 3}
+  PayForUse: 1
+  AbilityPrice: 10
+  AbilityFunction: {fileID: 0}
