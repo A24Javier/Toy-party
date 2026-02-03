@@ -33,5 +33,9 @@ EditorBuildSettings:
     path: Assets/Scenes/SceneTests/SceneTest 3.unity
     guid: 8e3838961a1d09e498b62180c8262945
   m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 886295bc59622a340a49270447d47c32,
+      type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: 831aa1bfd37cd4e4ab550224eca02840,
+      type: 2}
+    com.unity.localization.settings: {fileID: 11400000, guid: 8db51d4e4a077ea49ba67212f96106c4,
       type: 2}
