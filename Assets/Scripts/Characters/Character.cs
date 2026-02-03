@@ -10,13 +10,13 @@ public abstract class Character : MonoBehaviour
     public int stars;
     public Sprite characterImage;
     public Box actualBox;
-    protected Inventory
-        inventory = new Inventory();
+    protected Inventory inventory = new Inventory();
+    public Ability ability;
+    public List<Buff> buffs = new List<Buff>();
     public bool isPlayer;
     public float savedCameraRotationY = 0f;
     public bool waitingStarShop = false;
     public int pendingStepsAfterShop = 0;
-
 
     // Character values
     public float speed = 0.001f;

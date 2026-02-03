@@ -188,6 +188,11 @@ public class UIManager : MonoBehaviour
         characterImage.sprite = character.GetCharImage();
     }
 
+    public void FunctionUpdateTextCoins(Character character, int coins)
+    {
+        StartCoroutine(UpdateTextCoins(character, coins));
+    }
+
     public IEnumerator UpdateTextCoins(Character character, int coins)
     {
         ChangeCharacterUI(character);
@@ -610,6 +615,18 @@ public class UIManager : MonoBehaviour
                         charItem.actualBox.ActivateEffect(charItem);
                         charItem.transform.position = objBox.transform.position;
                     });
+
+                    break;
+
+                case "Bomb":
+                    Box absBox = chars[index].GetActualBox();
+
+                    for(int j = 0; j < modifierValue; j++)
+                    {
+                        absBox = absBox.LastBox;
+                    }
+
+                    selectPlayerBtns[index].onClick.AddListener(delegate { chars[index].actualBox = absBox; chars[index].transform.position = absBox.transform.position; });
 
                     break;
             }

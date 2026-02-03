@@ -10,6 +10,6 @@ public class Ability : ScriptableObject
     public Sprite AbilitySprite;
     public bool PayForUse;
     public int AbilityPrice;
-    //public Buff[] PassiveBuffs;
+    public Buff[] PassiveBuffs;
     public AbilityFunction AbilityFunction;
 }

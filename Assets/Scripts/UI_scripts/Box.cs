@@ -25,6 +25,8 @@ public class Box : MonoBehaviour
     [SerializeField] private BoxType type;
     [SerializeField] private int coins = 3;
     [SerializeField] private List<Box> possiblesBoxes;
+    [SerializeField] private Box lastBox;
+    public Box LastBox => lastBox;
     [SerializeField] private AnimToThis animToThis = AnimToThis.NoAnim;
     [SerializeField] private bool[] isPathToStar;
     [SerializeField] private UnityEvent EventAction;
@@ -172,7 +174,17 @@ public class Box : MonoBehaviour
             case BoxType.Coin:
                 Debug.Log("Character cayo en casilla monedas");
                 UIManager.instance.SetActualCharacter(character);
-                StartCoroutine(UIManager.instance.UpdateTextCoins(character, coins));
+
+                int buffCoins = 0;
+
+                foreach (Buff buff in character.buffs)
+                {
+                    if(coins > 0) { buffCoins += buff.extraCoinsBoxes; }
+                    else if(coins < 0) { buffCoins += buff.lessLoseInBoxes; }
+                    
+                }
+
+                StartCoroutine(UIManager.instance.UpdateTextCoins(character, (coins + buffCoins)));
                 StartCoroutine(character.DoAnim(
                     (coins > 0) ? ANIM_KEY_WIN_COINS : ANIM_KEY_LOSE_COINS,
                     (coins > 0) ? ANIM_NAME_WIN_COINS : ANIM_NAME_LOSE_COINS
