@@ -18,9 +18,9 @@ public class MsPage_Ability : AbilityFunction
         {
             UIManager.instance.ConfigureSelectPlayer(character, "Bomb", 3);
         }
-        else // Dibuja portal que te lleva a una casilla a tu elección
+        else // Se crea un portal y se usa al instante
         {
-            UIManager.instance.ConfigureSelectPlayer(character, "PerfectPortal");
+            UIManager.instance.ConfigureSelectPlayer(character, "TP_OtherPlayer");
         }
     }
 }

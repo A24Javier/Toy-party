@@ -9,8 +9,7 @@ public class ArrowInfo : MonoBehaviour
 
     private void Awake()
     {
-        Button btn = GetComponent<Button>();
-        btn.onClick.AddListener(SelectArrow);
+        GetComponent<Button>().onClick.AddListener(SelectArrow);
     }
 
     public void ArrangeVector(Vector3 box)
