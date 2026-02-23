@@ -78,14 +78,14 @@ public class DebugFunctions : MonoBehaviour
                 }
                 else
                 {
-                    dgEvent.DebugAction.Invoke();
+                    dgEvent.DebugAction?.Invoke();
                 }
             }
         }
 
         if (Time.frameCount % _heavyWaitFrames == 0 && _heavyEvents.Count > 0)
         {
-            _heavyEvents.Dequeue().Invoke();
+            _heavyEvents.Dequeue()?.Invoke();
         }
     }
 #endif

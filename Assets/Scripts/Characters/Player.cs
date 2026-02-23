@@ -64,11 +64,14 @@ public class Player : Character
     {
         //inventory.AddItem(randomTP);
         //Obtenemos los buffos pasivos de la habilidad en caso de que los haya
-        for(int i = 0; i < ability.PassiveBuffs.Length; i++)
+        if(ability != null)
         {
-            buffs[i] = ability.PassiveBuffs[i];
+            for (int i = 0; i < ability.PassiveBuffs.Length; i++)
+            {
+                buffs[i] = ability.PassiveBuffs[i];
+            }
         }
-
+        
         animator = GetComponent<Animator>();
         board = GameObject.FindObjectOfType<Board>();
         actualBox = board.GetCasilla(0);

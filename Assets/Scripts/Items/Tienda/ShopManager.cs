@@ -12,7 +12,7 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private Transform _itemButtonsParent;
 
     [SerializeField] private Item[] _shopItems;
-    private List<Button> _shopButtons;
+    private List<Button> _shopButtons = new List<Button>();
     [SerializeField] private int _extraItemPrice = 0;
 
     void Start()

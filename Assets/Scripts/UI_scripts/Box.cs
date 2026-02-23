@@ -27,6 +27,9 @@ public class Box : MonoBehaviour
     [SerializeField] private List<Box> possiblesBoxes;
     [SerializeField] private Box lastBox;
     public Box LastBox => lastBox;
+
+    public bool IsTowerOnIt = false;
+
     [SerializeField] private AnimToThis animToThis = AnimToThis.NoAnim;
     [SerializeField] private bool[] isPathToStar;
     [SerializeField] private UnityEvent EventAction;
