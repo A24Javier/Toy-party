@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UITexts_ca
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: ca
+  m_SharedData: {fileID: 11400000, guid: b1a26859b342c9b41a15a4b58d54c8fa, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 2482336366592
+    m_Localized: Jugar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7720956393463808
+    m_Localized: "SELECCIONA CAM\xCD"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7721305191784448
+    m_Localized: "Llan\xE7ar dau"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7721335487242240
+    m_Localized: Usa objecte
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7721230226989056
+    m_Localized: Monedes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7721268814585856
+    m_Localized: Estrelles
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7721779580149760
+    m_Localized: Vols comprar una estrella?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7721830348005376
+    m_Localized: 'Preu: x monedes'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7721889307336704
+    m_Localized: Comprar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7721934328995840
+    m_Localized: No comprar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7722543883001856
+    m_Localized: Temps de minijoc!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7722757888974848
+    m_Localized: "Taula de classificaci\xF3"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7723454676115456
+    m_Localized: Tornar al menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7723912425676800
+    m_Localized: 'Selecciona jugador:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7724045200564224
+    m_Localized: Seleccionar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7724255754625024
+    m_Localized: "Cup\xF3 estrella"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7724676153909248
+    m_Localized: "Podeu utilitzar el cup\xF3 d'estrella quan obris la pantalla de
+      confirmaci\xF3 de compra d'estrella"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7725084008030208
+    m_Localized: Tancar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7725506659655680
+    m_Localized: Botiga
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

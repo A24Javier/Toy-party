@@ -19,6 +19,8 @@ MonoBehaviour:
     and Star Spaces? No problem. They\u2019re completely skipped, because nothing
     stops this sprint."
   AbilitySprite: {fileID: 21300000, guid: 82ed9c49cdb4d084081fb5f519b9333c, type: 3}
+  BackgroundColor: {r: 0.39607844, g: 0.73333335, b: 0.77254903, a: 1}
   PayForUse: 1
   AbilityPrice: 10
+  PassiveBuffs: []
   AbilityFunction: {fileID: 0}

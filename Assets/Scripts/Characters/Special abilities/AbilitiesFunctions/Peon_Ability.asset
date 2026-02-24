@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57dd4173268b5f34a9bb5c07adc36252, type: 3}
-  m_Name: MsPage_AbilityFunction
+  m_Script: {fileID: 11500000, guid: a0bb7f4b39bc3304f8bfe25223402b5b, type: 3}
+  m_Name: Peon_Ability
   m_EditorClassIdentifier: 
   Ability: {fileID: 0}

@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: UITexts Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: UITexts
+  m_TableCollectionNameGuidString: b1a26859b342c9b41a15a4b58d54c8fa
+  m_Entries:
+  - m_Id: 2482336366592
+    m_Key: Play.button
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7720956393463808
+    m_Key: UI.TheTower.SelectPath
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7721230226989056
+    m_Key: UI.Info.Coins
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7721268814585856
+    m_Key: UI.Info.Stars
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7721305191784448
+    m_Key: UI.Action.ThrowDice
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7721335487242240
+    m_Key: UI.Action.UseItem
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7721779580149760
+    m_Key: UI.StarShop.Question
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7721830348005376
+    m_Key: UI.StarShop.Price
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7721889307336704
+    m_Key: UI.StarShop.Buy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7721934328995840
+    m_Key: UI.StarShop.DontBuy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7722543883001856
+    m_Key: UI.MinigameSelection.Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7722757888974848
+    m_Key: UI.Leaderboard.Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7723454676115456
+    m_Key: UI.Leaderboard.GoToMenu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7723912425676800
+    m_Key: UI.SelectPlayer.Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7724045200564224
+    m_Key: UI.SelectPlayer.Select
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7724255754625024
+    m_Key: UI.StarCoupon.Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7724676153909248
+    m_Key: UI.StarCoupon.Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7725084008030208
+    m_Key: UI.StarCoupon.Close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7725506659655680
+    m_Key: UI.Shop.Title
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 6872521694893572120
+  references:
+    version: 2
+    RefIds:
+    - rid: 6872521694893572120
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables,
+        asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1770108575402

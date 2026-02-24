@@ -109,6 +109,8 @@ public class UIManager : MonoBehaviour
 
             bool arrowActivated = false;
 
+            if (possBox.IsTowerOnIt) { continue; }
+
             // Verificar dirección y activar la flecha correspondiente
             if ((angle <= 45f && angle > -45f || angle >= 360f && angle > 45f) && rightArrow.alpha == 0 && !arrowActivated)
             {

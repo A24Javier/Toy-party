@@ -55,12 +55,14 @@ public class TheTowerSelectPath : MonoBehaviour
         _canvasPath.interactable = true;
 
         // Quitar ActionPanel
+        UIManager.instance.ControlActionPanel(false);
 
         StartCoroutine(TowerPathSelection());
     }
 
     private IEnumerator TowerPathSelection()
     {
+        Player player = GameController.instance.GetPlayerOfTurn();
         Box selectedPath = null;
         GameObject[] pathsGO = GameObject.FindGameObjectsWithTag("Path");
 
@@ -81,7 +83,12 @@ public class TheTowerSelectPath : MonoBehaviour
             yield return null;
         }
 
-        // Cosas que deben pasar por seleccionar camino
+        UIManager.instance.ControlActionPanel(true);
+        _cameraController.SetTarget(player.transform);
+
+        _canvasPath.alpha = 0f;
+        _canvasPath.blocksRaycasts = false;
+        _canvasPath.interactable = false;
     }
 
     private void PrepareButtons()
@@ -99,6 +106,18 @@ public class TheTowerSelectPath : MonoBehaviour
     private void SetArrows(Box pathBox)
     {
         Vector3 pathTransf = pathBox.transform.position;
+
+        _rightArrow.CanvasControl(false);
+        _rightArrow.ArrowButton.onClick.RemoveAllListeners();
+
+        _leftArrow.CanvasControl(false);
+        _leftArrow.ArrowButton.onClick.RemoveAllListeners();
+
+        _forwardArrow.CanvasControl(false);
+        _forwardArrow.ArrowButton.onClick.RemoveAllListeners();
+
+        _downArrow.CanvasControl(false);
+        _downArrow.ArrowButton.onClick.RemoveAllListeners();
 
         for (int i = 0; i < pathBox.PossiblesBoxesCount(); i++)
         {
@@ -118,7 +137,7 @@ public class TheTowerSelectPath : MonoBehaviour
 
                 // Aplicamos logica al botón
                 _rightArrow.ArrowButton.onClick.AddListener(delegate {
-                    SelectRoad(possBox);
+                    StartCoroutine(SelectRoad(possBox));
                 });
 
                 continue;
@@ -130,7 +149,7 @@ public class TheTowerSelectPath : MonoBehaviour
 
                 // Aplicamos logica al botón
                 _leftArrow.ArrowButton.onClick.AddListener(delegate {
-                    SelectRoad(possBox);
+                    StartCoroutine(SelectRoad(possBox));
                 });
 
                 continue;
@@ -143,7 +162,7 @@ public class TheTowerSelectPath : MonoBehaviour
 
                 // Aplicamos logica al botón
                 _forwardArrow.ArrowButton.onClick.AddListener(delegate {
-                    SelectRoad(possBox);
+                    StartCoroutine(SelectRoad(possBox));
                 });
 
             }
@@ -154,7 +173,7 @@ public class TheTowerSelectPath : MonoBehaviour
 
                 // Aplicamos logica al botón
                 _downArrow.ArrowButton.onClick.AddListener(delegate {
-                    SelectRoad(possBox);
+                    StartCoroutine(SelectRoad(possBox));
                 });
             }
         }
@@ -170,7 +189,7 @@ public class TheTowerSelectPath : MonoBehaviour
 
     private void ShowNextPath(bool next)
     {
-        _pathIndex = next ? _pathIndex++ : _pathIndex--;
+        _pathIndex = next ? ++_pathIndex : --_pathIndex;
 
         if(_paths.Length <= _pathIndex)
         {
@@ -184,15 +203,13 @@ public class TheTowerSelectPath : MonoBehaviour
         _cameraController.SetTarget(_paths[_pathIndex].transform);
     }
 
-    private void SelectRoad(Box selectedPath)
+    private IEnumerator SelectRoad(Box selectedPath)
     {
+        _instanciedTower = Instantiate(_theTowerPrefab, selectedPath.transform.position + (Vector3.up * _towerOffsetY), Quaternion.Euler(-90f, 0f, 0f));
+        selectedPath.IsTowerOnIt = true;
+
+        yield return new WaitForSeconds(3f);
+
         _pathSelected = true;
-
-        Player player = GameController.instance.GetPlayerOfTurn();
-
-        _instanciedTower = Instantiate(_theTowerPrefab, selectedPath.transform.position + (Vector3.up * _towerOffsetY), Quaternion.identity);
-
-        // Devolver la camara al jugador actual
-
     }
 }

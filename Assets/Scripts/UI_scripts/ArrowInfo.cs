@@ -7,11 +7,6 @@ public class ArrowInfo : MonoBehaviour
     private Vector3 nodeArranged;
     private Player player;
 
-    private void Awake()
-    {
-        GetComponent<Button>().onClick.AddListener(SelectArrow);
-    }
-
     public void ArrangeVector(Vector3 box)
     {
         nodeArranged = box;
@@ -25,6 +20,7 @@ public class ArrowInfo : MonoBehaviour
     public void SetBox(Box box)
     {
         boxArranged = box;
+        GetComponent<Button>().onClick.AddListener(SelectArrow);
     }
 
     public void SelectArrow()
