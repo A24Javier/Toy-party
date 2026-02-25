@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b0c1718265556544e9557625fc221e8b, type: 3}
-  m_Name: Princess_ability 1
+  m_Name: Princess_ability
   m_EditorClassIdentifier: 
   AbilityName: Rainbow Trap
   Description: By paying a set number of coins, this character can place sticky traps
@@ -21,4 +21,4 @@ MonoBehaviour:
   PayForUse: 1
   AbilityPrice: 10
   PassiveBuffs: []
-  AbilityFunction: {fileID: 0}
+  AbilityFunction: {fileID: 11400000, guid: 00c29bf8308a2464c9cd4ca5bd9166f8, type: 2}

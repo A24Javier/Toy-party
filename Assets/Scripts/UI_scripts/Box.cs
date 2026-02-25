@@ -4,17 +4,17 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Rendering.Universal;
 
+public enum BoxType
+{
+    Normal,
+    Coin,
+    Event,
+    Path,
+    Star
+}
+
 public class Box : MonoBehaviour
 {
-    public enum BoxType
-    {
-        Normal,
-        Coin,
-        Event,
-        Path,
-        Star
-    }
-
     public enum AnimToThis
     {
         NoAnim,
@@ -22,7 +22,7 @@ public class Box : MonoBehaviour
         SpecialAnim
     }
 
-    [SerializeField] private BoxType type;
+    public BoxType type { get; private set; }
     [SerializeField] private int coins = 3;
     [SerializeField] private List<Box> possiblesBoxes;
     [SerializeField] private Box lastBox;
