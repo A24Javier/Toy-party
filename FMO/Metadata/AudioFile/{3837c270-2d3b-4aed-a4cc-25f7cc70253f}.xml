@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{3837c270-2d3b-4aed-a4cc-25f7cc70253f}">
+		<property name="assetPath">
+			<value>Fiesta_Menú.mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>118.584</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{f3e76104-349f-43d2-b6ff-bd49eff70b2a}</destination>
+		</relationship>
+	</object>
+</objects>
