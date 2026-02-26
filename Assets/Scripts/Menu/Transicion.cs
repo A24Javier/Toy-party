@@ -34,6 +34,11 @@ public class Transicion : MonoBehaviour
 
         seq.AppendCallback(() =>
         {
+            if (sceneName.StartsWith("MG_"))
+            {
+                SceneManager.LoadScene("LoadingScene");
+                return;
+            }
             SceneManager.LoadScene(sceneName);
         });
     }
