@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameController : MonoBehaviour
 {
@@ -33,6 +34,7 @@ public class GameController : MonoBehaviour
     private int[] idOrder = new int[4];
     private bool[] isPlayer = new bool[4];
     private bool isPlayerRolling = false;
+    public UnityEvent OnRoundEnded;
 
     public static GameController instance;
 
@@ -248,6 +250,9 @@ public class GameController : MonoBehaviour
 
         // Sumamos un turno a 'actualTurn'
         actualTurn++;
+
+        // Activamos el evento de OnRoundEnded
+        OnRoundEnded?.Invoke();
 
         // Si todos los jugadores se han movido al menos una vez, empieza un minijuego.
         // Sino se inicia el movimiento del siguiente jugador

@@ -29,6 +29,14 @@ public class Box : MonoBehaviour
     public Box LastBox => lastBox;
 
     public bool IsTowerOnIt = false;
+    [SerializeField] private GameObject towerObject;
+    private int towerActiveTurns = 0;
+    private const int MaxTowerTurns = 2;
+
+    private bool areTrapOnIt = false;
+    private GameObject trapObject;
+    private int trapActiveTurns = 0;
+    private const int MaxTrapTurns = 2;
 
     [SerializeField] private AnimToThis animToThis = AnimToThis.NoAnim;
     [SerializeField] private bool[] isPathToStar;
@@ -168,6 +176,8 @@ public class Box : MonoBehaviour
 
             SetStarBox(starBoxes[Random.Range(0, starBoxes.Count)]);
         }
+
+        GameController.instance.OnRoundEnded.AddListener(UpdateTurns);
     }
 
     public void ActivateEffect(Character character)
@@ -223,6 +233,59 @@ public class Box : MonoBehaviour
         }
 
         StartCoroutine(GameController.instance.FinishTurn());
+    }
+
+    public void SetTrap(GameObject trapGO)
+    {
+        trapObject = trapGO;
+        trapActiveTurns = 0;
+        areTrapOnIt = true;
+    }
+
+    public bool IsTrapActive()
+    {
+        return areTrapOnIt;
+    }
+
+    public IEnumerator ActivateTrap(Character character)
+    {
+        // Hacer animación de jugador perjudicado por la trampa
+        Debug.Log("Trampa activada");
+        areTrapOnIt = false;
+        trapObject.GetComponent<Animator>().SetBool("close", true);
+        //character.DoAnim("trapAnim", "trap");
+
+        yield return new WaitForSeconds(0.3f);
+
+        Destroy(trapObject);
+        StartCoroutine(GameController.instance.FinishTurn());
+    }
+
+    private void UpdateTurns()
+    {
+        if (IsTowerOnIt)
+        {
+            Debug.Log($"Tower active turns: {towerActiveTurns}");
+
+            towerActiveTurns++;
+            if(towerActiveTurns >= MaxTowerTurns)
+            {
+                Debug.Log("Destruimos torre");
+
+                Destroy(towerObject); // No se destruye por no tener referencia a este
+                IsTowerOnIt = false;
+            }
+        }
+
+        if (areTrapOnIt)
+        {
+            trapActiveTurns++;
+            if(trapActiveTurns >= MaxTrapTurns)
+            {
+                Destroy(trapObject);
+                areTrapOnIt = false;
+            }
+        }
     }
 
     public Transform GetNewBoxTransf()

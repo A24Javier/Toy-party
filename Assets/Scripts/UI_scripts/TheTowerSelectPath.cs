@@ -14,7 +14,7 @@ public class SelectArrow
     {
         CanvasGroup.alpha = activate ? 1 : 0;
         CanvasGroup.interactable = activate;
-        CanvasGroup.blocksRaycasts = activate;
+        //CanvasGroup.blocksRaycasts = activate;
     }
 }
 
@@ -83,11 +83,12 @@ public class TheTowerSelectPath : MonoBehaviour
             yield return null;
         }
 
+        ResetPathButtons();
+
         UIManager.instance.ControlActionPanel(true);
         _cameraController.SetTarget(player.transform);
 
         _canvasPath.alpha = 0f;
-        _canvasPath.blocksRaycasts = false;
         _canvasPath.interactable = false;
     }
 
@@ -107,17 +108,7 @@ public class TheTowerSelectPath : MonoBehaviour
     {
         Vector3 pathTransf = pathBox.transform.position;
 
-        _rightArrow.CanvasControl(false);
-        _rightArrow.ArrowButton.onClick.RemoveAllListeners();
-
-        _leftArrow.CanvasControl(false);
-        _leftArrow.ArrowButton.onClick.RemoveAllListeners();
-
-        _forwardArrow.CanvasControl(false);
-        _forwardArrow.ArrowButton.onClick.RemoveAllListeners();
-
-        _downArrow.CanvasControl(false);
-        _downArrow.ArrowButton.onClick.RemoveAllListeners();
+        ResetPathButtons();
 
         for (int i = 0; i < pathBox.PossiblesBoxesCount(); i++)
         {
@@ -177,6 +168,21 @@ public class TheTowerSelectPath : MonoBehaviour
                 });
             }
         }
+    }
+
+    private void ResetPathButtons()
+    {
+        _rightArrow.CanvasControl(false);
+        _rightArrow.ArrowButton.onClick.RemoveAllListeners();
+
+        _leftArrow.CanvasControl(false);
+        _leftArrow.ArrowButton.onClick.RemoveAllListeners();
+
+        _forwardArrow.CanvasControl(false);
+        _forwardArrow.ArrowButton.onClick.RemoveAllListeners();
+
+        _downArrow.CanvasControl(false);
+        _downArrow.ArrowButton.onClick.RemoveAllListeners();
     }
 
     private float CalculateAngle(Vector3 P1, Vector3 P2)

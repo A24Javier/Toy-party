@@ -124,6 +124,8 @@ MonoBehaviour:
   stars: 0
   characterImage: {fileID: 21300000, guid: 2340e80fba76a6e42af2cb6f6c4468a4, type: 3}
   actualBox: {fileID: 0}
+  ability: {fileID: 0}
+  buffs: []
   isPlayer: 0
   savedCameraRotationY: 0
   waitingStarShop: 0
@@ -133,6 +135,7 @@ MonoBehaviour:
   isSelectingPath: 0
   smooth: 1
   velocidadDeRotacion: 5
+  charSetting: {fileID: 11400000, guid: caffe4cb9b7a2344f953cdc2eed1ff3f, type: 2}
   powerJump: 1
   timeJump: 1
   stepSfx: {fileID: 8300000, guid: 86544560de2afd14fbe90bf898a1d226, type: 3}
@@ -343,6 +346,24 @@ MonoBehaviour:
               type: 2}
             m_ObjectArgumentAssemblyTypeName: Item, Assembly-CSharp
             m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    IsHeavy: 0
+  abilityEvent:
+    KeyCode: 112
+    DebugAction:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2594915527693160189}
+          m_TargetAssemblyTypeName: Player, Assembly-CSharp
+          m_MethodName: UseAbility
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0

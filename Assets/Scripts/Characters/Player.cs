@@ -1,6 +1,5 @@
 ﻿using DG.Tweening;
 using System.Collections;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -14,6 +13,7 @@ public class Player : Character
     Box newBox = null;
     public bool smooth = true;
     public float velocidadDeRotacion = 5f;
+    [SerializeField] private CharacterSetting charSetting;
 
     //jump
     public float powerJump = 1f;
@@ -27,6 +27,7 @@ public class Player : Character
     private bool isDebug = false;
     [SerializeField] private DebugEvent[] movesWithoutFinish;
     [SerializeField] private DebugEvent[] addItemsDebug;
+    [SerializeField] private DebugEvent abilityEvent;
 
     private void OnEnable()
     {
@@ -39,7 +40,8 @@ public class Player : Character
         {
             DebugFunctions.Instance.AddEvent(dgEvent);
         }
-        
+
+        DebugFunctions.Instance.AddEvent(abilityEvent);
     }
 
     private void OnDisable()
@@ -53,6 +55,9 @@ public class Player : Character
         {
             DebugFunctions.Instance.RemoveEvent(dgEvent);
         }
+
+        DebugFunctions.Instance.RemoveEvent(abilityEvent);
+
     }
 
     public void AddItemToInventory(Item item)
@@ -60,11 +65,20 @@ public class Player : Character
         GetInventory().AddItem(item);
     }
 
+    void Awake()
+    {
+        if (charSetting != null)
+        {
+            ability = charSetting.characterAbility;
+            characterImage = charSetting.characterSprite;
+        }
+    }
+
     void Start()
     {
         //inventory.AddItem(randomTP);
         //Obtenemos los buffos pasivos de la habilidad en caso de que los haya
-        if(ability != null)
+        if (ability != null)
         {
             for (int i = 0; i < ability.PassiveBuffs.Length; i++)
             {
@@ -169,6 +183,11 @@ public class Player : Character
                 savedCameraRotationY = 0f;
             }
 
+            if (actualBox.IsTrapActive())
+            {
+                StartCoroutine(actualBox.ActivateTrap(this));
+                break;
+            }
 
             if (actualBox.PossiblesBoxesCount() >= 2)
             {
@@ -291,6 +310,10 @@ public class Player : Character
     {
         isDebug = true;
         Move(steps);
+    }
+    public void UseAbility()
+    {
+        ability.AbilityFunction.UseAbility();
     }
     #endregion
 

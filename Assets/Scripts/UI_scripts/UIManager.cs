@@ -72,6 +72,11 @@ public class UIManager : MonoBehaviour
     [Header("Elementos mensaje cupón estelar")]
     [SerializeField] private CanvasGroup starCouponMsgGroup;
 
+    [Header("Elementos para habilidad personaje")]
+    [SerializeField] private Button abilityButton;
+    [SerializeField] private Image abilityImage;
+    [SerializeField] private Image abilityBackground;
+
     // Elementos UI para Fade in/out
     [SerializeField] private CanvasGroup panelFadeInOut;
 
@@ -104,12 +109,12 @@ public class UIManager : MonoBehaviour
             Vector3 possBoxTransf = pathBox.GetBoxTransf(i).position;
             Box possBox = pathBox.GetNewBox(i);
 
+            if (possBox.IsTowerOnIt) { continue; }
+
             float angle = CalculateAngle(pathTransf, possBoxTransf);
             angle += Camera.main.transform.eulerAngles.y;
 
             bool arrowActivated = false;
-
-            if (possBox.IsTowerOnIt) { continue; }
 
             // Verificar dirección y activar la flecha correspondiente
             if ((angle <= 45f && angle > -45f || angle >= 360f && angle > 45f) && rightArrow.alpha == 0 && !arrowActivated)
@@ -458,6 +463,7 @@ public class UIManager : MonoBehaviour
         if (open)
         {
             LoadInventory();
+            ChangeAbilityUI();
         }
     }
 
@@ -499,6 +505,19 @@ public class UIManager : MonoBehaviour
         {
             Debug.Log($"Item cargado: {characterInventory.GetItem(i).name}");
             AddItem(characterInventory.GetItem(i));
+        }
+    }
+
+    private void ChangeAbilityUI()
+    {
+        if(actualCharacter.ability.AbilityFunction != null)
+        {
+            abilityButton.onClick.RemoveAllListeners();
+            abilityButton.onClick.AddListener(actualCharacter.ability.AbilityFunction.UseAbility);
+
+            abilityImage.sprite = actualCharacter.ability.AbilitySprite;
+            abilityBackground.color = actualCharacter.ability.BackgroundColor;
+
         }
     }
 
