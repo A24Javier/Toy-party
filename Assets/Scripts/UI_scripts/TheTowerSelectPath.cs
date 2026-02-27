@@ -212,7 +212,7 @@ public class TheTowerSelectPath : MonoBehaviour
     private IEnumerator SelectRoad(Box selectedPath)
     {
         _instanciedTower = Instantiate(_theTowerPrefab, selectedPath.transform.position + (Vector3.up * _towerOffsetY), Quaternion.Euler(-90f, 0f, 0f));
-        selectedPath.IsTowerOnIt = true;
+        selectedPath.SetTower(_instanciedTower);
 
         yield return new WaitForSeconds(3f);
 

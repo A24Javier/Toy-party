@@ -251,9 +251,6 @@ public class GameController : MonoBehaviour
         // Sumamos un turno a 'actualTurn'
         actualTurn++;
 
-        // Activamos el evento de OnRoundEnded
-        OnRoundEnded?.Invoke();
-
         // Si todos los jugadores se han movido al menos una vez, empieza un minijuego.
         // Sino se inicia el movimiento del siguiente jugador
         if (actualTurn % 4 == 0)
@@ -263,6 +260,10 @@ public class GameController : MonoBehaviour
             //MinigameController.instance.SelectMinigame("AllVSAll");
 
             actualRound++;
+
+            // Activamos el evento de OnRoundEnded
+            OnRoundEnded?.Invoke();
+
             yield return new WaitForSeconds(2f);
             if(actualRound < MAX_ROUNDS)
             {

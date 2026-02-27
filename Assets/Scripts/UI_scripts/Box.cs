@@ -242,6 +242,13 @@ public class Box : MonoBehaviour
         areTrapOnIt = true;
     }
 
+    public void SetTower(GameObject towerGO)
+    {
+        towerObject = towerGO;
+        towerActiveTurns = 0;
+        IsTowerOnIt = true;
+    }
+
     public bool IsTrapActive()
     {
         return areTrapOnIt;
