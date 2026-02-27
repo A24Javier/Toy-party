@@ -15080,6 +15080,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 74730805531437198, guid: 6fcc5160f77530740b07e815f84e1ce5,
+        type: 3}
+      propertyPath: lastBox
+      value: 
+      objectReference: {fileID: 2104151320}
+    - target: {fileID: 90652006858210551, guid: 6fcc5160f77530740b07e815f84e1ce5,
+        type: 3}
+      propertyPath: lastBox
+      value: 
+      objectReference: {fileID: 1166609731}
     - target: {fileID: 317377054850522676, guid: 6fcc5160f77530740b07e815f84e1ce5,
         type: 3}
       propertyPath: m_LocalRotation.w
@@ -15115,6 +15125,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0.939
       objectReference: {fileID: 0}
+    - target: {fileID: 423095463530409794, guid: 6fcc5160f77530740b07e815f84e1ce5,
+        type: 3}
+      propertyPath: lastBox
+      value: 
+      objectReference: {fileID: 1670760273}
     - target: {fileID: 1059385418254627370, guid: 6fcc5160f77530740b07e815f84e1ce5,
         type: 3}
       propertyPath: m_Name
@@ -15160,6 +15175,11 @@ PrefabInstance:
       propertyPath: EventAction.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 1231454146612266609, guid: 6fcc5160f77530740b07e815f84e1ce5,
+        type: 3}
+      propertyPath: lastBox
+      value: 
+      objectReference: {fileID: 1225387589}
     - target: {fileID: 1231454146612266609, guid: 6fcc5160f77530740b07e815f84e1ce5,
         type: 3}
       propertyPath: animToThis
@@ -15240,6 +15260,11 @@ PrefabInstance:
       propertyPath: animToThis
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1731532819949740386, guid: 6fcc5160f77530740b07e815f84e1ce5,
+        type: 3}
+      propertyPath: lastBox
+      value: 
+      objectReference: {fileID: 613545709}
     - target: {fileID: 1754723761599766720, guid: 6fcc5160f77530740b07e815f84e1ce5,
         type: 3}
       propertyPath: m_TagString
@@ -15270,6 +15295,11 @@ PrefabInstance:
       propertyPath: isPathToStar.Array.data[1]
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1962610837402973368, guid: 6fcc5160f77530740b07e815f84e1ce5,
+        type: 3}
+      propertyPath: lastBox
+      value: 
+      objectReference: {fileID: 1759543853}
     - target: {fileID: 1962610837402973368, guid: 6fcc5160f77530740b07e815f84e1ce5,
         type: 3}
       propertyPath: powerJump
@@ -15405,11 +15435,21 @@ PrefabInstance:
       propertyPath: animToThis
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4243250636267656586, guid: 6fcc5160f77530740b07e815f84e1ce5,
+        type: 3}
+      propertyPath: lastBox
+      value: 
+      objectReference: {fileID: 740616815}
     - target: {fileID: 4367641332757386133, guid: 6fcc5160f77530740b07e815f84e1ce5,
         type: 3}
       propertyPath: animToThis
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4897984328617837425, guid: 6fcc5160f77530740b07e815f84e1ce5,
+        type: 3}
+      propertyPath: lastBox
+      value: 
+      objectReference: {fileID: 1989553999}
     - target: {fileID: 5002925645906855214, guid: 6fcc5160f77530740b07e815f84e1ce5,
         type: 3}
       propertyPath: timeJump
@@ -15420,6 +15460,11 @@ PrefabInstance:
       propertyPath: powerJump
       value: 0.02
       objectReference: {fileID: 0}
+    - target: {fileID: 5227748013021761675, guid: 6fcc5160f77530740b07e815f84e1ce5,
+        type: 3}
+      propertyPath: lastBox
+      value: 
+      objectReference: {fileID: 886617612}
     - target: {fileID: 5227748013021761675, guid: 6fcc5160f77530740b07e815f84e1ce5,
         type: 3}
       propertyPath: animToThis
@@ -15440,6 +15485,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Path
       objectReference: {fileID: 0}
+    - target: {fileID: 6042751644814322420, guid: 6fcc5160f77530740b07e815f84e1ce5,
+        type: 3}
+      propertyPath: m_Name
+      value: Nodo (2) Star Renderer
+      objectReference: {fileID: 0}
     - target: {fileID: 6125387650210007072, guid: 6fcc5160f77530740b07e815f84e1ce5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15455,6 +15505,21 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0.895
       objectReference: {fileID: 0}
+    - target: {fileID: 6153519595406782550, guid: 6fcc5160f77530740b07e815f84e1ce5,
+        type: 3}
+      propertyPath: lastBox
+      value: 
+      objectReference: {fileID: 486993963}
+    - target: {fileID: 6207463099209025443, guid: 6fcc5160f77530740b07e815f84e1ce5,
+        type: 3}
+      propertyPath: lastBox
+      value: 
+      objectReference: {fileID: 886617612}
+    - target: {fileID: 6626750340578563111, guid: 6fcc5160f77530740b07e815f84e1ce5,
+        type: 3}
+      propertyPath: lastBox
+      value: 
+      objectReference: {fileID: 1435007673}
     - target: {fileID: 6776706603377313803, guid: 6fcc5160f77530740b07e815f84e1ce5,
         type: 3}
       propertyPath: timeJump
@@ -15480,6 +15545,11 @@ PrefabInstance:
       propertyPath: powerJump
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 7098737064224710312, guid: 6fcc5160f77530740b07e815f84e1ce5,
+        type: 3}
+      propertyPath: lastBox
+      value: 
+      objectReference: {fileID: 1977499370}
     - target: {fileID: 7098737064224710312, guid: 6fcc5160f77530740b07e815f84e1ce5,
         type: 3}
       propertyPath: boxRenderers.Array.size
@@ -15517,6 +15587,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7288556057705559233, guid: 6fcc5160f77530740b07e815f84e1ce5,
         type: 3}
+      propertyPath: lastBox
+      value: 
+      objectReference: {fileID: 2081743831}
+    - target: {fileID: 7288556057705559233, guid: 6fcc5160f77530740b07e815f84e1ce5,
+        type: 3}
       propertyPath: powerJump
       value: 0.2
       objectReference: {fileID: 0}
@@ -15525,6 +15600,11 @@ PrefabInstance:
       propertyPath: possiblesBoxes.Array.data[0]
       value: 
       objectReference: {fileID: 1796837614}
+    - target: {fileID: 7296630458744306003, guid: 6fcc5160f77530740b07e815f84e1ce5,
+        type: 3}
+      propertyPath: lastBox
+      value: 
+      objectReference: {fileID: 430695393}
     - target: {fileID: 7296630458744306003, guid: 6fcc5160f77530740b07e815f84e1ce5,
         type: 3}
       propertyPath: boxRenderers.Array.size
@@ -15555,16 +15635,36 @@ PrefabInstance:
       propertyPath: boxRenderers.Array.data[4]
       value: 
       objectReference: {fileID: 7356548141794087128}
+    - target: {fileID: 7296630458744306003, guid: 6fcc5160f77530740b07e815f84e1ce5,
+        type: 3}
+      propertyPath: EventAction.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7296630458744306003, guid: 6fcc5160f77530740b07e815f84e1ce5,
+        type: 3}
+      propertyPath: EventAction.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7319057940408308489, guid: 6fcc5160f77530740b07e815f84e1ce5,
         type: 3}
       propertyPath: isPathToStar.Array.size
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7404427294637938127, guid: 6fcc5160f77530740b07e815f84e1ce5,
+        type: 3}
+      propertyPath: lastBox
+      value: 
+      objectReference: {fileID: 1483116524}
     - target: {fileID: 7527093217079116137, guid: 6fcc5160f77530740b07e815f84e1ce5,
         type: 3}
       propertyPath: animToThis
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7601398003100846744, guid: 6fcc5160f77530740b07e815f84e1ce5,
+        type: 3}
+      propertyPath: lastBox
+      value: 
+      objectReference: {fileID: 1489867039}
     - target: {fileID: 7978405064747581271, guid: 6fcc5160f77530740b07e815f84e1ce5,
         type: 3}
       propertyPath: isPathToStar.Array.size
@@ -15617,9 +15717,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8737912497222719896, guid: 6fcc5160f77530740b07e815f84e1ce5,
         type: 3}
+      propertyPath: lastBox
+      value: 
+      objectReference: {fileID: 710494896}
+    - target: {fileID: 8737912497222719896, guid: 6fcc5160f77530740b07e815f84e1ce5,
+        type: 3}
       propertyPath: powerJump
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 9102651565029777236, guid: 6fcc5160f77530740b07e815f84e1ce5,
+        type: 3}
+      propertyPath: lastBox
+      value: 
+      objectReference: {fileID: 53990921}
     - target: {fileID: 9102651565029777236, guid: 6fcc5160f77530740b07e815f84e1ce5,
         type: 3}
       propertyPath: powerJump
