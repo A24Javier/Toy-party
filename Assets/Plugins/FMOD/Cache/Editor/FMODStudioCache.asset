@@ -15,7 +15,7 @@ MonoBehaviour:
   Path: FMO/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639078120508071617
+  lastModified: 639078213795671649
   FileSizes:
   - Name: Desktop
     Value: 1630464
@@ -35,7 +35,7 @@ MonoBehaviour:
   Path: FMO/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639078120508071617
+  lastModified: 639078213795681393
   FileSizes:
   - Name: Desktop
     Value: 846
@@ -90,7 +90,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: -7710316086532683459}
   cacheVersion: 131858
-  cacheTime: 639078120508071617
+  cacheTime: 639078213795681393
   SerializableEventsDict:
   - key: event:/Musica_Menu
     index: 0
