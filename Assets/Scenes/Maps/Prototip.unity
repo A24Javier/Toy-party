@@ -6021,7 +6021,7 @@ MonoBehaviour:
           m_CallState: 2
     IsHeavy: 0
   _heavyWaitFrames: 30
-  _worksInDevBuild: 0
+  _worksInDevBuild: 1
   _comments: "Numeros del 1 al 6 del teclado no numerico sirve para moverse sin que
     el turno finalice\n\nA\xF1adir objetos al inventario (usando teclado numerico):\n0
     => Actualizar inventario\n1 => Superglue (quitar movimiento a rival)\n2 => Portal

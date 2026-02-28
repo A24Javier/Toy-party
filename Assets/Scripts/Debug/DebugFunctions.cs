@@ -54,7 +54,6 @@ public class DebugFunctions : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
     }
 

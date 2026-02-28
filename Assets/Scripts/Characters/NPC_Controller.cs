@@ -128,6 +128,12 @@ public class NPC_Controller : Character
                 savedCameraRotationY = 0f;
             }
 
+            if (actualBox.IsTrapActive())
+            {
+                StartCoroutine(actualBox.ActivateTrap(this));
+                break;
+            }
+
             if (actualBox.PossiblesBoxesCount() >= 2) // Activar sistema encrucijada, pero random
             {
                 runningParticles.Stop();
@@ -139,6 +145,13 @@ public class NPC_Controller : Character
 
                 animator.SetBool("isRunning", true);
                 newBox = actualBox.GetBoxTransf(randPath).GetComponent<Box>();
+
+                int attemps = 0;
+                while (newBox.IsTowerOnIt && attemps < 100)
+                {
+                    newBox = actualBox.GetBoxTransf(randPath).GetComponent<Box>();
+                    attemps++;
+                }
                 destination = newBox.GetThisBoxTransf().position;
                 animToThis = newBox.GetAnimToThis();
                 audioSource.Play();
