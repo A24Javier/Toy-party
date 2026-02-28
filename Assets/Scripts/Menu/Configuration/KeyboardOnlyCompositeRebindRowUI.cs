@@ -1,152 +1,172 @@
-﻿using TMPro;
+﻿using System.Collections;
+using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class KeyboardMoveCompositeRowUI : MonoBehaviour
 {
-    [Header("Refs")]
     [SerializeField] private DeviceDetector deviceDetector;
     [SerializeField] private RebindSaveLoad saveLoad;
-    [SerializeField] private InputActionReference actionRef; // Player/Move
+    [SerializeField] private InputActionReference actionRef;
 
-    [Header("Composite Part")]
-    [Tooltip("Up / Down / Left / Right (como lo ves en el editor)")]
     [SerializeField] private string compositePartName = "Up";
 
-    [Header("UI")]
     [SerializeField] private TMP_Text bindingText;
     [SerializeField] private Button rebindButton;
-    [SerializeField] private TMP_Text rebindButtonText; // opcional
-
-    [Header("Rebind")]
-    [SerializeField] private float matchWaitSeconds = 0.1f;
-    [SerializeField] private string cancelPath = "<Keyboard>/escape";
+    [SerializeField] private Button[] otherButtonsToDisable;
 
     private InputActionRebindingExtensions.RebindingOperation op;
+    private Coroutine routine;
+
+    private EventSystem cachedEventSystem;
+    private bool prevSendNavEvents;
+    private bool prevEventSystemEnabled;
+
     private string lastShown = "";
 
-    private void OnEnable()
+    void OnEnable()
     {
-        if (rebindButton != null)
-        {
-            rebindButton.onClick.RemoveAllListeners();
-            rebindButton.onClick.AddListener(StartRebindKeyboard);
-        }
-
+        rebindButton.onClick.RemoveAllListeners();
+        rebindButton.onClick.AddListener(StartRebind);
         Refresh();
     }
 
-    private void OnDisable() => DisposeOp();
+    void Update() => Refresh();
 
-    private void Update() => Refresh();
-
-    private void Refresh()
+    public void StartRebind()
     {
-        if (actionRef == null || actionRef.action == null || bindingText == null)
-            return;
+        if (deviceDetector.IsUsingGamepad()) return;
 
-        bool usingGamepad = deviceDetector != null && deviceDetector.IsUsingGamepad();
-
-        // ✅ SIEMPRE mostramos la tecla del teclado
-        int idx = FindKeyboardPartIndex(actionRef.action, compositePartName);
-
-        string display = idx < 0
-            ? "-"
-            : actionRef.action.GetBindingDisplayString(idx, out _, out _, InputBinding.DisplayStringOptions.DontOmitDevice);
-
-        if (display != lastShown)
-        {
-            lastShown = display;
-            bindingText.text = display;
-        }
-
-        // ✅ Solo permitimos cambiar si estás usando teclado
-        if (rebindButton != null)
-            rebindButton.interactable = !usingGamepad;
+        if (routine != null) StopCoroutine(routine);
+        routine = StartCoroutine(RebindRoutine());
     }
 
-    // 🔥 Función robusta: encuentra Up/Down/Left/Right del teclado sin usar groups ni "WASD"
-    private int FindKeyboardPartIndex(InputAction action, string partName)
+    private IEnumerator RebindRoutine()
     {
-        if (action == null) return -1;
+        var action = actionRef.action;
+        int bindingIndex = FindKeyboardPart(action);
+        if (bindingIndex < 0) yield break;
 
+        SetUILocked(true);
+
+        bindingText.text = "Suelta y pulsa...";
+        yield return new WaitUntil(AllInputsReleased);
+
+        action.Disable();
+
+        op = action.PerformInteractiveRebinding(bindingIndex)
+            .WithMatchingEventsBeingSuppressed()
+            .WithCancelingThrough("<Keyboard>/escape");
+
+        string currentPath = action.bindings[bindingIndex].effectivePath;
+
+        op.OnPotentialMatch(o =>
+        {
+            if (o.selectedControl != null &&
+                o.selectedControl.path == currentPath)
+                o.Complete();
+        });
+
+        op.OnComplete(o =>
+        {
+            if (o.selectedControl != null)
+                action.ApplyBindingOverride(bindingIndex, o.selectedControl.path);
+
+            Finish(action);
+        });
+
+        op.OnCancel(o => Finish(action));
+
+        op.Start();
+    }
+
+    private void Finish(InputAction action)
+    {
+        action.Enable();
+
+        op?.Dispose();
+        op = null;
+
+        SetUILocked(false);
+        saveLoad?.Save();
+
+        lastShown = "";
+        Refresh();
+    }
+
+    private void SetUILocked(bool locked)
+    {
+        if (otherButtonsToDisable != null)
+        {
+            foreach (var b in otherButtonsToDisable)
+                if (b != null) b.interactable = !locked;
+        }
+
+        rebindButton.interactable = !locked;
+
+        if (locked)
+        {
+            if (cachedEventSystem == null)
+                cachedEventSystem = EventSystem.current;
+
+            if (cachedEventSystem != null)
+            {
+                prevSendNavEvents = cachedEventSystem.sendNavigationEvents;
+                prevEventSystemEnabled = cachedEventSystem.enabled;
+
+                cachedEventSystem.sendNavigationEvents = false;
+                cachedEventSystem.SetSelectedGameObject(null);
+                cachedEventSystem.enabled = false;
+            }
+        }
+        else
+        {
+            if (cachedEventSystem != null)
+            {
+                cachedEventSystem.enabled = prevEventSystemEnabled;
+                cachedEventSystem.sendNavigationEvents = prevSendNavEvents;
+            }
+        }
+    }
+
+    private bool AllInputsReleased()
+    {
+        return Keyboard.current == null || !Keyboard.current.anyKey.isPressed;
+    }
+
+    private int FindKeyboardPart(InputAction action)
+    {
         for (int i = 0; i < action.bindings.Count; i++)
         {
             var b = action.bindings[i];
 
             if (!b.isPartOfComposite) continue;
 
-            // Up/Down/Left/Right a veces vienen en minúsculas: "up"
-            if (!string.Equals(b.name, partName, System.StringComparison.OrdinalIgnoreCase))
+            if (!string.Equals(b.name, compositePartName,
+                System.StringComparison.OrdinalIgnoreCase))
                 continue;
 
-            // Nos aseguramos de que sea teclado
             string path = b.effectivePath;
-            if (string.IsNullOrEmpty(path)) path = b.path;
-
             if (!string.IsNullOrEmpty(path) && path.Contains("<Keyboard>"))
                 return i;
         }
-
         return -1;
     }
 
-    public void StartRebindKeyboard()
+    private void Refresh()
     {
-        if (actionRef == null || actionRef.action == null)
-            return;
+        int idx = FindKeyboardPart(actionRef.action);
+        if (idx < 0) return;
 
-        if (deviceDetector != null && deviceDetector.IsUsingGamepad())
-            return;
+        string display = actionRef.action.GetBindingDisplayString(idx);
 
-        var action = actionRef.action;
+        if (display == lastShown) return;
 
-        int bindingIndex = FindKeyboardPartIndex(action, compositePartName);
-        if (bindingIndex < 0)
-            return;
+        lastShown = display;
+        bindingText.text = display;
 
-        DisposeOp();
-
-        if (rebindButton != null) rebindButton.interactable = false;
-        if (rebindButtonText != null) rebindButtonText.text = "Pulsa...";
-        if (bindingText != null) bindingText.text = "Esperando...";
-
-        action.Disable();
-
-        op = action.PerformInteractiveRebinding(bindingIndex)
-            .WithCancelingThrough(cancelPath)
-            .OnMatchWaitForAnother(matchWaitSeconds)
-            .WithControlsExcluding("<Gamepad>"); // ✅ teclado only
-
-        op.OnComplete(_ =>
-        {
-            action.Enable();
-            Finish();
-            saveLoad?.Save();
-            Refresh();
-        });
-
-        op.OnCancel(_ =>
-        {
-            action.Enable();
-            Finish();
-            Refresh();
-        });
-
-        op.Start();
-    }
-
-    private void Finish()
-    {
-        DisposeOp();
-        if (rebindButton != null) rebindButton.interactable = true;
-        if (rebindButtonText != null) rebindButtonText.text = "Cambiar";
-    }
-
-    private void DisposeOp()
-    {
-        op?.Dispose();
-        op = null;
+        rebindButton.interactable = !deviceDetector.IsUsingGamepad();
     }
 }

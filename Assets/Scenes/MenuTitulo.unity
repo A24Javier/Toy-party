@@ -1830,9 +1830,12 @@ MonoBehaviour:
   compositePartName: Down
   bindingText: {fileID: 225090403}
   rebindButton: {fileID: 1983284109}
-  rebindButtonText: {fileID: 0}
-  matchWaitSeconds: 0.1
-  cancelPath: <Keyboard>/escape
+  otherButtonsToDisable:
+  - {fileID: 1281478705}
+  - {fileID: 289859547}
+  - {fileID: 1265686149}
+  - {fileID: 1137025911}
+  - {fileID: 1141865266}
 --- !u!1 &289859545
 GameObject:
   m_ObjectHideFlags: 0
@@ -4407,16 +4410,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deviceDetector: {fileID: 590286564}
+  saveLoad: {fileID: 1936217508}
   actionRef: {fileID: -546317607137684914, guid: e03da2bba7c884548a19e505720dfe06,
     type: 3}
   bindingText: {fileID: 1459558168}
   rebindButton: {fileID: 289859547}
   rebindButtonText: {fileID: 0}
-  keyboardSchemeName: Keyboard&Mouse
-  gamepadSchemeName: Gamepad
-  matchWaitSeconds: 0.1
-  cancelPath: <Keyboard>/escape
-  saveLoad: {fileID: 1936217508}
+  keyboardScheme: Keyboard&Mouse
+  gamepadScheme: Gamepad
+  otherButtonsToDisable:
+  - {fileID: 1281478705}
+  - {fileID: 1265686149}
+  - {fileID: 1983284109}
+  - {fileID: 1137025911}
+  - {fileID: 1141865266}
+  disableUINavigationWhileRebinding: 1
 --- !u!1 &850765086
 GameObject:
   m_ObjectHideFlags: 0
@@ -5626,9 +5634,12 @@ MonoBehaviour:
   compositePartName: Right
   bindingText: {fileID: 127029651}
   rebindButton: {fileID: 1137025911}
-  rebindButtonText: {fileID: 0}
-  matchWaitSeconds: 0.1
-  cancelPath: <Keyboard>/escape
+  otherButtonsToDisable:
+  - {fileID: 1281478705}
+  - {fileID: 289859547}
+  - {fileID: 1265686149}
+  - {fileID: 1983284109}
+  - {fileID: 1141865266}
 --- !u!1 &1184885527
 GameObject:
   m_ObjectHideFlags: 0
@@ -6121,16 +6132,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deviceDetector: {fileID: 805294062}
+  saveLoad: {fileID: 1936217508}
   actionRef: {fileID: 1989382350637113560, guid: e03da2bba7c884548a19e505720dfe06,
     type: 3}
   bindingText: {fileID: 1717465716}
   rebindButton: {fileID: 1281478705}
   rebindButtonText: {fileID: 0}
-  keyboardSchemeName: Keyboard&Mouse
-  gamepadSchemeName: Gamepad
-  matchWaitSeconds: 0.1
-  cancelPath: <Keyboard>/escape
-  saveLoad: {fileID: 1936217508}
+  keyboardScheme: Keyboard&Mouse
+  gamepadScheme: Gamepad
+  otherButtonsToDisable:
+  - {fileID: 289859547}
+  - {fileID: 1265686149}
+  - {fileID: 1983284109}
+  - {fileID: 1137025911}
+  - {fileID: 1141865266}
+  disableUINavigationWhileRebinding: 1
 --- !u!1 &1367587485
 GameObject:
   m_ObjectHideFlags: 0
@@ -8188,9 +8204,12 @@ MonoBehaviour:
   compositePartName: Up
   bindingText: {fileID: 1603826428}
   rebindButton: {fileID: 1265686149}
-  rebindButtonText: {fileID: 0}
-  matchWaitSeconds: 0.1
-  cancelPath: <Keyboard>/escape
+  otherButtonsToDisable:
+  - {fileID: 1281478705}
+  - {fileID: 289859547}
+  - {fileID: 1983284109}
+  - {fileID: 1137025911}
+  - {fileID: 1141865266}
 --- !u!1 &1983284107
 GameObject:
   m_ObjectHideFlags: 0
@@ -8844,9 +8863,12 @@ MonoBehaviour:
   compositePartName: Left
   bindingText: {fileID: 1435802279}
   rebindButton: {fileID: 1141865266}
-  rebindButtonText: {fileID: 0}
-  matchWaitSeconds: 0.1
-  cancelPath: <Keyboard>/escape
+  otherButtonsToDisable:
+  - {fileID: 1281478705}
+  - {fileID: 289859547}
+  - {fileID: 1265686149}
+  - {fileID: 1983284109}
+  - {fileID: 1137025911}
 --- !u!1001 &6452605152090403657
 PrefabInstance:
   m_ObjectHideFlags: 0

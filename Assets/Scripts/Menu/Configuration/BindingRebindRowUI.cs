@@ -1,5 +1,7 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -7,155 +9,173 @@ public class BindingRebindRowUI : MonoBehaviour
 {
     [Header("Refs")]
     [SerializeField] private DeviceDetector deviceDetector;
+    [SerializeField] private RebindSaveLoad saveLoad;
     [SerializeField] private InputActionReference actionRef;
 
     [Header("UI")]
     [SerializeField] private TMP_Text bindingText;
     [SerializeField] private Button rebindButton;
-    [SerializeField] private TMP_Text rebindButtonText; // opcional (puede ser null)
+    [SerializeField] private TMP_Text rebindButtonText;
 
-    [Header("Scheme names (exactos)")]
-    [SerializeField] private string keyboardSchemeName = "Keyboard&Mouse";
-    [SerializeField] private string gamepadSchemeName = "Gamepad";
+    [Header("Schemes")]
+    [SerializeField] private string keyboardScheme = "Keyboard&Mouse";
+    [SerializeField] private string gamepadScheme = "Gamepad";
 
-    [Header("Rebind")]
-    [SerializeField] private float matchWaitSeconds = 0.1f;
-    [SerializeField] private string cancelPath = "<Keyboard>/escape";
-    [SerializeField] private RebindSaveLoad saveLoad;
+    [Header("UI Lock")]
+    [SerializeField] private Button[] otherButtonsToDisable;
+    [SerializeField] private bool disableUINavigationWhileRebinding = true;
 
     private InputActionRebindingExtensions.RebindingOperation op;
+    private Coroutine routine;
+
+    private EventSystem cachedEventSystem;
+    private bool prevSendNavEvents;
+    private bool prevEventSystemEnabled;
+
     private string lastShown = "";
 
-    private void OnEnable()
+    void OnEnable()
     {
-        if (rebindButton != null)
-        {
-            rebindButton.onClick.RemoveAllListeners();
-            rebindButton.onClick.AddListener(StartRebind);
-        }
-
+        rebindButton.onClick.RemoveAllListeners();
+        rebindButton.onClick.AddListener(StartRebind);
         RefreshBindingText();
     }
 
-    private void OnDisable()
-    {
-        DisposeOp();
-    }
+    void Update() => RefreshBindingText();
 
-    private void Update()
-    {
-        // refresco ligero por si cambia dispositivo
-        RefreshBindingText();
-    }
-
-    private void RefreshBindingText()
-    {
-        if (deviceDetector == null || actionRef == null || actionRef.action == null || bindingText == null) return;
-
-        string scheme = deviceDetector.IsUsingGamepad() ? gamepadSchemeName : keyboardSchemeName;
-        string display = GetBindingDisplayForScheme(actionRef.action, scheme);
-
-        if (display == lastShown) return;
-        lastShown = display;
-        bindingText.text = display;
-    }
-
-    private int FindBindingIndexForScheme(InputAction action, string scheme)
-    {
-        for (int i = 0; i < action.bindings.Count; i++)
-        {
-            var b = action.bindings[i];
-            if (b.isComposite || b.isPartOfComposite) continue;
-
-            if (!string.IsNullOrEmpty(b.groups) && b.groups.Contains(scheme))
-                return i;
-        }
-        return -1;
-    }
-
-    private string GetBindingDisplayForScheme(InputAction action, string scheme)
-    {
-        int idx = FindBindingIndexForScheme(action, scheme);
-        if (idx < 0) return "-";
-
-        return action.GetBindingDisplayString(
-            idx,
-            out _,
-            out _,
-            InputBinding.DisplayStringOptions.DontOmitDevice
-        );
-    }
-
+    // =========================
     public void StartRebind()
     {
-        if (deviceDetector == null || actionRef == null || actionRef.action == null) return;
+        if (routine != null) StopCoroutine(routine);
+        routine = StartCoroutine(RebindRoutine());
+    }
 
+    private IEnumerator RebindRoutine()
+    {
         var action = actionRef.action;
 
-        string scheme = deviceDetector.IsUsingGamepad() ? gamepadSchemeName : keyboardSchemeName;
-        int bindingIndex = FindBindingIndexForScheme(action, scheme);
-        if (bindingIndex < 0) return;
+        int bindingIndex = FindBindingIndex(action);
+        if (bindingIndex < 0) yield break;
 
-        // Evitar doble operación
-        DisposeOp();
+        SetUILocked(true);
 
-        // UI feedback
-        if (rebindButton != null) rebindButton.interactable = false;
-        if (rebindButtonText != null) rebindButtonText.text = "Pulsa...";
+        bindingText.text = "Suelta y pulsa...";
+        yield return new WaitUntil(AllInputsReleased);
+
         bindingText.text = "Esperando input...";
 
         action.Disable();
 
         op = action.PerformInteractiveRebinding(bindingIndex)
-            .WithCancelingThrough(cancelPath)
-            .OnMatchWaitForAnother(matchWaitSeconds);
+            .WithMatchingEventsBeingSuppressed()
+            .WithCancelingThrough("<Keyboard>/escape");
 
-        // Filtrar: si estás en teclado, excluye mando; si estás en mando, excluye teclado/ratón
-        if (scheme == keyboardSchemeName)
-        {
-            op.WithControlsExcluding("<Gamepad>");
-        }
-        else if (scheme == gamepadSchemeName)
-        {
-            op.WithControlsExcluding("<Keyboard>");
-            op.WithControlsExcluding("<Mouse>");
-        }
+        string currentPath = action.bindings[bindingIndex].effectivePath;
 
-        op.OnComplete(_ =>
+        op.OnPotentialMatch(o =>
         {
-            action.Enable();
-            FinishRebindUI();
-            SaveOverridesIfYouWant();
-            RefreshBindingText();
+            if (o.selectedControl != null &&
+                o.selectedControl.path == currentPath)
+                o.Complete();
         });
 
-        op.OnCancel(_ =>
+        op.OnComplete(o =>
         {
-            action.Enable();
-            FinishRebindUI();
-            RefreshBindingText();
+            if (o.selectedControl != null)
+                action.ApplyBindingOverride(bindingIndex, o.selectedControl.path);
+
+            Finish(action);
         });
+
+        op.OnCancel(o => Finish(action));
 
         op.Start();
     }
 
-    private void FinishRebindUI()
+    private void Finish(InputAction action)
     {
-        DisposeOp();
-        if (rebindButton != null) rebindButton.interactable = true;
-        if (rebindButtonText != null) rebindButtonText.text = "Cambiar";
-    }
+        action.Enable();
 
-    private void DisposeOp()
-    {
         op?.Dispose();
         op = null;
+
+        SetUILocked(false);
+        saveLoad?.Save();
+
+        if (rebindButtonText != null)
+            rebindButtonText.text = "Cambiar";
+
+        lastShown = "";
+        RefreshBindingText();
     }
 
-    // Paso siguiente: lo conectamos a PlayerPrefs para persistir.
-    private void SaveOverridesIfYouWant()
+    // =========================
+    private void SetUILocked(bool locked)
     {
-        if (saveLoad != null)
-            saveLoad.Save();
+        if (otherButtonsToDisable != null)
+        {
+            foreach (var b in otherButtonsToDisable)
+                if (b != null) b.interactable = !locked;
+        }
+
+        if (rebindButton != null)
+            rebindButton.interactable = !locked;
+
+        if (!disableUINavigationWhileRebinding)
+            return;
+
+        if (locked)
+        {
+            if (cachedEventSystem == null)
+                cachedEventSystem = EventSystem.current;
+
+            if (cachedEventSystem != null)
+            {
+                prevSendNavEvents = cachedEventSystem.sendNavigationEvents;
+                prevEventSystemEnabled = cachedEventSystem.enabled;
+
+                cachedEventSystem.sendNavigationEvents = false;
+                cachedEventSystem.SetSelectedGameObject(null);
+                cachedEventSystem.enabled = false;
+            }
+        }
+        else
+        {
+            if (cachedEventSystem != null)
+            {
+                cachedEventSystem.enabled = prevEventSystemEnabled;
+                cachedEventSystem.sendNavigationEvents = prevSendNavEvents;
+            }
+        }
+    }
+
+    private bool AllInputsReleased()
+    {
+        return Keyboard.current == null || !Keyboard.current.anyKey.isPressed;
+    }
+
+    private int FindBindingIndex(InputAction action)
+    {
+        for (int i = 0; i < action.bindings.Count; i++)
+        {
+            var b = action.bindings[i];
+            if (!b.isComposite && !b.isPartOfComposite)
+                return i;
+        }
+        return -1;
+    }
+
+    private void RefreshBindingText()
+    {
+        var action = actionRef.action;
+        int idx = FindBindingIndex(action);
+        if (idx < 0) return;
+
+        string display = action.GetBindingDisplayString(idx);
+
+        if (display == lastShown) return;
+
+        lastShown = display;
+        bindingText.text = display;
     }
 }
