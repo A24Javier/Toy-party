@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master.bank
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Path: FMO/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
@@ -20,8 +20,7 @@ MonoBehaviour:
   - Name: Desktop
     Value: 1630464
   Exists: 1
-
---- !u!114 &9035345177600274529
+--- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -30,18 +29,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.strings.bank
-  m_EditorClassIdentifier:
-  Path: FMO/Build/Desktop/Master.strings.bank
-  Name: Master.strings
-  StudioPath: bank:/Master.strings
-  lastModified: 639078213795681393
-  FileSizes:
-  - Name: Desktop
-    Value: 846
-  Exists: 1
-
+  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
+  m_Name: FMODStudioCache
+  m_EditorClassIdentifier: 
+  EditorBanks:
+  - {fileID: 9035345177600274529}
+  - {fileID: -8964622028711879982}
+  EditorEvents:
+  - {fileID: 2831381510111777132}
+  EditorParameters: []
+  MasterBanks:
+  - {fileID: -8964622028711879982}
+  StringsBanks:
+  - {fileID: 9035345177600274529}
+  cacheVersion: 131858
+  cacheTime: 639078213795681393
+  SerializableEventsDict:
+  - key: event:/Musica_Menu
+    index: 0
 --- !u!114 &2831381510111777132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53,7 +58,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/Musica_Menu
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Path: event:/Musica_Menu
   Guid:
     Data1: -1900781796
@@ -69,8 +74,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 118584
-
---- !u!114 &11400000
+--- !u!114 &9035345177600274529
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -79,21 +83,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
-  m_Name: FMODStudioCache
-  m_EditorClassIdentifier:
-  EditorBanks:
-  - {fileID: 9035345177600274529}
-  - {fileID: -8964622028711879982}
-  EditorEvents:
-  - {fileID: 2831381510111777132}
-  EditorParameters: []
-  MasterBanks:
-  - {fileID: -8964622028711879982}
-  StringsBanks:
-  - {fileID: 9035345177600274529}
-  cacheVersion: 131858
-  cacheTime: 639076585193989347
-  SerializableEventsDict:
-  - key: event:/Musica_Menu
-    index: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: FMO/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 639078213795681393
+  FileSizes:
+  - Name: Desktop
+    Value: 846
+  Exists: 1
