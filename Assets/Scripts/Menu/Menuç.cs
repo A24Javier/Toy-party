@@ -1,5 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Logo : MonoBehaviour
 {
@@ -26,7 +27,8 @@ public class Logo : MonoBehaviour
     [SerializeField] private float posicionFinalConfig = -223f;
     [SerializeField] private float posicionFinalpe = -223f;
 
-
+    [Header("Evento")]
+    public UnityEvent OnMoveFinished;
 
 
 
@@ -70,7 +72,10 @@ public class Logo : MonoBehaviour
 
         seq.Join(exit.DOAnchorPosY(posicionFinalpe, duracionMov).SetEase(Ease.InQuad));
 
-
+        seq.OnComplete(() =>
+        {
+            OnMoveFinished?.Invoke();
+        });
 
     }
 }
