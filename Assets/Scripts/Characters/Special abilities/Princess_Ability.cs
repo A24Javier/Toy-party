@@ -10,38 +10,42 @@ public class Princess_Ability : AbilityFunction
 
     public override void UseAbility()
     {
-        Board board = FindAnyObjectByType<Board>();
+        bool payForAbility = true;
 
-        // Obtenemos las casillas aleatorias donde se instanciarán las trampas
-        HashSet<Box> aleatoryBoxes = new HashSet<Box>();
+#if (UNITY_EDITOR || DEVELOPER_BUILD)
+        payForAbility = false;
+#endif
+        Character princess = GameController.instance.GetCharacterOfTurn();
 
-        for(int i = 0; i < _totalTraps; i++)
+        if (payForAbility && princess.GetCoins() >= Ability.AbilityPrice || !payForAbility)
         {
-            Box aleatoryBox = null;
-            int attemps = 0;
-            do
+            if (payForAbility)
             {
+                UIManager.instance.UpdateTextCoins(princess, -Ability.AbilityPrice);
+            }
+
+            Board board = FindAnyObjectByType<Board>();
+
+            // Obtenemos las casillas aleatorias donde se instanciarán las trampas
+            HashSet<Box> aleatoryBoxes = new HashSet<Box>();
+
+            for (int i = 0; i < _totalTraps; i++)
+            {
+                Box aleatoryBox = null;
+                int attemps = 0;
                 do
                 {
-                    aleatoryBox = board.GetRandomBox();
-                    attemps++;
-                } while (aleatoryBox.type != BoxType.Coin && aleatoryBox.type != BoxType.Normal && attemps < 100);
-            } while (!aleatoryBoxes.Add(aleatoryBox));
-                
+                    do
+                    {
+                        aleatoryBox = board.GetRandomBox();
+                        attemps++;
+                    } while (aleatoryBox.type != BoxType.Coin && aleatoryBox.type != BoxType.Normal && attemps < 100);
+                } while (!aleatoryBoxes.Add(aleatoryBox));
 
-            //aleatoryBoxes[i] = aleatoryBox;
+            }
+
+            PrincessTrapCoroutine.Instance.StartTrapCoroutine(aleatoryBoxes);
         }
-
-        // Plantamos las trampas en las casillas
-        /*for(int i = 0; i < aleatoryBoxes.Length; i++)
-        {
-            // Plantamos la trampa en la casilla
-            GameObject trap = Instantiate(_prefabTrap, aleatoryBoxes[i].transform.position + (Vector3.up * 0.1f), Quaternion.identity);
-         
-            // Hacemos saber a la casilla que tiene una trampa
-            aleatoryBoxes[i].SetTrap(trap);
-        }*/
-
-        PrincessTrapCoroutine.Instance.StartTrapCoroutine(aleatoryBoxes);
+        
     }
 }

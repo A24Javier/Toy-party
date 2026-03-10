@@ -6,21 +6,36 @@ public class MsPage_Ability : AbilityFunction
 {
     public override void UseAbility()
     {
-        float rand = Random.Range(0, 101);
-        Character character = GameController.instance.GetCharacterOfTurn();
-        // Hacer animación de pintar
+        bool payForAbility = true;
 
-        if(rand >= 0 && rand <= 47.5f) // Dibuja y gana 4 monedas
+#if (UNITY_EDITOR || DEVELOPER_BUILD)
+        payForAbility = false;
+#endif
+        Character mspage = GameController.instance.GetCharacterOfTurn();
+
+        if (payForAbility && mspage.GetCoins() >= Ability.AbilityPrice || !payForAbility)
         {
-            UIManager.instance.FunctionUpdateTextCoins(character, 4);
+            if (payForAbility)
+            {
+                UIManager.instance.UpdateTextCoins(mspage, -Ability.AbilityPrice);
+            }
+
+            float rand = Random.Range(0, 101);
+            // Hacer animación de pintar
+
+            if (rand >= 0 && rand <= 47.5f) // Dibuja y gana 4 monedas
+            {
+                UIManager.instance.FunctionUpdateTextCoins(mspage, 4);
+            }
+            else if (rand > 47.5f && rand <= 95) // Dibuja una bomba que hace retroceder a un rival
+            {
+                UIManager.instance.ConfigureSelectPlayer(mspage, "Bomb", 3);
+            }
+            else // Se crea un portal y se usa al instante
+            {
+                UIManager.instance.ConfigureSelectPlayer(mspage, "TP_OtherPlayer");
+            }
         }
-        else if(rand > 47.5f && rand <= 95) // Dibuja una bomba que hace retroceder a un rival
-        {
-            UIManager.instance.ConfigureSelectPlayer(character, "Bomb", 3);
-        }
-        else // Se crea un portal y se usa al instante
-        {
-            UIManager.instance.ConfigureSelectPlayer(character, "TP_OtherPlayer");
-        }
+        
     }
 }

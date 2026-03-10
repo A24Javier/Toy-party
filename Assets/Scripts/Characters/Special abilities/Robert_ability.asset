@@ -23,4 +23,4 @@ MonoBehaviour:
   PayForUse: 1
   AbilityPrice: 10
   PassiveBuffs: []
-  AbilityFunction: {fileID: 0}
+  AbilityFunction: {fileID: 11400000, guid: 916061b3834b4c94ba773f197965a94b, type: 2}

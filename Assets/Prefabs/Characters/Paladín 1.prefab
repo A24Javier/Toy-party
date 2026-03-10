@@ -135,7 +135,7 @@ MonoBehaviour:
   isSelectingPath: 0
   smooth: 1
   velocidadDeRotacion: 5
-  charSetting: {fileID: 11400000, guid: c226e071c36ae094c80119cd77ae31e9, type: 2}
+  charSetting: {fileID: 11400000, guid: 071b023269decfa4ea00e0e2706b95f7, type: 2}
   powerJump: 1
   timeJump: 1
   stepSfx: {fileID: 8300000, guid: 86544560de2afd14fbe90bf898a1d226, type: 3}
