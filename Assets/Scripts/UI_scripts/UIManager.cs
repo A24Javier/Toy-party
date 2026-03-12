@@ -9,9 +9,6 @@ using System;
 using System.IO;
 using System.Linq;
 using UnityEngine.SceneManagement;
-using Unity.VisualScripting;
-using System.Reflection;
-using JetBrains.Annotations;
 
 public class UIManager : MonoBehaviour
 {
@@ -657,5 +654,10 @@ public class UIManager : MonoBehaviour
     public void AddTenCoinsToActualChar()
     {
         StartCoroutine(UpdateTextCoins(actualCharacter, 10));
+    }
+
+    public void ChangeDiceSprite(Sprite diceSprite)
+    {
+        actualDiceImage.sprite = diceSprite;
     }
 }

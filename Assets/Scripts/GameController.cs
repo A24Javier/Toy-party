@@ -11,7 +11,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private GameObject npcPrefab;
     [SerializeField] private GameObject dicePrefab;
-    private Dice diceToUse;
+    public Dice DiceToUse;
     [SerializeField] private Dice normalDice;
 
     [SerializeField] private Transform[] spawns;
@@ -63,11 +63,6 @@ public class GameController : MonoBehaviour
         CreatePlayers();
 
         StartCoroutine(Box.InitStarSystemNextFrame());
-    }
-
-    void Update()
-    {
-        
     }
 
     /// <summary>
@@ -177,7 +172,7 @@ public class GameController : MonoBehaviour
                     UIManager.instance.ChangeCharacterUI(playerOfTurn);
                     UIManager.instance.SetActualCharacter(playerOfTurn);
 
-                    diceToUse = normalDice;
+                    DiceToUse = normalDice;
                     UIManager.instance.ControlActionPanel(true);
 
                     // cam sigue jugador
@@ -213,8 +208,8 @@ public class GameController : MonoBehaviour
 
                     // Hacemos que el dado actual sea un dado normal (en un futuro cambiará)
                     DiceScript diceScr = dice.GetComponentInChildren<DiceScript>();
-                    diceToUse = normalDice;
-                    diceScr.ChangeScriptableDice(diceToUse); // De momento solo con dados normales
+                    DiceToUse = normalDice;
+                    diceScr.ChangeScriptableDice(DiceToUse); // De momento solo con dados normales
 
                     // Hacemos que empiece la corutina del rolling del dado del NPC
                     StartCoroutine(diceScr.DiceRolling(npcOfTurn));
@@ -235,7 +230,7 @@ public class GameController : MonoBehaviour
         GameObject dice = Instantiate(dicePrefab, playerOfTurn.transform.position + (Vector3.up * (3 * playerOfTurn.transform.localScale.x)), Quaternion.identity);
 
         DiceScript diceScr = dice.GetComponentInChildren<DiceScript>();
-        diceScr.ChangeScriptableDice(diceToUse);
+        diceScr.ChangeScriptableDice(DiceToUse);
 
         // Hacemos que empiece la corutina del rolling del dado del jugador
         StartCoroutine(diceScr.DiceRolling(playerOfTurn));
@@ -301,7 +296,7 @@ public class GameController : MonoBehaviour
 
     public void ChangeDiceToUse(Dice newDice)
     {
-        diceToUse = newDice;
+        DiceToUse = newDice;
     }
 
     public Character GetCharacter(int index)

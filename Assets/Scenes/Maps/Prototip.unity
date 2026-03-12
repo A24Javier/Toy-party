@@ -3644,6 +3644,7 @@ MonoBehaviour:
     type: 3}
   dicePrefab: {fileID: 1296695963405092170, guid: 45114ace4761b674b86dbfcca51d4d9e,
     type: 3}
+  DiceToUse: {fileID: 0}
   normalDice: {fileID: 11400000, guid: 3750882279889e345b122e3ab20dbd73, type: 2}
   spawns:
   - {fileID: 360795723}
@@ -13643,6 +13644,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 826a46e3cd4268f43bf0feef2570558c, type: 2}
   - {fileID: 11400000, guid: d9912db494edef14ebea6783e20fb881, type: 2}
   - {fileID: 11400000, guid: aaeab17d0f6d2dd499a2fe765a90de61, type: 2}
+  - {fileID: 11400000, guid: 9bffa5747812d8243bea00d42a6b63f8, type: 2}
+  - {fileID: 11400000, guid: 480d66f6719647b46b55d246dc38c879, type: 2}
+  - {fileID: 11400000, guid: 10e23092a7252a54688bd5099c1be899, type: 2}
   _extraItemPrice: 0
 --- !u!1 &1452532309 stripped
 GameObject:
@@ -16765,7 +16769,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000061035156, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1879846795
@@ -18213,7 +18217,7 @@ PrefabInstance:
     - target: {fileID: 5074534689038513058, guid: da4ecc58358df6947ab3bb08e1179ee3,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.000061035156
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5074534689038513058, guid: da4ecc58358df6947ab3bb08e1179ee3,
         type: 3}
