@@ -5,6 +5,8 @@ using TMPro;
 
 public class DiceScript : MonoBehaviour
 {
+    #region Old Version
+    /*
     // La idea de los dados es que esten en un pool. De ahí que use el OnEnable
 
     [SerializeField] private Dice scriptableDice;
@@ -148,5 +150,100 @@ public class DiceScript : MonoBehaviour
     public void NPC_Roll()
     {
         npcRolled = true;
+    }*/
+    #endregion
+    // Y misma direccion y velocidad, X varia entre positivo y negativo.
+    [SerializeField] private float _minRotX, maxRotX;
+    [SerializeField] private float _rotSpeed;
+    private bool _isRotating;
+
+    private int _minNum, _maxNum;
+    private float _numChangeSpeed;
+    [SerializeField] private int _maxChangeNumAttemps = 100;
+    [SerializeField] private float _upDistance = 1f;
+
+    private GameObject _instanciedDice;
+    private List<TMP_Text> _diceNums = new List<TMP_Text>();
+
+    public void SetupDice(Dice dice)
+    {
+        _isRotating = false;
+
+        _minNum = dice.minNumber;
+        _maxNum = dice.maxNumber+1;
+        _numChangeSpeed = dice.changeNumSpeed;
+
+        Vector3 diceSpawnPos = GameController.instance.GetCharacterOfTurn().transform.position + (Vector3.up * _upDistance);
+        _instanciedDice = Instantiate(dice.diceObject, diceSpawnPos, Quaternion.identity, transform);
+
+        for(int i = 0; i < _instanciedDice.transform.childCount; i++)
+        {
+            _diceNums.Add(_instanciedDice.transform.GetChild(i).GetComponent<TMP_Text>());
+        }
+
+        StartCoroutine(DiceRolling());
+    }
+
+    void Update()
+    {
+        
+    }
+
+    private IEnumerator DiceRolling()
+    {
+        int randNumber = Random.Range(_minNum, _maxNum);
+        int lastNumber = randNumber;
+
+        SetDiceNums(randNumber);
+
+        float timeElapsedNumChange = 0f;
+
+        _isRotating = true;
+
+        while (!InputHandler.instance.IsSpacebarTouched())
+        {
+            if(timeElapsedNumChange < _numChangeSpeed)
+            {
+                timeElapsedNumChange += Time.deltaTime;
+            }
+            else if(timeElapsedNumChange >= _numChangeSpeed)
+            {
+                int attemps = 0;
+
+                do
+                {
+                    randNumber = Random.RandomRange(_minNum, _maxNum);
+                    attemps++;
+                } while(randNumber == lastNumber && attemps < _maxChangeNumAttemps);
+
+                lastNumber = randNumber;
+
+                SetDiceNums(randNumber);
+
+                timeElapsedNumChange = 0f;
+            }
+
+            yield return null;
+        }
+
+        _isRotating = false;
+
+        StartCoroutine(ShowDiceNum(randNumber));
+    }
+
+    private void SetDiceNums(int number)
+    {
+        foreach(var diceNum in _diceNums)
+        {
+            diceNum.SetText(number.ToString());
+        }
+    }
+
+    // Debe mostrar el front con rotación 0, 0
+    private IEnumerator ShowDiceNum(int diceNum)
+    {
+        yield return null;
+
+        GameController.instance.GetCharacterOfTurn().Move(diceNum);
     }
 }

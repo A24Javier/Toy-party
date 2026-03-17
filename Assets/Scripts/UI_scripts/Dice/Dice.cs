@@ -6,8 +6,7 @@ using UnityEngine;
 public class Dice : ScriptableObject
 {
     [Header("Dice rendering")]
-    public Mesh diceMesh;
-    public Material diceMat;
+    public GameObject diceObject;
 
     [Header("Dice values")]
     public float changeNumSpeed;
