@@ -39,13 +39,15 @@ public class NPC_Controller : Character
         Look();
     }
 
-
+    /*
     public IEnumerator doRolling(DiceScript dice)
     {
         float randomTimeRoll = Random.Range(MIN_TIME_ROLL, MAX_TIME_ROLL);
         yield return new WaitForSeconds(randomTimeRoll);
         dice.NPC_Roll();
     }
+    */
+
     public override void Move(int steps)
     {
         StartCoroutine(MoveCharacterBoard(steps + extraStep));

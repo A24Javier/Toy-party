@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using DG.Tweening;
+using Unity.VisualScripting;
 
 public class DiceScript : MonoBehaviour
 {
@@ -152,10 +154,13 @@ public class DiceScript : MonoBehaviour
         npcRolled = true;
     }*/
     #endregion
-    // Y misma direccion y velocidad, X varia entre positivo y negativo.
-    [SerializeField] private float _minRotX, maxRotX;
+    [SerializeField] private float _minRotX, _maxRotX;
     [SerializeField] private float _rotSpeed;
     private bool _isRotating;
+    [SerializeField] private bool _isGoingToMaxRotX = false;
+
+    [SerializeField] private float _minNpcTime = 1.25f;
+    [SerializeField] private float _maxNpcTime = 3f;
 
     private int _minNum, _maxNum;
     private float _numChangeSpeed;
@@ -165,7 +170,15 @@ public class DiceScript : MonoBehaviour
     private GameObject _instanciedDice;
     private List<TMP_Text> _diceNums = new List<TMP_Text>();
 
-    public void SetupDice(Dice dice)
+    public static DiceScript Instance;
+
+    void Awake()
+    {
+        if(Instance != null && Instance != this) { Destroy(gameObject); return; }
+        Instance = this;
+    }
+
+    public void SetupDice(Dice dice, bool isNPC)
     {
         _isRotating = false;
 
@@ -181,18 +194,46 @@ public class DiceScript : MonoBehaviour
             _diceNums.Add(_instanciedDice.transform.GetChild(i).GetComponent<TMP_Text>());
         }
 
-        StartCoroutine(DiceRolling());
+        StartCoroutine(DiceRolling(isNPC));
     }
 
     void Update()
     {
-        
+        if (!_isRotating)
+            return;
+
+        _instanciedDice.transform.Rotate(Vector3.up * _rotSpeed, Space.Self);
+
+        Vector3 newAngle = new Vector3(0f, _instanciedDice.transform.rotation.y, 0f);
+
+        if (_isGoingToMaxRotX)
+        {
+            newAngle += Vector3.right * _rotSpeed;
+
+            if (_instanciedDice.transform.rotation.y > _maxRotX)
+                _isGoingToMaxRotX = false;
+        }
+        else
+        {
+            newAngle += Vector3.left * _rotSpeed;
+
+            if (_instanciedDice.transform.rotation.y <= _minRotX)
+                _isGoingToMaxRotX = true;
+
+        }
+
+        _instanciedDice.transform.rotation = new Quaternion(newAngle.x, newAngle.y, newAngle.z, 0f);
     }
 
-    private IEnumerator DiceRolling()
+    private IEnumerator DiceRolling(bool isNPC)
     {
         int randNumber = Random.Range(_minNum, _maxNum);
         int lastNumber = randNumber;
+
+        float npcTime = 0f;
+
+        if (isNPC)
+            npcTime = Random.Range(_minNpcTime, _maxNpcTime);
 
         SetDiceNums(randNumber);
 
@@ -200,7 +241,7 @@ public class DiceScript : MonoBehaviour
 
         _isRotating = true;
 
-        while (!InputHandler.instance.IsSpacebarTouched())
+        while ((!InputHandler.instance.IsSpacebarTouched() && !isNPC) || (timeElapsedNumChange < npcTime && isNPC))
         {
             if(timeElapsedNumChange < _numChangeSpeed)
             {
@@ -212,7 +253,7 @@ public class DiceScript : MonoBehaviour
 
                 do
                 {
-                    randNumber = Random.RandomRange(_minNum, _maxNum);
+                    randNumber = Random.Range(_minNum, _maxNum);
                     attemps++;
                 } while(randNumber == lastNumber && attemps < _maxChangeNumAttemps);
 
@@ -227,6 +268,7 @@ public class DiceScript : MonoBehaviour
         }
 
         _isRotating = false;
+        _isGoingToMaxRotX = false;
 
         StartCoroutine(ShowDiceNum(randNumber));
     }
@@ -242,7 +284,10 @@ public class DiceScript : MonoBehaviour
     // Debe mostrar el front con rotación 0, 0
     private IEnumerator ShowDiceNum(int diceNum)
     {
-        yield return null;
+        _instanciedDice.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+
+        yield return new WaitForSeconds(1.5f);
+        Destroy(_instanciedDice);
 
         GameController.instance.GetCharacterOfTurn().Move(diceNum);
     }

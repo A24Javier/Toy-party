@@ -156,6 +156,9 @@ public class GameController : MonoBehaviour
         Debug.Log("El charTurn es: " +  thisCharTurn);
         Debug.Log("El turno actual es de un jugador: " + isPlayer[thisCharTurn]);
 
+        if(DiceToUse == null)
+            DiceToUse = normalDice;
+
         // Dependiendo de si es un jugador o npc el movimiento y el llamado a funciones será distinto
         if (isPlayer[thisCharTurn])
         {
@@ -172,14 +175,11 @@ public class GameController : MonoBehaviour
                     UIManager.instance.ChangeCharacterUI(playerOfTurn);
                     UIManager.instance.SetActualCharacter(playerOfTurn);
 
-                    DiceToUse = normalDice;
                     UIManager.instance.ControlActionPanel(true);
 
                     // cam sigue jugador
                     camFollow.SetTarget(playerOfTurn.transform);
                     camFollow.SetBoxRotation(playerOfTurn.savedCameraRotationY);
-
-
                 }
 
             }
@@ -203,6 +203,9 @@ public class GameController : MonoBehaviour
                     camFollow.SetTarget(npcOfTurn.transform);
                     camFollow.SetBoxRotation(npcOfTurn.savedCameraRotationY);
 
+                    DiceScript.Instance.SetupDice(DiceToUse, true);
+
+                    /*
                     // Instanciamos el dado encima del npc
                     GameObject dice = Instantiate(dicePrefab, npcOfTurn.transform.position + (Vector3.up * (3 * npcOfTurn.transform.localScale.x)), Quaternion.identity);
 
@@ -210,22 +213,28 @@ public class GameController : MonoBehaviour
                     DiceScript diceScr = dice.GetComponentInChildren<DiceScript>();
                     DiceToUse = normalDice;
                     diceScr.ChangeScriptableDice(DiceToUse); // De momento solo con dados normales
+                    
 
                     // Hacemos que empiece la corutina del rolling del dado del NPC
                     StartCoroutine(diceScr.DiceRolling(npcOfTurn));
 
                     // Iniciamos la corutina para que el NPC pare el dado en algún momento
                     StartCoroutine(npcOfTurn.doRolling(diceScr));
+                    */
+
+
                 }
             }
         }
     }
 
+    
     public void ThrowPlayerDice()
     {
         UIManager.instance.ControlActionPanel(false);
         isPlayerRolling = true;
 
+        /*
         // Instanciamos el dado encima del jugador
         GameObject dice = Instantiate(dicePrefab, playerOfTurn.transform.position + (Vector3.up * (3 * playerOfTurn.transform.localScale.x)), Quaternion.identity);
 
@@ -234,7 +243,12 @@ public class GameController : MonoBehaviour
 
         // Hacemos que empiece la corutina del rolling del dado del jugador
         StartCoroutine(diceScr.DiceRolling(playerOfTurn));
+        */
+
+        DiceScript diceScr = FindFirstObjectByType<DiceScript>();
+        diceScr.SetupDice(DiceToUse, false);
     }
+    
 
     /// <summary>
     /// Función que se inicia cuando un turno debe terminar

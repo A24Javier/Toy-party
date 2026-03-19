@@ -13687,6 +13687,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a9fec058cc4dc441b54c4ac5db80ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1489692276
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1489692278}
+  - component: {fileID: 1489692277}
+  m_Layer: 0
+  m_Name: FoAD
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!114 &1489692277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489692276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dbddefb8adeb074cbe96cf74065c155, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _minRotX: -23.2
+  _maxRotX: 23.2
+  _rotSpeed: 1
+  _isGoingToMaxRotX: 0
+  _minNpcTime: 1.25
+  _maxNpcTime: 3
+  _maxChangeNumAttemps: 100
+  _upDistance: 0.22
+--- !u!4 &1489692278
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489692276}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1489867039 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 595684231098320376, guid: 6fcc5160f77530740b07e815f84e1ce5,
@@ -16275,8 +16327,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dbddefb8adeb074cbe96cf74065c155, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scriptableDice: {fileID: 11400000, guid: 3750882279889e345b122e3ab20dbd73, type: 2}
-  numberTxt: {fileID: 140247372}
+  _minRotX: 0
+  _maxRotX: 0
+  _rotSpeed: 0
+  _isGoingToMaxRotX: 0
+  _minNpcTime: 1.25
+  _maxNpcTime: 3
+  _maxChangeNumAttemps: 100
+  _upDistance: 1
 --- !u!65 &1798723839
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21524,3 +21582,4 @@ SceneRoots:
   - {fileID: 605337067}
   - {fileID: 2141705015}
   - {fileID: 1878328028}
+  - {fileID: 1489692278}
