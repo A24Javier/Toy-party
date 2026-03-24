@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad089e9a2dffddb43be2bd88f68f5e12, type: 3}
   m_Name: SixSeven_Dice
   m_EditorClassIdentifier: 
-  diceObject: {fileID: 1253218521591737602, guid: b6cc6c88e57594c46a6ee4849d0fabbd,
+  DiceObject: {fileID: 8618066680958892089, guid: d321d07eb4c1a9d47a549b81e8aac71f,
     type: 3}
-  changeNumSpeed: 0.1
-  minNumber: 6
-  maxNumber: 7
-  itemFunction: {fileID: 0}
+  ChangeNumSpeed: 0.33
+  MinNumber: 6
+  MaxNumber: 7
+  RotSpeedX: 1.5
+  RotSpeedY: 1.5
+  ItemFunction: {fileID: 0}

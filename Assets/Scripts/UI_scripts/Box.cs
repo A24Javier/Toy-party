@@ -22,7 +22,7 @@ public class Box : MonoBehaviour
         SpecialAnim
     }
 
-    public BoxType type { get; private set; }
+    public BoxType type;
     [SerializeField] private int coins = 3;
     [SerializeField] private List<Box> possiblesBoxes;
     [SerializeField] private Box lastBox;

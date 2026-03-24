@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using DG.Tweening;
-using Unity.VisualScripting;
 
 public class DiceScript : MonoBehaviour
 {
@@ -155,9 +153,9 @@ public class DiceScript : MonoBehaviour
     }*/
     #endregion
     [SerializeField] private float _minRotX, _maxRotX;
-    [SerializeField] private float _rotSpeed;
+    [SerializeField] private float _rotSpeedY, _rotSpeedX;
     private bool _isRotating;
-    [SerializeField] private bool _isGoingToMaxRotX = false;
+    [SerializeField] private float _maxRotXTime = 0.2f;
 
     [SerializeField] private float _minNpcTime = 1.25f;
     [SerializeField] private float _maxNpcTime = 3f;
@@ -180,20 +178,24 @@ public class DiceScript : MonoBehaviour
 
     public void SetupDice(Dice dice, bool isNPC)
     {
-        _isRotating = false;
+        _minNum = dice.MinNumber;
+        _maxNum = dice.MaxNumber+1;
+        _numChangeSpeed = dice.ChangeNumSpeed;
 
-        _minNum = dice.minNumber;
-        _maxNum = dice.maxNumber+1;
-        _numChangeSpeed = dice.changeNumSpeed;
+        _rotSpeedX = dice.RotSpeedX;
+        _rotSpeedY = dice.RotSpeedY;
 
         Vector3 diceSpawnPos = GameController.instance.GetCharacterOfTurn().transform.position + (Vector3.up * _upDistance);
-        _instanciedDice = Instantiate(dice.diceObject, diceSpawnPos, Quaternion.identity, transform);
+        _instanciedDice = Instantiate(dice.DiceObject, diceSpawnPos, Quaternion.identity, transform);
 
         for(int i = 0; i < _instanciedDice.transform.childCount; i++)
         {
             _diceNums.Add(_instanciedDice.transform.GetChild(i).GetComponent<TMP_Text>());
         }
 
+        _isRotating = true;
+
+        StartCoroutine(DiceXRotation());
         StartCoroutine(DiceRolling(isNPC));
     }
 
@@ -202,27 +204,19 @@ public class DiceScript : MonoBehaviour
         if (!_isRotating)
             return;
 
-        _instanciedDice.transform.Rotate(Vector3.up * _rotSpeed, Space.Self);
+        _instanciedDice.transform.Rotate(Vector3.up * _rotSpeedY, Space.Self);
+        _instanciedDice.transform.Rotate(Vector3.left * _rotSpeedX, Space.Self);
 
-        Vector3 newAngle = new Vector3(0f, _instanciedDice.transform.rotation.y, 0f);
+    }
 
-        if (_isGoingToMaxRotX)
+    
+    private IEnumerator DiceXRotation()
+    {
+        while (_isRotating)
         {
-            newAngle += Vector3.right * _rotSpeed;
-
-            if (_instanciedDice.transform.rotation.y > _maxRotX)
-                _isGoingToMaxRotX = false;
+            _rotSpeedX *= -1;
+            yield return new WaitForSeconds(_maxRotXTime);
         }
-        else
-        {
-            newAngle += Vector3.left * _rotSpeed;
-
-            if (_instanciedDice.transform.rotation.y <= _minRotX)
-                _isGoingToMaxRotX = true;
-
-        }
-
-        _instanciedDice.transform.rotation = new Quaternion(newAngle.x, newAngle.y, newAngle.z, 0f);
     }
 
     private IEnumerator DiceRolling(bool isNPC)
@@ -238,11 +232,14 @@ public class DiceScript : MonoBehaviour
         SetDiceNums(randNumber);
 
         float timeElapsedNumChange = 0f;
+        float timeNpcTime = 0f;
 
         _isRotating = true;
 
-        while ((!InputHandler.instance.IsSpacebarTouched() && !isNPC) || (timeElapsedNumChange < npcTime && isNPC))
+        while (isNPC ? timeNpcTime < npcTime : !InputHandler.instance.IsSpacebarTouched())
         {
+            timeNpcTime += Time.deltaTime;
+
             if(timeElapsedNumChange < _numChangeSpeed)
             {
                 timeElapsedNumChange += Time.deltaTime;
@@ -268,7 +265,6 @@ public class DiceScript : MonoBehaviour
         }
 
         _isRotating = false;
-        _isGoingToMaxRotX = false;
 
         StartCoroutine(ShowDiceNum(randNumber));
     }
@@ -281,7 +277,6 @@ public class DiceScript : MonoBehaviour
         }
     }
 
-    // Debe mostrar el front con rotación 0, 0
     private IEnumerator ShowDiceNum(int diceNum)
     {
         _instanciedDice.transform.rotation = Quaternion.Euler(0f, 0f, 0f);

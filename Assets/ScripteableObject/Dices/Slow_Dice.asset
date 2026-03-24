@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad089e9a2dffddb43be2bd88f68f5e12, type: 3}
   m_Name: Slow_Dice
   m_EditorClassIdentifier: 
-  diceMesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
-  diceMat: {fileID: 0}
-  changeNumSpeed: 0.5
-  minNumber: 1
-  maxNumber: 6
-  itemFunction: {fileID: 0}
+  DiceObject: {fileID: 8618066680958892089, guid: bd9a5a1141a94444f821a68407f67118,
+    type: 3}
+  ChangeNumSpeed: 0.66
+  MinNumber: 1
+  MaxNumber: 6
+  RotSpeedX: 1
+  RotSpeedY: 1
+  ItemFunction: {fileID: 0}

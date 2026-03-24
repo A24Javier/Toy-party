@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad089e9a2dffddb43be2bd88f68f5e12, type: 3}
   m_Name: DnD_Dice
   m_EditorClassIdentifier: 
-  diceObject: {fileID: 0}
-  changeNumSpeed: 0.1
-  minNumber: 1
-  maxNumber: 20
-  itemFunction: {fileID: 0}
+  DiceObject: {fileID: 1253218521591737602, guid: b6cc6c88e57594c46a6ee4849d0fabbd,
+    type: 3}
+  ChangeNumSpeed: 0.33
+  MinNumber: 1
+  MaxNumber: 20
+  RotSpeedX: 2
+  RotSpeedY: 2
+  ItemFunction: {fileID: 0}

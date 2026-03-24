@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad089e9a2dffddb43be2bd88f68f5e12, type: 3}
   m_Name: Election_Dice
   m_EditorClassIdentifier: 
-  diceMesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
-  diceMat: {fileID: 0}
-  changeNumSpeed: 1
-  minNumber: 1
-  maxNumber: 6
-  itemFunction: {fileID: 0}
+  DiceObject: {fileID: 8618066680958892089, guid: e0de4e909614cbc47962e33951c76670,
+    type: 3}
+  ChangeNumSpeed: 1.25
+  MinNumber: 1
+  MaxNumber: 6
+  RotSpeedX: 0.5
+  RotSpeedY: 0.5
+  ItemFunction: {fileID: 0}

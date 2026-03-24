@@ -1,18 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = ("Dice/Create Dice"))]
 public class Dice : ScriptableObject
 {
     [Header("Dice rendering")]
-    public GameObject diceObject;
+    public GameObject DiceObject;
 
     [Header("Dice values")]
-    public float changeNumSpeed;
-    public int minNumber;
-    public int maxNumber;
+    public float ChangeNumSpeed;
+    public int MinNumber;
+    public int MaxNumber;
+
+    [Header("Dice rotation")]
+    public float RotSpeedX;
+    public float RotSpeedY;
 
     [Header("Dice function")]
-    public ItemFunction itemFunction;
+    public ItemFunction ItemFunction;
 }
