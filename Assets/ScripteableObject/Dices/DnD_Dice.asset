@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad089e9a2dffddb43be2bd88f68f5e12, type: 3}
   m_Name: DnD_Dice
   m_EditorClassIdentifier: 
-  DiceObject: {fileID: 1253218521591737602, guid: b6cc6c88e57594c46a6ee4849d0fabbd,
+  DiceObject: {fileID: 6919904473301445068, guid: 74c2ee83f44959a4097942a91eedc6cd,
     type: 3}
   ChangeNumSpeed: 0.33
   MinNumber: 1

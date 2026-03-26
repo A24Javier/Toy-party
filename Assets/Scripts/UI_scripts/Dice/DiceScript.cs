@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using DG.Tweening;
 
 public class DiceScript : MonoBehaviour
 {
@@ -279,9 +280,15 @@ public class DiceScript : MonoBehaviour
 
     private IEnumerator ShowDiceNum(int diceNum)
     {
-        _instanciedDice.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        //_instanciedDice.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
 
-        yield return new WaitForSeconds(1.5f);
+        yield return _instanciedDice.transform.DORotate(Vector3.zero, 0.2f);
+        GetComponentInChildren<Animator>().SetBool("show", true);
+
+        // Damos Play al confeti
+
+        yield return new WaitForSeconds(3f);
+
         Destroy(_instanciedDice);
 
         GameController.instance.GetCharacterOfTurn().Move(diceNum);

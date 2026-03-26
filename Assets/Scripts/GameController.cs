@@ -156,8 +156,7 @@ public class GameController : MonoBehaviour
         Debug.Log("El charTurn es: " +  thisCharTurn);
         Debug.Log("El turno actual es de un jugador: " + isPlayer[thisCharTurn]);
 
-        if(DiceToUse == null)
-            DiceToUse = normalDice;
+        DiceToUse = normalDice;
 
         // Dependiendo de si es un jugador o npc el movimiento y el llamado a funciones será distinto
         if (isPlayer[thisCharTurn])
