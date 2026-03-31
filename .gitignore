@@ -79,6 +79,9 @@ crashlytics-build.properties
 # TestRunner generated files
 InitTestScene*.unity*
 
+# FMOD cache (NO versionar)
+Assets/Plugins/FMOD/Cache/
+
 # Addressables default ignores, before user customizations
 /ServerData
 /[Aa]ssets/StreamingAssets/aa*
