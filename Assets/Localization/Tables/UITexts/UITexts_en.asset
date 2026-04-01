@@ -94,6 +94,30 @@ MonoBehaviour:
     m_Localized: Shop
     m_Metadata:
       m_Items: []
+  - m_Id: 20756564137451520
+    m_Localized: Stats
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20756857629679616
+    m_Localized: 'Playtime:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20757060977926144
+    m_Localized: 'Games played:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20758941846446080
+    m_Localized: Minigames Played
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20759313319174144
+    m_Localized: 'Mini-games won:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20759610166845440
+    m_Localized: Losed mini-games
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

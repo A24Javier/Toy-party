@@ -10,6 +10,10 @@ public class Stats
 {
     public float Playtime;
     public int GamesPlayed;
+
+    public int MinigamesPlayed;
+    public int MinigamesWon;
+    public int MinigamesLost;
 }
 
 public class PlayerStats : MonoBehaviour
@@ -70,11 +74,14 @@ public class PlayerStats : MonoBehaviour
                 FileStream stream = new FileStream(path, FileMode.Open);
                 Stats data = formatter.Deserialize(stream) as Stats;
                 stream.Close();
+
+                Debug.Log($"Playtime: {data.Playtime}, GamesPlayed: {data.GamesPlayed}");
+
                 return data;
             }
             catch(Exception e)
             {
-                Debug.Log("Archivo corrupto, generamos uno nuevo");
+                Debug.LogError($"Archivo corrupto, generamos uno nuevo.\nException: {e}");
                 return new Stats();
             }
             
@@ -88,13 +95,24 @@ public class PlayerStats : MonoBehaviour
 
     public void SaveData()
     {
-        BinaryFormatter formatter = new BinaryFormatter();
         string path = Path.Combine(Application.persistentDataPath, _statsFilename);
         FileStream stream = new FileStream(path, FileMode.Create);
+        try
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            formatter.Serialize(stream, _stats);
 
-        formatter.Serialize(stream, _stats);
-        stream.Close();
-        Debug.Log("Stats saved correctly");
+            Debug.Log("Stats saved correctly");
+        }
+        catch(Exception e)
+        {
+            Debug.LogError($"Error al guardar archivo. Exception: {e}");
+        }
+        finally
+        {
+            stream.Close();
+        }
+
     }
 
     public void OneGameMore()

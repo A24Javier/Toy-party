@@ -95,6 +95,30 @@ MonoBehaviour:
     m_Localized: Tienda
     m_Metadata:
       m_Items: []
+  - m_Id: 20756564137451520
+    m_Localized: "Estad\xEDsticas"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20756857629679616
+    m_Localized: 'Tiempo de juego:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20757060977926144
+    m_Localized: 'Partidas jugadas:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20758941846446080
+    m_Localized: 'Minijuegos jugados:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20759313319174144
+    m_Localized: Minijuegos jugados
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20759610166845440
+    m_Localized: 'Minijuegos perdidos:'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -91,6 +91,30 @@ MonoBehaviour:
     m_Key: UI.Shop.Title
     m_Metadata:
       m_Items: []
+  - m_Id: 20756564137451520
+    m_Key: UI.Stats.Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20756857629679616
+    m_Key: UI.Stats.Playtime
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20757060977926144
+    m_Key: UI.Stats.GamesPlayed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20758941846446080
+    m_Key: UI.Stats.MinigamesPlayed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20759313319174144
+    m_Key: UI.Stats.MinigamesWon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20759610166845440
+    m_Key: UI.Stats.MinigamesLose
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

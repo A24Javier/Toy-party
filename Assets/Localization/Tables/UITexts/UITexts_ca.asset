@@ -95,6 +95,30 @@ MonoBehaviour:
     m_Localized: Botiga
     m_Metadata:
       m_Items: []
+  - m_Id: 20756564137451520
+    m_Localized: "Estad\xEDstiques"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20756857629679616
+    m_Localized: 'Temps de joc:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20757060977926144
+    m_Localized: 'Jocs jugats:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20758941846446080
+    m_Localized: 'Minijocs jugats:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20759313319174144
+    m_Localized: 'Minijocs jugats:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20759610166845440
+    m_Localized: 'Minijocs perduts:'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
