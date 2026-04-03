@@ -115,6 +115,10 @@ MonoBehaviour:
     m_Key: UI.Stats.MinigamesLose
     m_Metadata:
       m_Items: []
+  - m_Id: 21412004017971200
+    m_Key: UI.Stats.Seconds
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

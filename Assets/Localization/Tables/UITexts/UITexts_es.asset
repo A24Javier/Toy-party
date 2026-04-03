@@ -112,11 +112,15 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 20759313319174144
-    m_Localized: Minijuegos jugados
+    m_Localized: 'Minijuegos ganados:'
     m_Metadata:
       m_Items: []
   - m_Id: 20759610166845440
     m_Localized: 'Minijuegos perdidos:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21412004017971200
+    m_Localized: seg
     m_Metadata:
       m_Items: []
   references:

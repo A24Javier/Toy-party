@@ -18,7 +18,7 @@ public class Stats
 
 public class PlayerStats : MonoBehaviour
 {
-    private Stats _stats;
+    public Stats PStats { get; private set; }
 
     [SerializeField]
     [Tooltip("Time that will be doing autosave (Provide time in seconds)")]
@@ -42,7 +42,7 @@ public class PlayerStats : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         // Carga el archivo de guardado en caso de tener
-        _stats = LoadData();
+        PStats = LoadData();
     }
 
     private void OnApplicationQuit()
@@ -52,7 +52,7 @@ public class PlayerStats : MonoBehaviour
 
     void Update()
     {
-        _stats.Playtime += Time.unscaledDeltaTime;
+        PStats.Playtime += Time.unscaledDeltaTime;
         _autosaveElapsedTime += Time.unscaledDeltaTime;
 
         if(_autosaveElapsedTime >= _autosaveTime)
@@ -100,7 +100,7 @@ public class PlayerStats : MonoBehaviour
         try
         {
             BinaryFormatter formatter = new BinaryFormatter();
-            formatter.Serialize(stream, _stats);
+            formatter.Serialize(stream, PStats);
 
             Debug.Log("Stats saved correctly");
         }
@@ -117,6 +117,6 @@ public class PlayerStats : MonoBehaviour
 
     public void OneGameMore()
     {
-        _stats.GamesPlayed++;
+        PStats.GamesPlayed++;
     }
 }

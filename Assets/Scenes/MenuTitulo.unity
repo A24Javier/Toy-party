@@ -783,7 +783,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 128448351}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1719302845}
+        m_TargetAssemblyTypeName: UI_StatsInfo, Assembly-CSharp
+        m_MethodName: CloseStatsInfo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &128448351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2617,7 +2629,6 @@ GameObject:
   - component: {fileID: 598140601}
   - component: {fileID: 598140604}
   - component: {fileID: 598140603}
-  - component: {fileID: 598140602}
   m_Layer: 5
   m_Name: LostMinigames_text
   m_TagString: Untagged
@@ -2644,46 +2655,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
---- !u!114 &598140602
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 598140600}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_StringReference:
-    m_TableReference:
-      m_TableCollectionName: GUID:b1a26859b342c9b41a15a4b58d54c8fa
-    m_TableEntryReference:
-      m_KeyId: 20756857629679616
-      m_Key: 
-    m_FallbackState: 0
-    m_WaitForCompletion: 0
-    m_LocalVariables: []
-  m_FormatArguments: []
-  m_UpdateString:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 598140603}
-        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
-        m_MethodName: set_text
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  references:
-    version: 2
-    RefIds: []
 --- !u!114 &598140603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2793,6 +2764,7 @@ GameObject:
   - component: {fileID: 647449549}
   - component: {fileID: 647449551}
   - component: {fileID: 647449550}
+  - component: {fileID: 647449552}
   m_Layer: 5
   m_Name: PanelStats
   m_TagString: Untagged
@@ -2860,6 +2832,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 647449548}
   m_CullTransparentMesh: 1
+--- !u!225 &647449552
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 647449548}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &651899735
 GameObject:
   m_ObjectHideFlags: 0
@@ -4553,7 +4537,6 @@ GameObject:
   - component: {fileID: 1098299699}
   - component: {fileID: 1098299702}
   - component: {fileID: 1098299701}
-  - component: {fileID: 1098299700}
   m_Layer: 5
   m_Name: GamesPlayed_text
   m_TagString: Untagged
@@ -4580,46 +4563,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
---- !u!114 &1098299700
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1098299698}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_StringReference:
-    m_TableReference:
-      m_TableCollectionName: GUID:b1a26859b342c9b41a15a4b58d54c8fa
-    m_TableEntryReference:
-      m_KeyId: 20756857629679616
-      m_Key: 
-    m_FallbackState: 0
-    m_WaitForCompletion: 0
-    m_LocalVariables: []
-  m_FormatArguments: []
-  m_UpdateString:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1098299701}
-        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
-        m_MethodName: set_text
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  references:
-    version: 2
-    RefIds: []
 --- !u!114 &1098299701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7217,7 +7160,6 @@ GameObject:
   - component: {fileID: 1702437010}
   - component: {fileID: 1702437013}
   - component: {fileID: 1702437012}
-  - component: {fileID: 1702437011}
   m_Layer: 5
   m_Name: MinigamesPlayed_text
   m_TagString: Untagged
@@ -7244,46 +7186,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
---- !u!114 &1702437011
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1702437009}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_StringReference:
-    m_TableReference:
-      m_TableCollectionName: GUID:b1a26859b342c9b41a15a4b58d54c8fa
-    m_TableEntryReference:
-      m_KeyId: 20756857629679616
-      m_Key: 
-    m_FallbackState: 0
-    m_WaitForCompletion: 0
-    m_LocalVariables: []
-  m_FormatArguments: []
-  m_UpdateString:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1702437012}
-        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
-        m_MethodName: set_text
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  references:
-    version: 2
-    RefIds: []
 --- !u!114 &1702437012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7769,7 +7671,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UITable:
     m_TableReference:
-      m_TableCollectionName: 
+      m_TableCollectionName: GUID:b1a26859b342c9b41a15a4b58d54c8fa
+  _canvasGroup: {fileID: 647449552}
+  _playtimeTextValue: {fileID: 1753596039}
+  _gamesPlayedTextValue: {fileID: 1098299701}
+  _minigamesPlayedTextValue: {fileID: 1702437012}
+  _minigamesWonTextValue: {fileID: 2127210175}
+  _minigamesLostTextValue: {fileID: 598140603}
 --- !u!1 &1753596036
 GameObject:
   m_ObjectHideFlags: 0
@@ -7781,7 +7689,6 @@ GameObject:
   - component: {fileID: 1753596037}
   - component: {fileID: 1753596040}
   - component: {fileID: 1753596039}
-  - component: {fileID: 1753596038}
   m_Layer: 5
   m_Name: Playtime_text
   m_TagString: Untagged
@@ -7808,46 +7715,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
---- !u!114 &1753596038
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1753596036}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_StringReference:
-    m_TableReference:
-      m_TableCollectionName: GUID:b1a26859b342c9b41a15a4b58d54c8fa
-    m_TableEntryReference:
-      m_KeyId: 20756857629679616
-      m_Key: 
-    m_FallbackState: 0
-    m_WaitForCompletion: 0
-    m_LocalVariables: []
-  m_FormatArguments: []
-  m_UpdateString:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1753596039}
-        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
-        m_MethodName: set_text
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  references:
-    version: 2
-    RefIds: []
 --- !u!114 &1753596039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9408,7 +9275,6 @@ GameObject:
   - component: {fileID: 2127210173}
   - component: {fileID: 2127210176}
   - component: {fileID: 2127210175}
-  - component: {fileID: 2127210174}
   m_Layer: 5
   m_Name: MinigamesWon_text
   m_TagString: Untagged
@@ -9435,46 +9301,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
---- !u!114 &2127210174
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2127210172}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_StringReference:
-    m_TableReference:
-      m_TableCollectionName: GUID:b1a26859b342c9b41a15a4b58d54c8fa
-    m_TableEntryReference:
-      m_KeyId: 20756857629679616
-      m_Key: 
-    m_FallbackState: 0
-    m_WaitForCompletion: 0
-    m_LocalVariables: []
-  m_FormatArguments: []
-  m_UpdateString:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2127210175}
-        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
-        m_MethodName: set_text
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  references:
-    version: 2
-    RefIds: []
 --- !u!114 &2127210175
 MonoBehaviour:
   m_ObjectHideFlags: 0
