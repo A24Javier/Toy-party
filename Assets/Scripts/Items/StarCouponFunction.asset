@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: StarCouponFunction
   m_EditorClassIdentifier: 
   itemSpr: {fileID: 21300000, guid: 191818769624ace488b687e563ed7dad, type: 3}
-  itemName: Star Coupon
+  itemKeyName: Item.StarCoupon
+  itemName: 
+  itemPrice: 0
   itemFunction: {fileID: 11400000, guid: 02b28d1800a16394b82ea50989f4ad67, type: 2}
-  inventoryAssociated: {fileID: 0}

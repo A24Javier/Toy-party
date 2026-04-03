@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SlowDiceItem
   m_EditorClassIdentifier: 
   itemSpr: {fileID: 21300000, guid: 2229209b06717a44391697d904b61437, type: 3}
+  itemKeyName: Item.SlowDice
   itemName: Slow Dice
   itemPrice: 6
   itemFunction: {fileID: 11400000, guid: 66cbe0ff78ef34247ab3274520a8f827, type: 2}

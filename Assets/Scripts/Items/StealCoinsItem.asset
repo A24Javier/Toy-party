@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: StealCoinsItem
   m_EditorClassIdentifier: 
   itemSpr: {fileID: 21300000, guid: dc915b2aa8b85d64fb65d03a123cf945, type: 3}
-  itemName: Vacuum cleaner
+  itemKeyName: Item.VacuumCleaner
+  itemName: 
+  itemPrice: 0
   itemFunction: {fileID: 11400000, guid: 2a185001e6676604493f8c1f22b8d90d, type: 2}
-  inventoryAssociated: {fileID: 0}

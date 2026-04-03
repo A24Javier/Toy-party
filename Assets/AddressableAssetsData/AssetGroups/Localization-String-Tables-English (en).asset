@@ -17,6 +17,13 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: c266688e03cacf843b278d5c3cbbab1a
   m_SerializeEntries:
+  - m_GUID: 3b89e5552bb0cc248b4b063da50504e8
+    m_Address: ItemsTexts_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c0e1b1e64e951434b80f96a8cacae828
     m_Address: UITexts_en
     m_ReadOnly: 1

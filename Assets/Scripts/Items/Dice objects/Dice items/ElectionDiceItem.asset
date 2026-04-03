@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: ElectionDiceItem
   m_EditorClassIdentifier: 
   itemSpr: {fileID: 21300000, guid: 444d12a89f72e7e41aa888e4d36eaa52, type: 3}
+  itemKeyName: Item.ElectionDice
   itemName: ElectionDice
   itemPrice: 8
   itemFunction: {fileID: 11400000, guid: 87c480d8ed556bb48b82c92b665c70e6, type: 2}

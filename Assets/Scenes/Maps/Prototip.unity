@@ -5230,6 +5230,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 1984089991}
+  FristClick:
+    m_PersistentCalls:
+      m_Calls: []
+  SecondClick:
+    m_PersistentCalls:
+      m_Calls: []
+  config: {fileID: 0}
+  play: {fileID: 0}
+  otro: {fileID: 0}
 --- !u!4 &605337067
 Transform:
   m_ObjectHideFlags: 0
@@ -13648,6 +13657,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 480d66f6719647b46b55d246dc38c879, type: 2}
   - {fileID: 11400000, guid: 10e23092a7252a54688bd5099c1be899, type: 2}
   _extraItemPrice: 0
+  ItemTable:
+    m_TableReference:
+      m_TableCollectionName: GUID:e93c0a20c3100744a96dc1cde5fb00e5
 --- !u!1 &1452532309 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5286747667465420555, guid: ddef60cf5ae51f945a691dc2732ba762,

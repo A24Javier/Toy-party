@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: TP_OtherPlayer
   m_EditorClassIdentifier: 
   itemSpr: {fileID: 21300000, guid: 643831b410774c440a54032f44424236, type: 3}
+  itemKeyName: Item.Portal
   itemName: Portal
   itemPrice: 12
   itemFunction: {fileID: 11400000, guid: 215c963a6f00c02429498baee2b5eefc, type: 2}
