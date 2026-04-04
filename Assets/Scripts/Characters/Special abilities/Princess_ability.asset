@@ -12,13 +12,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0c1718265556544e9557625fc221e8b, type: 3}
   m_Name: Princess_ability
   m_EditorClassIdentifier: 
-  AbilityName: Rainbow Trap
-  Description: By paying a set number of coins, this character can place sticky traps
-    that latch onto any player who lands on them, immediately ending their turn.
-    Each trap lasts for two turns, and only up to two can exist at the same time.
+  AbilityLocalName:
+    m_TableReference:
+      m_TableCollectionName: GUID:94d12fa6e21310e43a7f5389eb8227b9
+    m_TableEntryReference:
+      m_KeyId: 16646910222336
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  _abilityName: Rainbow trap
+  AbilityDescrLocal:
+    m_TableReference:
+      m_TableCollectionName: GUID:94d12fa6e21310e43a7f5389eb8227b9
+    m_TableEntryReference:
+      m_KeyId: 1088349249536
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  _abilityDescription: By paying a set number of coins, this character can place
+    sticky traps that latch onto any player who lands on them, immediately ending
+    their turn. Each trap lasts for two turns, and only up to two can exist at the
+    same time.
   AbilitySprite: {fileID: 21300000, guid: 25697d1010be42c4c862c43d6d862759, type: 3}
   BackgroundColor: {r: 0.39607844, g: 0.73333335, b: 0.77254903, a: 1}
   PayForUse: 1
   AbilityPrice: 10
   PassiveBuffs: []
   AbilityFunction: {fileID: 11400000, guid: 00c29bf8308a2464c9cd4ca5bd9166f8, type: 2}
+  references:
+    version: 2
+    RefIds: []

@@ -13,7 +13,17 @@ MonoBehaviour:
   m_Name: DnDDiceItem
   m_EditorClassIdentifier: 
   itemSpr: {fileID: 21300000, guid: ac63151b0b7e1a047a8d7b9b7047833a, type: 3}
-  itemKeyName: Item.D20Dice
-  itemName: D20 Dice
+  ItemLocalName:
+    m_TableReference:
+      m_TableCollectionName: GUID:e93c0a20c3100744a96dc1cde5fb00e5
+    m_TableEntryReference:
+      m_KeyId: 4038966616064
+      m_Key: 
+    m_FallbackState: 1
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   itemPrice: 12
   itemFunction: {fileID: 11400000, guid: 3b498bfe95af1c94d819d80233a58a87, type: 2}
+  references:
+    version: 2
+    RefIds: []

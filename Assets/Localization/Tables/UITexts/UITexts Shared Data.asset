@@ -119,6 +119,14 @@ MonoBehaviour:
     m_Key: UI.Stats.Seconds
     m_Metadata:
       m_Items: []
+  - m_Id: 21764701204226048
+    m_Key: UI.PlayerInfo.Coins
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21764783760711680
+    m_Key: UI.PlayerInfo.Stars
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

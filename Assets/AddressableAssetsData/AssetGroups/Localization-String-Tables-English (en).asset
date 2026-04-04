@@ -24,6 +24,13 @@ MonoBehaviour:
     - Locale-en
     - Preload
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 494eae3612be7264d9d014b8d9831d97
+    m_Address: CharacterTexts_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c0e1b1e64e951434b80f96a8cacae828
     m_Address: UITexts_en
     m_ReadOnly: 1

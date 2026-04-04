@@ -14,6 +14,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterMesh: {fileID: 0}
   characterAbility: {fileID: 11400000, guid: e70277f0ef42e53448d840290a071710, type: 2}
-  characterName: Soldier
-  characterDescription: 
+  CharNameTraduction:
+    m_TableReference:
+      m_TableCollectionName: GUID:94d12fa6e21310e43a7f5389eb8227b9
+    m_TableEntryReference:
+      m_KeyId: 2539838480384
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  CharDescrTraduction:
+    m_TableReference:
+      m_TableCollectionName: GUID:94d12fa6e21310e43a7f5389eb8227b9
+    m_TableEntryReference:
+      m_KeyId: 33417046237184
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  _characterName: Soldier Bryan
+  _characterDescription: TBD
   characterSprite: {fileID: 21300000, guid: 2340e80fba76a6e42af2cb6f6c4468a4, type: 3}
+  references:
+    version: 2
+    RefIds: []

@@ -7669,15 +7669,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47d2ec8e07d1f414fbe06232e2003667, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UITable:
+  _canvasGroup: {fileID: 647449552}
+  _secondsTraduc:
     m_TableReference:
       m_TableCollectionName: GUID:b1a26859b342c9b41a15a4b58d54c8fa
-  _canvasGroup: {fileID: 647449552}
+    m_TableEntryReference:
+      m_KeyId: 21412004017971200
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  _gamesPlayedTraduc:
+    m_TableReference:
+      m_TableCollectionName: GUID:b1a26859b342c9b41a15a4b58d54c8fa
+    m_TableEntryReference:
+      m_KeyId: 20757060977926144
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  _minigamesPlayedTraduc:
+    m_TableReference:
+      m_TableCollectionName: GUID:b1a26859b342c9b41a15a4b58d54c8fa
+    m_TableEntryReference:
+      m_KeyId: 20758941846446080
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  _minigamesWonTraduc:
+    m_TableReference:
+      m_TableCollectionName: GUID:b1a26859b342c9b41a15a4b58d54c8fa
+    m_TableEntryReference:
+      m_KeyId: 20759313319174144
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  _minigamesLostTraduc:
+    m_TableReference:
+      m_TableCollectionName: GUID:b1a26859b342c9b41a15a4b58d54c8fa
+    m_TableEntryReference:
+      m_KeyId: 20759610166845440
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   _playtimeTextValue: {fileID: 1753596039}
   _gamesPlayedTextValue: {fileID: 1098299701}
   _minigamesPlayedTextValue: {fileID: 1702437012}
   _minigamesWonTextValue: {fileID: 2127210175}
   _minigamesLostTextValue: {fileID: 598140603}
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &1753596036
 GameObject:
   m_ObjectHideFlags: 0

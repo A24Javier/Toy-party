@@ -46,7 +46,7 @@ public class ShopManager : MonoBehaviour
 
             itemButton.transform.GetChild(1).GetComponent<TMP_Text>().SetText(item.itemPrice.ToString("0"));
             itemButton.transform.GetChild(2).GetComponent<Image>().sprite = item.itemSpr;
-            itemButton.transform.GetChild(3).GetComponent<TMP_Text>().SetText(item.itemName);
+            itemButton.transform.GetChild(3).GetComponent<TMP_Text>().SetText(item.ItemName);
 
             list.Add(itemButton);
         }

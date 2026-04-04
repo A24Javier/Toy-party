@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Events;
-using UnityEngine.TextCore.Text;
 using System;
-using System.IO;
 using System.Linq;
 using UnityEngine.SceneManagement;
+using UnityEngine.Localization;
 
 public class UIManager : MonoBehaviour
 {
@@ -16,7 +14,10 @@ public class UIManager : MonoBehaviour
 
     // Elementos de la UI
     [Header("Elementos de la UI")]
+    [SerializeField] private LocalizedString coinsLocal;
     [SerializeField] private TMP_Text characterTextCoins;
+
+    [SerializeField] private LocalizedString starsLocal;
     [SerializeField] private TMP_Text characterTextStars;
     [SerializeField] private Image characterImage;
 
@@ -187,8 +188,12 @@ public class UIManager : MonoBehaviour
 
     public void ChangeCharacterUI(Character character)
     {
-        characterTextCoins.text = character.GetCoins().ToString("Coins: 0");
-        characterTextStars.text = character.GetStars().ToString("Stars: 0");
+        string coinsTraduction = coinsLocal.GetLocalizedString();
+        characterTextCoins.text = string.Concat(coinsTraduction, character.GetCoins());
+
+        string starsTraduction = starsLocal.GetLocalizedString();
+        characterTextStars.text = string.Concat(starsTraduction, character.GetStars());
+
         characterImage.sprite = character.GetCharImage();
     }
 
@@ -247,7 +252,7 @@ public class UIManager : MonoBehaviour
         
         for(int i = 0; i < character.GetInventory().GetTotalObjLoaded(); i++)
         {
-            if(character.GetInventory().GetItem(i).itemName == "Star Coupon")
+            if(character.GetInventory().GetItem(i).ItemName == "Star Coupon")
             {
                 textoPrecioEstrella.text = precio.ToString("Price: Star Coupon");
                 canBuyStar = true;
@@ -437,9 +442,15 @@ public class UIManager : MonoBehaviour
         {
             if (itemsButtons[i].image.sprite == nullObjSpr)
             {
-                Debug.Log($"Button events: {itemsButtons[i].onClick.GetPersistentEventCount()}, newItem name: {newItem.itemName}, i = {i} ");
+                Debug.Log($"Button events: {itemsButtons[i].onClick.GetPersistentEventCount()}, newItem name: {newItem.ItemName}, i = {i} ");
                 itemsButtons[i].image.sprite = newItem.itemSpr;
-                itemsButtons[i].onClick.AddListener(delegate { newItem.itemFunction.UseItem(); if (newItem.itemName != "Star Coupon") { DeleteItem(i); } });
+                itemsButtons[i].onClick.AddListener(delegate { 
+                    newItem.itemFunction.UseItem();
+                    if (newItem.ItemName != "Star Coupon" && newItem.ItemName != "Cupón estrella" && newItem.ItemName != "Cupó estrella")
+                    {
+                        DeleteItem(i);
+                    }
+                });
                 break;
             }
         }

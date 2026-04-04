@@ -12,13 +12,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0c1718265556544e9557625fc221e8b, type: 3}
   m_Name: MsPage_ability
   m_EditorClassIdentifier: 
-  AbilityName: Magic Drawing
-  Description: 'Pay coins to activate. Ms. Page draws with her magic pencil and triggers
-    one random effect: gain 4 coins, send an opponent backward, or warp to any space
-    you choose.'
+  AbilityLocalName:
+    m_TableReference:
+      m_TableCollectionName: GUID:94d12fa6e21310e43a7f5389eb8227b9
+    m_TableEntryReference:
+      m_KeyId: 16500927471616
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  _abilityName: Magic Drawing
+  AbilityDescrLocal:
+    m_TableReference:
+      m_TableCollectionName: GUID:94d12fa6e21310e43a7f5389eb8227b9
+    m_TableEntryReference:
+      m_KeyId: 796530548736
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  _abilityDescription: 'Pay coins to activate. Ms. Page draws with her magic pencil
+    and triggers one random effect: gain 4 coins, send an opponent backward, or warp
+    to any space you choose.'
   AbilitySprite: {fileID: 21300000, guid: f6a5c5cb750c3424b8e7daa1e35b8aed, type: 3}
   BackgroundColor: {r: 0.39607844, g: 0.73333335, b: 0.77254903, a: 1}
   PayForUse: 1
   AbilityPrice: 7
   PassiveBuffs: []
   AbilityFunction: {fileID: 11400000, guid: 3d0093a17266d3d4ba4a3f08c4800389, type: 2}
+  references:
+    version: 2
+    RefIds: []

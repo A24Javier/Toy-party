@@ -13,7 +13,28 @@ MonoBehaviour:
   m_Name: Robert
   m_EditorClassIdentifier: 
   characterMesh: {fileID: 0}
-  characterAbility: {fileID: 11400000, guid: 7e623d4aadbbe7f428c5e68d605c79af, type: 2}
-  characterName: Robert
-  characterDescription: 
+  characterAbility: {fileID: 11400000, guid: 09d00b8d0d63fce489b57bcf8dd90a86, type: 2}
+  CharNameTraduction:
+    m_TableReference:
+      m_TableCollectionName: GUID:94d12fa6e21310e43a7f5389eb8227b9
+    m_TableEntryReference:
+      m_KeyId: 2454555697152
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  CharDescrTraduction:
+    m_TableReference:
+      m_TableCollectionName: GUID:94d12fa6e21310e43a7f5389eb8227b9
+    m_TableEntryReference:
+      m_KeyId: 33343058714624
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  _characterName: Robert
+  _characterDescription: TBD
   characterSprite: {fileID: 21300000, guid: 2340e80fba76a6e42af2cb6f6c4468a4, type: 3}
+  references:
+    version: 2
+    RefIds: []

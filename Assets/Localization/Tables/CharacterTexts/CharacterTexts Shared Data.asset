@@ -1,0 +1,109 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: CharacterTexts Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: CharacterTexts
+  m_TableCollectionNameGuidString: 94d12fa6e21310e43a7f5389eb8227b9
+  m_Entries:
+  - m_Id: 178692792320
+    m_Key: Char.MsPage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33097356386304
+    m_Key: Char.MsPage.Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 863438086144
+    m_Key: Char.Peon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33220379516928
+    m_Key: Char.Peon.Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1046301351936
+    m_Key: Char.Princess
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33290751549440
+    m_Key: Char.Princess.Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2454555697152
+    m_Key: Char.Robert
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33343058714624
+    m_Key: Char.Robert.Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2539838480384
+    m_Key: Char.Soldier
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33417046237184
+    m_Key: Char.Soldier.Description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16500927471616
+    m_Key: Ability.MsPage.Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 796530548736
+    m_Key: Ability.MsPage.Desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16577045700608
+    m_Key: Ability.Peon.Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 951233257472
+    m_Key: Ability.Peon.Desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16646910222336
+    m_Key: Ability.Princess.Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1088349249536
+    m_Key: Ability.Princess.Desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16711741579264
+    m_Key: Ability.Robert.Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2505575211008
+    m_Key: Ability.Robert.Desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16789063573504
+    m_Key: Ability.Soldier.Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2575922077696
+    m_Key: Ability.Soldier.Desc
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 7802714053768904706
+  references:
+    version: 2
+    RefIds:
+    - rid: 7802714053768904706
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables,
+        asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1775300088818

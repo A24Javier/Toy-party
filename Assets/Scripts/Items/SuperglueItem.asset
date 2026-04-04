@@ -10,10 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 33b7840ce0ee3a54aa709ab1ba26b537, type: 3}
-  m_Name: AbsPlayerMovement
+  m_Name: SuperglueItem
   m_EditorClassIdentifier: 
   itemSpr: {fileID: 21300000, guid: 27cc659136db1634fa859abb3cd5eed4, type: 3}
-  itemKeyName: Item.Superglue
-  itemName: Pegamento
+  ItemLocalName:
+    m_TableReference:
+      m_TableCollectionName: GUID:e93c0a20c3100744a96dc1cde5fb00e5
+    m_TableEntryReference:
+      m_KeyId: 309831901184
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  _itemName: Superglue
   itemPrice: 5
   itemFunction: {fileID: 11400000, guid: f1485d53645240744b2c764515d7180a, type: 2}
+  references:
+    version: 2
+    RefIds: []

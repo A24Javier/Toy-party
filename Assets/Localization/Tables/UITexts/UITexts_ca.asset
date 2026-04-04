@@ -123,6 +123,14 @@ MonoBehaviour:
     m_Localized: seg
     m_Metadata:
       m_Items: []
+  - m_Id: 21764701204226048
+    m_Localized: 'Monedes: '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21764783760711680
+    m_Localized: 'Estrelles: '
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

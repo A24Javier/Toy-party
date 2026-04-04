@@ -1,0 +1,117 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: CharacterTexts_ca
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: ca
+  m_SharedData: {fileID: 11400000, guid: 94d12fa6e21310e43a7f5389eb8227b9, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 178692792320
+    m_Localized: Sra. Page
+    m_Metadata:
+      m_Items: []
+  - m_Id: 796530548736
+    m_Localized: "Paga monedes per activar. Ms Page dibuixa amb el seu llapis m\xE0gic
+      i activa un efecte aleatori: guanyar 4 monedes, enviar un oponent enrere o
+      teletransportar-se a qualsevol espai que tri\xEFs."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 863438086144
+    m_Localized: "Pe\xF3"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 951233257472
+    m_Localized: "Pagant un nombre fix de monedes, aquest personatge convoca el seu
+      amic \"La Torre\" per bloquejar temporalment un dels camins en un espai de
+      bifurcaci\xF3 durant un torn. Sense atajo, sense excuses: nom\xE9s una torre
+      molt inconvenient."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1046301351936
+    m_Localized: Princesa arcoiris
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1088349249536
+    m_Localized: "Pagant un nombre fix de monedes, aquest personatge pot col\xB7locar
+      trampes adhesives que s'enganxen a qualsevol jugador que hi caigui, acabant
+      immediatament el seu torn. Cada trampa dura dos torns i nom\xE9s n'hi pot haver
+      fins a dues alhora."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2454555697152
+    m_Localized: Robert
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2505575211008
+    m_Localized: "Pagant un nombre fix de monedes, aquest personatge es llan\xE7a
+      a tota velocitat \u2014com si fos disparat d'un can\xF3\u2014 i avan\xE7a cinc
+      espais. Pel cam\xED, roba 5 monedes a cada jugador que trobi al seu pas. Trampes
+      enganxoses i Espais Estel\xB7lars? Cap problema. Els salta completament, perqu\xE8
+      res no atura aquest sprint."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2539838480384
+    m_Localized: Soldat Bryan
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2575922077696
+    m_Localized: "L'habilitat passiva d'aquest personatge atorga una moneda extra
+      en aterrar a les caselles blaves i redueix en una la p\xE8rdua de moneda en
+      aterrar a les caselles vermelles."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16500927471616
+    m_Localized: Dibuix magic
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16577045700608
+    m_Localized: La torre
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16646910222336
+    m_Localized: Trampa arcoiris
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16711741579264
+    m_Localized: "\xA1Roca va!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16789063573504
+    m_Localized: Medalla d'honor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33097356386304
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33220379516928
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33290751549440
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33343058714624
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33417046237184
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

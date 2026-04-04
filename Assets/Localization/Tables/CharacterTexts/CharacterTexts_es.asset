@@ -1,0 +1,117 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: CharacterTexts_es
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: es
+  m_SharedData: {fileID: 11400000, guid: 94d12fa6e21310e43a7f5389eb8227b9, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 178692792320
+    m_Localized: Sra. Page
+    m_Metadata:
+      m_Items: []
+  - m_Id: 796530548736
+    m_Localized: "Paga monedas para activarla. La Sra. Page dibuja con su l\xE1piz
+      m\xE1gico y activa un efecto aleatorio: gana 4 monedas, hace retroceder a un
+      adversario o te teletransporta a cualquier casilla que elijas."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 863438086144
+    m_Localized: "Pe\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 951233257472
+    m_Localized: "Al pagar una cantidad determinada de monedas, este personaje llama
+      a su amigo \xABLa Torre\xBB para que bloquee temporalmente uno de los caminos
+      en una casilla con bifurcaci\xF3n durante un turno. Sin atajos, sin excusas:
+      solo una torre muy molesta."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1046301351936
+    m_Localized: Princesa arcoiris
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1088349249536
+    m_Localized: Al pagar una cantidad determinada de monedas, este personaje puede
+      colocar trampas adhesivas que se adhieren a cualquier jugador que caiga sobre
+      ellas, poniendo fin inmediatamente a su turno. Cada trampa dura dos turnos,
+      y solo pueden existir hasta dos a la vez.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2454555697152
+    m_Localized: Roberto
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2505575211008
+    m_Localized: "Al pagar una cantidad determinada de monedas, este personaje echa
+      a correr a toda velocidad \u2014como si lo lanzaran desde un ca\xF1\xF3n\u2014
+      y avanza cinco casillas. Por el camino, roba 5 monedas a cada jugador que se
+      encuentre a su paso. \xBFTrampas adhesivas y casillas de estrella? No hay problema.
+      Las pasa por alto por completo, porque nada detiene este sprint."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2539838480384
+    m_Localized: Soldado Bryan
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2575922077696
+    m_Localized: "La habilidad pasiva de este personaje otorga una moneda extra al
+      caer en casillas azules y reduce la p\xE9rdida de monedas en una unidad al
+      caer en casillas rojas."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16500927471616
+    m_Localized: Dibujo magico
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16577045700608
+    m_Localized: La torre
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16646910222336
+    m_Localized: Trampa arcoiris
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16711741579264
+    m_Localized: "\xA1Roca va!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16789063573504
+    m_Localized: Medalla de honor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33097356386304
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33220379516928
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33290751549440
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33343058714624
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33417046237184
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

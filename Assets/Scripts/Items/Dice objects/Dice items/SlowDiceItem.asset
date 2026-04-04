@@ -13,7 +13,17 @@ MonoBehaviour:
   m_Name: SlowDiceItem
   m_EditorClassIdentifier: 
   itemSpr: {fileID: 21300000, guid: 2229209b06717a44391697d904b61437, type: 3}
-  itemKeyName: Item.SlowDice
-  itemName: Slow Dice
+  ItemLocalName:
+    m_TableReference:
+      m_TableCollectionName: GUID:e93c0a20c3100744a96dc1cde5fb00e5
+    m_TableEntryReference:
+      m_KeyId: 4579692093440
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   itemPrice: 6
   itemFunction: {fileID: 11400000, guid: 66cbe0ff78ef34247ab3274520a8f827, type: 2}
+  references:
+    version: 2
+    RefIds: []

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Localization;
 using TMPro;
@@ -7,12 +5,34 @@ using TMPro;
 public class UI_StatsInfo : MonoBehaviour
 {
     [SerializeField]
-    private LocalizedStringTable UITable;
-
-    [SerializeField]
     private CanvasGroup _canvasGroup;
 
     private int _appFrames;
+
+    [Header("Traduction values")]
+    /*
+    [SerializeField]
+    private LocalizedStringTable UITable;
+    */
+    [SerializeField]
+    private LocalizedString _secondsTraduc;
+    private string _secondsTraducValue;
+
+    [SerializeField]
+    private LocalizedString _gamesPlayedTraduc;
+    private string _gamesPlayedTraducValue;
+
+    [SerializeField]
+    private LocalizedString _minigamesPlayedTraduc;
+    private string _minigamesPlayedTraducValue;
+
+    [SerializeField]
+    private LocalizedString _minigamesWonTraduc;
+    private string _minigamesWonTraducValue;
+
+    [SerializeField]
+    private LocalizedString _minigamesLostTraduc;
+    private string _minigamesLostTraducValue;
 
     [Space]
     [Header("TMP_Text components")]
@@ -39,7 +59,9 @@ public class UI_StatsInfo : MonoBehaviour
 
     void Start()
     {
-        //CloseStatsInfo();
+        _secondsTraduc.StringChanged += UpdateSeconds;
+
+        CloseStatsInfo();
         SetStatsText();
     }
 
@@ -53,23 +75,21 @@ public class UI_StatsInfo : MonoBehaviour
 
     private void CalculatePlaytime()
     {
-        string secTraduction = UITable.GetTable().GetEntry("UI.Stats.Seconds").Value;
-
         int totalSeconds = Mathf.FloorToInt(PlayerStats.Instance.PStats.Playtime);
 
         int hours = totalSeconds / 3600;
         int minutes = (totalSeconds % 3600) / 60;
         int secs = totalSeconds % 60;
 
-        _playtimeTextValue.text = string.Concat(hours, "h ", minutes, "min ", secs, secTraduction);
+        _playtimeTextValue.text = string.Concat(hours, "h ", minutes, "min ", secs, _secondsTraducValue);
     }
 
     private void SetStatsText()
     {
-        string gamesPlayedDescText = GetDescriptionText("UI.Stats.GamesPlayed");
-        string minigamesPlayedDescText = GetDescriptionText("UI.Stats.MinigamesPlayed");
-        string minigamesWonDescText = GetDescriptionText("UI.Stats.MinigamesWon");
-        string minigamesLostDescText = GetDescriptionText("UI.Stats.MinigamesLose");
+        string gamesPlayedDescText = GetDescriptionText(_gamesPlayedTraducValue);
+        string minigamesPlayedDescText = GetDescriptionText(_minigamesPlayedTraducValue);
+        string minigamesWonDescText = GetDescriptionText(_minigamesWonTraducValue);
+        string minigamesLostDescText = GetDescriptionText(_minigamesLostTraducValue);
 
         _gamesPlayedTextValue.text = string.Concat(PlayerStats.Instance.PStats.GamesPlayed, gamesPlayedDescText);
         _minigamesPlayedTextValue.text = string.Concat(PlayerStats.Instance.PStats.MinigamesPlayed, minigamesPlayedDescText);
@@ -77,9 +97,8 @@ public class UI_StatsInfo : MonoBehaviour
         _minigamesLostTextValue.text = string.Concat(PlayerStats.Instance.PStats.MinigamesLost, minigamesLostDescText);
     }
 
-    private string GetDescriptionText(string entryKey)
+    private string GetDescriptionText(string value)
     {
-        string value = UITable.GetTable().GetEntry(entryKey).Value;
         value = value.ToLower();
         value = " " + value.Substring(0, value.Length - 1);
 
@@ -98,5 +117,10 @@ public class UI_StatsInfo : MonoBehaviour
         _canvasGroup.alpha = 0f;
         _canvasGroup.interactable = false;
         _canvasGroup.blocksRaycasts = false;
+    }
+
+    private void UpdateSeconds(string value)
+    {
+        _secondsTraducValue = value;
     }
 }

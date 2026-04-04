@@ -12,15 +12,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0c1718265556544e9557625fc221e8b, type: 3}
   m_Name: Robert_ability
   m_EditorClassIdentifier: 
-  AbilityName: Rock dash
-  Description: "By paying a set number of coins, this character goes on a full-speed
-    sprint\u2014as if launched from a cannon\u2014charging forward five spaces. Along
-    the way, they steal 5 coins from every player caught in their path. Sticky traps
-    and Star Spaces? No problem. They\u2019re completely skipped, because nothing
-    stops this sprint."
+  AbilityLocalName:
+    m_TableReference:
+      m_TableCollectionName: GUID:94d12fa6e21310e43a7f5389eb8227b9
+    m_TableEntryReference:
+      m_KeyId: 16711741579264
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  _abilityName: Rock dash
+  AbilityDescrLocal:
+    m_TableReference:
+      m_TableCollectionName: GUID:94d12fa6e21310e43a7f5389eb8227b9
+    m_TableEntryReference:
+      m_KeyId: 2505575211008
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  _abilityDescription: "By paying a set number of coins, this character goes on a
+    full-speed sprint\u2014as if launched from a cannon\u2014charging forward five
+    spaces. Along the way, they steal 5 coins from every player caught in their path.
+    Sticky traps and Star Spaces? No problem. They\u2019re completely skipped, because
+    nothing stops this sprint."
   AbilitySprite: {fileID: 21300000, guid: 82ed9c49cdb4d084081fb5f519b9333c, type: 3}
   BackgroundColor: {r: 0.39607844, g: 0.73333335, b: 0.77254903, a: 1}
   PayForUse: 1
   AbilityPrice: 10
   PassiveBuffs: []
   AbilityFunction: {fileID: 11400000, guid: 916061b3834b4c94ba773f197965a94b, type: 2}
+  references:
+    version: 2
+    RefIds: []

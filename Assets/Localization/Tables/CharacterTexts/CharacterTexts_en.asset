@@ -1,0 +1,117 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: CharacterTexts_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 94d12fa6e21310e43a7f5389eb8227b9, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 178692792320
+    m_Localized: Ms. Page
+    m_Metadata:
+      m_Items: []
+  - m_Id: 796530548736
+    m_Localized: 'Pay coins to activate. Ms. Page draws with her magic pencil and
+      triggers one random effect: gain 4 coins, send an opponent backward, or warp
+      to any space you choose.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 863438086144
+    m_Localized: Pawn
+    m_Metadata:
+      m_Items: []
+  - m_Id: 951233257472
+    m_Localized: "By paying a set number of coins, this character calls in their
+      friend \u201CThe Tower\u201D to temporarily block one of the paths at a split-path
+      space for one turn. No shortcuts, no excuses\u2014just a very inconvenient
+      tower."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1046301351936
+    m_Localized: Rainbow Princess
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1088349249536
+    m_Localized: By paying a set number of coins, this character can place sticky
+      traps that latch onto any player who lands on them, immediately ending their
+      turn. Each trap lasts for two turns, and only up to two can exist at the same
+      time.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2454555697152
+    m_Localized: Robert
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2505575211008
+    m_Localized: "By paying a set number of coins, this character goes on a full-speed
+      sprint\u2014as if launched from a cannon\u2014charging forward five spaces.
+      Along the way, they steal 5 coins from every player caught in their path. Sticky
+      traps and Star Spaces? No problem. They\u2019re completely skipped, because
+      nothing stops this sprint."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2539838480384
+    m_Localized: Soldier Bryan
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2575922077696
+    m_Localized: "This character\u2019s passive ability grants an extra coin when
+      landing on Blue Spaces, and reduces the coin loss by one when landing on Red
+      Spaces"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16500927471616
+    m_Localized: Magic Drawing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16577045700608
+    m_Localized: The Tower
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16646910222336
+    m_Localized: Rainbow trap
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16711741579264
+    m_Localized: Rock dash
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16789063573504
+    m_Localized: Medal of Honor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33097356386304
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33220379516928
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33290751549440
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33343058714624
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 33417046237184
+    m_Localized: TBD
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

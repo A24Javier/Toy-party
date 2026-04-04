@@ -13649,17 +13649,14 @@ MonoBehaviour:
     type: 3}
   _itemButtonsParent: {fileID: 1737697885}
   _shopItems:
-  - {fileID: 11400000, guid: 1f43245250761614797a148a07aba18b, type: 2}
-  - {fileID: 11400000, guid: 826a46e3cd4268f43bf0feef2570558c, type: 2}
-  - {fileID: 11400000, guid: d9912db494edef14ebea6783e20fb881, type: 2}
-  - {fileID: 11400000, guid: aaeab17d0f6d2dd499a2fe765a90de61, type: 2}
+  - {fileID: 11400000, guid: 9ffc373b4c829774e82f793288b309eb, type: 2}
+  - {fileID: 11400000, guid: 4df970cabfb741846be840ab45dfaa4b, type: 2}
+  - {fileID: 11400000, guid: 59f3d1da278269e46ba3c06e46c2bdb2, type: 2}
+  - {fileID: 11400000, guid: 40f3add7c5ca3eb4ab8dc4f88036f836, type: 2}
   - {fileID: 11400000, guid: 9bffa5747812d8243bea00d42a6b63f8, type: 2}
   - {fileID: 11400000, guid: 480d66f6719647b46b55d246dc38c879, type: 2}
   - {fileID: 11400000, guid: 10e23092a7252a54688bd5099c1be899, type: 2}
   _extraItemPrice: 0
-  ItemTable:
-    m_TableReference:
-      m_TableCollectionName: GUID:e93c0a20c3100744a96dc1cde5fb00e5
 --- !u!1 &1452532309 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5286747667465420555, guid: ddef60cf5ae51f945a691dc2732ba762,
@@ -14885,7 +14882,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06b5db0795f74eb479ad589e4223abd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coinsLocal:
+    m_TableReference:
+      m_TableCollectionName: GUID:b1a26859b342c9b41a15a4b58d54c8fa
+    m_TableEntryReference:
+      m_KeyId: 21764701204226048
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   characterTextCoins: {fileID: 1933556971}
+  starsLocal:
+    m_TableReference:
+      m_TableCollectionName: GUID:b1a26859b342c9b41a15a4b58d54c8fa
+    m_TableEntryReference:
+      m_KeyId: 21764783760711680
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   characterTextStars: {fileID: 914067907}
   characterImage: {fileID: 2099873069}
   actionPanel: {fileID: 720214350}
@@ -14933,6 +14948,9 @@ MonoBehaviour:
   abilityImage: {fileID: 508897394}
   abilityBackground: {fileID: 2059793385}
   panelFadeInOut: {fileID: 1509943947}
+  references:
+    version: 2
+    RefIds: []
 --- !u!4 &1662263263
 Transform:
   m_ObjectHideFlags: 0
