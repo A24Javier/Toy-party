@@ -16,7 +16,11 @@ MonoBehaviour:
   m_TableCollectionNameGuidString: b1a26859b342c9b41a15a4b58d54c8fa
   m_Entries:
   - m_Id: 2482336366592
-    m_Key: Play.button
+    m_Key: UI.Play
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22125961577996288
+    m_Key: UI.Exit
     m_Metadata:
       m_Items: []
   - m_Id: 7720956393463808
@@ -125,6 +129,70 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 21764783760711680
     m_Key: UI.PlayerInfo.Stars
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22128310891552768
+    m_Key: UI.Configuration
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22128755135455232
+    m_Key: UI.Configuration.Volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22129454363680768
+    m_Key: UI.Configuration.Video
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22129509367783424
+    m_Key: UI.Configuration.Controls
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22130408479760384
+    m_Key: UI.Configuration.Audio
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22130671135465472
+    m_Key: UI.Configuration.Music
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22131308921331712
+    m_Key: UI.Configuration.Glow
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22131495681105920
+    m_Key: UI.Configuration.Quality
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22131694600167424
+    m_Key: UI.Configuration.Fullscreen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22131936263380992
+    m_Key: UI.Configuration.Resolution
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22133559421280256
+    m_Key: UI.Configuration.Jump
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22135821371678720
+    m_Key: UI.Configuration.KeyMinigames
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22138178264342528
+    m_Key: UI.Configuration.MoveUp
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22138524508332032
+    m_Key: UI.Configuration.MoveDown
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22138698068631552
+    m_Key: UI.Configuration.MoveRight
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22138841429942272
+    m_Key: UI.Configuration.MoveLeft
     m_Metadata:
       m_Items: []
   m_Metadata:

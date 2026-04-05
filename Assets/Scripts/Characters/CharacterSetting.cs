@@ -4,7 +4,7 @@ using UnityEngine.Localization;
 [CreateAssetMenu(fileName = "CharacterSetting.asset", menuName = ("Data/Create Character setting"))]
 public class CharacterSetting : ScriptableObject
 {
-    public Mesh characterMesh;
+    public GameObject characterPrefab;
     public Ability characterAbility;
 
     [SerializeField] private LocalizedString CharNameTraduction;

@@ -60,6 +60,10 @@ public class UI_StatsInfo : MonoBehaviour
     void Start()
     {
         _secondsTraduc.StringChanged += UpdateSeconds;
+        _gamesPlayedTraduc.StringChanged += UpdateGamesPlayed;
+        _minigamesPlayedTraduc.StringChanged += UpdateMinigamesPlayed;
+        _minigamesWonTraduc.StringChanged += UpdateMinigamesWon;
+        _minigamesLostTraduc.StringChanged += UpdateMinigamesLost;
 
         CloseStatsInfo();
         SetStatsText();
@@ -122,5 +126,25 @@ public class UI_StatsInfo : MonoBehaviour
     private void UpdateSeconds(string value)
     {
         _secondsTraducValue = value;
+    }
+
+    private void UpdateGamesPlayed(string value)
+    {
+        _gamesPlayedTraducValue = value;
+    }
+
+    private void UpdateMinigamesPlayed(string value)
+    {
+        _minigamesPlayedTraducValue = value;
+    }
+
+    private void UpdateMinigamesWon(string value)
+    {
+        _minigamesWonTraducValue = value;
+    }
+
+    private void UpdateMinigamesLost(string value)
+    {
+        _minigamesLostTraducValue = value;
     }
 }

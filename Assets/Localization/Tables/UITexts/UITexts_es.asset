@@ -131,6 +131,74 @@ MonoBehaviour:
     m_Localized: 'Estrellas: '
     m_Metadata:
       m_Items: []
+  - m_Id: 22125961577996288
+    m_Localized: Salir
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22128310891552768
+    m_Localized: "Configuraci\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22128755135455232
+    m_Localized: VOLUMEN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22129454363680768
+    m_Localized: Video
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22129509367783424
+    m_Localized: Controles
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22130408479760384
+    m_Localized: Audio
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22130671135465472
+    m_Localized: "M\xFAsica"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22131308921331712
+    m_Localized: Brillo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22131495681105920
+    m_Localized: Calidad
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22131694600167424
+    m_Localized: Pantalla completa
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22131936263380992
+    m_Localized: "Resoluci\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22133559421280256
+    m_Localized: Saltar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22135821371678720
+    m_Localized: Tecla usada en minijuegos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22138178264342528
+    m_Localized: Arriba
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22138524508332032
+    m_Localized: Abajo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22138698068631552
+    m_Localized: Derecha
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22138841429942272
+    m_Localized: Izquierda
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
