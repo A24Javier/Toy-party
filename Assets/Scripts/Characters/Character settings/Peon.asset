@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce9f02cbfd83a7346834f8b9ea29acb8, type: 3}
   m_Name: Peon
   m_EditorClassIdentifier: 
-  characterMesh: {fileID: 0}
+  characterPrefab: {fileID: 0}
   characterAbility: {fileID: 11400000, guid: 6ea36c452d199e6458ed4bdcca24a7a1, type: 2}
   CharNameTraduction:
     m_TableReference:
@@ -32,9 +32,9 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  _characterName: Pawn
+  _characterName: "Pe\xF3n"
   _characterDescription: TBD
-  characterSprite: {fileID: 21300000, guid: 2340e80fba76a6e42af2cb6f6c4468a4, type: 3}
+  characterSprite: {fileID: 21300000, guid: 2db1f6ae29aba7346aec312b38f4bd8f, type: 3}
   references:
     version: 2
     RefIds: []

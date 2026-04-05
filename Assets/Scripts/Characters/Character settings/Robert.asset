@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce9f02cbfd83a7346834f8b9ea29acb8, type: 3}
   m_Name: Robert
   m_EditorClassIdentifier: 
-  characterMesh: {fileID: 0}
+  characterPrefab: {fileID: 0}
   characterAbility: {fileID: 11400000, guid: 09d00b8d0d63fce489b57bcf8dd90a86, type: 2}
   CharNameTraduction:
     m_TableReference:
@@ -32,9 +32,9 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  _characterName: Robert
+  _characterName: Roberto
   _characterDescription: TBD
-  characterSprite: {fileID: 21300000, guid: 2340e80fba76a6e42af2cb6f6c4468a4, type: 3}
+  characterSprite: {fileID: 21300000, guid: 54ce99243a923b74b95b82b0c1807247, type: 3}
   references:
     version: 2
     RefIds: []

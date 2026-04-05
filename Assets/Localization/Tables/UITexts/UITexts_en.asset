@@ -47,7 +47,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7721830348005376
-    m_Localized: 'Price: x coins'
+    m_Localized: 'Price: '
     m_Metadata:
       m_Items: []
   - m_Id: 7721889307336704
