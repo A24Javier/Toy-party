@@ -39,6 +39,9 @@ public class UIManager : MonoBehaviour
 
     // Elementos UI para la compra de estrella
     [Header("Cosas comprar estrella")]
+    [SerializeField] private LocalizedString priceLocal;
+    [SerializeField] private LocalizedString starCouponLocal;
+
     [SerializeField] private TMP_Text textoPrecioEstrella;
     [SerializeField] private CanvasGroup UI_buyStar;
     private bool canBuyStar = false;
@@ -249,12 +252,16 @@ public class UIManager : MonoBehaviour
 
         ChangeCharacterUI(character);
         UIStarShopControl(true);
-        
-        for(int i = 0; i < character.GetInventory().GetTotalObjLoaded(); i++)
+
+        string priceText = priceLocal.GetLocalizedString();
+
+        for (int i = 0; i < character.GetInventory().GetTotalObjLoaded(); i++)
         {
-            if(character.GetInventory().GetItem(i).ItemName == "Star Coupon")
+            if(character.GetInventory().GetItem(i).ItemName == "Star Coupon" || character.GetInventory().GetItem(i).ItemName == "Cupón estrella" || character.GetInventory().GetItem(i).ItemName == "Cupó estrella")
             {
-                textoPrecioEstrella.text = precio.ToString("Price: Star Coupon");
+                //textoPrecioEstrella.text = precio.ToString("Price: Star Coupon");
+                string starCouponText = starCouponLocal.GetLocalizedString();
+                textoPrecioEstrella.text = string.Concat(priceText, starCouponText);
                 canBuyStar = true;
                 isStarCoupon = true;
                 couponInvIndex = i;
@@ -264,7 +271,8 @@ public class UIManager : MonoBehaviour
 
         if (!canBuyStar && !isStarCoupon)
         {
-            textoPrecioEstrella.text = precio.ToString($"Price: {currentStarPrice} coins");
+            string coinsText = coinsLocal.GetLocalizedString().ToLower();
+            textoPrecioEstrella.text = string.Concat(priceText, currentStarPrice.ToString(), " ", coinsText);
             canBuyStar = true;
         }
 
