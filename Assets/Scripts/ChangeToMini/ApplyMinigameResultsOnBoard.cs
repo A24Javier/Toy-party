@@ -15,7 +15,7 @@ public class ApplyMinigameResultsOnBoard : MonoBehaviour
             {
                 Character boardChar = GameController.instance.GetCharacter(j);
 
-                if (boardChar != null && boardChar.characterId == snap.characterId)
+                if (boardChar.characterId == snap.characterId)
                 {
                     boardChar.coins = snap.coins;
                     boardChar.stars = snap.stars;
@@ -24,3 +24,4 @@ public class ApplyMinigameResultsOnBoard : MonoBehaviour
         }
     }
 }
+

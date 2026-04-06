@@ -1476,6 +1476,7 @@ GameObject:
   - component: {fileID: 1079560157}
   - component: {fileID: 1079560158}
   - component: {fileID: 1079560159}
+  - component: {fileID: 1079560160}
   m_Layer: 0
   m_Name: ManagerJoc
   m_TagString: Untagged
@@ -1510,14 +1511,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df6c4feb3c56f244fad1ea26e720a439, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ia: {fileID: 5758896}
-  player: {fileID: 1048615695}
-  texts:
-  - {fileID: 410111253}
-  - {fileID: 33490736}
-  - {fileID: 905838288}
-  - {fileID: 835718690}
-  textovictoria: {fileID: 835718688}
+  characterManager: {fileID: 0}
+  boardSceneName: Prototip
+  activeIndexA: 0
+  activeIndexB: 1
+  matchTimeSeconds: 30
+  coinsAward: 0a000000050000000200000000000000
+  starsAward: 00000000000000000000000000000000
+  timeText: {fileID: 0}
+  forceAText: {fileID: 0}
+  forceBText: {fileID: 0}
+  resultText: {fileID: 0}
+  victoryPanel: {fileID: 0}
 --- !u!95 &1079560159
 Animator:
   serializedVersion: 5
@@ -1539,6 +1544,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1079560160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079560156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df4fdb30823444d4195a9be27fbff0d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterPrefab: {fileID: 6465673799542807158, guid: 7f19162a1f551da4781f505bb4328a9b,
+    type: 3}
+  spawnPoints: []
 --- !u!1 &2115432184
 GameObject:
   m_ObjectHideFlags: 0
@@ -1549,6 +1569,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2115432186}
   - component: {fileID: 2115432185}
+  - component: {fileID: 2115432187}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -1633,6 +1654,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &2115432187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2115432184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1643,7 +1687,7 @@ SceneRoots:
   - {fileID: 5758893}
   - {fileID: 104304281}
   - {fileID: 918619418}
-  - {fileID: 1079560157}
   - {fileID: 503485972}
   - {fileID: 804681021}
   - {fileID: 474501572}
+  - {fileID: 1079560157}

@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MinigameFlow : MonoBehaviour
@@ -18,9 +18,10 @@ public class MinigameFlow : MonoBehaviour
     public void StartRandom(MinigameType type)
     {
         var list = database.GetMinigamesByType(type);
+
         if (list == null || list.Count == 0)
         {
-            Debug.LogError($"No hay minijuegos del tipo {type} en MinigameDatabase.");
+            Debug.LogError($"No hay minijuegos del tipo {type}");
             return;
         }
 
@@ -30,8 +31,13 @@ public class MinigameFlow : MonoBehaviour
 
     public void StartMinigame(MinigameData mg)
     {
+        // 1 Guardar estado de los 4 jugadores
         SavePartySnapshotFromBoard();
+
+        // 2️ Guardar qué minijuego se va a jugar
         MinigameSession.SelectedMinigame = mg;
+
+        // 3️ Cargar SIEMPRE la escena Loading
         SceneManager.LoadScene(loadingSceneName);
     }
 
@@ -39,7 +45,7 @@ public class MinigameFlow : MonoBehaviour
     {
         if (PartySession.instance == null)
         {
-            Debug.LogError("No existe PartySession en escena (debe estar en DontDestroyOnLoad).");
+            Debug.LogError("No existe PartySession en escena.");
             return;
         }
 
