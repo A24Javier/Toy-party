@@ -65,6 +65,12 @@ public class UI_StatsInfo : MonoBehaviour
         _minigamesWonTraduc.StringChanged += UpdateMinigamesWon;
         _minigamesLostTraduc.StringChanged += UpdateMinigamesLost;
 
+        _secondsTraducValue = _secondsTraduc.GetLocalizedString();
+        _gamesPlayedTraducValue = _gamesPlayedTraduc.GetLocalizedString();
+        _minigamesPlayedTraducValue = _minigamesPlayedTraduc.GetLocalizedString();
+        _minigamesWonTraducValue = _minigamesWonTraduc.GetLocalizedString();
+        _minigamesLostTraducValue = _minigamesLostTraduc.GetLocalizedString();
+
         CloseStatsInfo();
         SetStatsText();
     }
