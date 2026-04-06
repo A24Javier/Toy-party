@@ -74,6 +74,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private CanvasGroup starCouponMsgGroup;
 
     [Header("Elementos para habilidad personaje")]
+    [SerializeField] private CanvasGroup abilityButtGroup;
     [SerializeField] private Button abilityButton;
     [SerializeField] private Image abilityImage;
     [SerializeField] private Image abilityBackground;
@@ -209,6 +210,7 @@ public class UIManager : MonoBehaviour
     {
         ChangeCharacterUI(character);
         int actualCoins = character.GetCoins();
+        string coinsTradText = coinsLocal.GetLocalizedString();
 
         for (int i = 0; i < Mathf.Abs(coins); i++)
         {
@@ -225,7 +227,7 @@ public class UIManager : MonoBehaviour
             }
 
             yield return new WaitForSeconds(0.25f);
-            characterTextCoins.text = actualCoins.ToString("Coins: 0");
+            characterTextCoins.text = string.Concat(coinsTradText, actualCoins.ToString());
         }
 
         character.SetCoins(actualCoins);
@@ -233,7 +235,8 @@ public class UIManager : MonoBehaviour
 
     private void UpdateStarsText()
     {
-        characterTextStars.text = actualCharacter.GetStars().ToString("Stars: 0");
+        string starsTradText = starsLocal.GetLocalizedString();
+        characterTextStars.text = string.Concat(starsTradText, actualCharacter.GetStars().ToString());
     }
     #endregion
 
@@ -476,10 +479,12 @@ public class UIManager : MonoBehaviour
         actionPanel.interactable = open;
         actionPanel.blocksRaycasts = open;
 
+        abilityButtGroup.interactable = open;
+        ChangeAbilityUI();
+
         if (open)
         {
             LoadInventory();
-            ChangeAbilityUI();
         }
     }
 
@@ -526,10 +531,14 @@ public class UIManager : MonoBehaviour
 
     private void ChangeAbilityUI()
     {
-        if(actualCharacter.ability.AbilityFunction != null)
+        if(actualCharacter.ability != null)
         {
-            abilityButton.onClick.RemoveAllListeners();
-            abilityButton.onClick.AddListener(actualCharacter.ability.AbilityFunction.UseAbility);
+            if(actualCharacter.ability.AbilityFunction != null)
+            {
+                abilityButton.onClick.RemoveAllListeners();
+                abilityButton.onClick.AddListener(actualCharacter.ability.AbilityFunction.UseAbility);
+            }
+            
 
             abilityImage.sprite = actualCharacter.ability.AbilitySprite;
             abilityBackground.color = actualCharacter.ability.BackgroundColor;

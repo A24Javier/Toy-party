@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5446551571750143576}
   - component: {fileID: -2682193999045717577}
   - component: {fileID: 2594915527693160189}
+  - component: {fileID: 3865150087165779848}
   - component: {fileID: 1772914731259837079}
   m_Layer: 7
   m_Name: "Palad\xEDn 1"
@@ -114,7 +115,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1830928126585884430}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 90c83773118b357408fe2571069e7b9b, type: 3}
   m_Name: 
@@ -135,7 +136,6 @@ MonoBehaviour:
   isSelectingPath: 0
   smooth: 1
   velocidadDeRotacion: 5
-  charSetting: {fileID: 11400000, guid: 071b023269decfa4ea00e0e2706b95f7, type: 2}
   powerJump: 1
   timeJump: 1
   stepSfx: {fileID: 8300000, guid: 86544560de2afd14fbe90bf898a1d226, type: 3}
@@ -369,6 +369,36 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
     IsHeavy: 0
+--- !u!114 &3865150087165779848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1830928126585884430}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9828a2f4cd57e42459bcedc0ba52d1dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterId: 0
+  coins: 0
+  stars: 0
+  characterImage: {fileID: 21300000, guid: 8a012681bac2fe242b1df864d879d9c1, type: 3}
+  actualBox: {fileID: 0}
+  ability: {fileID: 0}
+  buffs: []
+  isPlayer: 0
+  savedCameraRotationY: 0
+  waitingStarShop: 0
+  pendingStepsAfterShop: 0
+  speed: 0.9
+  extraStep: 0
+  smooth: 1
+  velocidadDeRotacion: 5
+  powerJump: 1
+  timeJump: 1
+  stepSfx: {fileID: 8300000, guid: 86544560de2afd14fbe90bf898a1d226, type: 3}
 --- !u!82 &1772914731259837079
 AudioSource:
   m_ObjectHideFlags: 0

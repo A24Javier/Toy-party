@@ -93,12 +93,6 @@ public class Box : MonoBehaviour
 
     private static void SetStarBox(Box box)
     {
-        Debug.Log(box);
-        Debug.Log(box);
-
-        Debug.Log(box);
-
-
         for (int i = 0; i < starBoxes.Count; i++)
         {
             if (starBoxes[i] != null)

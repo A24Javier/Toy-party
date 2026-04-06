@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MenuPrincipal.unity
     guid: 1c24e4dd7254b1e4e9874e4b1e1f6cf6
   - enabled: 1
+    path: Assets/Scenes/SelectCharacterMenu.unity
+    guid: 23685381a80720644a3ad7aef705d552
+  - enabled: 1
     path: Assets/Scenes/Maps/Prototip.unity
     guid: 88ffc01853086f14d957ad702e5bd64e
   - enabled: 1
@@ -29,6 +32,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SceneTests/SceneTest 3.unity
     guid: 8e3838961a1d09e498b62180c8262945
+  - enabled: 1
+    path: Assets/Scenes/Credit.unity
+    guid: 16f1becf3b556df4b94f2c4ed4a725e6
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 886295bc59622a340a49270447d47c32,
       type: 2}

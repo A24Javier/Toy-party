@@ -8,6 +8,9 @@ public class GameController : MonoBehaviour
     private const int MAX_PLAYERS = 4;
     private const int MAX_ROUNDS = 10;
     private int playersToCreate;
+
+    [SerializeField] private CharacterSetting[] _charactersSettings;
+
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private GameObject npcPrefab;
     [SerializeField] private GameObject dicePrefab;
@@ -17,16 +20,14 @@ public class GameController : MonoBehaviour
     [SerializeField] private Transform[] spawns;
     private bool gameEnded = false;
 
-
-    private Player[] players;
-    private NPC_Controller[] npcs;
+    private List<Player> players = new List<Player>();
+    private List<NPC_Controller> npcs = new List<NPC_Controller>();
     private Character[] characters;
 
     private Character characterOfTurn;
     private Player playerOfTurn;
     private NPC_Controller npcOfTurn;
     [SerializeField] private BoardCameraController camFollow;
-
 
     // Orden y control
     private int actualTurn = 0;
@@ -40,11 +41,9 @@ public class GameController : MonoBehaviour
 
     void Awake()
     {
-        // Se comenta solo para el prototipo
         if(instance == null)
         {
             instance = this;
-            //DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -77,13 +76,22 @@ public class GameController : MonoBehaviour
         // Id que se usará para asignarles a los jugadores y NPCs
         int setId = 0;
 
+        // De momento solo esta preparado para 1 solo jugador humano
+        int playerSetting = PlayerPrefs.GetInt("PlayerSelected", 0);
+
         // Creará tantos jugadores (que se puedan controlar) como se hayan especificado en el menú
         for(int i = 0; i < playersToCreate; i++)
         {
             // Instancia jugador
-            GameObject newPlayerGO = Instantiate(playerPrefab, initialPos + (Vector3.left * (i * 3)), Quaternion.identity);
+            //GameObject newPlayerGO = Instantiate(playerPrefab, initialPos + (Vector3.left * (i * 3)), Quaternion.identity);
+            GameObject newPlayerGO = Instantiate(_charactersSettings[playerSetting].characterPrefab, initialPos + (Vector3.left * (i * 3)), Quaternion.identity);
+            Destroy(newPlayerGO.GetComponent<NPC_Controller>());
+            newPlayerGO.name = _charactersSettings[playerSetting].CharacterName;
+
             Player newPlayer = newPlayerGO.GetComponent<Player>();
+            newPlayer.enabled = true;
             newPlayer.isPlayer = true;
+            newPlayer.SetCharSetting(_charactersSettings[playerSetting]);
             newPlayerGO.transform.position = spawns[setId].position;
 
             // Asigna un character id al jugador instanciado
@@ -92,18 +100,44 @@ public class GameController : MonoBehaviour
             isPlayer[i] = true;
             characters[i] = newPlayer;
 
+            players.Add(newPlayer);
+
             setId++;
         }
 
         // Creará los NPCs necesarios hasta que sean un total de 4 jugadores (sumando players y NPCs)
-        if((MAX_PLAYERS - playersToCreate) > 0)
+        int npcsToCreate = (MAX_PLAYERS - playersToCreate);
+        if(npcsToCreate > 0)
         {
-            for (int i = 0; i < (MAX_PLAYERS - playersToCreate); i++)
+            int[] npcsCharSettings = new int[npcsToCreate];
+            HashSet<int> usedCharSettings = new HashSet<int>();
+
+            usedCharSettings.Add(playerSetting);
+
+            for(int i = 0; i < npcsToCreate; i++)
+            {
+                int rand = 0;
+
+                do
+                {
+                    rand = Random.Range(0, _charactersSettings.Length);
+                }while(!usedCharSettings.Add(rand));
+
+                npcsCharSettings[i] = rand;
+            }
+
+            for (int i = 0; i < npcsToCreate; i++)
             {
                 // Instanciamos un NPC
-                GameObject newNPCGO = Instantiate(npcPrefab, initialPos + (Vector3.right * (i * 3)), Quaternion.identity);
+                //GameObject newNPCGO = Instantiate(npcPrefab, initialPos + (Vector3.right * (i * 3)), Quaternion.identity);
+                GameObject newNPCGO = Instantiate(_charactersSettings[npcsCharSettings[i]].characterPrefab, initialPos + (Vector3.right * (i * 3)), Quaternion.identity);
+                Destroy(newNPCGO.GetComponent<Player>());
+                newNPCGO.name = _charactersSettings[npcsCharSettings[i]].CharacterName;
+
                 NPC_Controller newNPC = newNPCGO.GetComponent<NPC_Controller>();
+                newNPC.enabled = true;
                 newNPC.isPlayer = false;
+                newNPC.SetCharSetting(_charactersSettings[npcsCharSettings[i]]);
                 newNPCGO.transform.position = spawns[setId].position;
 
                 // Asigna un character id al NPC instanciado
@@ -111,6 +145,8 @@ public class GameController : MonoBehaviour
                 idOrder[(playersToCreate) + i] = setId;
                 isPlayer[(playersToCreate) + i] = false;
                 characters[setId] = newNPC;
+
+                npcs.Add(newNPC);
 
                 setId++;
             }
@@ -135,9 +171,6 @@ public class GameController : MonoBehaviour
             Debug.Log("Orden[" + i + "]: " + idOrder[i] + ", isPlayer: " + isPlayer[i]);
         }*/
 
-        // Llenamos los arrays de players y npcs
-        players = GameObject.FindObjectsOfType<Player>();
-        npcs = GameObject.FindObjectsOfType<NPC_Controller>();
         StartMovement();
     }
 
@@ -162,7 +195,7 @@ public class GameController : MonoBehaviour
         if (isPlayer[thisCharTurn])
         {
             // Recorre la lista de players
-            for (int i = 0; i < players.Length; i++)
+            for (int i = 0; i < players.Count; i++)
             {
                 // Cuando el jugador actual de la lista tenga el mismo Char id que el del turno actual...
                 if (players[i].GetCharId() == idOrder[thisCharTurn])
@@ -171,8 +204,8 @@ public class GameController : MonoBehaviour
                     characterOfTurn = players[i];
 
                     // Actualiza UI
-                    UIManager.instance.ChangeCharacterUI(playerOfTurn);
                     UIManager.instance.SetActualCharacter(playerOfTurn);
+                    UIManager.instance.ChangeCharacterUI(playerOfTurn);
 
                     UIManager.instance.ControlActionPanel(true);
 
@@ -186,17 +219,16 @@ public class GameController : MonoBehaviour
         else
         {
             // Recorre la lista de npcs para buscar al npc del turno actual
-            for(int i = 0; i < npcs.Length; i++)
+            for(int i = 0; i < npcs.Count; i++)
             {
                 // Cuando el npc actual de la lista tenga el mismo char id que el del turno actual...
                 if (npcs[i].GetCharId() == idOrder[thisCharTurn])
                 {
-                    UIManager.instance.ControlActionPanel(false);
-
                     npcOfTurn = npcs[i];
                     characterOfTurn = npcs[i];
-                    UIManager.instance.ChangeCharacterUI(npcOfTurn);
                     UIManager.instance.SetActualCharacter(npcOfTurn);
+                    UIManager.instance.ControlActionPanel(false);
+                    UIManager.instance.ChangeCharacterUI(npcOfTurn);
 
                     // cam sigue npc
                     camFollow.SetTarget(npcOfTurn.transform);

@@ -1519,6 +1519,7 @@ GameObject:
   - component: {fileID: 241589904}
   - component: {fileID: 241589903}
   - component: {fileID: 241589902}
+  - component: {fileID: 241589905}
   m_Layer: 5
   m_Name: GRP_Ability
   m_TagString: Untagged
@@ -1573,7 +1574,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -1630,6 +1631,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 241589900}
   m_CullTransparentMesh: 1
+--- !u!225 &241589905
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 241589900}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &246896301
 GameObject:
   m_ObjectHideFlags: 0
@@ -3638,6 +3651,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1a676916639812458a97ee98dd3596d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _charactersSettings:
+  - {fileID: 11400000, guid: 0ca8e642e49c63244a727db8ff745d4e, type: 2}
+  - {fileID: 11400000, guid: caffe4cb9b7a2344f953cdc2eed1ff3f, type: 2}
+  - {fileID: 11400000, guid: c226e071c36ae094c80119cd77ae31e9, type: 2}
+  - {fileID: 11400000, guid: 071b023269decfa4ea00e0e2706b95f7, type: 2}
+  - {fileID: 11400000, guid: 705dbdbf414882e46a4e51391682b2ca, type: 2}
   playerPrefab: {fileID: 1830928126585884430, guid: dc48736f50eb89d44ad1b2b1aa48a2a6,
     type: 3}
   npcPrefab: {fileID: 1830928126585884430, guid: 296701bd24f24ae4c8a53f3663b842c5,
@@ -5232,13 +5251,25 @@ MonoBehaviour:
   panel: {fileID: 1984089991}
   FristClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1694153548}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
+        m_MethodName: Select
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   SecondClick:
     m_PersistentCalls:
       m_Calls: []
-  config: {fileID: 0}
+  config: {fileID: 550380961}
   play: {fileID: 0}
-  otro: {fileID: 0}
+  otro: {fileID: 1694153548}
 --- !u!4 &605337067
 Transform:
   m_ObjectHideFlags: 0
@@ -9097,7 +9128,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Stars: 0'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -9127,9 +9158,9 @@ MonoBehaviour:
   m_fontSize: 52
   m_fontSizeBase: 52
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 52
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -9140,7 +9171,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -9190,8 +9221,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -30}
-  m_SizeDelta: {x: 244, y: 70}
+  m_AnchoredPosition: {x: -4.399994, y: -30}
+  m_SizeDelta: {x: 235, y: 70}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &928366072 stripped
 MonoBehaviour:
@@ -14917,6 +14948,24 @@ MonoBehaviour:
   rightArrow: {fileID: 2006396966}
   forwardArrow: {fileID: 432349631}
   downArrow: {fileID: 587798515}
+  priceLocal:
+    m_TableReference:
+      m_TableCollectionName: GUID:b1a26859b342c9b41a15a4b58d54c8fa
+    m_TableEntryReference:
+      m_KeyId: 7721830348005376
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  starCouponLocal:
+    m_TableReference:
+      m_TableCollectionName: GUID:e93c0a20c3100744a96dc1cde5fb00e5
+    m_TableEntryReference:
+      m_KeyId: 491332018176
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   textoPrecioEstrella: {fileID: 1551807889}
   UI_buyStar: {fileID: 1385918536}
   prefabMinigameObjList: {fileID: 6355963459433820445, guid: 093a6055900b1cd47ae2989ac0fa2652,
@@ -14944,6 +14993,7 @@ MonoBehaviour:
   - {fileID: 1719718639}
   - {fileID: 1794272130}
   starCouponMsgGroup: {fileID: 1006020182}
+  abilityButtGroup: {fileID: 241589905}
   abilityButton: {fileID: 241589902}
   abilityImage: {fileID: 508897394}
   abilityBackground: {fileID: 2059793385}
@@ -15387,6 +15437,18 @@ MonoBehaviour:
   _theTowerPrefab: {fileID: 538332846251715401, guid: 3323c42c53d6a8e428ae3b7cd2999b0b,
     type: 3}
   _towerOffsetY: 3.5
+--- !u!114 &1694153548 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7244727646729126086, guid: da4ecc58358df6947ab3bb08e1179ee3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1984089986}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1697553523
 GameObject:
   m_ObjectHideFlags: 0
@@ -17182,7 +17244,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Coins: 0'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -17212,9 +17274,9 @@ MonoBehaviour:
   m_fontSize: 52
   m_fontSizeBase: 52
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 52
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -17225,7 +17287,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -17275,8 +17337,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 30}
-  m_SizeDelta: {x: 244, y: 70}
+  m_AnchoredPosition: {x: -4.399994, y: 30}
+  m_SizeDelta: {x: 235, y: 70}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!1 &1940242258
 GameObject:

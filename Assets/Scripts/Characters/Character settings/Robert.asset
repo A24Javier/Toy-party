@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce9f02cbfd83a7346834f8b9ea29acb8, type: 3}
   m_Name: Robert
   m_EditorClassIdentifier: 
-  characterPrefab: {fileID: 0}
+  characterPrefab: {fileID: 1830928126585884430, guid: dc48736f50eb89d44ad1b2b1aa48a2a6,
+    type: 3}
   characterAbility: {fileID: 11400000, guid: 09d00b8d0d63fce489b57bcf8dd90a86, type: 2}
   CharNameTraduction:
     m_TableReference:

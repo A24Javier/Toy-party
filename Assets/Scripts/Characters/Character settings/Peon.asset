@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce9f02cbfd83a7346834f8b9ea29acb8, type: 3}
   m_Name: Peon
   m_EditorClassIdentifier: 
-  characterPrefab: {fileID: 0}
+  characterPrefab: {fileID: 1830928126585884430, guid: dc48736f50eb89d44ad1b2b1aa48a2a6,
+    type: 3}
   characterAbility: {fileID: 11400000, guid: 6ea36c452d199e6458ed4bdcca24a7a1, type: 2}
   CharNameTraduction:
     m_TableReference:

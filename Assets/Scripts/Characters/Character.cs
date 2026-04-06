@@ -76,4 +76,17 @@ public abstract class Character : MonoBehaviour
     {
         extraStep += value;
     }
+
+    public virtual void SetCharSetting(CharacterSetting charSetting)
+    {
+        Debug.Log($"Carga habilidad {charSetting.characterAbility.AbilityLocalName.GetLocalizedString()}");
+        Ability charAbility = charSetting.characterAbility;
+        ability = charAbility;
+        characterImage = charSetting.characterSprite;
+
+        for (int i = 0; i < ability.PassiveBuffs.Length; i++)
+        {
+            buffs.Add(ability.PassiveBuffs[i]);
+        }
+    }
 }

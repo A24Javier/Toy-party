@@ -13,7 +13,6 @@ public class Player : Character
     Box newBox = null;
     public bool smooth = true;
     public float velocidadDeRotacion = 5f;
-    [SerializeField] private CharacterSetting charSetting;
 
     //jump
     public float powerJump = 1f;
@@ -65,27 +64,9 @@ public class Player : Character
         GetInventory().AddItem(item);
     }
 
-    void Awake()
-    {
-        if (charSetting != null)
-        {
-            ability = charSetting.characterAbility;
-            characterImage = charSetting.characterSprite;
-        }
-    }
-
     void Start()
     {
         //inventory.AddItem(randomTP);
-        //Obtenemos los buffos pasivos de la habilidad en caso de que los haya
-        if (ability != null)
-        {
-            for (int i = 0; i < ability.PassiveBuffs.Length; i++)
-            {
-                buffs[i] = ability.PassiveBuffs[i];
-            }
-        }
-        
         animator = GetComponent<Animator>();
         board = GameObject.FindObjectOfType<Board>();
         actualBox = board.GetCasilla(0);
