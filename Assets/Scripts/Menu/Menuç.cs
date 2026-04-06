@@ -23,9 +23,11 @@ public class Logo : MonoBehaviour
     [SerializeField] private RectTransform conf;
     [SerializeField] private RectTransform play;
     [SerializeField] private RectTransform exit;
+    [SerializeField] private RectTransform credito;
 
     [SerializeField] private float posicionFinalConfig = -223f;
     [SerializeField] private float posicionFinalpe = -223f;
+    [SerializeField] private float posicionFinalCreditoY = -54f;
 
     [Header("Evento")]
     public UnityEvent OnMoveFinished;
@@ -71,6 +73,8 @@ public class Logo : MonoBehaviour
         seq.Join(play.DOAnchorPosY(posicionFinalpe, duracionMov).SetEase(Ease.InQuad));
 
         seq.Join(exit.DOAnchorPosY(posicionFinalpe, duracionMov).SetEase(Ease.InQuad));
+
+        seq.Join(credito.DOAnchorPosY(posicionFinalpe, duracionMov).SetEase(Ease.InQuad));
 
         seq.OnComplete(() =>
         {
