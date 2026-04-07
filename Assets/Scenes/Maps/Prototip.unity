@@ -17171,6 +17171,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1928719376}
   - component: {fileID: 1928719377}
+  - component: {fileID: 1928719378}
   m_Layer: 0
   m_Name: MinigameController
   m_TagString: Untagged
@@ -17207,6 +17208,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   database: {fileID: 11400000, guid: ee9ce038f1e0abc4ba7dd8d0969867d1, type: 2}
   loadingSceneName: LoadingScreen
+--- !u!114 &1928719378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1928719374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a53058dfdb5f1a4e9e86d06881142b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  database: {fileID: 11400000, guid: ee9ce038f1e0abc4ba7dd8d0969867d1, type: 2}
 --- !u!1 &1933556970
 GameObject:
   m_ObjectHideFlags: 0
