@@ -305,11 +305,13 @@ public class GameController : MonoBehaviour
             OnRoundEnded?.Invoke();
 
             yield return new WaitForSeconds(2f);
-            if(actualRound < MAX_ROUNDS)
+
+            if (actualRound < MAX_ROUNDS)
             {
-                StartMovement();
+                MinigameFlow.instance.StartRandom(MinigameType.OneVSOne);
+                yield break;
             }
-            
+
         }
         else
         {
