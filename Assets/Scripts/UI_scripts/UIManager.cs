@@ -444,7 +444,7 @@ public class UIManager : MonoBehaviour
         RectTransform selectedImage = images[end].GetComponent<RectTransform>();
         selectedImage.sizeDelta = new Vector2(selectedImage.sizeDelta.x * 1.25f, selectedImage.sizeDelta.y * 1.25f);
         yield return new WaitForSeconds(2f);
-        StartCoroutine(FadeInOut(true, MinigameController.instance.LoadMinigame));
+        //StartCoroutine(FadeInOut(true, MinigameController.instance.LoadMinigame));
     }
 
     public void AddItem(Item newItem)

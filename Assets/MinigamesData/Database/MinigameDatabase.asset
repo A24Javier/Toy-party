@@ -14,5 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minigames:
   - {fileID: 11400000, guid: 3219cf4d7e01eb24e86df3e4d7f6bb98, type: 2}
-  - {fileID: 11400000, guid: 3219cf4d7e01eb24e86df3e4d7f6bb98, type: 2}
-  - {fileID: 11400000, guid: 3219cf4d7e01eb24e86df3e4d7f6bb98, type: 2}
+  - {fileID: 11400000, guid: 0c270e8afb8739e4498b62532eb4c48e, type: 2}

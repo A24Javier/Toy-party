@@ -38,7 +38,8 @@ public class MinigameFlow : MonoBehaviour
         MinigameSession.SelectedMinigame = mg;
 
         // 3️ Cargar SIEMPRE la escena Loading
-        SceneManager.LoadScene(loadingSceneName);
+        //SceneManager.LoadScene(loadingSceneName);
+        MinigameController.instance.LoadMinigame(mg.sceneName);
     }
 
     private void SavePartySnapshotFromBoard()
