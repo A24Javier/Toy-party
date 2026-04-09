@@ -9,17 +9,17 @@ public class LoadingScreenUI : MonoBehaviour
     public TMP_Text titleText;
     public TMP_Text descriptionText;
     public Image previewImage;
-    public GameObject continueText; // Texto "Click para continuar"
+    public GameObject continueText;
 
     [Header("Config")]
-    public float minimumWaitTime = 2f; // Tiempo antes de poder continuar
+    public float minimumWaitTime = 2f;
 
     private bool canContinue = false;
     private string nextScene;
 
     void Start()
     {
-        continueText.SetActive(false); // Ocultar el texto al inicio
+        continueText.SetActive(false);
 
         var mg = MinigameSession.SelectedMinigame;
         titleText.text = mg.minigameName;
@@ -33,7 +33,6 @@ public class LoadingScreenUI : MonoBehaviour
     IEnumerator WaitAndEnableContinue()
     {
         yield return new WaitForSeconds(minimumWaitTime);
-
         continueText.SetActive(true);
         canContinue = true;
     }
@@ -45,7 +44,7 @@ public class LoadingScreenUI : MonoBehaviour
 
         if (InputHandler.instance != null && InputHandler.instance.IsSpacebarTouched())
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(nextScene);
+            MinigameController.instance.LoadMinigame(nextScene);
         }
     }
 }

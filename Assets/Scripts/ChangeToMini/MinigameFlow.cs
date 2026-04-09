@@ -31,15 +31,10 @@ public class MinigameFlow : MonoBehaviour
 
     public void StartMinigame(MinigameData mg)
     {
-        // 1 Guardar estado de los 4 jugadores
         SavePartySnapshotFromBoard();
-
-        // 2️ Guardar qué minijuego se va a jugar
         MinigameSession.SelectedMinigame = mg;
 
-        // 3️ Cargar SIEMPRE la escena Loading
-        //SceneManager.LoadScene(loadingSceneName);
-        MinigameController.instance.LoadMinigame(mg.sceneName);
+        SceneManager.LoadScene(loadingSceneName);
     }
 
     private void SavePartySnapshotFromBoard()

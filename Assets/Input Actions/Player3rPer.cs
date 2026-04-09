@@ -238,6 +238,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     // PlayerMov
     private readonly InputActionMap m_PlayerMov;
     private List<IPlayerMovActions> m_PlayerMovActionsCallbackInterfaces = new List<IPlayerMovActions>();
+    internal object actions;
     private readonly InputAction m_PlayerMov_Move;
     private readonly InputAction m_PlayerMov_Jump;
     public struct PlayerMovActions

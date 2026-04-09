@@ -70,10 +70,22 @@ public class MinigameController : MonoBehaviour
 
     public void LoadMinigame(string sceneName)
     {
-        // Hacemos que la carga sea Aditiva para que la escena del tablero siga cargada
-        SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
+        selectedMinigame = database.minigames
+            .FirstOrDefault(m => m.sceneName == sceneName);
 
-        // Cuando carga la escena de minijuego desactivamos todos los objetos del tablero
+        StartCoroutine(LoadMinigameRoutine(sceneName));
+    }
+
+    private IEnumerator LoadMinigameRoutine(string sceneName)
+    {
+        Scene loadingScene = SceneManager.GetSceneByName("LoadingScene");
+        if (loadingScene.IsValid() && loadingScene.isLoaded)
+        {
+            yield return SceneManager.UnloadSceneAsync("LoadingScene");
+        }
+
+        yield return SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+
         LoadBoardGameObjects(false);
     }
 
@@ -88,7 +100,11 @@ public class MinigameController : MonoBehaviour
 
     public void ReloadBoard()
     {
-        SceneManager.UnloadSceneAsync(selectedMinigame.sceneName);
+        if (selectedMinigame != null)
+        {
+            SceneManager.UnloadSceneAsync(selectedMinigame.sceneName);
+        }
+
         LoadBoardGameObjects(true);
     }
 }
