@@ -23,6 +23,7 @@ public class UIManager : MonoBehaviour
 
     [Header("Elementos Inventario")]
     [SerializeField] private CanvasGroup actionPanel;
+    [SerializeField] private CanvasGroup actionButtonsPanel;
     [SerializeField] private CanvasGroup itemsPanel;
     [SerializeField] private Image actualDiceImage;
     [SerializeField] private Button[] itemsButtons;
@@ -121,22 +122,26 @@ public class UIManager : MonoBehaviour
             // Verificar dirección y activar la flecha correspondiente
             if ((angle <= 45f && angle > -45f || angle >= 360f && angle > 45f) && rightArrow.alpha == 0 && !arrowActivated)
             {
+                GamepadController.Instance.GoToButton(rightArrow.gameObject);
                 ActivateArrow(rightArrow, angle, possBoxTransf, possBox);
                 arrowActivated = true;
             }
             else if ((angle > 135f && angle < 225f) && leftArrow.alpha == 0 && !arrowActivated)
             {
+                GamepadController.Instance.GoToButton(leftArrow.gameObject);
                 ActivateArrow(leftArrow, angle, possBoxTransf, possBox);
                 arrowActivated = true;
             }
 
             if ((angle < 135f && angle > 45f) && forwardArrow.alpha == 0 && !arrowActivated)
             {
+                GamepadController.Instance.GoToButton(forwardArrow.gameObject);
                 ActivateArrow(forwardArrow, angle, possBoxTransf, possBox);
                 arrowActivated = true;
             }
             else if ((angle < 315f && angle > 225f || angle < -45f && angle > -135f) && downArrow.alpha == 0 && !arrowActivated)
             {
+                GamepadController.Instance.GoToButton(downArrow.gameObject);
                 ActivateArrow(downArrow, angle, possBoxTransf, possBox);
                 arrowActivated = true;
             }
@@ -493,14 +498,23 @@ public class UIManager : MonoBehaviour
         if (itemsPanel.alpha >= 1f)
         {
             itemsPanel.alpha = 0f;
+            actionButtonsPanel.interactable = true;
+            GamepadController.Instance.GoToButton(actionButtonsPanel.transform.GetChild(0).gameObject);
         }
         else
         {
             itemsPanel.alpha = 1f;
+            actionButtonsPanel.interactable = false;
         }
 
         itemsPanel.interactable = !itemsPanel.interactable;
         itemsPanel.blocksRaycasts = !itemsPanel.blocksRaycasts;
+    }
+
+    public void CloseItemPanel()
+    {
+        if(itemsPanel.alpha >= 1f && actualCharacter.isPlayer)
+            ControlItemPanel();
     }
 
     public void ControlStarCouponMsg(bool open)
@@ -531,6 +545,9 @@ public class UIManager : MonoBehaviour
 
     private void ChangeAbilityUI()
     {
+        if (actualCharacter == null)
+            return;
+
         if(actualCharacter.ability != null)
         {
             if(actualCharacter.ability.AbilityFunction != null)
