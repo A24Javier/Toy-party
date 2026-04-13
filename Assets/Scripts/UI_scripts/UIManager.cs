@@ -21,6 +21,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text characterTextStars;
     [SerializeField] private Image characterImage;
 
+    [SerializeField] private Animator yourTurnAnimator;
+
     [Header("Elementos Inventario")]
     [SerializeField] private CanvasGroup actionPanel;
     [SerializeField] private CanvasGroup actionButtonsPanel;
@@ -486,6 +488,9 @@ public class UIManager : MonoBehaviour
 
         abilityButtGroup.interactable = open;
         ChangeAbilityUI();
+
+        if(actualCharacter != null)
+            yourTurnAnimator.SetBool("show", actualCharacter.isPlayer);
 
         if (open)
         {

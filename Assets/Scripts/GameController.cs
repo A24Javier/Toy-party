@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Events;
+using TMPro;
 
 public class GameController : MonoBehaviour
 {
@@ -36,6 +38,9 @@ public class GameController : MonoBehaviour
     private bool[] isPlayer = new bool[4];
     private bool isPlayerRolling = false;
     public UnityEvent OnRoundEnded;
+
+    [SerializeField] private Button fastTimeScaleButton;
+    [SerializeField] private float npcFastTimeScale = 2.5f;
 
     public static GameController instance;
 
@@ -194,6 +199,7 @@ public class GameController : MonoBehaviour
         // Dependiendo de si es un jugador o npc el movimiento y el llamado a funciones será distinto
         if (isPlayer[thisCharTurn])
         {
+            DeactivateFastTimeScale();
             // Recorre la lista de players
             for (int i = 0; i < players.Count; i++)
             {
@@ -202,6 +208,12 @@ public class GameController : MonoBehaviour
                 {
                     playerOfTurn = players[i];
                     characterOfTurn = players[i];
+
+                    if(playerOfTurn.actualBox != null && actualRound > 0)
+                    {
+                        Vector3 boxPos = new Vector3(playerOfTurn.actualBox.GetThisBoxTransf().position.x, playerOfTurn.transform.position.y, playerOfTurn.actualBox.GetThisBoxTransf().position.z);
+                        playerOfTurn.transform.position = boxPos;
+                    }
 
                     // Actualiza UI
                     UIManager.instance.SetActualCharacter(playerOfTurn);
@@ -230,6 +242,12 @@ public class GameController : MonoBehaviour
                     UIManager.instance.ControlActionPanel(false);
                     UIManager.instance.ChangeCharacterUI(npcOfTurn);
 
+                    if(npcOfTurn.actualBox != null && actualRound > 0)
+                    {
+                        Vector3 boxPos = new Vector3(npcOfTurn.actualBox.GetThisBoxTransf().position.x, npcOfTurn.transform.position.y, npcOfTurn.actualBox.GetThisBoxTransf().position.z);
+                        npcOfTurn.transform.position = boxPos;
+                    }
+                    
                     // cam sigue npc
                     camFollow.SetTarget(npcOfTurn.transform);
                     camFollow.SetBoxRotation(npcOfTurn.savedCameraRotationY);
@@ -308,6 +326,7 @@ public class GameController : MonoBehaviour
 
             if (actualRound < MAX_ROUNDS)
             {
+                DeactivateFastTimeScale();
                 MinigameFlow.instance.StartRandom(MinigameType.OneVSOne);
                 yield break;
             }
@@ -329,11 +348,39 @@ public class GameController : MonoBehaviour
             if (gameEnded) yield break; 
             gameEnded = true;
 
+            DeactivateFastTimeScale();
+
             UIManager.instance.ShowLeaderboard(characters);
             yield return null;
         }
 
 
+    }
+
+    public void ControlFastTimeScale()
+    {
+        if(Time.timeScale >= npcFastTimeScale)
+        {
+            DeactivateFastTimeScale();
+        }
+        else
+        {
+            ActivateFastTimeScale();
+        }
+    }
+
+    private void ActivateFastTimeScale()
+    {
+        fastTimeScaleButton.GetComponent<Image>().color = Color.yellow;
+        fastTimeScaleButton.GetComponentInChildren<TMP_Text>().text = npcFastTimeScale.ToString("x0.0");
+        Time.timeScale = npcFastTimeScale;
+    }
+    
+    private void DeactivateFastTimeScale()
+    {
+        fastTimeScaleButton.GetComponent<Image>().color = Color.cyan;
+        fastTimeScaleButton.GetComponentInChildren<TMP_Text>().text = "x1.0";
+        Time.timeScale = 1f;
     }
 
     public bool IsPlayerRolling()

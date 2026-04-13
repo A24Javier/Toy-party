@@ -124,7 +124,7 @@ public class Player : Character
             newBox = actualBox.GetNewBox(0);
 
             string animToThis = newBox.GetAnimToThis();
-            Vector3 destination = newBox.GetThisBoxTransf().position + upToBox;
+            Vector3 destination = newBox.GetThisBoxTransf().position;
 
             if (animToThis == "NoAnim")
             {

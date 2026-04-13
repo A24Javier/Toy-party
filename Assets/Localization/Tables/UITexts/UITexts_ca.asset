@@ -199,6 +199,10 @@ MonoBehaviour:
     m_Localized: Esquerra
     m_Metadata:
       m_Items: []
+  - m_Id: 25122700560322560
+    m_Localized: El teu torn
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

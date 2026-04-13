@@ -17,6 +17,6 @@ MonoBehaviour:
   ChangeNumSpeed: 0.08
   MinNumber: 1
   MaxNumber: 20
-  RotSpeedX: 2
-  RotSpeedY: 2
+  RotSpeedX: 3.3
+  RotSpeedY: 3.3
   ItemFunction: {fileID: 0}

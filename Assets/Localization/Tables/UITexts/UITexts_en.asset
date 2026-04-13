@@ -198,6 +198,10 @@ MonoBehaviour:
     m_Localized: Move left
     m_Metadata:
       m_Items: []
+  - m_Id: 25122700560322560
+    m_Localized: Your turn
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

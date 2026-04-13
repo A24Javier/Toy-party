@@ -1,8 +1,9 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Rendering.Universal;
+using UnityEngine.TextCore.Text;
 
 public enum BoxType
 {
@@ -11,6 +12,19 @@ public enum BoxType
     Event,
     Path,
     Star
+}
+
+[System.Serializable]
+public class PlayerOutBoxPos
+{
+    [HideInInspector] public bool IsFilled = false;
+    public Transform TransfPos = null;
+
+    public void GoToPosition(Transform charTransf)
+    {
+        Vector3 pos = new Vector3(TransfPos.position.x, charTransf.position.y, TransfPos.position.z);
+        charTransf.DOMove(pos, 1f);
+    }
 }
 
 public class Box : MonoBehaviour
@@ -44,6 +58,8 @@ public class Box : MonoBehaviour
     public float camRotationY;
     public float powerJump = 1f;
     public float timeJump = 1f;
+
+    [SerializeField] private PlayerOutBoxPos[] playerBoxesPos;
 
     private const string ANIM_KEY_WIN_COINS = "isCelebrating";
     private const string ANIM_KEY_LOSE_COINS = "isMourning";
@@ -85,10 +101,6 @@ public class Box : MonoBehaviour
     public static Box GetCurrentStarBox()
     {
         return currentStarBox;
-    }
-
-    private void Update()
-    {
     }
 
     private static void SetStarBox(Box box)
@@ -223,10 +235,25 @@ public class Box : MonoBehaviour
                     StartCoroutine(character.gameObject.GetComponent<NPC_Controller>().ProcessBuyStar(coins));
                 }
 
-                return; 
+                break; 
         }
 
         StartCoroutine(GameController.instance.FinishTurn());
+        StartCoroutine(MoveCharacterAway(character));
+        
+    }
+
+    private IEnumerator MoveCharacterAway(Character charac)
+    {
+        yield return new WaitForSeconds(2.15f);
+
+        for(int i = 0; i < playerBoxesPos.Length; i++)
+        {
+            if (!playerBoxesPos[i].IsFilled)
+            {
+                playerBoxesPos[i].GoToPosition(charac.transform);
+            }
+        }
     }
 
     public void SetTrap(GameObject trapGO)

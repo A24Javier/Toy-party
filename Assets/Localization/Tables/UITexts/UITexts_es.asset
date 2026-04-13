@@ -199,6 +199,10 @@ MonoBehaviour:
     m_Localized: Izquierda
     m_Metadata:
       m_Items: []
+  - m_Id: 25122700560322560
+    m_Localized: Tu turno
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
