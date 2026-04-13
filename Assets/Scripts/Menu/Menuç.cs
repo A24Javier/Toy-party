@@ -1,9 +1,17 @@
+using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class Logo : MonoBehaviour
 {
+    [System.Serializable]
+    public class BotonAnimado
+    {
+        public RectTransform boton;
+        public float posicionFinalY;
+    }
+
     [Header("Movimiento Logo")]
     [SerializeField] private float posicionFinalY = 200f;
     [SerializeField] private float duracionMov = 1.5f;
@@ -19,67 +27,70 @@ public class Logo : MonoBehaviour
     [SerializeField] private RectTransform cor2;
     [SerializeField] private RectTransform corFondo;
 
-    [Header("Movimiento Boton")]
-    [SerializeField] private RectTransform conf;
-    [SerializeField] private RectTransform play;
-    [SerializeField] private RectTransform exit;
-    [SerializeField] private RectTransform credito;
-
-    [SerializeField] private float posicionFinalConfig = -223f;
-    [SerializeField] private float posicionFinalpe = -223f;
-    [SerializeField] private float posicionFinalCreditoY = -54f;
+    [Header("Botones")]
+    [SerializeField] private List<BotonAnimado> botones = new List<BotonAnimado>();
 
     [Header("Evento")]
     public UnityEvent OnMoveFinished;
 
-
-
-
     public void MoveCortinas()
     {
-        cor1.DOKill();
-        cor2.DOKill();
-        corFondo.DOKill();
+        if (cor1 != null) cor1.DOKill();
+        if (cor2 != null) cor2.DOKill();
+        if (corFondo != null) corFondo.DOKill();
 
         Sequence seq = DOTween.Sequence();
 
-        seq.Append(cor1.DOAnchorPosX(-posicionFinalCor, duracionMovCor).SetEase(Ease.InQuad));
+        if (cor1 != null)
+            seq.Append(cor1.DOAnchorPosX(-posicionFinalCor, duracionMovCor).SetEase(Ease.InQuad));
 
-        seq.Join(cor2.DOAnchorPosX(posicionFinalCor, duracionMovCor).SetEase(Ease.InQuad));
+        if (cor2 != null)
+            seq.Join(cor2.DOAnchorPosX(posicionFinalCor, duracionMovCor).SetEase(Ease.InQuad));
 
-        seq.Join(corFondo.DOAnchorPosY(posicionFinalCor, duracionMovCor).SetEase(Ease.InQuad));
+        if (corFondo != null)
+            seq.Join(corFondo.DOAnchorPosY(posicionFinalCor, duracionMovCor).SetEase(Ease.InQuad));
 
         seq.OnComplete(() =>
         {
             Move();
         });
-
-
     }
+
     public void Move()
     {
-        logo.DOKill();
+        if (logo != null)
+            logo.DOKill();
+
+        for (int i = 0; i < botones.Count; i++)
+        {
+            if (botones[i].boton != null)
+                botones[i].boton.DOKill();
+        }
 
         Sequence seq = DOTween.Sequence();
 
-        seq.Append(logo.DOAnchorPosY(posicionFinalY, duracionMov).SetEase(Ease.InQuad));
+        if (logo != null)
+        {
+            seq.Append(logo.DOAnchorPosY(posicionFinalY, duracionMov).SetEase(Ease.InQuad));
+            seq.Append(logo.DOAnchorPosY(posicionFinalY + reboteH, duracionReb).SetEase(Ease.OutQuad));
+            seq.Append(logo.DOAnchorPosY(posicionFinalY, duracionSegundoMov).SetEase(Ease.InQuad));
+        }
 
-        seq.Append(logo.DOAnchorPosY(posicionFinalY + reboteH, duracionReb).SetEase(Ease.OutQuad));
+        for (int i = 0; i < botones.Count; i++)
+        {
+            BotonAnimado botonActual = botones[i];
 
-        seq.Append(logo.DOAnchorPosY(posicionFinalY, duracionSegundoMov).SetEase(Ease.InQuad));
+            if (botonActual.boton == null)
+                continue;
 
-        seq.Join(conf.DOAnchorPosY(posicionFinalConfig, duracionMov).SetEase(Ease.InQuad));
-
-        seq.Join(play.DOAnchorPosY(posicionFinalpe, duracionMov).SetEase(Ease.InQuad));
-
-        seq.Join(exit.DOAnchorPosY(posicionFinalpe, duracionMov).SetEase(Ease.InQuad));
-
-        seq.Join(credito.DOAnchorPosY(posicionFinalpe, duracionMov).SetEase(Ease.InQuad));
+            seq.Join(
+                botonActual.boton.DOAnchorPosY(botonActual.posicionFinalY, duracionMov).SetEase(Ease.InQuad)
+            );
+        }
 
         seq.OnComplete(() =>
         {
             OnMoveFinished?.Invoke();
         });
-
     }
 }
