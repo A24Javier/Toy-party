@@ -322,7 +322,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  coins: 3
+  blueBoxCoins: 3
+  starCoins: 10
   possiblesBoxes: []
   lastBox: {fileID: 0}
   IsTowerOnIt: 0
@@ -336,10 +337,15 @@ MonoBehaviour:
   powerJump: 1
   timeJump: 1
   playerBoxesPos:
-  - TransfPos: {fileID: 4227939459741527646}
-  - TransfPos: {fileID: 8292505002330809224}
-  - TransfPos: {fileID: 1650375169896151587}
+  - IsFilled: 0
+    TransfPos: {fileID: 4227939459741527646}
+  - IsFilled: 0
+    TransfPos: {fileID: 8292505002330809224}
+  - IsFilled: 0
+    TransfPos: {fileID: 1650375169896151587}
   boxRenderers: []
+  blueBoxMat: {fileID: 2100000, guid: def029a9a0d42f74686d79c1e2fcd0f5, type: 2}
+  starBoxMat: {fileID: 2100000, guid: a4d95b01407cbb44eb9c661c27bcb986, type: 2}
 --- !u!65 &5433810204708980235
 BoxCollider:
   m_ObjectHideFlags: 0

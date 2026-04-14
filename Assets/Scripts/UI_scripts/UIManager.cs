@@ -7,6 +7,7 @@ using System;
 using System.Linq;
 using UnityEngine.SceneManagement;
 using UnityEngine.Localization;
+using UnityEngine.Events;
 
 public class UIManager : MonoBehaviour
 {
@@ -37,7 +38,7 @@ public class UIManager : MonoBehaviour
 
     // Elementos UI para selección de camino
     [Header("Cosas encrucijada")]
-    private Board board;
+    public UnityEvent OnArrowSelected;
     [SerializeField] private CanvasGroup leftArrow, rightArrow, forwardArrow, downArrow;
 
     // Elementos UI para la compra de estrella
@@ -161,12 +162,14 @@ public class UIManager : MonoBehaviour
 
         arrow.alpha = 1.0f;
         arrow.interactable = true;
+        arrow.blocksRaycasts = true;
     }
 
     private void DeactivateArrow(CanvasGroup arrow)
     {
         arrow.alpha = 0.0f;
         arrow.interactable = false;
+        arrow.blocksRaycasts = false;
     }
 
     private float CalculateAngle(Vector3 P1, Vector3 P2)
@@ -179,6 +182,8 @@ public class UIManager : MonoBehaviour
 
     public void DeactivatePathDecision()
     {
+        OnArrowSelected?.Invoke();
+
         DeactivateArrow(forwardArrow);
         DeactivateArrow(downArrow);
         DeactivateArrow(leftArrow);
