@@ -18,7 +18,7 @@ public class PlayersChuteGol : MonoBehaviour
     //variable para salvar la informacion del input
     public string NomAction = "";
 
-    PlayerInput MyInput;
+    private UnityEngine.InputSystem.PlayerInput MyInput;
     InputAction[] MisAcciones = new InputAction[3];
     [SerializeField] ManagerHUDChutechutegol Manager;
 
@@ -29,7 +29,7 @@ public class PlayersChuteGol : MonoBehaviour
 
     private void Start()
     {
-        MyInput = GetComponent<PlayerInput>();
+        MyInput = GetComponent<UnityEngine.InputSystem.PlayerInput>(); 
         for (int i = 0; i < 3; i++)
         {
             MisAcciones[i] = MyInput.actions[$"Chute{i + 1}"];

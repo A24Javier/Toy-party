@@ -15,6 +15,6 @@ MonoBehaviour:
   minigameName: Fruta al hoyo
   description: afwfqwfqwf
   previewImage: {fileID: 21300000, guid: 13495d2b7206383459c4a7a3a3070ed7, type: 3}
-  sceneName: SceneTest
+  sceneName: Fruta Al Hoyo
   previewMusic: {fileID: 8300000, guid: 86544560de2afd14fbe90bf898a1d226, type: 3}
   type: 0

@@ -13,13 +13,10 @@ public class MinigameController : MonoBehaviour
     [SerializeField] private MinigameDatabase database;
 
     private MinigameData selectedMinigame;
-
     private Scene boardScene;
 
     private void Awake()
     {
-        boardScene = SceneManager.GetActiveScene();
-
         if (instance == null)
         {
             instance = this;
@@ -31,10 +28,11 @@ public class MinigameController : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Selecciona los posibles minijuegos según el tipo definido
-    /// y los muestra en la UI correspondiente.
-    /// </summary>
+    private void Start()
+    {
+        boardScene = SceneManager.GetSceneByName("Prototip");
+    }
+
     public void SelectMinigame(string strMinigameType)
     {
         MinigameType type = (MinigameType)Enum.Parse(typeof(MinigameType), strMinigameType);
@@ -47,7 +45,6 @@ public class MinigameController : MonoBehaviour
             return;
         }
 
-        // Pasamos solo los nombres de escena a la UI
         List<string> sceneNames = possible.Select(m => m.sceneName).ToList();
 
         UIManager.instance.ShowPossibleMinigamesList(sceneNames);
@@ -55,7 +52,6 @@ public class MinigameController : MonoBehaviour
 
     public void SetMinigameToLoad(string sceneName)
     {
-        // Buscar el minijuego real
         selectedMinigame = database.minigames
             .FirstOrDefault(m => m.sceneName == sceneName);
 
@@ -73,6 +69,12 @@ public class MinigameController : MonoBehaviour
         selectedMinigame = database.minigames
             .FirstOrDefault(m => m.sceneName == sceneName);
 
+        if (selectedMinigame == null)
+        {
+            Debug.LogError("No se encontró un MinigameData para la escena: " + sceneName);
+            return;
+        }
+
         StartCoroutine(LoadMinigameRoutine(sceneName));
     }
 
@@ -86,14 +88,28 @@ public class MinigameController : MonoBehaviour
 
         yield return SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
 
+        boardScene = SceneManager.GetSceneByName("Prototip");
         LoadBoardGameObjects(false);
     }
 
     public void LoadBoardGameObjects(bool activate)
     {
+        if (!boardScene.IsValid() || !boardScene.isLoaded)
+        {
+            boardScene = SceneManager.GetSceneByName("Prototip");
+        }
+
+        if (!boardScene.IsValid() || !boardScene.isLoaded)
+        {
+            Debug.LogError("MinigameController: la escena Prototip no está cargada.");
+            return;
+        }
+
         foreach (GameObject go in boardScene.GetRootGameObjects())
         {
-            Debug.Log(go.name);
+            if (go == gameObject)
+                continue; // no apagar el propio MinigameController
+
             go.SetActive(activate);
         }
     }

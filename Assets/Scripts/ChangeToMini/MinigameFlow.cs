@@ -32,9 +32,24 @@ public class MinigameFlow : MonoBehaviour
     public void StartMinigame(MinigameData mg)
     {
         SavePartySnapshotFromBoard();
+
         MinigameSession.SelectedMinigame = mg;
 
         SceneManager.LoadScene(loadingSceneName);
+    }
+
+    public void StartRoundEndMinigame()
+    {
+        var list = database.GetRoundEndMinigames();
+
+        if (list == null || list.Count == 0)
+        {
+            Debug.LogError("No hay minijuegos válidos para final de ronda.");
+            return;
+        }
+
+        MinigameData chosen = list[Random.Range(0, list.Count)];
+        StartMinigame(chosen);
     }
 
     private void SavePartySnapshotFromBoard()

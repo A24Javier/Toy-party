@@ -308,7 +308,7 @@ public class GameController : MonoBehaviour
 
             if (actualRound < MAX_ROUNDS)
             {
-                MinigameFlow.instance.StartRandom(MinigameType.OneVSOne);
+                MinigameFlow.instance.StartRoundEndMinigame(); 
                 yield break;
             }
 

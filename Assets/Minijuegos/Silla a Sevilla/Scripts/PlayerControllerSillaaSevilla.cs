@@ -26,13 +26,13 @@ public class PlayerControllerSillaaSevilla : MonoBehaviour
     {
         //id = WhoAmI();
         //IA = YoureARobot();
-        MiInput = GetComponent<PlayerInput>();
-        Action = MiInput.actions["Sit"];
+        MiInput = GetComponent<UnityEngine.InputSystem.PlayerInput>();
+        Action = MiInput.currentActionMap.FindAction("Sit");
         MiIA = GetComponent<IASillaASevilla>();
         PlayerQuiet = true;
         ActionEnCurso = false;
         MiPosition = this.gameObject.transform.position;
-    }
+    } 
 
 
     //Aqu� cunaod activemos el script de la ia, se llamar a la funcion de la ia, para que pueda coger una silla por un periodo tiempo.
