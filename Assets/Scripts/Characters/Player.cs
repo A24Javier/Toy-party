@@ -86,6 +86,7 @@ public class Player : Character
         totalSteps = Mathf.Max(totalSteps, 0); // TotalSteps nunca será un numero negativon 
         Debug.Log($"TotalSteps es: {totalSteps}");
 
+        OnStartMove?.Invoke();
         StartCoroutine(MoveCharacterBoard(totalSteps));
         extraStep = 0;
     }

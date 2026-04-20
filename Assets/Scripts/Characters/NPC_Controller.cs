@@ -50,6 +50,8 @@ public class NPC_Controller : Character
 
     public override void Move(int steps)
     {
+        OnStartMove?.Invoke();
+
         StartCoroutine(MoveCharacterBoard(steps + extraStep));
         extraStep = 0;
     }

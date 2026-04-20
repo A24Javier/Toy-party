@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.TextCore.Text;
 
 public enum BoxType
 {
@@ -10,7 +11,8 @@ public enum BoxType
     Coin,
     Event,
     Path,
-    Star
+    Star,
+    Shop
 }
 
 [System.Serializable]
@@ -30,6 +32,8 @@ public class PlayerOutBoxPos
         ua = () =>
         {
             IsFilled = false;
+            Transform parentTransf = TransfPos.parent.gameObject.transform;
+            character.transform.position = new Vector3(parentTransf.position.x, character.transform.position.y, parentTransf.position.z);
             character.OnStartMove.RemoveListener(ua);
         };
 
@@ -239,6 +243,8 @@ public class Box : MonoBehaviour
 
     public void ActivateEffect(Character character)
     {
+        bool autoFinishTurn = true;
+
         switch (type)
         {
             case BoxType.Coin:
@@ -286,8 +292,32 @@ public class Box : MonoBehaviour
                     StartCoroutine(character.gameObject.GetComponent<NPC_Controller>().ProcessBuyStar(coins));
                 }
 
-                break; 
+                autoFinishTurn = false;
+
+                break;
+
+            case BoxType.Shop:
+                Debug.Log("Character cayo en casilla tienda");
+                ShopManager.Instance.OpenShop();
+
+                UnityAction ua = null;
+
+                ua = () =>
+                {
+                    StartCoroutine(GameController.instance.FinishTurn());
+                    StartCoroutine(MoveCharacterAway(character));
+
+                    ShopManager.Instance.OnCloseShop.RemoveListener(ua);
+                };
+
+                ShopManager.Instance.OnCloseShop.AddListener(ua);
+                autoFinishTurn = false;
+
+                break;
         }
+
+        if (!autoFinishTurn)
+            return;
 
         StartCoroutine(GameController.instance.FinishTurn());
         StartCoroutine(MoveCharacterAway(character));

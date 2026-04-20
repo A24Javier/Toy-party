@@ -31,7 +31,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7721335487242240
-    m_Localized: Usa objecte
+    m_Localized: Usar objecte
     m_Metadata:
       m_Items: []
   - m_Id: 7721230226989056
@@ -201,6 +201,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 25122700560322560
     m_Localized: El teu torn
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27672043561570304
+    m_Localized: Presiona 'ESC' per sortir
     m_Metadata:
       m_Items: []
   references:

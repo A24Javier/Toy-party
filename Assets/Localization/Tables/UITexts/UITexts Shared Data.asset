@@ -199,6 +199,10 @@ MonoBehaviour:
     m_Key: UI.YourTurn
     m_Metadata:
       m_Items: []
+  - m_Id: 27672043561570304
+    m_Key: UI.Action.PulsaESCSalir
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Events;
 
 public class ShopManager : MonoBehaviour
 {
@@ -14,6 +15,15 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private Item[] _shopItems;
     private List<Button> _shopButtons = new List<Button>();
     [SerializeField] private int _extraItemPrice = 0;
+
+    public UnityEvent OnCloseShop;
+    public static ShopManager Instance { get; private set; }
+
+    void Awake()
+    {
+        if(Instance != null && Instance != this) { Destroy(gameObject); return; }
+        Instance = this;
+    }
 
     void Start()
     {
@@ -85,6 +95,10 @@ public class ShopManager : MonoBehaviour
 
             _shopButtons.Clear();
         }
-        
+
+        OnCloseShop?.Invoke();
+
+        OnCloseShop.RemoveAllListeners();
+
     }
 }

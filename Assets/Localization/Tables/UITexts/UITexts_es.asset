@@ -203,6 +203,10 @@ MonoBehaviour:
     m_Localized: Tu turno
     m_Metadata:
       m_Items: []
+  - m_Id: 27672043561570304
+    m_Localized: Pulsa 'ESC' para salir
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "MsPage_Ability.asset", menuName = ("Abilities/Create MsPage_Ability"))]
 public class MsPage_Ability : AbilityFunction
