@@ -1,8 +1,7 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using MongoDB.Bson;
 using UnityEngine;
 
 [System.Serializable]
@@ -119,4 +118,18 @@ public class PlayerStats : MonoBehaviour
     {
         PStats.GamesPlayed++;
     }
+
+    public BsonDocument CreateUserTelemetryBSON()
+    {
+        BsonDocument bsonDoc = new BsonDocument
+        {
+            { "Playtime", PStats.Playtime },
+            { "GamesPlayed", PStats.GamesPlayed },
+            { "MinigamesPlayed", PStats.MinigamesPlayed },
+            { "MinigamesWon", PStats.MinigamesWon },
+            { "MinigamesLost", PStats.MinigamesLost }
+        };
+        return bsonDoc;
+    }
+
 }
