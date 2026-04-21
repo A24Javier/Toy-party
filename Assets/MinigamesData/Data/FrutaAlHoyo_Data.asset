@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e98bb328c117435458ad3024cccb920f, type: 3}
   m_Name: FrutaAlHoyo_Data
   m_EditorClassIdentifier: 
-  minigameName: Fruta al hoyo
+  minigameName: Fruta al Hoyo
   description: afwfqwfqwf
   previewImage: {fileID: 21300000, guid: 13495d2b7206383459c4a7a3a3070ed7, type: 3}
-  sceneName: Fruta Al Hoyo
+  sceneName: FrutaAlHoyo
   previewMusic: {fileID: 8300000, guid: 86544560de2afd14fbe90bf898a1d226, type: 3}
   type: 0

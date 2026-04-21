@@ -17,6 +17,7 @@ public class LoadingScreenUI : MonoBehaviour
 
     private bool canContinue = false;
     private string nextScene;
+    private bool alreadyContinuing = false;
 
     void Start()
     {
@@ -47,11 +48,13 @@ public class LoadingScreenUI : MonoBehaviour
 
     void Update()
     {
-        if (!canContinue)
+        if (!canContinue || alreadyContinuing)
             return;
 
-        if (AnySubmitPressed())
+        if (AnyContinuePressed())
         {
+            alreadyContinuing = true;
+
             if (MinigameController.instance == null)
             {
                 Debug.LogError("LoadingScreenUI: no existe MinigameController.");
@@ -62,7 +65,7 @@ public class LoadingScreenUI : MonoBehaviour
         }
     }
 
-    private bool AnySubmitPressed()
+    private bool AnyContinuePressed()
     {
         if (Keyboard.current != null && Keyboard.current.anyKey.wasPressedThisFrame)
             return true;

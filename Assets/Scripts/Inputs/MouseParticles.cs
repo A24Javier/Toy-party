@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MouseParticles : MonoBehaviour
 {
@@ -14,22 +12,54 @@ public class MouseParticles : MonoBehaviour
 
     void Awake()
     {
-        if (Instance != this && Instance != null) { Destroy(gameObject); return; }
+        if (Instance != this && Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         Instance = this;
         DontDestroyOnLoad(gameObject);
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void Start()
+    {
+        RefreshCamera();
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        RefreshCamera();
+    }
+
+    private void RefreshCamera()
+    {
+        particleCamera = Camera.main;
     }
 
     void Update()
     {
-        if (isEfectoActivado)
-        {
-            Ray r = particleCamera.ScreenPointToRay(Input.mousePosition);
-            Vector3 pos = r.GetPoint(distancia);
+        if (!isEfectoActivado)
+            return;
 
-            if (Input.GetMouseButtonDown(0))
-            {
-                Instantiate(clickEffect, pos, Quaternion.identity);
-            }
+        if (particleCamera == null)
+        {
+            RefreshCamera();
+            if (particleCamera == null) return;
+        }
+
+        Ray r = particleCamera.ScreenPointToRay(Input.mousePosition);
+        Vector3 pos = r.GetPoint(distancia);
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Instantiate(clickEffect, pos, Quaternion.identity);
         }
     }
 }

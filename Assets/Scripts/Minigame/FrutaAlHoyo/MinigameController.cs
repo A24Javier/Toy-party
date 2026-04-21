@@ -14,6 +14,7 @@ public class MinigameController : MonoBehaviour
 
     private MinigameData selectedMinigame;
     private Scene boardScene;
+    private bool isTransitioning = false;
 
     private void Awake()
     {
@@ -33,39 +34,10 @@ public class MinigameController : MonoBehaviour
         boardScene = SceneManager.GetSceneByName("Prototip");
     }
 
-    public void SelectMinigame(string strMinigameType)
-    {
-        MinigameType type = (MinigameType)Enum.Parse(typeof(MinigameType), strMinigameType);
-
-        List<MinigameData> possible = database.GetMinigamesByType(type);
-
-        if (possible.Count == 0)
-        {
-            Debug.LogError("No hay minijuegos del tipo: " + type);
-            return;
-        }
-
-        List<string> sceneNames = possible.Select(m => m.sceneName).ToList();
-
-        UIManager.instance.ShowPossibleMinigamesList(sceneNames);
-    }
-
-    public void SetMinigameToLoad(string sceneName)
-    {
-        selectedMinigame = database.minigames
-            .FirstOrDefault(m => m.sceneName == sceneName);
-
-        if (selectedMinigame == null)
-        {
-            Debug.LogError("No se encontró un MinigameData para la escena: " + sceneName);
-            return;
-        }
-
-        MinigameSession.SelectedMinigame = selectedMinigame;
-    }
-
     public void LoadMinigame(string sceneName)
     {
+        if (isTransitioning) return;
+
         selectedMinigame = database.minigames
             .FirstOrDefault(m => m.sceneName == sceneName);
 
@@ -80,24 +52,32 @@ public class MinigameController : MonoBehaviour
 
     private IEnumerator LoadMinigameRoutine(string sceneName)
     {
+        isTransitioning = true;
+
+        boardScene = SceneManager.GetSceneByName("Prototip");
+        if (!boardScene.IsValid() || !boardScene.isLoaded)
+        {
+            Debug.LogError("MinigameController: la escena Prototip no está cargada.");
+            isTransitioning = false;
+            yield break;
+        }
+
+        yield return SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+
+        LoadBoardGameObjects(false);
+
         Scene loadingScene = SceneManager.GetSceneByName("LoadingScene");
         if (loadingScene.IsValid() && loadingScene.isLoaded)
         {
             yield return SceneManager.UnloadSceneAsync("LoadingScene");
         }
 
-        yield return SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
-
-        boardScene = SceneManager.GetSceneByName("Prototip");
-        LoadBoardGameObjects(false);
+        isTransitioning = false;
     }
 
     public void LoadBoardGameObjects(bool activate)
     {
-        if (!boardScene.IsValid() || !boardScene.isLoaded)
-        {
-            boardScene = SceneManager.GetSceneByName("Prototip");
-        }
+        boardScene = SceneManager.GetSceneByName("Prototip");
 
         if (!boardScene.IsValid() || !boardScene.isLoaded)
         {
@@ -108,7 +88,7 @@ public class MinigameController : MonoBehaviour
         foreach (GameObject go in boardScene.GetRootGameObjects())
         {
             if (go == gameObject)
-                continue; // no apagar el propio MinigameController
+                continue;
 
             go.SetActive(activate);
         }
@@ -116,11 +96,25 @@ public class MinigameController : MonoBehaviour
 
     public void ReloadBoard()
     {
+        if (isTransitioning) return;
+        StartCoroutine(ReloadBoardRoutine());
+    }
+
+    private IEnumerator ReloadBoardRoutine()
+    {
+        isTransitioning = true;
+
         if (selectedMinigame != null)
         {
-            SceneManager.UnloadSceneAsync(selectedMinigame.sceneName);
+            Scene mgScene = SceneManager.GetSceneByName(selectedMinigame.sceneName);
+            if (mgScene.IsValid() && mgScene.isLoaded)
+            {
+                yield return SceneManager.UnloadSceneAsync(selectedMinigame.sceneName);
+            }
         }
 
         LoadBoardGameObjects(true);
+
+        isTransitioning = false;
     }
 }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class MinigameFlow : MonoBehaviour
 {
@@ -9,37 +10,18 @@ public class MinigameFlow : MonoBehaviour
     [SerializeField] private MinigameDatabase database;
     [SerializeField] private string loadingSceneName = "LoadingScene";
 
+    private bool isLoadingMinigame = false;
+
     private void Awake()
     {
         if (instance == null) instance = this;
         else Destroy(gameObject);
     }
 
-    public void StartRandom(MinigameType type)
-    {
-        var list = database.GetMinigamesByType(type);
-
-        if (list == null || list.Count == 0)
-        {
-            Debug.LogError($"No hay minijuegos del tipo {type}");
-            return;
-        }
-
-        MinigameData chosen = list[Random.Range(0, list.Count)];
-        StartMinigame(chosen);
-    }
-
-    public void StartMinigame(MinigameData mg)
-    {
-        SavePartySnapshotFromBoard();
-
-        MinigameSession.SelectedMinigame = mg;
-
-        SceneManager.LoadScene(loadingSceneName);
-    }
-
     public void StartRoundEndMinigame()
     {
+        if (isLoadingMinigame) return;
+
         var list = database.GetRoundEndMinigames();
 
         if (list == null || list.Count == 0)
@@ -50,6 +32,28 @@ public class MinigameFlow : MonoBehaviour
 
         MinigameData chosen = list[Random.Range(0, list.Count)];
         StartMinigame(chosen);
+    }
+
+    public void StartMinigame(MinigameData mg)
+    {
+        if (isLoadingMinigame) return;
+
+        SavePartySnapshotFromBoard();
+        MinigameSession.SelectedMinigame = mg;
+        StartCoroutine(LoadLoadingSceneRoutine());
+    }
+
+    private IEnumerator LoadLoadingSceneRoutine()
+    {
+        isLoadingMinigame = true;
+
+        Scene loadingScene = SceneManager.GetSceneByName(loadingSceneName);
+        if (!loadingScene.isLoaded)
+        {
+            yield return SceneManager.LoadSceneAsync(loadingSceneName, LoadSceneMode.Additive);
+        }
+
+        isLoadingMinigame = false;
     }
 
     private void SavePartySnapshotFromBoard()
