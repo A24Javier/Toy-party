@@ -1,8 +1,9 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Rendering.Universal;
+using UnityEngine.TextCore.Text;
 
 public enum BoxType
 {
@@ -10,7 +11,34 @@ public enum BoxType
     Coin,
     Event,
     Path,
-    Star
+    Star,
+    Shop
+}
+
+[System.Serializable]
+public class PlayerOutBoxPos
+{
+    [HideInInspector] public bool IsFilled = false;
+    public Transform TransfPos = null;
+
+    public void GoToPosition(Character character)
+    {
+        IsFilled = true;
+        Vector3 pos = new Vector3(TransfPos.position.x, character.transform.position.y, TransfPos.position.z);
+        character.transform.DOMove(pos, 1f);
+
+        UnityAction ua = null;
+
+        ua = () =>
+        {
+            IsFilled = false;
+            Transform parentTransf = TransfPos.parent.gameObject.transform;
+            character.transform.position = new Vector3(parentTransf.position.x, character.transform.position.y, parentTransf.position.z);
+            character.OnStartMove.RemoveListener(ua);
+        };
+
+        character.OnStartMove.AddListener(ua);
+    }
 }
 
 public class Box : MonoBehaviour
@@ -23,7 +51,9 @@ public class Box : MonoBehaviour
     }
 
     public BoxType type;
-    [SerializeField] private int coins = 3;
+    private int coins = 3;
+    [SerializeField] private int blueBoxCoins = 3;
+    [SerializeField] private int starCoins = 10;
     [SerializeField] private List<Box> possiblesBoxes;
     [SerializeField] private Box lastBox;
     public Box LastBox => lastBox;
@@ -45,6 +75,8 @@ public class Box : MonoBehaviour
     public float powerJump = 1f;
     public float timeJump = 1f;
 
+    [SerializeField] private PlayerOutBoxPos[] playerBoxesPos;
+
     private const string ANIM_KEY_WIN_COINS = "isCelebrating";
     private const string ANIM_KEY_LOSE_COINS = "isMourning";
 
@@ -53,6 +85,8 @@ public class Box : MonoBehaviour
 
     [Header("Star System")]
     [SerializeField] private Renderer[] boxRenderers;
+    [SerializeField] private Material blueBoxMat;
+    [SerializeField] private Material starBoxMat;
 
     private static List<Box> starBoxes = new List<Box>();
     private static Box currentStarBox;
@@ -66,6 +100,7 @@ public class Box : MonoBehaviour
         starInitialized = false;
     }
 
+    /*
     private void CacheRenderers()
     {
         if (boxRenderers == null || boxRenderers.Length == 0)
@@ -81,14 +116,25 @@ public class Box : MonoBehaviour
                 r.enabled = visible;
         }
     }
+    */
+
+    private void SetBoxAsStarBox()
+    {
+        type = BoxType.Star;
+        GetComponent<MeshRenderer>().material = starBoxMat;
+        coins = starCoins;
+    }
+
+    private void SetBoxAsBlueBox()
+    {
+        type = BoxType.Coin;
+        GetComponent<MeshRenderer>().material = blueBoxMat;
+        coins = blueBoxCoins;
+    }
 
     public static Box GetCurrentStarBox()
     {
         return currentStarBox;
-    }
-
-    private void Update()
-    {
     }
 
     private static void SetStarBox(Box box)
@@ -96,13 +142,21 @@ public class Box : MonoBehaviour
         for (int i = 0; i < starBoxes.Count; i++)
         {
             if (starBoxes[i] != null)
-                starBoxes[i].SetBoxVisible(false);
+            {
+                //starBoxes[i].SetBoxVisible(false);
+                starBoxes[i].SetBoxAsBlueBox();
+            }
+                
         }
 
         currentStarBox = box;
 
         if (currentStarBox != null)
-            currentStarBox.SetBoxVisible(true);
+        {
+            //currentStarBox.SetBoxVisible(true);
+            currentStarBox.SetBoxAsStarBox();
+        }
+            
     }
 
     public static void MoveStarToRandom(Box exclude)
@@ -126,7 +180,7 @@ public class Box : MonoBehaviour
 
     private void OnEnable()
     {
-        CacheRenderers();
+        //CacheRenderers();
 
         if (type == BoxType.Star)
         {
@@ -135,12 +189,21 @@ public class Box : MonoBehaviour
 
             if (!starInitialized)
             {
-                SetBoxVisible(false);
+                //SetBoxVisible(false);
+                SetBoxAsBlueBox();
             }
             else
             {
-                SetBoxVisible(currentStarBox == this);
+                //SetBoxVisible(currentStarBox == this);
+                if (currentStarBox == this)
+                    SetBoxAsStarBox();
             }
+
+            coins = starCoins;
+        }
+        else if(type == BoxType.Coin)
+        {
+            coins = blueBoxCoins;
         }
     }
 
@@ -165,7 +228,11 @@ public class Box : MonoBehaviour
             for (int i = 0; i < starBoxes.Count; i++)
             {
                 if (starBoxes[i] != null)
-                    starBoxes[i].SetBoxVisible(false);
+                {
+                    //starBoxes[i].SetBoxVisible(false);
+                    starBoxes[i].SetBoxAsBlueBox();
+                }
+                    
             }
 
             SetStarBox(starBoxes[Random.Range(0, starBoxes.Count)]);
@@ -176,6 +243,8 @@ public class Box : MonoBehaviour
 
     public void ActivateEffect(Character character)
     {
+        bool autoFinishTurn = true;
+
         switch (type)
         {
             case BoxType.Coin:
@@ -223,10 +292,49 @@ public class Box : MonoBehaviour
                     StartCoroutine(character.gameObject.GetComponent<NPC_Controller>().ProcessBuyStar(coins));
                 }
 
-                return; 
+                autoFinishTurn = false;
+
+                break;
+
+            case BoxType.Shop:
+                Debug.Log("Character cayo en casilla tienda");
+                ShopManager.Instance.OpenShop();
+
+                UnityAction ua = null;
+
+                ua = () =>
+                {
+                    StartCoroutine(GameController.instance.FinishTurn());
+                    StartCoroutine(MoveCharacterAway(character));
+
+                    ShopManager.Instance.OnCloseShop.RemoveListener(ua);
+                };
+
+                ShopManager.Instance.OnCloseShop.AddListener(ua);
+                autoFinishTurn = false;
+
+                break;
         }
 
+        if (!autoFinishTurn)
+            return;
+
         StartCoroutine(GameController.instance.FinishTurn());
+        StartCoroutine(MoveCharacterAway(character));
+        
+    }
+
+    private IEnumerator MoveCharacterAway(Character charac)
+    {
+        yield return new WaitForSeconds(2.15f);
+
+        for(int i = 0; i < playerBoxesPos.Length; i++)
+        {
+            if (!playerBoxesPos[i].IsFilled)
+            {
+                playerBoxesPos[i].GoToPosition(charac);
+            }
+        }
     }
 
     public void SetTrap(GameObject trapGO)
@@ -331,14 +439,16 @@ public class Box : MonoBehaviour
             if (all[i].type == BoxType.Star)
             {
                 starBoxes.Add(all[i]);
-                all[i].SetBoxVisible(false);
+                //all[i].SetBoxVisible(false);
+                all[i].SetBoxAsBlueBox();
             }
         }
 
         if (starBoxes.Count > 0)
         {
             currentStarBox = starBoxes[Random.Range(0, starBoxes.Count)];
-            currentStarBox.SetBoxVisible(true);
+            //currentStarBox.SetBoxVisible(true);
+            currentStarBox.SetBoxAsStarBox();
         }
     }
 

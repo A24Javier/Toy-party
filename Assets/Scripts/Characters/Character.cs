@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public abstract class Character : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public abstract class Character : MonoBehaviour
 
     // Character things
     protected ParticleSystem runningParticles;
+    public UnityEvent OnStartMove;
 
     public abstract void Move(int steps);
     protected abstract IEnumerator MoveCharacterBoard(int steps);

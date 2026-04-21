@@ -7,6 +7,7 @@ using System;
 using System.Linq;
 using UnityEngine.SceneManagement;
 using UnityEngine.Localization;
+using UnityEngine.Events;
 
 public class UIManager : MonoBehaviour
 {
@@ -21,8 +22,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text characterTextStars;
     [SerializeField] private Image characterImage;
 
+    [SerializeField] private Animator yourTurnAnimator;
+
     [Header("Elementos Inventario")]
     [SerializeField] private CanvasGroup actionPanel;
+    [SerializeField] private CanvasGroup actionButtonsPanel;
     [SerializeField] private CanvasGroup itemsPanel;
     [SerializeField] private Image actualDiceImage;
     [SerializeField] private Button[] itemsButtons;
@@ -34,7 +38,7 @@ public class UIManager : MonoBehaviour
 
     // Elementos UI para selección de camino
     [Header("Cosas encrucijada")]
-    private Board board;
+    public UnityEvent OnArrowSelected;
     [SerializeField] private CanvasGroup leftArrow, rightArrow, forwardArrow, downArrow;
 
     // Elementos UI para la compra de estrella
@@ -121,22 +125,26 @@ public class UIManager : MonoBehaviour
             // Verificar dirección y activar la flecha correspondiente
             if ((angle <= 45f && angle > -45f || angle >= 360f && angle > 45f) && rightArrow.alpha == 0 && !arrowActivated)
             {
+                GamepadController.Instance.GoToButton(rightArrow.gameObject);
                 ActivateArrow(rightArrow, angle, possBoxTransf, possBox);
                 arrowActivated = true;
             }
             else if ((angle > 135f && angle < 225f) && leftArrow.alpha == 0 && !arrowActivated)
             {
+                GamepadController.Instance.GoToButton(leftArrow.gameObject);
                 ActivateArrow(leftArrow, angle, possBoxTransf, possBox);
                 arrowActivated = true;
             }
 
             if ((angle < 135f && angle > 45f) && forwardArrow.alpha == 0 && !arrowActivated)
             {
+                GamepadController.Instance.GoToButton(forwardArrow.gameObject);
                 ActivateArrow(forwardArrow, angle, possBoxTransf, possBox);
                 arrowActivated = true;
             }
             else if ((angle < 315f && angle > 225f || angle < -45f && angle > -135f) && downArrow.alpha == 0 && !arrowActivated)
             {
+                GamepadController.Instance.GoToButton(downArrow.gameObject);
                 ActivateArrow(downArrow, angle, possBoxTransf, possBox);
                 arrowActivated = true;
             }
@@ -154,12 +162,14 @@ public class UIManager : MonoBehaviour
 
         arrow.alpha = 1.0f;
         arrow.interactable = true;
+        arrow.blocksRaycasts = true;
     }
 
     private void DeactivateArrow(CanvasGroup arrow)
     {
         arrow.alpha = 0.0f;
         arrow.interactable = false;
+        arrow.blocksRaycasts = false;
     }
 
     private float CalculateAngle(Vector3 P1, Vector3 P2)
@@ -172,6 +182,8 @@ public class UIManager : MonoBehaviour
 
     public void DeactivatePathDecision()
     {
+        OnArrowSelected?.Invoke();
+
         DeactivateArrow(forwardArrow);
         DeactivateArrow(downArrow);
         DeactivateArrow(leftArrow);
@@ -372,7 +384,9 @@ public class UIManager : MonoBehaviour
     // Método vacío para la selección de minijuegos (por implementar más tarde)
     public void ShowPossibleMinigamesList(List<string> possibleMinigames)
     {
-        int[] selectedMinigames = new int[MAX_MINIGAMES_SELECTION];
+        Debug.LogWarning("ShowPossibleMinigamesList está obsoleto con el flujo actual de MinigameFlow + LoadingScene.");
+
+        /*int[] selectedMinigames = new int[MAX_MINIGAMES_SELECTION];
         panelMinigameSelection.alpha = 1;
 
         // Quitar minijuegos hasta quedarnos solo con 5 seleccionados aleatoriamente
@@ -408,7 +422,7 @@ public class UIManager : MonoBehaviour
         int end = UnityEngine.Random.Range(0, possibleMinigames.Count);
         MinigameController.instance.SetMinigameToLoad(possibleMinigames[end]);
 
-        StartCoroutine(MinigameRoulette(end, images));
+        StartCoroutine(MinigameRoulette(end, images));*/
     }
 
     private IEnumerator MinigameRoulette(int end, Image[] images)
@@ -482,6 +496,9 @@ public class UIManager : MonoBehaviour
         abilityButtGroup.interactable = open;
         ChangeAbilityUI();
 
+        if(actualCharacter != null)
+            yourTurnAnimator.SetBool("show", actualCharacter.isPlayer);
+
         if (open)
         {
             LoadInventory();
@@ -493,14 +510,23 @@ public class UIManager : MonoBehaviour
         if (itemsPanel.alpha >= 1f)
         {
             itemsPanel.alpha = 0f;
+            actionButtonsPanel.interactable = true;
+            GamepadController.Instance.GoToButton(actionButtonsPanel.transform.GetChild(0).gameObject);
         }
         else
         {
             itemsPanel.alpha = 1f;
+            actionButtonsPanel.interactable = false;
         }
 
         itemsPanel.interactable = !itemsPanel.interactable;
         itemsPanel.blocksRaycasts = !itemsPanel.blocksRaycasts;
+    }
+
+    public void CloseItemPanel()
+    {
+        if(itemsPanel.alpha >= 1f && actualCharacter.isPlayer)
+            ControlItemPanel();
     }
 
     public void ControlStarCouponMsg(bool open)
@@ -531,6 +557,9 @@ public class UIManager : MonoBehaviour
 
     private void ChangeAbilityUI()
     {
+        if (actualCharacter == null)
+            return;
+
         if(actualCharacter.ability != null)
         {
             if(actualCharacter.ability.AbilityFunction != null)

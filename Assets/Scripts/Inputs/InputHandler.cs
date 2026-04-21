@@ -7,6 +7,7 @@ public class InputHandler : MonoBehaviour
 
     [Header("Input Actions")]
     [SerializeField] private InputActionReference touchDiceAction;
+    [SerializeField] private InputActionReference returnAction;
 
     private bool spacePressed = false;
 
@@ -25,6 +26,9 @@ public class InputHandler : MonoBehaviour
 
         touchDiceAction.action.performed += OnTouchDicePerformed;
         touchDiceAction.action.Enable();
+
+        returnAction.action.performed += OnReturnActionPressed;
+        returnAction.action.Enable();
     }
 
     private void OnDestroy()
@@ -43,6 +47,11 @@ public class InputHandler : MonoBehaviour
         spacePressed = true;
 
         StartCoroutine(ResetInputDelayed());
+    }
+
+    private void OnReturnActionPressed(InputAction.CallbackContext ctx)
+    {
+        UIManager.instance.CloseItemPanel();
     }
 
     private System.Collections.IEnumerator ResetInputDelayed()

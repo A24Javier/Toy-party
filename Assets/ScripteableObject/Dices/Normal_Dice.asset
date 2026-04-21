@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DiceObject: {fileID: 8618066680958892089, guid: d321d07eb4c1a9d47a549b81e8aac71f,
     type: 3}
-  ChangeNumSpeed: 0.33
+  ChangeNumSpeed: 0.08
   MinNumber: 1
   MaxNumber: 6
-  RotSpeedX: 1.5
-  RotSpeedY: 1.5
+  RotSpeedX: 2.25
+  RotSpeedY: 2.25
   ItemFunction: {fileID: 0}

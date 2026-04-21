@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 
 [CreateAssetMenu(fileName = "CharacterSetting.asset", menuName = ("Data/Create Character setting"))]
 public class CharacterSetting : ScriptableObject
@@ -25,6 +26,16 @@ public class CharacterSetting : ScriptableObject
         Initialize();
     }
 
+    private void OnDisable()
+    {
+        CharNameTraduction.StringChanged -= UpdateName;
+        CharDescrTraduction.StringChanged -= UpdateDescription;
+
+        LocalizationSettings.SelectedLocaleChanged -= OnLocaleChanged;
+
+        _initialized = false;
+    }
+
     private void Initialize()
     {
         if (_initialized)
@@ -33,6 +44,14 @@ public class CharacterSetting : ScriptableObject
         CharNameTraduction.StringChanged += UpdateName;
         CharDescrTraduction.StringChanged += UpdateDescription;
 
+        LocalizationSettings.SelectedLocaleChanged += OnLocaleChanged;
+
+        CharNameTraduction.RefreshString();
+        CharDescrTraduction.RefreshString();
+    }
+
+    private void OnLocaleChanged(Locale locale)
+    {
         CharNameTraduction.RefreshString();
         CharDescrTraduction.RefreshString();
     }

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 
 [CreateAssetMenu(menuName = ("Abilities/Create Ability"))]
 public class Ability : ScriptableObject
@@ -29,6 +30,16 @@ public class Ability : ScriptableObject
         Initialize();
     }
 
+    private void OnDisable()
+    {
+        AbilityLocalName.StringChanged -= UpdateName;
+        AbilityDescrLocal.StringChanged -= UpdateDescription;
+
+        LocalizationSettings.SelectedLocaleChanged -= OnLocaleChanged;
+
+        _initialized = false;
+    }
+
     public void Initialize()
     {
         if (_initialized)
@@ -39,6 +50,14 @@ public class Ability : ScriptableObject
         AbilityLocalName.StringChanged += UpdateName;
         AbilityDescrLocal.StringChanged += UpdateDescription;
 
+        LocalizationSettings.SelectedLocaleChanged += OnLocaleChanged;
+
+        AbilityLocalName.RefreshString();
+        AbilityDescrLocal.RefreshString();
+    }
+
+    private void OnLocaleChanged(Locale locale)
+    {
         AbilityLocalName.RefreshString();
         AbilityDescrLocal.RefreshString();
     }

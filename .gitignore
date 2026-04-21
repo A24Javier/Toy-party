@@ -88,6 +88,7 @@ Assets/Plugins/FMOD/Cache/
 [Aa]ssets/Prefabs/Map*
 [Aa]ssets/Models/Dice*
 /[Aa]ssets/Models/DnD_Dice/textures*
+/[Aa]ssets/Models/Characters*
 /[Aa]ssets/AddressableAssetsData/link.xml*
 /[Aa]ssets/Addressables_Temp*
 # By default, Addressables content builds will generate addressables_content_state.bin

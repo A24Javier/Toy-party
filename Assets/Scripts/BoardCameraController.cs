@@ -45,4 +45,6 @@ public class BoardCameraController : MonoBehaviour
     {
         targetRotationY = camRotationY;
     }
+
+    public Transform GetActualTarget() { return target; }
 }

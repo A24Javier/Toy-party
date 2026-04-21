@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 
 [CreateAssetMenu(menuName = ("Item/Create Item"))]
 public class Item : ScriptableObject
@@ -22,6 +23,15 @@ public class Item : ScriptableObject
         Initialize();
     }
 
+    private void OnDisable()
+    {
+        ItemLocalName.StringChanged -= UpdateName;
+
+        LocalizationSettings.SelectedLocaleChanged -= OnLocaleChanged;
+
+        _initialized = false;
+    }
+
     private void Initialize()
     {
         if (_initialized)
@@ -30,6 +40,12 @@ public class Item : ScriptableObject
         _initialized = true;
 
         ItemLocalName.StringChanged += UpdateName;
+        LocalizationSettings.SelectedLocaleChanged += OnLocaleChanged;
+        ItemLocalName.RefreshString();
+    }
+
+    private void OnLocaleChanged(Locale locale)
+    {
         ItemLocalName.RefreshString();
     }
 

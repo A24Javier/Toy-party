@@ -86,6 +86,7 @@ public class Player : Character
         totalSteps = Mathf.Max(totalSteps, 0); // TotalSteps nunca será un numero negativon 
         Debug.Log($"TotalSteps es: {totalSteps}");
 
+        OnStartMove?.Invoke();
         StartCoroutine(MoveCharacterBoard(totalSteps));
         extraStep = 0;
     }
@@ -124,7 +125,7 @@ public class Player : Character
             newBox = actualBox.GetNewBox(0);
 
             string animToThis = newBox.GetAnimToThis();
-            Vector3 destination = newBox.GetThisBoxTransf().position + upToBox;
+            Vector3 destination = newBox.GetThisBoxTransf().position;
 
             if (animToThis == "NoAnim")
             {
