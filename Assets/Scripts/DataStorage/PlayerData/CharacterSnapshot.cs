@@ -10,4 +10,6 @@ public class CharacterSnapshot
     public int stars;
     public bool isPlayer;
     public Sprite characterImage;
+    public int actualBoxIndex;
+    public int characterSettingIndex;
 }

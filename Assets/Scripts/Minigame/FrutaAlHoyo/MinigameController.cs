@@ -62,10 +62,13 @@ public class MinigameController : MonoBehaviour
             yield break;
         }
 
+        // 1. Cargar el minijuego encima del tablero
         yield return SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
 
+        // 2. Apagar tablero
         LoadBoardGameObjects(false);
 
+        // 3. Descargar loading screen
         Scene loadingScene = SceneManager.GetSceneByName("LoadingScene");
         if (loadingScene.IsValid() && loadingScene.isLoaded)
         {

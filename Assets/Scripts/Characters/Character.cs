@@ -18,6 +18,7 @@ public abstract class Character : MonoBehaviour
     public float savedCameraRotationY = 0f;
     public bool waitingStarShop = false;
     public int pendingStepsAfterShop = 0;
+    public int characterSettingIndex;
 
     // Character values
     public float speed = 0.001f;

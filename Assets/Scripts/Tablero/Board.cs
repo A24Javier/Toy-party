@@ -31,4 +31,15 @@ public class Board : MonoBehaviour
         int rand = Random.Range(0, boxes.Length);
         return boxes[rand];
     }
+
+    public int GetBoxIndex(Box targetBox)
+    {
+        for (int i = 0; i < boxes.Length; i++)
+        {
+            if (boxes[i] == targetBox)
+                return i;
+        }
+
+        return -1;
+    }
 }

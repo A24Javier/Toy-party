@@ -41,6 +41,8 @@ public class MinigameFlow : MonoBehaviour
         SavePartySnapshotFromBoard();
         MinigameSession.SelectedMinigame = mg;
         StartCoroutine(LoadLoadingSceneRoutine());
+        SaveBoardState();
+        SceneManager.LoadScene("LoadingScene");
     }
 
     private IEnumerator LoadLoadingSceneRoutine()
@@ -74,8 +76,23 @@ public class MinigameFlow : MonoBehaviour
                 coins = c.coins,
                 stars = c.stars,
                 isPlayer = c.isPlayer,
-                characterImage = c.characterImage
+                characterImage = c.characterImage,
+                actualBoxIndex = Board.instance.GetBoxIndex(c.actualBox)
             };
         }
+    }
+
+    private void SaveBoardState()
+    {
+        if (PartySession.instance == null || GameController.instance == null)
+        {
+            Debug.LogError("No se puede guardar BoardState.");
+            return;
+        }
+
+        PartySession.instance.boardState.actualTurn = GameController.instance.GetActualTurn();
+        PartySession.instance.boardState.actualRound = GameController.instance.GetActualRound();
+        PartySession.instance.boardState.idOrder = GameController.instance.GetIdOrderCopy();
+        PartySession.instance.boardState.isPlayerOrder = GameController.instance.GetIsPlayerOrderCopy();
     }
 }
