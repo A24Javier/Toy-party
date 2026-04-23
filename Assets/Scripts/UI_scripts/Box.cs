@@ -197,6 +197,8 @@ public class Box : MonoBehaviour
                 //SetBoxVisible(currentStarBox == this);
                 if (currentStarBox == this)
                     SetBoxAsStarBox();
+                else
+                    SetBoxAsBlueBox();
             }
 
             coins = starCoins;
@@ -298,12 +300,12 @@ public class Box : MonoBehaviour
 
             case BoxType.Shop:
                 Debug.Log("Character cayo en casilla tienda");
-                ShopManager.Instance.OpenShop();
 
                 UnityAction ua = null;
 
                 ua = () =>
                 {
+                    // MEJOR QUE PUEDA SEGUIR CON LOS PASOS QUE LE QUEDAN
                     StartCoroutine(GameController.instance.FinishTurn());
                     StartCoroutine(MoveCharacterAway(character));
 
@@ -311,6 +313,8 @@ public class Box : MonoBehaviour
                 };
 
                 ShopManager.Instance.OnCloseShop.AddListener(ua);
+                ShopManager.Instance.OpenShop(!character.isPlayer);
+
                 autoFinishTurn = false;
 
                 break;

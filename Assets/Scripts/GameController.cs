@@ -327,7 +327,8 @@ public class GameController : MonoBehaviour
             if (actualRound < MAX_ROUNDS)
             {
                 DeactivateFastTimeScale();
-                MinigameFlow.instance.StartRandom(MinigameType.OneVSOne);
+                //MinigameFlow.instance.StartRandom(MinigameType.OneVSOne);
+                StartMovement();
                 yield break;
             }
 
