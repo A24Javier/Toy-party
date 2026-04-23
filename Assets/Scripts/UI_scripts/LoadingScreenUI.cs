@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class LoadingScreenUI : MonoBehaviour
 {
@@ -54,14 +55,7 @@ public class LoadingScreenUI : MonoBehaviour
         if (AnyContinuePressed())
         {
             alreadyContinuing = true;
-
-            if (MinigameController.instance == null)
-            {
-                Debug.LogError("LoadingScreenUI: no existe MinigameController.");
-                return;
-            }
-
-            MinigameController.instance.LoadMinigame(nextScene);
+            SceneManager.LoadScene(nextScene);
         }
     }
 

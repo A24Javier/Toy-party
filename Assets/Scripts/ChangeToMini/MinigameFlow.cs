@@ -36,12 +36,10 @@ public class MinigameFlow : MonoBehaviour
 
     public void StartMinigame(MinigameData mg)
     {
-        if (isLoadingMinigame) return;
-
         SavePartySnapshotFromBoard();
-        MinigameSession.SelectedMinigame = mg;
-        StartCoroutine(LoadLoadingSceneRoutine());
         SaveBoardState();
+
+        MinigameSession.SelectedMinigame = mg;
         SceneManager.LoadScene("LoadingScene");
     }
 
