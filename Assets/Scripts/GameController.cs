@@ -252,7 +252,8 @@ public class GameController : MonoBehaviour
                     camFollow.SetTarget(npcOfTurn.transform);
                     camFollow.SetBoxRotation(npcOfTurn.savedCameraRotationY);
 
-                    DiceScript.Instance.SetupDice(DiceToUse, true);
+                    npcOfTurn.NPC_Actions();
+                    //DiceScript.Instance.SetupDice(DiceToUse, true);
 
                     /*
                     // Instanciamos el dado encima del npc
@@ -327,6 +328,10 @@ public class GameController : MonoBehaviour
             if (actualRound < MAX_ROUNDS)
             {
                 DeactivateFastTimeScale();
+
+                if (PlayerStats.Instance?.PStats != null)
+                    PlayerStats.Instance.PStats.MinigamesPlayed++;
+
                 //MinigameFlow.instance.StartRandom(MinigameType.OneVSOne);
                 StartMovement();
                 yield break;

@@ -78,7 +78,7 @@ public class ShopManager : MonoBehaviour
         float buyChance = Mathf.Clamp01(charCoins / 25f);
 
         // Si el inventario del NPC esta lleno cerrará la tienda
-        if (actualChar.GetInventory().GetTotalObjLoaded() >= actualChar.GetInventory().GetMaxObjects())
+        if (actualChar.GetInventory().items.Count >= actualChar.GetInventory().GetMaxObjects())
         {
             yield return new WaitForSeconds(1f);
             CloseShop();

@@ -48,6 +48,30 @@ public class NPC_Controller : Character
     }
     */
 
+    public void NPC_Actions()
+    {
+        StartCoroutine(NPC_Thinking());
+    }
+
+    /// <summary>
+    /// Función que hace que piense si debe usar objeto o tirar directamente
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator NPC_Thinking()
+    {
+        if(inventory.items.Count > 0)
+        {
+            int randItem = Random.Range(0, inventory.items.Count);
+            inventory.items[randItem].itemFunction.UseItem();
+
+            yield return new WaitForSeconds(5f);
+        }
+        
+        yield return null;
+
+        DiceScript.Instance.SetupDice(GameController.instance.DiceToUse, true);
+    }
+
     public override void Move(int steps)
     {
         OnStartMove?.Invoke();

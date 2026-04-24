@@ -704,6 +704,19 @@ public class UIManager : MonoBehaviour
                     break;
             }
         }
+
+        if (!charItem.isPlayer)
+            StartCoroutine(NPC_SelectButtons());
+
+    }
+
+    private IEnumerator NPC_SelectButtons()
+    {
+        float randWaiting = UnityEngine.Random.Range(1f, 3f);
+        yield return new WaitForSeconds(randWaiting);
+
+        int randButton = UnityEngine.Random.Range(0, selectPlayerBtns.Length);
+        selectPlayerBtns[randButton].onClick?.Invoke();
     }
 
     public void AddTenCoinsToActualChar()
