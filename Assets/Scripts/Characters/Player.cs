@@ -190,7 +190,7 @@ public class Player : Character
                 // Reanudamos movimiento
                 animator.SetBool("isRunning", true);
             }
-            if (Box.GetCurrentStarBox() == actualBox)
+            if (Box.GetCurrentStarBox() == actualBox || actualBox.type == BoxType.Shop)
             {
                 int remaining = steps - (i + 1);
 
@@ -208,6 +208,7 @@ public class Player : Character
                     yield break; // parar movimiento aquí
                 }
             }
+
         }
 
         runningParticles.Stop();

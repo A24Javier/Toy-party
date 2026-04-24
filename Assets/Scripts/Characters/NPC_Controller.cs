@@ -193,7 +193,7 @@ public class NPC_Controller : Character
                 }
 
             }
-            if (Box.GetCurrentStarBox() == actualBox)
+            if (Box.GetCurrentStarBox() == actualBox || actualBox.type == BoxType.Shop)
             {
                 int remaining = steps - (i + 1);
 

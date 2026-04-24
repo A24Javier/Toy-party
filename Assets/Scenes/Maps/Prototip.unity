@@ -17181,7 +17181,6 @@ RectTransform:
   - {fileID: 862777088}
   - {fileID: 759575376}
   - {fileID: 1006020181}
-  - {fileID: 1444528868}
   - {fileID: 241589901}
   - {fileID: 1690467223}
   - {fileID: 1984089987}
@@ -17189,6 +17188,7 @@ RectTransform:
   - {fileID: 1879846794}
   - {fileID: 59580366}
   - {fileID: 1078417756}
+  - {fileID: 1444528868}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

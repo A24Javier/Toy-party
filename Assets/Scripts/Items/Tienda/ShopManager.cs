@@ -34,14 +34,17 @@ public class ShopManager : MonoBehaviour
     public void OpenShop(bool isNPC)
     {
         // Hacemos visible la tienda
-        _shopGroup.alpha = isNPC ? 1f : 0f;
-        _shopGroup.interactable = !isNPC;
+        _shopGroup.alpha = 1f;
+        _shopGroup.interactable = true;
         _shopGroup.blocksRaycasts = !isNPC;
 
         _closeButton.interactable = !isNPC;
 
         // Creamos la lista de objetos disponibles
         _shopButtons = CreateShopList();
+
+        if (isNPC)
+            StartCoroutine(NPC_Shopping());
     }
 
     private List<Button> CreateShopList(int itemsToCreate = 3)
@@ -97,6 +100,8 @@ public class ShopManager : MonoBehaviour
         }
 
         yield return new WaitForSeconds(1f);
+
+        CloseShop();
     }
 
     private void BuyItem(Item item, Button itemButton)

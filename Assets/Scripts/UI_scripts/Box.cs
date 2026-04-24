@@ -305,9 +305,16 @@ public class Box : MonoBehaviour
 
                 ua = () =>
                 {
-                    // MEJOR QUE PUEDA SEGUIR CON LOS PASOS QUE LE QUEDAN
-                    StartCoroutine(GameController.instance.FinishTurn());
-                    StartCoroutine(MoveCharacterAway(character));
+                    if(character.pendingStepsAfterShop > 0)
+                        character.Move(character.pendingStepsAfterShop);
+                    else
+                    {
+                        StartCoroutine(GameController.instance.FinishTurn());
+                        StartCoroutine(MoveCharacterAway(character));
+                    }
+
+                    //StartCoroutine(GameController.instance.FinishTurn());
+                    //StartCoroutine(MoveCharacterAway(character));
 
                     ShopManager.Instance.OnCloseShop.RemoveListener(ua);
                 };
