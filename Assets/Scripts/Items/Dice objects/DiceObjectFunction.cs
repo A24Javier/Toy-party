@@ -7,6 +7,8 @@ public class DiceObjectFunction : ItemFunction
 
     public override void UseItem()
     {
+        ItemHeadFunction();
+
         // Cambiamos el dado que se usara al tirar el dado
         GameController.instance.DiceToUse = Dice;
 

@@ -7,6 +7,8 @@ public class AbsPlayerMovement : ItemFunction
 
     public override void UseItem()
     {
+        ItemHeadFunction();
+
         UIManager.instance.ConfigureSelectPlayer(GameController.instance.GetCharacterOfTurn(), "AbstractMovement", movementAbs);
 
         // Quitar objeto del inventario del player

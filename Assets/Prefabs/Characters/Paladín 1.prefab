@@ -133,6 +133,9 @@ MonoBehaviour:
   pendingStepsAfterShop: 0
   speed: 0.9
   extraStep: 0
+  OnStartMove:
+    m_PersistentCalls:
+      m_Calls: []
   isSelectingPath: 0
   smooth: 1
   velocidadDeRotacion: 5
@@ -252,7 +255,7 @@ MonoBehaviour:
           m_MethodName: AddItemToInventory
           m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 11400000, guid: 1f43245250761614797a148a07aba18b,
+            m_ObjectArgument: {fileID: 11400000, guid: 9ffc373b4c829774e82f793288b309eb,
               type: 2}
             m_ObjectArgumentAssemblyTypeName: Item, Assembly-CSharp
             m_IntArgument: 1
@@ -270,7 +273,7 @@ MonoBehaviour:
           m_MethodName: AddItemToInventory
           m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 11400000, guid: 826a46e3cd4268f43bf0feef2570558c,
+            m_ObjectArgument: {fileID: 11400000, guid: 4df970cabfb741846be840ab45dfaa4b,
               type: 2}
             m_ObjectArgumentAssemblyTypeName: Item, Assembly-CSharp
             m_IntArgument: 1
@@ -288,7 +291,7 @@ MonoBehaviour:
           m_MethodName: AddItemToInventory
           m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 11400000, guid: 89743ffb64a5fd84e98295db4d62af34,
+            m_ObjectArgument: {fileID: 11400000, guid: 9bffa5747812d8243bea00d42a6b63f8,
               type: 2}
             m_ObjectArgumentAssemblyTypeName: Item, Assembly-CSharp
             m_IntArgument: 1
@@ -394,6 +397,9 @@ MonoBehaviour:
   pendingStepsAfterShop: 0
   speed: 0.9
   extraStep: 0
+  OnStartMove:
+    m_PersistentCalls:
+      m_Calls: []
   smooth: 1
   velocidadDeRotacion: 5
   powerJump: 1

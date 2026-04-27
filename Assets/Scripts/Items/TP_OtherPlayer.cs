@@ -5,6 +5,8 @@ public class TP_OtherPlayer : ItemFunction
 {
     public override void UseItem()
     {
+        ItemHeadFunction();
+
         UIManager.instance.ConfigureSelectPlayer(GameController.instance.GetCharacterOfTurn(), "TP_OtherPlayer", 0);
 
         // Quitar objeto del inventario del player

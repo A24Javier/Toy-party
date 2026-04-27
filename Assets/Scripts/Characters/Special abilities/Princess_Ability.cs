@@ -19,6 +19,8 @@ public class Princess_Ability : AbilityFunction
 
         if (payForAbility && princess.GetCoins() >= Ability.AbilityPrice || !payForAbility)
         {
+            princess.usingAbility = true;
+
             if (payForAbility)
             {
                 UIManager.instance.UpdateTextCoins(princess, -Ability.AbilityPrice);

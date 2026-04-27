@@ -48,6 +48,7 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private TMP_Text textoPrecioEstrella;
     [SerializeField] private CanvasGroup UI_buyStar;
+    [SerializeField] private Button buyStarButton;
     private bool canBuyStar = false;
     private bool isStarCoupon = false;
     private int couponInvIndex = -1;
@@ -291,7 +292,8 @@ public class UIManager : MonoBehaviour
             canBuyStar = true;
         }
 
-        canBuyStar = (character.GetCoins() >= currentStarPrice);
+        canBuyStar = (character.GetCoins() >= currentStarPrice || isStarCoupon);
+        buyStarButton.interactable = canBuyStar;
     }
 
     public void BuyStar()
@@ -624,12 +626,17 @@ public class UIManager : MonoBehaviour
     private void ControlSelectPlayer(bool show)
     {
         selectPlayerGroup.alpha = show ? 1f : 0f;
-        selectPlayerGroup.interactable = selectPlayerGroup.blocksRaycasts = show;
+        selectPlayerGroup.interactable = show;
+
+        if (!show)
+            selectPlayerGroup.blocksRaycasts = false;
     }
 
     public void ConfigureSelectPlayer(Character charItem, string functionName, int modifierValue = 0)
     {
         ControlSelectPlayer(true);
+        selectPlayerGroup.blocksRaycasts = charItem.isPlayer;
+
         ControlActionPanel(false);
 
         Character[] chars = new Character[3];
@@ -668,7 +675,7 @@ public class UIManager : MonoBehaviour
             switch (functionName)
             {
                 case "AbstractMovement":
-                    selectPlayerBtns[index].onClick.AddListener(delegate { chars[index].SetExtraStep(modifierValue); });
+                    selectPlayerBtns[index].onClick.AddListener(delegate { chars[index].SetExtraStep(modifierValue); charItem.usingAbility = false; });
                     break;
                 case "StealCoins":
                     // Objective coins
@@ -678,15 +685,16 @@ public class UIManager : MonoBehaviour
                     // Coins difference
                     int diffCoins = 0;
 
-                    selectPlayerBtns[index].onClick.AddListener(delegate { chars[index].SetCoins(objCoins); UpdateTextCoins(charItem, diffCoins); });
+                    selectPlayerBtns[index].onClick.AddListener(delegate { chars[index].SetCoins(objCoins); UpdateTextCoins(charItem, diffCoins); charItem.usingAbility = false; });
                     break;
                 case "TP_OtherPlayer":
                     Box objBox = chars[index].GetActualBox();
 
                     selectPlayerBtns[index].onClick.AddListener(delegate{
                         charItem.actualBox = objBox;
-                        charItem.actualBox.ActivateEffect(charItem);
+                        //charItem.actualBox.ActivateEffect(charItem);
                         charItem.transform.position = objBox.transform.position;
+                        charItem.usingAbility = false;
                     });
 
                     break;
@@ -699,11 +707,24 @@ public class UIManager : MonoBehaviour
                         absBox = absBox.LastBox;
                     }
 
-                    selectPlayerBtns[index].onClick.AddListener(delegate { chars[index].actualBox = absBox; chars[index].transform.position = absBox.transform.position; });
+                    selectPlayerBtns[index].onClick.AddListener(delegate { chars[index].actualBox = absBox; chars[index].transform.position = absBox.transform.position; charItem.usingAbility = false; });
 
                     break;
             }
         }
+
+        if (!charItem.isPlayer)
+            StartCoroutine(NPC_SelectButtons());
+
+    }
+
+    private IEnumerator NPC_SelectButtons()
+    {
+        float randWaiting = UnityEngine.Random.Range(1f, 3f);
+        yield return new WaitForSeconds(randWaiting);
+
+        int randButton = UnityEngine.Random.Range(0, selectPlayerBtns.Length);
+        selectPlayerBtns[randButton].onClick?.Invoke();
     }
 
     public void AddTenCoinsToActualChar()

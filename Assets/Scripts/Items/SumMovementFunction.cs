@@ -7,6 +7,8 @@ public class SumMovementFunction : ItemFunction
 
     public override void UseItem()
     {
+        ItemHeadFunction();
+
         Character character = GameController.instance.GetCharacterOfTurn();
         character.SetExtraStep(sumMovement);
 

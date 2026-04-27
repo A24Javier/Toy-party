@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5ac815ede4d14148bc77972b5349a84, type: 3}
   m_Name: TP_OtherPlayerFunction
   m_EditorClassIdentifier: 
-  item: {fileID: 0}
+  item: {fileID: 11400000, guid: 59f3d1da278269e46ba3c06e46c2bdb2, type: 2}
+  headAnimator: {fileID: 9100000, guid: 689db9605a63ebb469d4fe70e349de76, type: 2}
