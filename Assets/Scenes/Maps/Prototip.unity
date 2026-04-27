@@ -6980,14 +6980,14 @@ MonoBehaviour:
         - m_Target: {fileID: 1444528872}
           m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
           m_MethodName: OpenShop
-          m_Mode: 1
+          m_Mode: 6
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
-            m_BoolArgument: 0
+            m_BoolArgument: 1
           m_CallState: 2
     IsHeavy: 0
   - KeyCode: 122
@@ -8099,6 +8099,7 @@ GameObject:
   - component: {fileID: 862777091}
   - component: {fileID: 862777090}
   - component: {fileID: 862777089}
+  - component: {fileID: 862777092}
   m_Layer: 5
   m_Name: GRP_Leaderboard
   m_TagString: Untagged
@@ -8178,6 +8179,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 862777087}
   m_CullTransparentMesh: 1
+--- !u!95 &862777092
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 862777087}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &864925952
 GameObject:
   m_ObjectHideFlags: 0
@@ -14641,6 +14663,7 @@ MonoBehaviour:
     m_LocalVariables: []
   textoPrecioEstrella: {fileID: 1551807889}
   UI_buyStar: {fileID: 1385918536}
+  buyStarButton: {fileID: 839982331}
   prefabMinigameObjList: {fileID: 6355963459433820445, guid: 093a6055900b1cd47ae2989ac0fa2652,
     type: 3}
   panelMinigameSelection: {fileID: 1757416899}

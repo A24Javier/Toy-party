@@ -7,6 +7,7 @@ public class RandomTP : ItemFunction
 {
     public override void UseItem()
     {
+        ItemHeadFunction();
         Box newBox = Board.instance.GetRandomBox();
 
         // Hacer que pegue una explosión de particulas o algo

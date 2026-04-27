@@ -22,6 +22,7 @@ public abstract class Character : MonoBehaviour
     // Character values
     public float speed = 0.001f;
     public int extraStep = 0;
+    public bool usingAbility = false;
 
     // Character things
     protected ParticleSystem runningParticles;

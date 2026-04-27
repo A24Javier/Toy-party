@@ -14,6 +14,8 @@ public class MsPage_Ability : AbilityFunction
 
         if (payForAbility && mspage.GetCoins() >= Ability.AbilityPrice || !payForAbility)
         {
+            mspage.usingAbility = true;
+
             if (payForAbility)
             {
                 UIManager.instance.UpdateTextCoins(mspage, -Ability.AbilityPrice);
@@ -25,6 +27,7 @@ public class MsPage_Ability : AbilityFunction
             if (rand >= 0 && rand <= 47.5f) // Dibuja y gana 4 monedas
             {
                 UIManager.instance.FunctionUpdateTextCoins(mspage, 4);
+                mspage.usingAbility = false;
             }
             else if (rand > 47.5f && rand <= 95) // Dibuja una bomba que hace retroceder a un rival
             {

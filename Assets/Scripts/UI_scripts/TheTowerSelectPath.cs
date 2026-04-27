@@ -14,7 +14,7 @@ public class SelectArrow
     {
         CanvasGroup.alpha = activate ? 1 : 0;
         CanvasGroup.interactable = activate;
-        //CanvasGroup.blocksRaycasts = activate;
+        CanvasGroup.blocksRaycasts = GameController.instance.GetCharacterOfTurn().isPlayer;
     }
 }
 
@@ -48,7 +48,7 @@ public class TheTowerSelectPath : MonoBehaviour
         _cameraController = FindAnyObjectByType<BoardCameraController>();
     }
 
-    public void StartSelectPathTower()
+    public void StartSelectPathTower(bool isNPC)
     {
         _canvasPath.alpha = 1f;
         _canvasPath.blocksRaycasts = true;
@@ -57,12 +57,12 @@ public class TheTowerSelectPath : MonoBehaviour
         // Quitar ActionPanel
         UIManager.instance.ControlActionPanel(false);
 
-        StartCoroutine(TowerPathSelection());
+        StartCoroutine(TowerPathSelection(isNPC));
     }
 
-    private IEnumerator TowerPathSelection()
+    private IEnumerator TowerPathSelection(bool isNPC)
     {
-        Player player = GameController.instance.GetPlayerOfTurn();
+        Character character = GameController.instance.GetCharacterOfTurn();
         Box selectedPath = null;
         GameObject[] pathsGO = GameObject.FindGameObjectsWithTag("Path");
 
@@ -78,18 +78,21 @@ public class TheTowerSelectPath : MonoBehaviour
         _cameraController.SetTarget(actualPath.transform);
         PrepareButtons();
 
+        if (isNPC)
+        {
+            yield return StartCoroutine(SelectPathDecition());
+            StartCoroutine(NPC_SelectArrowDecition());
+        }
+
         while(!_pathSelected)
         {
             yield return null;
         }
 
-        ResetPathButtons();
+        UIManager.instance.ControlActionPanel(character.isPlayer);
+        _cameraController.SetTarget(character.transform);
 
-        UIManager.instance.ControlActionPanel(true);
-        _cameraController.SetTarget(player.transform);
-
-        _canvasPath.alpha = 0f;
-        _canvasPath.interactable = false;
+        character.usingAbility = false;
     }
 
     private void PrepareButtons()
@@ -211,11 +214,51 @@ public class TheTowerSelectPath : MonoBehaviour
 
     private IEnumerator SelectRoad(Box selectedPath)
     {
+        ResetPathButtons();
+
+        _canvasPath.alpha = 0f;
+        _canvasPath.blocksRaycasts = false;
+        _canvasPath.interactable = false;
+
         _instanciedTower = Instantiate(_theTowerPrefab, selectedPath.transform.position + (Vector3.up * _towerOffsetY), Quaternion.Euler(-90f, 0f, 0f));
         selectedPath.SetTower(_instanciedTower);
 
         yield return new WaitForSeconds(3f);
 
         _pathSelected = true;
+    }
+
+    private IEnumerator SelectPathDecition()
+    {
+        int randPath = Random.Range(0, _paths.Length);
+        _pathIndex = randPath;
+
+        yield return new WaitForSeconds(1.5f);
+        
+        SetArrows(_paths[_pathIndex]);
+        _cameraController.SetTarget(_paths[_pathIndex].transform);
+    }
+
+    private IEnumerator NPC_SelectArrowDecition()
+    {
+        List<SelectArrow> arrowList = new List<SelectArrow>();
+
+        if(_forwardArrow.CanvasGroup.interactable)
+            arrowList.Add(_forwardArrow);
+
+        if(_downArrow.CanvasGroup.interactable)
+            arrowList.Add(_downArrow);
+
+        if(_leftArrow.CanvasGroup.interactable)
+            arrowList.Add(_leftArrow);
+
+        if(_rightArrow.CanvasGroup.interactable)
+            arrowList.Add(_rightArrow);
+
+        int randArrow = Random.Range(0, arrowList.Count);
+
+        yield return new WaitForSeconds(1.5f);
+
+        arrowList[randArrow].ArrowButton.onClick?.Invoke();
     }
 }

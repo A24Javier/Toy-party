@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33b7840ce0ee3a54aa709ab1ba26b537, type: 3}
   m_Name: VacuumCleanerItem
   m_EditorClassIdentifier: 
-  itemSpr: {fileID: 21300000, guid: dc915b2aa8b85d64fb65d03a123cf945, type: 3}
+  itemSpr: {fileID: 21300000, guid: d996fdba6ffa65540a9bcaf56ea8c210, type: 3}
   ItemLocalName:
     m_TableReference:
       m_TableCollectionName: GUID:e93c0a20c3100744a96dc1cde5fb00e5
