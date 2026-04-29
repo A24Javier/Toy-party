@@ -207,6 +207,14 @@ MonoBehaviour:
     m_Localized: Pulsa 'ESC' para salir
     m_Metadata:
       m_Items: []
+  - m_Id: 30896196459995136
+    m_Localized: Tutorial
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30896440790786048
+    m_Localized: "Cr\xE9ditos"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
