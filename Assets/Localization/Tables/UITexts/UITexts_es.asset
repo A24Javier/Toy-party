@@ -204,7 +204,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 27672043561570304
-    m_Localized: Pulsa 'ESC' para salir
+    m_Localized: "Pulsa 'ESC'/'Bot\xF3n derecho' para salir"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31259560806338560
+    m_Localized: "\xA1UNO VS UNO!"
     m_Metadata:
       m_Items: []
   - m_Id: 30896196459995136

@@ -84,6 +84,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image abilityImage;
     [SerializeField] private Image abilityBackground;
 
+    [Header("Casilla minijuego 1vs1")]
+    [SerializeField] private Animator minigameTimeAnimator;
+
+
     // Elementos UI para Fade in/out
     [SerializeField] private CanvasGroup panelFadeInOut;
 
@@ -710,6 +714,14 @@ public class UIManager : MonoBehaviour
                     selectPlayerBtns[index].onClick.AddListener(delegate { chars[index].actualBox = absBox; chars[index].transform.position = absBox.transform.position; charItem.usingAbility = false; });
 
                     break;
+
+                case "OneVSOne":
+                    selectPlayerBtns[index].onClick.AddListener(delegate
+                    {
+                        // Empezar minijuego con el jugador chars[index]
+                    });
+
+                    break;
             }
         }
 
@@ -735,5 +747,18 @@ public class UIManager : MonoBehaviour
     public void ChangeDiceSprite(Sprite diceSprite)
     {
         actualDiceImage.sprite = diceSprite;
+    }
+
+    public void MinigameOneVSOneBoxFunction()
+    {
+        StartCoroutine(CoroutineMinigameOneVSOne());
+    }
+
+    private IEnumerator CoroutineMinigameOneVSOne()
+    {
+        minigameTimeAnimator.SetBool("show", true);
+        yield return new WaitForSeconds(3f);
+        minigameTimeAnimator.SetBool("show", false);
+        ConfigureSelectPlayer(GameController.instance.GetCharacterOfTurn(), "OneVSOne");
     }
 }
