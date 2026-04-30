@@ -203,7 +203,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 27672043561570304
-    m_Localized: Press 'ESC' to exit
+    m_Localized: Press 'ESC'/'Right button' to exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31259560806338560
+    m_Localized: ONE VS ONE!
     m_Metadata:
       m_Items: []
   references:

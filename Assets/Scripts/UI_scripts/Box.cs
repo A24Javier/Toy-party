@@ -12,7 +12,8 @@ public enum BoxType
     Event,
     Path,
     Star,
-    Shop
+    Shop,
+    MinigameOneVSOne
 }
 
 [System.Serializable]
@@ -270,7 +271,7 @@ public class Box : MonoBehaviour
                 break;
 
             case BoxType.Event:
-                Debug.Log("Character cayo en casilla trampa");
+                Debug.Log("Character cayo en casilla de evento");
                 EventAction.Invoke();
                 break;
 
@@ -322,6 +323,12 @@ public class Box : MonoBehaviour
                 ShopManager.Instance.OnCloseShop.AddListener(ua);
                 ShopManager.Instance.OpenShop(!character.isPlayer);
 
+                autoFinishTurn = false;
+
+                break;
+
+            case BoxType.MinigameOneVSOne:
+                UIManager.instance.MinigameOneVSOneBoxFunction();
                 autoFinishTurn = false;
 
                 break;
