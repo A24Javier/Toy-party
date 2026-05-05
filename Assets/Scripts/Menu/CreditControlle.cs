@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class CreditController : MonoBehaviour
+public class CreditosController: MonoBehaviour
 {
     [Header("Nombres de escenas")]
     [SerializeField] private string atras;

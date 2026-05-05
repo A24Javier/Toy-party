@@ -8,12 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MenuTitulo.unity
     guid: bc407e01a4f9f9f40bfbe5e40cffce8a
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/MenuPrincipal.unity
     guid: 1c24e4dd7254b1e4e9874e4b1e1f6cf6
-  - enabled: 1
-    path: Assets/Scenes/SelectCharacterMenu.unity
-    guid: 23685381a80720644a3ad7aef705d552
   - enabled: 1
     path: Assets/Scenes/Maps/Prototip.unity
     guid: 88ffc01853086f14d957ad702e5bd64e
@@ -32,12 +29,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SceneTests/SceneTest 3.unity
     guid: 8e3838961a1d09e498b62180c8262945
-  - enabled: 1
-    path: Assets/Scenes/Minigames/FrutaAlHoyo.unity
-    guid: bbc8930197546cf42b744e7f47c7ef50
-  - enabled: 1
-    path: Assets/Scenes/Minigames/Strip Slack.unity
-    guid: fccce3ec27e6e044f8749b199f612fb4
   - enabled: 1
     path: Assets/Scenes/Credit.unity
     guid: 16f1becf3b556df4b94f2c4ed4a725e6
