@@ -130,25 +130,51 @@ public class UIManager : MonoBehaviour
             // Verificar dirección y activar la flecha correspondiente
             if ((angle <= 45f && angle > -45f || angle >= 360f && angle > 45f) && rightArrow.alpha == 0 && !arrowActivated)
             {
+                Debug.Log("Es flecha derecha");
                 GamepadController.Instance.GoToButton(rightArrow.gameObject);
                 ActivateArrow(rightArrow, angle, possBoxTransf, possBox);
                 arrowActivated = true;
             }
             else if ((angle > 135f && angle < 225f) && leftArrow.alpha == 0 && !arrowActivated)
             {
+                Debug.Log("Es flecha izquierda");
                 GamepadController.Instance.GoToButton(leftArrow.gameObject);
                 ActivateArrow(leftArrow, angle, possBoxTransf, possBox);
                 arrowActivated = true;
             }
 
-            if ((angle < 135f && angle > 45f) && forwardArrow.alpha == 0 && !arrowActivated)
+            if ((angle < 135f && angle > 45f) && !arrowActivated)
             {
-                GamepadController.Instance.GoToButton(forwardArrow.gameObject);
-                ActivateArrow(forwardArrow, angle, possBoxTransf, possBox);
-                arrowActivated = true;
+                Debug.Log("Es flecha delante");
+                if(forwardArrow.alpha == 0)
+                {
+                    GamepadController.Instance.GoToButton(forwardArrow.gameObject);
+                    ActivateArrow(forwardArrow, angle, possBoxTransf, possBox);
+                    arrowActivated = true;
+                }
+                else if(rightArrow.alpha == 0)
+                {
+                    GamepadController.Instance.GoToButton(rightArrow.gameObject);
+                    ActivateArrow(rightArrow, angle, possBoxTransf, possBox);
+                    arrowActivated = true;
+                }
+                else if(leftArrow.alpha == 0)
+                {
+                    GamepadController.Instance.GoToButton(leftArrow.gameObject);
+                    ActivateArrow(leftArrow, angle, possBoxTransf, possBox);
+                    arrowActivated = true;
+                }
+                else if(downArrow.alpha == 0)
+                {
+                    GamepadController.Instance.GoToButton(downArrow.gameObject);
+                    ActivateArrow(downArrow, angle, possBoxTransf, possBox);
+                    arrowActivated = true;
+                }
+                
             }
             else if ((angle < 315f && angle > 225f || angle < -45f && angle > -135f) && downArrow.alpha == 0 && !arrowActivated)
             {
+                Debug.Log("Es flecha abajo");
                 GamepadController.Instance.GoToButton(downArrow.gameObject);
                 ActivateArrow(downArrow, angle, possBoxTransf, possBox);
                 arrowActivated = true;
@@ -561,6 +587,8 @@ public class UIManager : MonoBehaviour
 
     private void ChangeAbilityUI()
     {
+        abilityButton.onClick.RemoveAllListeners();
+
         if (actualCharacter == null)
             return;
 
@@ -568,11 +596,9 @@ public class UIManager : MonoBehaviour
         {
             if(actualCharacter.ability.AbilityFunction != null)
             {
-                abilityButton.onClick.RemoveAllListeners();
                 abilityButton.onClick.AddListener(actualCharacter.ability.AbilityFunction.UseAbility);
             }
             
-
             abilityImage.sprite = actualCharacter.ability.AbilitySprite;
             abilityBackground.color = actualCharacter.ability.BackgroundColor;
 

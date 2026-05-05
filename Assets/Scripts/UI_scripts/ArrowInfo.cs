@@ -32,7 +32,6 @@ public class ArrowInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         {
             if (!_isShowingPath)
             {
-                Debug.Log($"Mostrar camino. Object name: {gameObject.name}");
                 ShowPath();
             }
 
@@ -41,7 +40,6 @@ public class ArrowInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         {
             if (_isShowingPath)
             {
-                Debug.Log($"No mostrar camino. Object name: {gameObject.name}");
                 UnshowPath();
             }
             
