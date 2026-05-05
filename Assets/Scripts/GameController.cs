@@ -134,6 +134,7 @@ public class GameController : MonoBehaviour
             newPlayer.isPlayer = true;
             newPlayer.SetCharSetting(_charactersSettings[playerSetting]);
             newPlayerGO.transform.position = spawns[setId].position;
+            newPlayer.savedCameraRotationY = spawns[setId].transform.localRotation.eulerAngles.y;
 
             // Asigna un character id al jugador instanciado
             newPlayer.SetCharId(setId);
@@ -180,6 +181,7 @@ public class GameController : MonoBehaviour
                 newNPC.isPlayer = false;
                 newNPC.SetCharSetting(_charactersSettings[npcsCharSettings[i]]);
                 newNPCGO.transform.position = spawns[setId].position;
+                newNPC.savedCameraRotationY = spawns[setId].transform.localRotation.eulerAngles.y;
 
                 // Asigna un character id al NPC instanciado
                 newNPC.SetCharId(setId);
@@ -288,7 +290,8 @@ public class GameController : MonoBehaviour
                     camFollow.SetTarget(npcOfTurn.transform);
                     camFollow.SetBoxRotation(npcOfTurn.savedCameraRotationY);
 
-                    DiceScript.Instance.SetupDice(DiceToUse, true);
+                    npcOfTurn.NPC_Actions();
+                    //DiceScript.Instance.SetupDice(DiceToUse, true);
 
                     /*
                     // Instanciamos el dado encima del npc
@@ -350,12 +353,9 @@ public class GameController : MonoBehaviour
         if (actualTurn % 4 == 0)
         {
             Debug.Log("Ronda de minijuego");
-            // Ronda de minijuego
-            //MinigameController.instance.SelectMinigame("AllVSAll");
 
             actualRound++;
 
-            // Activamos el evento de OnRoundEnded
             OnRoundEnded?.Invoke();
 
             yield return new WaitForSeconds(2f);
@@ -363,20 +363,21 @@ public class GameController : MonoBehaviour
             if (actualRound < MAX_ROUNDS)
             {
                 DeactivateFastTimeScale();
+
+                if (PlayerStats.Instance?.PStats != null)
+                    PlayerStats.Instance.PStats.MinigamesPlayed++;
+
                 MinigameFlow.instance.StartRoundEndMinigame();
                 yield break;
             }
-
         }
         else
         {
-            if(actualRound < MAX_ROUNDS)
+            if (actualRound < MAX_ROUNDS)
             {
-                // Que tire el siguiente jugador
                 yield return new WaitForSeconds(2f);
                 StartMovement();
             }
-            
         }
 
         if (actualRound >= MAX_ROUNDS)
@@ -486,6 +487,36 @@ public class GameController : MonoBehaviour
         }
 
         StartCoroutine(Box.InitStarSystemNextFrame());
+        StartMovement();
+    }
+
+    public Character GetCharacterById(int characterId)
+    {
+        if (characters == null)
+            return null;
+
+        for (int i = 0; i < characters.Length; i++)
+        {
+            if (characters[i] != null && characters[i].characterId == characterId)
+                return characters[i];
+        }
+
+        return null;
+    }
+
+    public void StartNextTurnAfterMinigame()
+    {
+        if (actualRound >= MAX_ROUNDS)
+        {
+            if (gameEnded)
+                return;
+
+            gameEnded = true;
+            DeactivateFastTimeScale();
+            UIManager.instance.ShowLeaderboard(characters);
+            return;
+        }
+
         StartMovement();
     }
 }

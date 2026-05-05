@@ -1,30 +1,29 @@
 using System.Collections;
-using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LoadingScreenUI : MonoBehaviour
 {
     [Header("UI References")]
-    public TMP_Text titleText;
-    public TMP_Text descriptionText;
-    public Image previewImage;
-    public GameObject continueText;
+    [SerializeField] private TMP_Text titleText;
+    [SerializeField] private TMP_Text descriptionText;
+    [SerializeField] private Image previewImage;
+    [SerializeField] private GameObject continueText;
 
     [Header("Config")]
-    public float minimumWaitTime = 2f;
+    [SerializeField] private float minimumWaitTime = 2f;
 
     private bool canContinue = false;
-    private string nextScene;
     private bool alreadyContinuing = false;
 
-    void Start()
+    private void Start()
     {
-        continueText.SetActive(false);
+        if (continueText != null)
+            continueText.SetActive(false);
 
-        var mg = MinigameSession.SelectedMinigame;
+        MinigameData mg = MinigameSession.SelectedMinigame;
 
         if (mg == null)
         {
@@ -32,22 +31,29 @@ public class LoadingScreenUI : MonoBehaviour
             return;
         }
 
-        titleText.text = mg.minigameName;
-        descriptionText.text = mg.description;
-        previewImage.sprite = mg.previewImage;
-        nextScene = mg.sceneName;
+        if (titleText != null)
+            titleText.text = mg.minigameName;
+
+        if (descriptionText != null)
+            descriptionText.text = mg.description;
+
+        if (previewImage != null)
+            previewImage.sprite = mg.previewImage;
 
         StartCoroutine(WaitAndEnableContinue());
     }
 
-    IEnumerator WaitAndEnableContinue()
+    private IEnumerator WaitAndEnableContinue()
     {
         yield return new WaitForSeconds(minimumWaitTime);
-        continueText.SetActive(true);
+
+        if (continueText != null)
+            continueText.SetActive(true);
+
         canContinue = true;
     }
 
-    void Update()
+    private void Update()
     {
         if (!canContinue || alreadyContinuing)
             return;
@@ -55,7 +61,14 @@ public class LoadingScreenUI : MonoBehaviour
         if (AnyContinuePressed())
         {
             alreadyContinuing = true;
-            SceneManager.LoadScene(nextScene);
+
+            if (MinigameController.instance == null)
+            {
+                Debug.LogError("LoadingScreenUI: no existe MinigameController.instance.");
+                return;
+            }
+
+            MinigameController.instance.StartSelectedMinigame();
         }
     }
 
@@ -69,8 +82,11 @@ public class LoadingScreenUI : MonoBehaviour
 
         if (Gamepad.current != null)
         {
-            if (Gamepad.current.buttonSouth.wasPressedThisFrame) return true;
-            if (Gamepad.current.startButton.wasPressedThisFrame) return true;
+            if (Gamepad.current.buttonSouth.wasPressedThisFrame)
+                return true;
+
+            if (Gamepad.current.startButton.wasPressedThisFrame)
+                return true;
         }
 
         return false;

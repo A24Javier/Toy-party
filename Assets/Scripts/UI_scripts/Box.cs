@@ -12,7 +12,8 @@ public enum BoxType
     Event,
     Path,
     Star,
-    Shop
+    Shop,
+    MinigameOneVSOne
 }
 
 [System.Serializable]
@@ -197,6 +198,8 @@ public class Box : MonoBehaviour
                 //SetBoxVisible(currentStarBox == this);
                 if (currentStarBox == this)
                     SetBoxAsStarBox();
+                else
+                    SetBoxAsBlueBox();
             }
 
             coins = starCoins;
@@ -268,7 +271,7 @@ public class Box : MonoBehaviour
                 break;
 
             case BoxType.Event:
-                Debug.Log("Character cayo en casilla trampa");
+                Debug.Log("Character cayo en casilla de evento");
                 EventAction.Invoke();
                 break;
 
@@ -298,19 +301,34 @@ public class Box : MonoBehaviour
 
             case BoxType.Shop:
                 Debug.Log("Character cayo en casilla tienda");
-                ShopManager.Instance.OpenShop();
 
                 UnityAction ua = null;
 
                 ua = () =>
                 {
-                    StartCoroutine(GameController.instance.FinishTurn());
-                    StartCoroutine(MoveCharacterAway(character));
+                    if(character.pendingStepsAfterShop > 0)
+                        character.Move(character.pendingStepsAfterShop);
+                    else
+                    {
+                        StartCoroutine(GameController.instance.FinishTurn());
+                        StartCoroutine(MoveCharacterAway(character));
+                    }
+
+                    //StartCoroutine(GameController.instance.FinishTurn());
+                    //StartCoroutine(MoveCharacterAway(character));
 
                     ShopManager.Instance.OnCloseShop.RemoveListener(ua);
                 };
 
                 ShopManager.Instance.OnCloseShop.AddListener(ua);
+                ShopManager.Instance.OpenShop(!character.isPlayer);
+
+                autoFinishTurn = false;
+
+                break;
+
+            case BoxType.MinigameOneVSOne:
+                UIManager.instance.MinigameOneVSOneBoxFunction();
                 autoFinishTurn = false;
 
                 break;

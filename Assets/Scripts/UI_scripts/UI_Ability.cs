@@ -19,10 +19,12 @@ public class UI_Ability : MonoBehaviour
 
     public void SetAbilityButton(Ability ability)
     {
+        _abilityButton.interactable = ability.AbilityFunction != null;
+
         _abilityImage.sprite = ability.AbilitySprite;
         _imageBackground.color = ability.BackgroundColor;
 
         _abilityButton.onClick.RemoveAllListeners();
-        _abilityButton.onClick.AddListener(delegate { ability.AbilityFunction.UseAbility(); });
+        _abilityButton.onClick.AddListener(delegate { ability.AbilityFunction.UseAbility(); _abilityButton.interactable = false; });
     }
 }

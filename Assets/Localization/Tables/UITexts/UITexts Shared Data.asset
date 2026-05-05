@@ -203,6 +203,18 @@ MonoBehaviour:
     m_Key: UI.Action.PulsaESCSalir
     m_Metadata:
       m_Items: []
+  - m_Id: 30896196459995136
+    m_Key: UI.Tutorial
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30896440790786048
+    m_Key: UI.Creditos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31259560806338560
+    m_Key: UI.UnoVSUno
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

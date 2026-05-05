@@ -48,6 +48,7 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private TMP_Text textoPrecioEstrella;
     [SerializeField] private CanvasGroup UI_buyStar;
+    [SerializeField] private Button buyStarButton;
     private bool canBuyStar = false;
     private bool isStarCoupon = false;
     private int couponInvIndex = -1;
@@ -82,6 +83,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Button abilityButton;
     [SerializeField] private Image abilityImage;
     [SerializeField] private Image abilityBackground;
+
+    [Header("Casilla minijuego 1vs1")]
+    [SerializeField] private Animator minigameTimeAnimator;
+
 
     // Elementos UI para Fade in/out
     [SerializeField] private CanvasGroup panelFadeInOut;
@@ -125,25 +130,51 @@ public class UIManager : MonoBehaviour
             // Verificar dirección y activar la flecha correspondiente
             if ((angle <= 45f && angle > -45f || angle >= 360f && angle > 45f) && rightArrow.alpha == 0 && !arrowActivated)
             {
+                Debug.Log("Es flecha derecha");
                 GamepadController.Instance.GoToButton(rightArrow.gameObject);
                 ActivateArrow(rightArrow, angle, possBoxTransf, possBox);
                 arrowActivated = true;
             }
             else if ((angle > 135f && angle < 225f) && leftArrow.alpha == 0 && !arrowActivated)
             {
+                Debug.Log("Es flecha izquierda");
                 GamepadController.Instance.GoToButton(leftArrow.gameObject);
                 ActivateArrow(leftArrow, angle, possBoxTransf, possBox);
                 arrowActivated = true;
             }
 
-            if ((angle < 135f && angle > 45f) && forwardArrow.alpha == 0 && !arrowActivated)
+            if ((angle < 135f && angle > 45f) && !arrowActivated)
             {
-                GamepadController.Instance.GoToButton(forwardArrow.gameObject);
-                ActivateArrow(forwardArrow, angle, possBoxTransf, possBox);
-                arrowActivated = true;
+                Debug.Log("Es flecha delante");
+                if(forwardArrow.alpha == 0)
+                {
+                    GamepadController.Instance.GoToButton(forwardArrow.gameObject);
+                    ActivateArrow(forwardArrow, angle, possBoxTransf, possBox);
+                    arrowActivated = true;
+                }
+                else if(rightArrow.alpha == 0)
+                {
+                    GamepadController.Instance.GoToButton(rightArrow.gameObject);
+                    ActivateArrow(rightArrow, angle, possBoxTransf, possBox);
+                    arrowActivated = true;
+                }
+                else if(leftArrow.alpha == 0)
+                {
+                    GamepadController.Instance.GoToButton(leftArrow.gameObject);
+                    ActivateArrow(leftArrow, angle, possBoxTransf, possBox);
+                    arrowActivated = true;
+                }
+                else if(downArrow.alpha == 0)
+                {
+                    GamepadController.Instance.GoToButton(downArrow.gameObject);
+                    ActivateArrow(downArrow, angle, possBoxTransf, possBox);
+                    arrowActivated = true;
+                }
+                
             }
             else if ((angle < 315f && angle > 225f || angle < -45f && angle > -135f) && downArrow.alpha == 0 && !arrowActivated)
             {
+                Debug.Log("Es flecha abajo");
                 GamepadController.Instance.GoToButton(downArrow.gameObject);
                 ActivateArrow(downArrow, angle, possBoxTransf, possBox);
                 arrowActivated = true;
@@ -238,7 +269,7 @@ public class UIManager : MonoBehaviour
                 }
             }
 
-            yield return new WaitForSeconds(0.25f);
+            yield return new WaitForSeconds(0.1f);
             characterTextCoins.text = string.Concat(coinsTradText, actualCoins.ToString());
         }
 
@@ -291,7 +322,8 @@ public class UIManager : MonoBehaviour
             canBuyStar = true;
         }
 
-        canBuyStar = (character.GetCoins() >= currentStarPrice);
+        canBuyStar = (character.GetCoins() >= currentStarPrice || isStarCoupon);
+        buyStarButton.interactable = canBuyStar;
     }
 
     public void BuyStar()
@@ -557,6 +589,8 @@ public class UIManager : MonoBehaviour
 
     private void ChangeAbilityUI()
     {
+        abilityButton.onClick.RemoveAllListeners();
+
         if (actualCharacter == null)
             return;
 
@@ -564,11 +598,9 @@ public class UIManager : MonoBehaviour
         {
             if(actualCharacter.ability.AbilityFunction != null)
             {
-                abilityButton.onClick.RemoveAllListeners();
                 abilityButton.onClick.AddListener(actualCharacter.ability.AbilityFunction.UseAbility);
             }
             
-
             abilityImage.sprite = actualCharacter.ability.AbilitySprite;
             abilityBackground.color = actualCharacter.ability.BackgroundColor;
 
@@ -626,12 +658,17 @@ public class UIManager : MonoBehaviour
     private void ControlSelectPlayer(bool show)
     {
         selectPlayerGroup.alpha = show ? 1f : 0f;
-        selectPlayerGroup.interactable = selectPlayerGroup.blocksRaycasts = show;
+        selectPlayerGroup.interactable = show;
+
+        if (!show)
+            selectPlayerGroup.blocksRaycasts = false;
     }
 
     public void ConfigureSelectPlayer(Character charItem, string functionName, int modifierValue = 0)
     {
         ControlSelectPlayer(true);
+        selectPlayerGroup.blocksRaycasts = charItem.isPlayer;
+
         ControlActionPanel(false);
 
         Character[] chars = new Character[3];
@@ -670,7 +707,7 @@ public class UIManager : MonoBehaviour
             switch (functionName)
             {
                 case "AbstractMovement":
-                    selectPlayerBtns[index].onClick.AddListener(delegate { chars[index].SetExtraStep(modifierValue); });
+                    selectPlayerBtns[index].onClick.AddListener(delegate { chars[index].SetExtraStep(modifierValue); charItem.usingAbility = false; });
                     break;
                 case "StealCoins":
                     // Objective coins
@@ -680,15 +717,16 @@ public class UIManager : MonoBehaviour
                     // Coins difference
                     int diffCoins = 0;
 
-                    selectPlayerBtns[index].onClick.AddListener(delegate { chars[index].SetCoins(objCoins); UpdateTextCoins(charItem, diffCoins); });
+                    selectPlayerBtns[index].onClick.AddListener(delegate { chars[index].SetCoins(objCoins); UpdateTextCoins(charItem, diffCoins); charItem.usingAbility = false; });
                     break;
                 case "TP_OtherPlayer":
                     Box objBox = chars[index].GetActualBox();
 
                     selectPlayerBtns[index].onClick.AddListener(delegate{
                         charItem.actualBox = objBox;
-                        charItem.actualBox.ActivateEffect(charItem);
+                        //charItem.actualBox.ActivateEffect(charItem);
                         charItem.transform.position = objBox.transform.position;
+                        charItem.usingAbility = false;
                     });
 
                     break;
@@ -701,11 +739,32 @@ public class UIManager : MonoBehaviour
                         absBox = absBox.LastBox;
                     }
 
-                    selectPlayerBtns[index].onClick.AddListener(delegate { chars[index].actualBox = absBox; chars[index].transform.position = absBox.transform.position; });
+                    selectPlayerBtns[index].onClick.AddListener(delegate { chars[index].actualBox = absBox; chars[index].transform.position = absBox.transform.position; charItem.usingAbility = false; });
+
+                    break;
+
+                case "OneVSOne":
+                    selectPlayerBtns[index].onClick.AddListener(delegate
+                    {
+                        // Empezar minijuego con el jugador chars[index]
+                    });
 
                     break;
             }
         }
+
+        if (!charItem.isPlayer)
+            StartCoroutine(NPC_SelectButtons());
+
+    }
+
+    private IEnumerator NPC_SelectButtons()
+    {
+        float randWaiting = UnityEngine.Random.Range(1f, 3f);
+        yield return new WaitForSeconds(randWaiting);
+
+        int randButton = UnityEngine.Random.Range(0, selectPlayerBtns.Length);
+        selectPlayerBtns[randButton].onClick?.Invoke();
     }
 
     public void AddTenCoinsToActualChar()
@@ -716,5 +775,18 @@ public class UIManager : MonoBehaviour
     public void ChangeDiceSprite(Sprite diceSprite)
     {
         actualDiceImage.sprite = diceSprite;
+    }
+
+    public void MinigameOneVSOneBoxFunction()
+    {
+        StartCoroutine(CoroutineMinigameOneVSOne());
+    }
+
+    private IEnumerator CoroutineMinigameOneVSOne()
+    {
+        minigameTimeAnimator.SetBool("show", true);
+        yield return new WaitForSeconds(3f);
+        minigameTimeAnimator.SetBool("show", false);
+        ConfigureSelectPlayer(GameController.instance.GetCharacterOfTurn(), "OneVSOne");
     }
 }

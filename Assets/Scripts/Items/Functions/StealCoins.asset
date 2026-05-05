@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3252d27fe21a34941b1f491053c6cc79, type: 3}
   m_Name: StealCoins
   m_EditorClassIdentifier: 
-  item: {fileID: 0}
+  item: {fileID: 11400000, guid: 6cf36508e4ab59642b4da0fa472baea2, type: 2}
+  headAnimator: {fileID: 9100000, guid: 689db9605a63ebb469d4fe70e349de76, type: 2}
   coinsToSteal: 3

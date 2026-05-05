@@ -18,6 +18,8 @@ public class Robert_Ability : AbilityFunction
 
         if(payForAbility && robert.GetCoins() >= Ability.AbilityPrice || !payForAbility)
         {
+            robert.usingAbility = true;
+
             if(payForAbility)
             {
                 UIManager.instance.UpdateTextCoins(robert, -Ability.AbilityPrice);
@@ -36,12 +38,17 @@ public class Robert_Ability : AbilityFunction
                 sq.Append(robert.transform.DOMove(boxes[i].transform.position, durationToBox));
             }
 
+            Debug.Log("Robert secuencia empezada");
             sq.Play();
 
             robert.actualBox = boxes[(boxesToPass - 1)];
 
             sq.OnComplete(() =>
             {
+                Debug.Log("Robert secuencia terminada");
+
+                robert.StopAllCoroutines();
+                robert.usingAbility = false;
                 robert.actualBox.ActivateEffect(robert);
             });
         }

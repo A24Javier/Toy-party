@@ -7,6 +7,8 @@ public class StealCoins : ItemFunction
 
     public override void UseItem()
     {
+        ItemHeadFunction();
+
         UIManager.instance.ConfigureSelectPlayer(GameController.instance.GetCharacterOfTurn(), "StealCoins", coinsToSteal);
 
         // Quitar objeto del inventario del player

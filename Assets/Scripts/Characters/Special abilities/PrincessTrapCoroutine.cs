@@ -39,7 +39,8 @@ public class PrincessTrapCoroutine : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
 
-        Player player = GameController.instance.GetPlayerOfTurn();
-        _cameraController.SetTarget(player.transform);
+        Character character = GameController.instance.GetCharacterOfTurn();
+        _cameraController.SetTarget(character.transform);
+        character.usingAbility = false;
     }
 }

@@ -14,12 +14,14 @@ public class Peon_Ability : AbilityFunction
 
         if (payForAbility && peon.GetCoins() >= Ability.AbilityPrice || !payForAbility)
         {
+            peon.usingAbility = true;
+
             if (payForAbility)
             {
                 UIManager.instance.UpdateTextCoins(peon, -Ability.AbilityPrice);
             }
 
-            TheTowerSelectPath.Instance.StartSelectPathTower();
+            TheTowerSelectPath.Instance.StartSelectPathTower(!peon.isPlayer);
         }
     }
 }

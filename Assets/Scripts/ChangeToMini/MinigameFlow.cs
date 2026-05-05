@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
-using System.Collections;
 
 public class MinigameFlow : MonoBehaviour
 {
@@ -8,65 +6,104 @@ public class MinigameFlow : MonoBehaviour
 
     [Header("Config")]
     [SerializeField] private MinigameDatabase database;
-    [SerializeField] private string loadingSceneName = "LoadingScene";
 
-    private bool isLoadingMinigame = false;
+    private bool isStartingMinigame = false;
 
     private void Awake()
     {
-        if (instance == null) instance = this;
-        else Destroy(gameObject);
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void StartRoundEndMinigame()
     {
-        if (isLoadingMinigame) return;
+        if (isStartingMinigame)
+            return;
+
+        isStartingMinigame = true;
+
+        if (database == null)
+        {
+            Debug.LogError("MinigameFlow: no hay MinigameDatabase asignada.");
+            isStartingMinigame = false;
+            return;
+        }
 
         var list = database.GetRoundEndMinigames();
 
         if (list == null || list.Count == 0)
         {
-            Debug.LogError("No hay minijuegos válidos para final de ronda.");
+            Debug.LogError("MinigameFlow: no hay minijuegos válidos para final de ronda. Recuerda excluir OneVSOne.");
+            isStartingMinigame = false;
             return;
         }
 
         MinigameData chosen = list[Random.Range(0, list.Count)];
+
         StartMinigame(chosen);
     }
 
     public void StartMinigame(MinigameData mg)
     {
+        if (mg == null)
+        {
+            Debug.LogError("MinigameFlow: MinigameData recibido es null.");
+            isStartingMinigame = false;
+            return;
+        }
+
         SavePartySnapshotFromBoard();
         SaveBoardState();
 
         MinigameSession.SelectedMinigame = mg;
-        SceneManager.LoadScene("LoadingScene");
-    }
 
-    private IEnumerator LoadLoadingSceneRoutine()
-    {
-        isLoadingMinigame = true;
-
-        Scene loadingScene = SceneManager.GetSceneByName(loadingSceneName);
-        if (!loadingScene.isLoaded)
+        if (MinigameController.instance == null)
         {
-            yield return SceneManager.LoadSceneAsync(loadingSceneName, LoadSceneMode.Additive);
+            Debug.LogError("MinigameFlow: no existe MinigameController.instance.");
+            isStartingMinigame = false;
+            return;
         }
 
-        isLoadingMinigame = false;
+        MinigameController.instance.OpenLoadingScene();
+
+        isStartingMinigame = false;
     }
 
     private void SavePartySnapshotFromBoard()
     {
         if (PartySession.instance == null)
         {
-            Debug.LogError("No existe PartySession en escena.");
+            Debug.LogError("MinigameFlow: no existe PartySession en escena.");
+            return;
+        }
+
+        if (GameController.instance == null)
+        {
+            Debug.LogError("MinigameFlow: no existe GameController.instance.");
+            return;
+        }
+
+        if (Board.instance == null)
+        {
+            Debug.LogError("MinigameFlow: no existe Board.instance.");
             return;
         }
 
         for (int i = 0; i < 4; i++)
         {
             Character c = GameController.instance.GetCharacter(i);
+
+            if (c == null)
+            {
+                Debug.LogError("MinigameFlow: character " + i + " es null.");
+                continue;
+            }
 
             PartySession.instance.characters[i] = new CharacterSnapshot
             {
@@ -75,7 +112,8 @@ public class MinigameFlow : MonoBehaviour
                 stars = c.stars,
                 isPlayer = c.isPlayer,
                 characterImage = c.characterImage,
-                actualBoxIndex = Board.instance.GetBoxIndex(c.actualBox)
+                actualBoxIndex = Board.instance.GetBoxIndex(c.actualBox),
+                characterSettingIndex = c.characterSettingIndex
             };
         }
     }
@@ -84,7 +122,7 @@ public class MinigameFlow : MonoBehaviour
     {
         if (PartySession.instance == null || GameController.instance == null)
         {
-            Debug.LogError("No se puede guardar BoardState.");
+            Debug.LogError("MinigameFlow: no se puede guardar BoardState.");
             return;
         }
 

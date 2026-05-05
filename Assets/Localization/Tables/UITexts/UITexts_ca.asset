@@ -204,7 +204,19 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 27672043561570304
-    m_Localized: Presiona 'ESC' per sortir
+    m_Localized: "Presiona 'ESC'/'Bot\xF3 dret' per sortir"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31259560806338560
+    m_Localized: UN VS UN!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30896196459995136
+    m_Localized: Tutorial
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30896440790786048
+    m_Localized: "Cr\xE8dits"
     m_Metadata:
       m_Items: []
   references:
