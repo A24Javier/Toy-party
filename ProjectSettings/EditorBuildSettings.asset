@@ -35,6 +35,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SelectMap.unity
     guid: e6522134f9fd60e4987d5696f4e40aca
+  - enabled: 1
+    path: Assets/Scenes/SelectCharacterMenu.unity
+    guid: 23685381a80720644a3ad7aef705d552
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 886295bc59622a340a49270447d47c32,
       type: 2}
