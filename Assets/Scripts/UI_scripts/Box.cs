@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.TextCore.Text;
 
 public enum BoxType
 {
@@ -77,6 +76,9 @@ public class Box : MonoBehaviour
     public float timeJump = 1f;
 
     [SerializeField] private PlayerOutBoxPos[] playerBoxesPos;
+
+    [SerializeField] private GameObject prefabCoins;
+    [SerializeField] private GameObject prefabParticleLose;
 
     private const string ANIM_KEY_WIN_COINS = "isCelebrating";
     private const string ANIM_KEY_LOSE_COINS = "isMourning";
@@ -262,6 +264,11 @@ public class Box : MonoBehaviour
                     else if(coins < 0) { buffCoins += buff.lessLoseInBoxes; }
                     
                 }
+
+                if (coins > 0)
+                    CreateCoins();
+                else if (coins < 0)
+                    CharLoseCoins();
 
                 StartCoroutine(UIManager.instance.UpdateTextCoins(character, (coins + buffCoins)));
                 StartCoroutine(character.DoAnim(
@@ -477,4 +484,22 @@ public class Box : MonoBehaviour
         InitStarSystemNow();
     }
 
+
+    private void CreateCoins()
+    {
+        Vector3 initialPos = gameObject.transform.position;
+        initialPos.y += 0.5f;
+
+        for(int i = 0; i < blueBoxCoins; i++)
+        {
+            Instantiate(prefabCoins, initialPos, Quaternion.Euler(prefabCoins.transform.localRotation.eulerAngles.x, camRotationY, gameObject.transform.localRotation.eulerAngles.z));
+            initialPos.y += 0.1f;
+        }
+    }
+
+    private void CharLoseCoins()
+    {
+        ParticleSystem particles = Instantiate(prefabParticleLose, Vector3.zero, Quaternion.identity, transform).GetComponent<ParticleSystem>();
+        particles.transform.localPosition = new Vector3(0f, 5f, 0f);
+    }
 }

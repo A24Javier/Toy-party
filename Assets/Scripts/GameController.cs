@@ -92,6 +92,7 @@ public class GameController : MonoBehaviour
             GameObject newPlayerGO = Instantiate(_charactersSettings[playerSetting].characterPrefab, initialPos + (Vector3.left * (i * 3)), Quaternion.identity);
             Destroy(newPlayerGO.GetComponent<NPC_Controller>());
             newPlayerGO.name = _charactersSettings[playerSetting].CharacterName;
+            newPlayerGO.tag = "Player";
 
             Player newPlayer = newPlayerGO.GetComponent<Player>();
             newPlayer.enabled = true;
@@ -139,6 +140,7 @@ public class GameController : MonoBehaviour
                 GameObject newNPCGO = Instantiate(_charactersSettings[npcsCharSettings[i]].characterPrefab, initialPos + (Vector3.right * (i * 3)), Quaternion.identity);
                 Destroy(newNPCGO.GetComponent<Player>());
                 newNPCGO.name = _charactersSettings[npcsCharSettings[i]].CharacterName;
+                newNPCGO.tag = "NPC";
 
                 NPC_Controller newNPC = newNPCGO.GetComponent<NPC_Controller>();
                 newNPC.enabled = true;

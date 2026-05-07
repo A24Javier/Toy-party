@@ -344,6 +344,10 @@ MonoBehaviour:
     TransfPos: {fileID: 8292505002330809224}
   - IsFilled: 0
     TransfPos: {fileID: 1650375169896151587}
+  prefabCoins: {fileID: 1861325304001955992, guid: 97fc787a6a7ae074886343b11eae9eb3,
+    type: 3}
+  prefabParticleLose: {fileID: 8319892906248146575, guid: 3894f55f4bda52847ba31b5e48efdb81,
+    type: 3}
   boxRenderers: []
   blueBoxMat: {fileID: 2100000, guid: 08e7644ca9179e5458a6fa1eca187243, type: 2}
   starBoxMat: {fileID: 2100000, guid: 502b92fc7bb667542b4ccd96799f0565, type: 2}
