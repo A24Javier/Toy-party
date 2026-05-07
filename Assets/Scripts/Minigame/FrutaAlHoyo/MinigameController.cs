@@ -1,7 +1,9 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MinigameController : MonoBehaviour
 {
@@ -9,26 +11,33 @@ public class MinigameController : MonoBehaviour
 
     [Header("Scene Names")]
     [SerializeField] private string boardSceneName = "Prototip";
-    [SerializeField] private string loadingSceneName = "LoadingScene";
-
-    [Header("Board Objects To Disable During Minigames")]
-    [Tooltip("Cámaras del tablero. Ejemplo: Main Camera, cámaras de Cinemachine, cámara del dado, etc.")]
-    [SerializeField] private GameObject[] boardCameras;
-
-    [Tooltip("Canvas o roots de UI del tablero. Ejemplo: HUD, Canvas principal, paneles de acción, pausa, etc.")]
-    [SerializeField] private GameObject[] boardCanvasRoots;
-
-    [Tooltip("Scripts de input del tablero que no deben funcionar durante LoadingScene/minijuego.")]
-    [SerializeField] private Behaviour[] boardInputBehaviours;
-
-    [Tooltip("EventSystem del tablero. Se apaga para evitar warning de 2 EventSystems.")]
-    [SerializeField] private EventSystem boardEventSystem;
-
-    [Tooltip("Opcional. Objetos visuales pesados del tablero que quieras ocultar sin romper lógica.")]
-    [SerializeField] private GameObject[] optionalBoardVisualRoots;
+    [SerializeField] private string loadingSceneName = "LoadingScreen";
 
     private bool isTransitioning = false;
     private string currentMinigameSceneName = "";
+
+    private readonly List<ComponentState<Camera>> cachedBoardCameras = new List<ComponentState<Camera>>();
+    private readonly List<ComponentState<AudioListener>> cachedAudioListeners = new List<ComponentState<AudioListener>>();
+    private readonly List<ComponentState<Canvas>> cachedBoardCanvases = new List<ComponentState<Canvas>>();
+    private readonly List<ComponentState<GraphicRaycaster>> cachedGraphicRaycasters = new List<ComponentState<GraphicRaycaster>>();
+    private readonly List<ComponentState<EventSystem>> cachedEventSystems = new List<ComponentState<EventSystem>>();
+    private readonly List<ComponentState<BaseInputModule>> cachedInputModules = new List<ComponentState<BaseInputModule>>();
+
+    private readonly List<ComponentState<Behaviour>> cachedGlobalBoardInputs = new List<ComponentState<Behaviour>>();
+
+    private bool boardComponentsCached = false;
+
+    private class ComponentState<T> where T : Behaviour
+    {
+        public T component;
+        public bool wasEnabled;
+
+        public ComponentState(T component)
+        {
+            this.component = component;
+            this.wasEnabled = component != null && component.enabled;
+        }
+    }
 
     private void Awake()
     {
@@ -64,7 +73,7 @@ public class MinigameController : MonoBehaviour
 
         if (!IsBoardLoaded())
         {
-            Debug.LogError("MinigameController: Prototip no está cargada. El flujo aditivo necesita Prototip persistente.");
+            Debug.LogError("MinigameController: la escena Prototip no está cargada.");
             isTransitioning = false;
             yield break;
         }
@@ -135,6 +144,7 @@ public class MinigameController : MonoBehaviour
         }
 
         Scene loadedMinigameScene = SceneManager.GetSceneByName(currentMinigameSceneName);
+
         if (loadedMinigameScene.IsValid() && loadedMinigameScene.isLoaded)
         {
             SceneManager.SetActiveScene(loadedMinigameScene);
@@ -169,6 +179,7 @@ public class MinigameController : MonoBehaviour
         }
 
         Scene boardScene = SceneManager.GetSceneByName(boardSceneName);
+
         if (boardScene.IsValid() && boardScene.isLoaded)
         {
             SceneManager.SetActiveScene(boardScene);
@@ -184,15 +195,135 @@ public class MinigameController : MonoBehaviour
         isTransitioning = false;
     }
 
-    private void ContinueBoardAfterMinigame()
+    private void SetBoardActive(bool active)
     {
-        if (GameController.instance == null)
+        if (!boardComponentsCached)
+            CacheBoardComponents();
+
+        if (active)
+            RestoreBoardComponents();
+        else
+            DisableBoardComponents();
+    }
+
+    private void CacheBoardComponents()
+    {
+        ClearCaches();
+
+        Scene boardScene = SceneManager.GetSceneByName(boardSceneName);
+
+        if (!boardScene.IsValid() || !boardScene.isLoaded)
         {
-            Debug.LogError("MinigameController: no existe GameController al volver del minijuego.");
+            Debug.LogError("MinigameController: no se puede cachear Prototip porque no está cargada.");
             return;
         }
 
-        GameController.instance.StartNextTurnAfterMinigame();
+        GameObject[] roots = boardScene.GetRootGameObjects();
+
+        for (int i = 0; i < roots.Length; i++)
+        {
+            CacheComponentsInRoot(roots[i]);
+        }
+
+        CacheGlobalBoardInputScripts();
+
+        boardComponentsCached = true;
+    }
+
+    private void CacheComponentsInRoot(GameObject root)
+    {
+        Camera[] cameras = root.GetComponentsInChildren<Camera>(true);
+        for (int i = 0; i < cameras.Length; i++)
+            cachedBoardCameras.Add(new ComponentState<Camera>(cameras[i]));
+
+        AudioListener[] audioListeners = root.GetComponentsInChildren<AudioListener>(true);
+        for (int i = 0; i < audioListeners.Length; i++)
+            cachedAudioListeners.Add(new ComponentState<AudioListener>(audioListeners[i]));
+
+        Canvas[] canvases = root.GetComponentsInChildren<Canvas>(true);
+        for (int i = 0; i < canvases.Length; i++)
+            cachedBoardCanvases.Add(new ComponentState<Canvas>(canvases[i]));
+
+        GraphicRaycaster[] raycasters = root.GetComponentsInChildren<GraphicRaycaster>(true);
+        for (int i = 0; i < raycasters.Length; i++)
+            cachedGraphicRaycasters.Add(new ComponentState<GraphicRaycaster>(raycasters[i]));
+
+        EventSystem[] eventSystems = root.GetComponentsInChildren<EventSystem>(true);
+        for (int i = 0; i < eventSystems.Length; i++)
+            cachedEventSystems.Add(new ComponentState<EventSystem>(eventSystems[i]));
+
+        BaseInputModule[] inputModules = root.GetComponentsInChildren<BaseInputModule>(true);
+        for (int i = 0; i < inputModules.Length; i++)
+            cachedInputModules.Add(new ComponentState<BaseInputModule>(inputModules[i]));
+    }
+
+    private void CacheGlobalBoardInputScripts()
+    {
+        InputHandler[] inputHandlers = FindObjectsOfType<InputHandler>(true);
+        for (int i = 0; i < inputHandlers.Length; i++)
+            cachedGlobalBoardInputs.Add(new ComponentState<Behaviour>(inputHandlers[i]));
+
+        VirtualMouseUI[] virtualMice = FindObjectsOfType<VirtualMouseUI>(true);
+        for (int i = 0; i < virtualMice.Length; i++)
+            cachedGlobalBoardInputs.Add(new ComponentState<Behaviour>(virtualMice[i]));
+
+        MouseParticles[] mouseParticles = FindObjectsOfType<MouseParticles>(true);
+        for (int i = 0; i < mouseParticles.Length; i++)
+            cachedGlobalBoardInputs.Add(new ComponentState<Behaviour>(mouseParticles[i]));
+    }
+
+    private void DisableBoardComponents()
+    {
+        SetEnabled(cachedBoardCameras, false);
+        SetEnabled(cachedAudioListeners, false);
+        SetEnabled(cachedBoardCanvases, false);
+        SetEnabled(cachedGraphicRaycasters, false);
+        SetEnabled(cachedEventSystems, false);
+        SetEnabled(cachedInputModules, false);
+        SetEnabled(cachedGlobalBoardInputs, false);
+    }
+
+    private void RestoreBoardComponents()
+    {
+        RestoreEnabled(cachedBoardCameras);
+        RestoreEnabled(cachedAudioListeners);
+        RestoreEnabled(cachedBoardCanvases);
+        RestoreEnabled(cachedGraphicRaycasters);
+        RestoreEnabled(cachedEventSystems);
+        RestoreEnabled(cachedInputModules);
+        RestoreEnabled(cachedGlobalBoardInputs);
+
+        boardComponentsCached = false;
+        ClearCaches();
+    }
+
+    private void SetEnabled<T>(List<ComponentState<T>> list, bool enabled) where T : Behaviour
+    {
+        for (int i = 0; i < list.Count; i++)
+        {
+            if (list[i].component != null)
+                list[i].component.enabled = enabled;
+        }
+    }
+
+    private void RestoreEnabled<T>(List<ComponentState<T>> list) where T : Behaviour
+    {
+        for (int i = 0; i < list.Count; i++)
+        {
+            if (list[i].component != null)
+                list[i].component.enabled = list[i].wasEnabled;
+        }
+    }
+
+    private void ClearCaches()
+    {
+        cachedBoardCameras.Clear();
+        cachedAudioListeners.Clear();
+        cachedBoardCanvases.Clear();
+        cachedGraphicRaycasters.Clear();
+        cachedEventSystems.Clear();
+        cachedInputModules.Clear();
+        cachedGlobalBoardInputs.Clear();
     }
 
     private void ApplyPartySessionResultsToBoard()
@@ -223,40 +354,15 @@ public class MinigameController : MonoBehaviour
         }
     }
 
-    public void SetBoardActive(bool active)
+    private void ContinueBoardAfterMinigame()
     {
-        SetGameObjectsActive(boardCameras, active);
-        SetGameObjectsActive(boardCanvasRoots, active);
-        SetGameObjectsActive(optionalBoardVisualRoots, active);
-
-        SetBehavioursEnabled(boardInputBehaviours, active);
-
-        if (boardEventSystem != null)
-            boardEventSystem.enabled = active;
-    }
-
-    private void SetGameObjectsActive(GameObject[] objects, bool active)
-    {
-        if (objects == null)
-            return;
-
-        for (int i = 0; i < objects.Length; i++)
+        if (GameController.instance == null)
         {
-            if (objects[i] != null)
-                objects[i].SetActive(active);
-        }
-    }
-
-    private void SetBehavioursEnabled(Behaviour[] behaviours, bool enabled)
-    {
-        if (behaviours == null)
+            Debug.LogError("MinigameController: no existe GameController al volver del minijuego.");
             return;
-
-        for (int i = 0; i < behaviours.Length; i++)
-        {
-            if (behaviours[i] != null)
-                behaviours[i].enabled = enabled;
         }
+
+        GameController.instance.StartNextTurnAfterMinigame();
     }
 
     private bool IsBoardLoaded()

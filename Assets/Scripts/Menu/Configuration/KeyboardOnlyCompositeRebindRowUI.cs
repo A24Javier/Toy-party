@@ -26,32 +26,70 @@ public class KeyboardMoveCompositeRowUI : MonoBehaviour
 
     private string lastShown = "";
 
-    void OnEnable()
+    private void OnEnable()
     {
-        rebindButton.onClick.RemoveAllListeners();
-        rebindButton.onClick.AddListener(StartRebind);
+        if (rebindButton != null)
+        {
+            rebindButton.onClick.RemoveAllListeners();
+            rebindButton.onClick.AddListener(StartRebind);
+        }
+
         Refresh();
     }
 
-    void Update() => Refresh();
+    private void OnDisable()
+    {
+        if (op != null)
+        {
+            op.Dispose();
+            op = null;
+        }
+
+        if (routine != null)
+        {
+            StopCoroutine(routine);
+            routine = null;
+        }
+    }
+
+    private void Update()
+    {
+        Refresh();
+    }
 
     public void StartRebind()
     {
-        if (deviceDetector.IsUsingGamepad()) return;
+        if (deviceDetector != null && deviceDetector.IsUsingGamepad())
+            return;
 
-        if (routine != null) StopCoroutine(routine);
+        if (actionRef == null || actionRef.action == null)
+        {
+            Debug.LogWarning($"{name}: falta actionRef o actionRef.action.");
+            return;
+        }
+
+        if (routine != null)
+            StopCoroutine(routine);
+
         routine = StartCoroutine(RebindRoutine());
     }
 
     private IEnumerator RebindRoutine()
     {
-        var action = actionRef.action;
+        InputAction action = actionRef.action;
+
         int bindingIndex = FindKeyboardPart(action);
-        if (bindingIndex < 0) yield break;
+        if (bindingIndex < 0)
+        {
+            Debug.LogWarning($"{name}: no se encontró binding composite '{compositePartName}'.");
+            yield break;
+        }
 
         SetUILocked(true);
 
-        bindingText.text = "Suelta y pulsa...";
+        if (bindingText != null)
+            bindingText.text = "Suelta y pulsa...";
+
         yield return new WaitUntil(AllInputsReleased);
 
         action.Disable();
@@ -64,8 +102,7 @@ public class KeyboardMoveCompositeRowUI : MonoBehaviour
 
         op.OnPotentialMatch(o =>
         {
-            if (o.selectedControl != null &&
-                o.selectedControl.path == currentPath)
+            if (o.selectedControl != null && o.selectedControl.path == currentPath)
                 o.Complete();
         });
 
@@ -84,13 +121,19 @@ public class KeyboardMoveCompositeRowUI : MonoBehaviour
 
     private void Finish(InputAction action)
     {
-        action.Enable();
+        if (action != null)
+            action.Enable();
 
-        op?.Dispose();
-        op = null;
+        if (op != null)
+        {
+            op.Dispose();
+            op = null;
+        }
 
         SetUILocked(false);
-        saveLoad?.Save();
+
+        if (saveLoad != null)
+            saveLoad.Save();
 
         lastShown = "";
         Refresh();
@@ -100,11 +143,15 @@ public class KeyboardMoveCompositeRowUI : MonoBehaviour
     {
         if (otherButtonsToDisable != null)
         {
-            foreach (var b in otherButtonsToDisable)
-                if (b != null) b.interactable = !locked;
+            foreach (Button b in otherButtonsToDisable)
+            {
+                if (b != null)
+                    b.interactable = !locked;
+            }
         }
 
-        rebindButton.interactable = !locked;
+        if (rebindButton != null)
+            rebindButton.interactable = !locked;
 
         if (locked)
         {
@@ -138,35 +185,52 @@ public class KeyboardMoveCompositeRowUI : MonoBehaviour
 
     private int FindKeyboardPart(InputAction action)
     {
+        if (action == null)
+            return -1;
+
         for (int i = 0; i < action.bindings.Count; i++)
         {
-            var b = action.bindings[i];
+            InputBinding b = action.bindings[i];
 
-            if (!b.isPartOfComposite) continue;
+            if (!b.isPartOfComposite)
+                continue;
 
-            if (!string.Equals(b.name, compositePartName,
-                System.StringComparison.OrdinalIgnoreCase))
+            if (!string.Equals(b.name, compositePartName, System.StringComparison.OrdinalIgnoreCase))
                 continue;
 
             string path = b.effectivePath;
+
             if (!string.IsNullOrEmpty(path) && path.Contains("<Keyboard>"))
                 return i;
         }
+
         return -1;
     }
 
     private void Refresh()
     {
+        if (actionRef == null || actionRef.action == null)
+            return;
+
+        if (bindingText == null)
+            return;
+
         int idx = FindKeyboardPart(actionRef.action);
-        if (idx < 0) return;
+        if (idx < 0)
+            return;
 
         string display = actionRef.action.GetBindingDisplayString(idx);
 
-        if (display == lastShown) return;
+        if (display == lastShown)
+            return;
 
         lastShown = display;
         bindingText.text = display;
 
-        rebindButton.interactable = !deviceDetector.IsUsingGamepad();
+        if (rebindButton != null)
+        {
+            bool usingGamepad = deviceDetector != null && deviceDetector.IsUsingGamepad();
+            rebindButton.interactable = !usingGamepad;
+        }
     }
 }
