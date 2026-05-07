@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad089e9a2dffddb43be2bd88f68f5e12, type: 3}
   m_Name: Election_Dice
   m_EditorClassIdentifier: 
-  DiceObject: {fileID: 8618066680958892089, guid: e0de4e909614cbc47962e33951c76670,
+  DiceObject: {fileID: 3628123695749908817, guid: 9ca2c610a1b517c4ebde33cd5e57eed3,
     type: 3}
   ChangeNumSpeed: 1.25
   MinNumber: 1

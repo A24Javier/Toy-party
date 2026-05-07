@@ -90,6 +90,9 @@ Assets/Plugins/FMOD/Cache/
 /[Aa]ssets/Models/DnD_Dice/textures*
 /[Aa]ssets/Models/Characters*
 /[Aa]ssets/Models/Maps*
+/[Aa]ssets/Models/Objects/Prop Jorddy*
+/[Aa]ssets/Models/DefinitiveDices*
+/[Aa]ssets/Models/Casillas*
 /[Aa]ssets/Packages/AllSkyFree*
 /[Aa]ssets/AddressableAssetsData/link.xml*
 /[Aa]ssets/Addressables_Temp*

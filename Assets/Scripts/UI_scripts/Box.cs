@@ -379,7 +379,7 @@ public class Box : MonoBehaviour
         // Hacer animación de jugador perjudicado por la trampa
         Debug.Log("Trampa activada");
         areTrapOnIt = false;
-        trapObject.GetComponent<Animator>().SetBool("close", true);
+        trapObject.GetComponentInChildren<Animator>().SetBool("close", true);
         //character.DoAnim("trapAnim", "trap");
 
         yield return new WaitForSeconds(0.3f);

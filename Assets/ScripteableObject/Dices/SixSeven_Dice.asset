@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad089e9a2dffddb43be2bd88f68f5e12, type: 3}
   m_Name: SixSeven_Dice
   m_EditorClassIdentifier: 
-  DiceObject: {fileID: 8618066680958892089, guid: d321d07eb4c1a9d47a549b81e8aac71f,
+  DiceObject: {fileID: 6465532005912115146, guid: f90df8857a151204e8c0a877e06bc26b,
     type: 3}
   ChangeNumSpeed: 0.08
   MinNumber: 6

@@ -189,9 +189,9 @@ public class DiceScript : MonoBehaviour
         Vector3 diceSpawnPos = GameController.instance.GetCharacterOfTurn().transform.position + (Vector3.up * _upDistance);
         _instanciedDice = Instantiate(dice.DiceObject, diceSpawnPos, Quaternion.identity, transform);
 
-        for(int i = 0; i < _instanciedDice.transform.childCount; i++)
+        for(int i = 0; i < _instanciedDice.transform.GetChild(0).childCount; i++)
         {
-            _diceNums.Add(_instanciedDice.transform.GetChild(i).GetComponent<TMP_Text>());
+            _diceNums.Add(_instanciedDice.transform.GetChild(0).GetChild(i).GetComponent<TMP_Text>());
         }
 
         _isRotating = true;
