@@ -10666,7 +10666,7 @@ PrefabInstance:
     - target: {fileID: 2076316601842790452, guid: ebded4510029c454eb2053d30cdae031,
         type: 3}
       propertyPath: boxRenderers.Array.size
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2076316601842790452, guid: ebded4510029c454eb2053d30cdae031,
         type: 3}
@@ -10766,7 +10766,7 @@ PrefabInstance:
     - target: {fileID: 3282952432640197736, guid: ebded4510029c454eb2053d30cdae031,
         type: 3}
       propertyPath: m_Name
-      value: StartNode /// STAR RENDERER
+      value: StartNode
       objectReference: {fileID: 0}
     - target: {fileID: 4227939459741527646, guid: ebded4510029c454eb2053d30cdae031,
         type: 3}
@@ -13089,7 +13089,7 @@ Transform:
   m_GameObject: {fileID: 2025739375}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 2.423, y: 0.3, z: 1.355}
+  m_LocalPosition: {x: -80.693, y: 0.27600002, z: -114.921}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

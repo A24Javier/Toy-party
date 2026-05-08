@@ -1079,6 +1079,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a9fec058cc4dc441b54c4ac5db80ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!23 &330104684 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7026587645921493012, guid: ebded4510029c454eb2053d30cdae031,
+    type: 3}
+  m_PrefabInstance: {fileID: 330104681}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &344108038
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5294,6 +5300,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a9fec058cc4dc441b54c4ac5db80ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!23 &1304156441 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7026587645921493012, guid: ebded4510029c454eb2053d30cdae031,
+    type: 3}
+  m_PrefabInstance: {fileID: 1304156438}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1310591644
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5581,9 +5593,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2076316601842790452, guid: ebded4510029c454eb2053d30cdae031,
         type: 3}
+      propertyPath: boxRenderers.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2076316601842790452, guid: ebded4510029c454eb2053d30cdae031,
+        type: 3}
       propertyPath: possiblesBoxes.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2076316601842790452, guid: ebded4510029c454eb2053d30cdae031,
+        type: 3}
+      propertyPath: boxRenderers.Array.data[0]
+      value: 
+      objectReference: {fileID: 330104684}
+    - target: {fileID: 2076316601842790452, guid: ebded4510029c454eb2053d30cdae031,
+        type: 3}
+      propertyPath: boxRenderers.Array.data[1]
+      value: 
+      objectReference: {fileID: 1304156441}
     - target: {fileID: 2076316601842790452, guid: ebded4510029c454eb2053d30cdae031,
         type: 3}
       propertyPath: possiblesBoxes.Array.data[0]

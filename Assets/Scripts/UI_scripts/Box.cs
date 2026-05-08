@@ -124,14 +124,14 @@ public class Box : MonoBehaviour
     private void SetBoxAsStarBox()
     {
         type = BoxType.Star;
-        GetComponent<MeshRenderer>().material = starBoxMat;
+        transform.GetChild(5).GetComponent<MeshRenderer>().material = starBoxMat;
         coins = starCoins;
     }
 
     private void SetBoxAsBlueBox()
     {
         type = BoxType.Coin;
-        GetComponent<MeshRenderer>().material = blueBoxMat;
+        transform.GetChild(5).GetComponent<MeshRenderer>().material = blueBoxMat;
         coins = blueBoxCoins;
     }
 
