@@ -93,23 +93,27 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 33097356386304
-    m_Localized: TBD
+    m_Localized: A paper painter who has a magic pencil that allows her to summon
+      what she paints.
     m_Metadata:
       m_Items: []
   - m_Id: 33220379516928
-    m_Localized: TBD
+    m_Localized: A pawn with aspirations to be king. He has a bodyguard who swears
+      absolute loyalty to him; he is known as "The Rook."
     m_Metadata:
       m_Items: []
   - m_Id: 33290751549440
-    m_Localized: TBD
+    m_Localized: A toy that has suffered greatly at the hands of a human. Now it's
+      an amalgamation of toys that only seeks to make the other toys suffer.
     m_Metadata:
       m_Items: []
   - m_Id: 33343058714624
-    m_Localized: TBD
+    m_Localized: Una roca amb ulls. Li encanta sortir disparat.
     m_Metadata:
       m_Items: []
   - m_Id: 33417046237184
-    m_Localized: TBD
+    m_Localized: A toy soldier who has witnessed countless wars. He has been awarded
+      a medal that grants him certain privileges.
     m_Metadata:
       m_Items: []
   references:

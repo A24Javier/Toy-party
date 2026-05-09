@@ -93,23 +93,27 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 33097356386304
-    m_Localized: TBD
+    m_Localized: Una pintora de papel que tiene el un lapiz magico que le permite
+      invocar lo que pinta.
     m_Metadata:
       m_Items: []
   - m_Id: 33220379516928
-    m_Localized: TBD
+    m_Localized: "Un pe\xF3n con aspiraciones a rey. Tiene un guardaespaldas que
+      le jura lealtad absoluta, se le conoce como \"La Torre\"."
     m_Metadata:
       m_Items: []
   - m_Id: 33290751549440
-    m_Localized: TBD
+    m_Localized: Un juguete que ha sufrido mucho a causa de un humano. Ahora es una
+      amalgama de juguetes que solo busca hacer sufrir al resto de juguetes.
     m_Metadata:
       m_Items: []
   - m_Id: 33343058714624
-    m_Localized: TBD
+    m_Localized: Una roca con ojos. Le encanta salir disparado.
     m_Metadata:
       m_Items: []
   - m_Id: 33417046237184
-    m_Localized: TBD
+    m_Localized: Un soldado de juguete que ha visto incontables guerras. Le han condecorado
+      con una medalla que le da algunos beneficios.
     m_Metadata:
       m_Items: []
   references:
