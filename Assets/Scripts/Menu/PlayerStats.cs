@@ -16,6 +16,39 @@ public class Stats
     public int MinigamesPlayed;
     public int MinigamesWon;
     public int MinigamesLost;
+
+    // Estadisticas por personajes
+    public int SoldierPlays;
+    public int SoldierWon;
+    public int SoldierLost;
+
+    public int PawnPlays;
+    public int PawnWon;
+    public int PawnLost;
+    public int PawnAbilityUse;
+
+    public int RainbowPrincessPlays;
+    public int RainbowPrincessWon;
+    public int RainbowPrincessLost;
+    public int RainbowPrincessAbilityUse;
+
+    public int MsPagePlays;
+    public int MsPageWon;
+    public int MsPageLost;
+    public int MsPageAbilityUse;
+
+    public int RobertPlays;
+    public int RobertWon;
+    public int RobertLost;
+    public int RobertAbilityUse;
+
+    // Estadisticas de mapas
+    public int RoomPlays;
+    public int ParkPlays;
+    public int GaragePlays;
+
+    // Otros Stats
+    public int AbandonedPlays;
 }
 
 public class PlayerStats : MonoBehaviour
@@ -57,6 +90,7 @@ public class PlayerStats : MonoBehaviour
     private void OnApplicationQuit()
     {
         SaveData();
+        JsonCreator.Instance?.SaveStats(PStats);
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -152,6 +186,8 @@ public class PlayerStats : MonoBehaviour
     {
         BsonDocument bsonDoc = CreateUserTelemetryBSON();
         MongoDBConnection.Instance?.InsertData(bsonDoc);
+
+        JsonCreator.Instance?.SaveStats(PStats);
     }
 
     public BsonDocument CreateUserTelemetryBSON()
@@ -161,9 +197,39 @@ public class PlayerStats : MonoBehaviour
             { "UserID", PStats.userID },
             { "Playtime", PStats.Playtime },
             { "GamesPlayed", PStats.GamesPlayed },
+        
             { "MinigamesPlayed", PStats.MinigamesPlayed },
             { "MinigamesWon", PStats.MinigamesWon },
-            { "MinigamesLost", PStats.MinigamesLost }
+            { "MinigamesLost", PStats.MinigamesLost },
+        
+            // Estadísticas por personajes
+            { "SoldierPlays", PStats.SoldierPlays },
+            { "SoldierWon", PStats.SoldierWon },
+            { "SoldierLost", PStats.SoldierLost },
+        
+            { "PawnPlays", PStats.PawnPlays },
+            { "PawnWon", PStats.PawnWon },
+            { "PawnLost", PStats.PawnLost },
+        
+            { "RainbowPrincessPlays", PStats.RainbowPrincessPlays },
+            { "RainbowPrincessWon", PStats.RainbowPrincessWon },
+            { "RainbowPrincessLost", PStats.RainbowPrincessLost },
+        
+            { "MsPagePlays", PStats.MsPagePlays },
+            { "MsPageWon", PStats.MsPageWon },
+            { "MsPageLost", PStats.MsPageLost },
+        
+            { "RobertPlays", PStats.RobertPlays },
+            { "RobertWon", PStats.RobertWon },
+            { "RobertLost", PStats.RobertLost },
+        
+            // Estadísticas de mapas
+            { "RoomPlays", PStats.RoomPlays },
+            { "ParkPlays", PStats.ParkPlays },
+            { "GaragePlays", PStats.GaragePlays },
+
+            // Otros
+            { "AbandonedPlays", PStats.AbandonedPlays }
         };
         return bsonDoc;
     }
