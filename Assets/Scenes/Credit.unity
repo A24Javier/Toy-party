@@ -136,6 +136,12 @@ PrefabInstance:
       propertyPath: m_text
       value: Jorddy Alejandro
       objectReference: {fileID: 0}
+    - target: {fileID: 2389775592743663918, guid: e323c6b199d6fa445aa6b91d7f11dd2b,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 02b3b149fcb5dcc4484dbb281daa897d,
+        type: 3}
     - target: {fileID: 2951910006397422950, guid: e323c6b199d6fa445aa6b91d7f11dd2b,
         type: 3}
       propertyPath: m_Pivot.x
@@ -235,6 +241,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6408853733640843335, guid: e323c6b199d6fa445aa6b91d7f11dd2b,
+        type: 3}
+      propertyPath: m_text
+      value: "Animaci\xF3n, Modelado Texturizado, Escenarios y Sonidos"
       objectReference: {fileID: 0}
     - target: {fileID: 7040107595164465145, guid: e323c6b199d6fa445aa6b91d7f11dd2b,
         type: 3}
@@ -586,6 +597,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1319531930}
     m_Modifications:
+    - target: {fileID: 1658350930934138368, guid: e323c6b199d6fa445aa6b91d7f11dd2b,
+        type: 3}
+      propertyPath: m_text
+      value: Gabriel Sharman
+      objectReference: {fileID: 0}
+    - target: {fileID: 2389775592743663918, guid: e323c6b199d6fa445aa6b91d7f11dd2b,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4d24e76d16e09fb40916574fd4ea4c97,
+        type: 3}
     - target: {fileID: 2951910006397422950, guid: e323c6b199d6fa445aa6b91d7f11dd2b,
         type: 3}
       propertyPath: m_Pivot.x
@@ -685,6 +707,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6408853733640843335, guid: e323c6b199d6fa445aa6b91d7f11dd2b,
+        type: 3}
+      propertyPath: m_text
+      value: Programador
       objectReference: {fileID: 0}
     - target: {fileID: 7040107595164465145, guid: e323c6b199d6fa445aa6b91d7f11dd2b,
         type: 3}
@@ -938,6 +965,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6408853733640843335, guid: e323c6b199d6fa445aa6b91d7f11dd2b,
+        type: 3}
+      propertyPath: m_text
+      value: Programador
       objectReference: {fileID: 0}
     - target: {fileID: 7040107595164465145, guid: e323c6b199d6fa445aa6b91d7f11dd2b,
         type: 3}
@@ -1202,6 +1234,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1319531930}
     m_Modifications:
+    - target: {fileID: 1658350930934138368, guid: e323c6b199d6fa445aa6b91d7f11dd2b,
+        type: 3}
+      propertyPath: m_text
+      value: "Ra\xFAl Redondo"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2389775592743663918, guid: e323c6b199d6fa445aa6b91d7f11dd2b,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b4ac64e3fe73c854face2ed5a83621ad,
+        type: 3}
     - target: {fileID: 2951910006397422950, guid: e323c6b199d6fa445aa6b91d7f11dd2b,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1301,6 +1344,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6408853733640843335, guid: e323c6b199d6fa445aa6b91d7f11dd2b,
+        type: 3}
+      propertyPath: m_text
+      value: Programador
       objectReference: {fileID: 0}
     - target: {fileID: 7040107595164465145, guid: e323c6b199d6fa445aa6b91d7f11dd2b,
         type: 3}
@@ -1331,6 +1379,12 @@ PrefabInstance:
       propertyPath: m_text
       value: 'Naiara Reyes '
       objectReference: {fileID: 0}
+    - target: {fileID: 2389775592743663918, guid: e323c6b199d6fa445aa6b91d7f11dd2b,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a7a1a08016634c842ac45154d7f36e12,
+        type: 3}
     - target: {fileID: 2951910006397422950, guid: e323c6b199d6fa445aa6b91d7f11dd2b,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1430,6 +1484,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6408853733640843335, guid: e323c6b199d6fa445aa6b91d7f11dd2b,
+        type: 3}
+      propertyPath: m_text
+      value: "Animaci\xF3n, Modelado Texturizado, Escenarios y Sonidos"
       objectReference: {fileID: 0}
     - target: {fileID: 7040107595164465145, guid: e323c6b199d6fa445aa6b91d7f11dd2b,
         type: 3}
@@ -1544,6 +1603,12 @@ PrefabInstance:
       propertyPath: m_text
       value: Khelley Olivo
       objectReference: {fileID: 0}
+    - target: {fileID: 2389775592743663918, guid: e323c6b199d6fa445aa6b91d7f11dd2b,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e52aacff1e3d8014bb6af51d55202129,
+        type: 3}
     - target: {fileID: 2951910006397422950, guid: e323c6b199d6fa445aa6b91d7f11dd2b,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1643,6 +1708,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6408853733640843335, guid: e323c6b199d6fa445aa6b91d7f11dd2b,
+        type: 3}
+      propertyPath: m_text
+      value: "Animaci\xF3n, Modelado Texturizado, Escenarios y Sonidos"
       objectReference: {fileID: 0}
     - target: {fileID: 7040107595164465145, guid: e323c6b199d6fa445aa6b91d7f11dd2b,
         type: 3}
@@ -2109,6 +2179,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1319531930}
     m_Modifications:
+    - target: {fileID: 1658350930934138368, guid: e323c6b199d6fa445aa6b91d7f11dd2b,
+        type: 3}
+      propertyPath: m_text
+      value: Javier Sala
+      objectReference: {fileID: 0}
+    - target: {fileID: 2389775592743663918, guid: e323c6b199d6fa445aa6b91d7f11dd2b,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f60c597604bf72f47ab89686f5945da4,
+        type: 3}
     - target: {fileID: 2951910006397422950, guid: e323c6b199d6fa445aa6b91d7f11dd2b,
         type: 3}
       propertyPath: m_Pivot.x
@@ -2208,6 +2289,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6408853733640843335, guid: e323c6b199d6fa445aa6b91d7f11dd2b,
+        type: 3}
+      propertyPath: m_text
+      value: Programador
       objectReference: {fileID: 0}
     - target: {fileID: 7040107595164465145, guid: e323c6b199d6fa445aa6b91d7f11dd2b,
         type: 3}
