@@ -90,6 +90,7 @@ public class Box : MonoBehaviour
     [SerializeField] private Renderer[] boxRenderers;
     [SerializeField] private Material blueBoxMat;
     [SerializeField] private Material starBoxMat;
+    [SerializeField] private GameObject starGO;
 
     private static List<Box> starBoxes = new List<Box>();
     private static Box currentStarBox;
@@ -126,6 +127,7 @@ public class Box : MonoBehaviour
         type = BoxType.Star;
         transform.GetChild(5).GetComponent<MeshRenderer>().material = starBoxMat;
         coins = starCoins;
+        starGO?.SetActive(true);
     }
 
     private void SetBoxAsBlueBox()
@@ -133,6 +135,7 @@ public class Box : MonoBehaviour
         type = BoxType.Coin;
         transform.GetChild(5).GetComponent<MeshRenderer>().material = blueBoxMat;
         coins = blueBoxCoins;
+        starGO?.SetActive(false);
     }
 
     public static Box GetCurrentStarBox()
