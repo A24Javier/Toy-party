@@ -1,10 +1,10 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class MinigameFlow : MonoBehaviour
 {
     public static MinigameFlow instance;
 
-    [Header("Config")]
     [SerializeField] private MinigameDatabase database;
 
     private bool isStartingMinigame = false;
@@ -23,52 +23,49 @@ public class MinigameFlow : MonoBehaviour
 
     public void StartRoundEndMinigame()
     {
-        if (isStartingMinigame)
-            return;
-
-        isStartingMinigame = true;
+        if (isStartingMinigame) return;
 
         if (database == null)
         {
             Debug.LogError("MinigameFlow: no hay MinigameDatabase asignada.");
-            isStartingMinigame = false;
             return;
         }
 
-        var list = database.GetRoundEndMinigames();
+        List<MinigameData> possibleMinigames = database.GetRoundEndMinigames();
 
-        if (list == null || list.Count == 0)
+        if (possibleMinigames == null || possibleMinigames.Count == 0)
         {
-            Debug.LogError("MinigameFlow: no hay minijuegos válidos para final de ronda. Recuerda excluir OneVSOne.");
-            isStartingMinigame = false;
+            Debug.LogError("MinigameFlow: no hay minijuegos válidos para final de ronda.");
             return;
         }
 
-        MinigameData chosen = list[Random.Range(0, list.Count)];
+        int randomIndex = Random.Range(0, possibleMinigames.Count);
+        MinigameData selectedMinigame = possibleMinigames[randomIndex];
 
-        StartMinigame(chosen);
+        StartMinigame(selectedMinigame);
     }
 
     public void StartMinigame(MinigameData mg)
     {
+        if (isStartingMinigame) return;
+
         if (mg == null)
         {
-            Debug.LogError("MinigameFlow: MinigameData recibido es null.");
-            isStartingMinigame = false;
+            Debug.LogError("MinigameFlow: el MinigameData recibido es null.");
             return;
         }
-
-        SavePartySnapshotFromBoard();
-        SaveBoardState();
-
-        MinigameSession.SelectedMinigame = mg;
 
         if (MinigameController.instance == null)
         {
-            Debug.LogError("MinigameFlow: no existe MinigameController.instance.");
-            isStartingMinigame = false;
+            Debug.LogError("MinigameFlow: no existe MinigameController en escena.");
             return;
         }
+
+        isStartingMinigame = true;
+
+        SavePartySnapshotFromBoard();
+
+        MinigameSession.SelectedMinigame = mg;
 
         MinigameController.instance.OpenLoadingScene();
 
@@ -79,31 +76,22 @@ public class MinigameFlow : MonoBehaviour
     {
         if (PartySession.instance == null)
         {
-            Debug.LogError("MinigameFlow: no existe PartySession en escena.");
+            Debug.LogWarning("MinigameFlow: no existe PartySession. Se continuará sin snapshots.");
             return;
         }
 
         if (GameController.instance == null)
         {
-            Debug.LogError("MinigameFlow: no existe GameController.instance.");
+            Debug.LogError("MinigameFlow: no existe GameController.");
             return;
         }
 
-        if (Board.instance == null)
-        {
-            Debug.LogError("MinigameFlow: no existe Board.instance.");
-            return;
-        }
-
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < GameController.instance.GetCharactersInParty(); i++)
         {
             Character c = GameController.instance.GetCharacter(i);
 
             if (c == null)
-            {
-                Debug.LogError("MinigameFlow: character " + i + " es null.");
                 continue;
-            }
 
             PartySession.instance.characters[i] = new CharacterSnapshot
             {
@@ -111,24 +99,33 @@ public class MinigameFlow : MonoBehaviour
                 coins = c.coins,
                 stars = c.stars,
                 isPlayer = c.isPlayer,
-                characterImage = c.characterImage,
-                actualBoxIndex = Board.instance.GetBoxIndex(c.actualBox),
-                characterSettingIndex = c.characterSettingIndex
+                characterImage = c.characterImage
             };
         }
     }
 
-    private void SaveBoardState()
+    public void StartMinigameByType(MinigameType type)
     {
-        if (PartySession.instance == null || GameController.instance == null)
+        if (isStartingMinigame)
+            return;
+
+        if (database == null)
         {
-            Debug.LogError("MinigameFlow: no se puede guardar BoardState.");
+            Debug.LogError("MinigameFlow: no hay MinigameDatabase asignada.");
             return;
         }
 
-        PartySession.instance.boardState.actualTurn = GameController.instance.GetActualTurn();
-        PartySession.instance.boardState.actualRound = GameController.instance.GetActualRound();
-        PartySession.instance.boardState.idOrder = GameController.instance.GetIdOrderCopy();
-        PartySession.instance.boardState.isPlayerOrder = GameController.instance.GetIsPlayerOrderCopy();
+        List<MinigameData> possibleMinigames = database.GetMinigamesByType(type);
+
+        if (possibleMinigames == null || possibleMinigames.Count == 0)
+        {
+            Debug.LogError("MinigameFlow: no hay minijuegos del tipo: " + type);
+            return;
+        }
+
+        int randomIndex = Random.Range(0, possibleMinigames.Count);
+        MinigameData selectedMinigame = possibleMinigames[randomIndex];
+
+        StartMinigame(selectedMinigame);
     }
 }

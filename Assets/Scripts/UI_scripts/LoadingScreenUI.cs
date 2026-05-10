@@ -64,7 +64,7 @@ public class LoadingScreenUI : MonoBehaviour
 
             if (MinigameController.instance == null)
             {
-                Debug.LogError("LoadingScreenUI: no existe MinigameController.instance.");
+                Debug.LogError("LoadingScreenUI: no existe MinigameController.");
                 return;
             }
 

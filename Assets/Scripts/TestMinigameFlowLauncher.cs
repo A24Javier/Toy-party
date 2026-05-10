@@ -1,84 +1,39 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class TestMinigameFlowLauncher : MonoBehaviour
+public class TestMinigameLauncher : MonoBehaviour
 {
-    [Header("Scenes")]
-    [SerializeField] private string loadingSceneName = "LoadingScreen";
+    [Header("Minijuego a probar")]
+    [SerializeField] private MinigameData minigameToTest;
 
-    [Header("Minigame")]
-    [SerializeField] private MinigameDatabase database;
-    [SerializeField] private string minigameSceneName = "FrutaAlHoyo";
-
-    private bool isLoading = false;
+    [Header("Input")]
+    [SerializeField] private KeyCode startKey = KeyCode.Space;
 
     private void Update()
     {
-        if (isLoading)
+        if (Input.GetKeyDown(startKey))
+        {
+            StartTestMinigame();
+        }
+    }
+
+    private void StartTestMinigame()
+    {
+        if (minigameToTest == null)
+        {
+            Debug.LogError("TestMinigameLauncher: no has asignado ningún MinigameData.");
             return;
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            StartCoroutine(TestFlowRoutine());
-        }
-    }
-
-    private IEnumerator TestFlowRoutine()
-    {
-        isLoading = true;
-
-        MinigameData selected = FindMinigameData();
-
-        if (selected == null)
-        {
-            Debug.LogError("TestMinigameFlowLauncher: no se ha encontrado el MinigameData.");
-            isLoading = false;
-            yield break;
         }
 
-        MinigameSession.SelectedMinigame = selected;
-
-        Debug.Log("TEST: Cargando LoadingScreen...");
-
-        yield return SceneManager.LoadSceneAsync(loadingSceneName, LoadSceneMode.Additive);
-
-        Scene loadingScene = SceneManager.GetSceneByName(loadingSceneName);
-
-        if (loadingScene.IsValid() && loadingScene.isLoaded)
+        if (MinigameController.instance == null)
         {
-            SceneManager.SetActiveScene(loadingScene);
+            Debug.LogError("TestMinigameLauncher: no existe MinigameController en la escena.");
+            return;
         }
 
-        Debug.Log("TEST: LoadingScreen cargada. Pulsa cualquier tecla en LoadingScreen para ir al minijuego.");
-    }
+        MinigameSession.SelectedMinigame = minigameToTest;
 
-    private MinigameData FindMinigameData()
-    {
-        if (database == null)
-        {
-            Debug.LogError("TestMinigameFlowLauncher: falta asignar MinigameDatabase.");
-            return null;
-        }
+        Debug.Log("TEST: Abriendo LoadingScene para " + minigameToTest.minigameName);
 
-        if (database.minigames == null)
-        {
-            Debug.LogError("TestMinigameFlowLauncher: database.minigames es null.");
-            return null;
-        }
-
-        for (int i = 0; i < database.minigames.Length; i++)
-        {
-            MinigameData data = database.minigames[i];
-
-            if (data == null)
-                continue;
-
-            if (data.sceneName == minigameSceneName)
-                return data;
-        }
-
-        Debug.LogError("TestMinigameFlowLauncher: no existe minijuego con sceneName: " + minigameSceneName);
-        return null;
+        MinigameController.instance.OpenLoadingScene();
     }
 }

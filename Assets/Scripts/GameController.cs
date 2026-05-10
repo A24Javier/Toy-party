@@ -519,4 +519,16 @@ public class GameController : MonoBehaviour
 
         StartMovement();
     }
+    public Character GetCharacterByCharacterId(int characterId)
+    {
+        for (int i = 0; i < characters.Length; i++)
+        {
+            if (characters[i] != null && characters[i].characterId == characterId)
+            {
+                return characters[i];
+            }
+        }
+
+        return null;
+    }
 }

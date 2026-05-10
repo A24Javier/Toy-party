@@ -1,0 +1,34 @@
+{
+    "name": "InputsPlayer",
+    "maps": [
+        {
+            "name": "MyJugador",
+            "id": "ea5c57e0-36dc-4aea-ab12-bb6f4e81b646",
+            "actions": [
+                {
+                    "name": "Sit",
+                    "type": "Button",
+                    "id": "9903de01-5386-4a5f-8e1e-948dab106148",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "611bdbb9-5f0c-4e70-ac0c-0a3de9b1dd59",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

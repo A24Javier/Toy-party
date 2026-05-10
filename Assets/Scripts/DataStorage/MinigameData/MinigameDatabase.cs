@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "MinigameDatabase", menuName = "Data/Minigame Database")]
+[CreateAssetMenu(fileName = "MinigameDatabase", menuName = "Minigames/Database")]
 public class MinigameDatabase : ScriptableObject
 {
     public MinigameData[] minigames;
@@ -14,10 +14,12 @@ public class MinigameDatabase : ScriptableObject
 
     public List<MinigameData> GetRoundEndMinigames()
     {
-        return minigames.Where(m =>
-            m.type == MinigameType.AllVSAll ||
-            m.type == MinigameType.TwoVSTwo ||
-            m.type == MinigameType.ThreeVSOne
-        ).ToList();
+        return minigames
+            .Where(m =>
+                m.type == MinigameType.AllVSAll ||
+                m.type == MinigameType.TwoVSTwo ||
+                m.type == MinigameType.ThreeVSOne
+            )
+            .ToList();
     }
 }

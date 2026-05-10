@@ -47,6 +47,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Minigames/Chute chute gol.unity
     guid: bdf51ba846c63484e9a3f031b3fec009
+  - enabled: 1
+    path: Assets/Minijuegos/HudFinMinijuego/NivelRecompensasMinijuegos.unity
+    guid: c53550e25d7f1314bb7c1e6b342fdb32
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 886295bc59622a340a49270447d47c32,
       type: 2}

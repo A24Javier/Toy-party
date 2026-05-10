@@ -1,181 +1,241 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class SillaASevillaManager : MonoBehaviour
 {
-    //variable de la maquina de estado
-    enum Statjoc {StartRound, Play, InfoPlay ,ChooseChair, Eleminated}
+    enum Statjoc { StartRound, Play, InfoPlay, ChooseChair, Eleminated }
+
     Statjoc MyStat;
 
-    //variables serilizefiled
+    [Header("HUD")]
     [SerializeField] TextMeshProUGUI MyTextronda;
     [SerializeField] GameObject[] HudObject;
-    [SerializeField] ChairController[] MisSillas;
     [SerializeField] Image[] ImgHud;
-    
-    //varibales del juego
+
+    [Header("Sillas")]
+    [SerializeField] ChairController[] MisSillas;
+
+    [Header("Timeline")]
+    [SerializeField] ManagerTimeLine timeLine;
+
+    [Header("Escenas")]
+    [SerializeField] string nombreEscenaRecompensas = "NivelRecompensasMinijuegos";
+
     string Textronda;
     int ronda;
 
-    //varibles de tiempo
-    float timeRonda, timeplay, timeinfoplaying, timeChoose, timeeleminated;
+    float timeRonda;
+    float timeplay;
+    float timeinfoplaying;
+    float timeChoose;
+    float timeeleminated;
 
     List<PlayerControllerSillaaSevilla> MisJugadores = new List<PlayerControllerSillaaSevilla>();
     List<GameObject> ObjectoJugador = new List<GameObject>();
-    Sprite[] MisSprite;
 
     List<PlayerSillaaSevilla> MiRegstroEleminados = new List<PlayerSillaaSevilla>();
 
+    bool minijuegoFinalizado = false;
+
     private void Start()
     {
-        //inicmaos la varible de la maquina de estado
         MyStat = Statjoc.StartRound;
-        //instaciamos la varible string
+
         Textronda = "Ronda ";
-        //instaciamos la variable de la ronda
         ronda = 1;
-        //inicmaos los tiempos de cada varible de tiempo
-        timeRonda = 3.0f;
+
+        timeRonda = 1.5f;
         timeplay = 15.0f;
-        timeinfoplaying = 2.0f;
-        timeChoose = 8.0f;
+        timeinfoplaying = 1.5f;
+        timeChoose = 5.0f;
         timeeleminated = 1.0f;
-        //desactivamos los objectos del hud al inicar el juego
-        for (int  i = 0; i < HudObject.Length; i++)
-            HudObject[i].SetActive(false);
+
+        for (int i = 0; i < HudObject.Length; i++)
+        {
+            if (HudObject[i] != null)
+                HudObject[i].SetActive(false);
+        }
+
+        if (timeLine != null)
+        {
+            timeLine.PausarAnimation();
+            timeLine.DesactivarMusicSpecial();
+        }
     }
 
     public void RegistraJugador(PlayerControllerSillaaSevilla player)
     {
-        MisJugadores.Add(player);
-        ObjectoJugador.Add(player.gameObject);
+        if (player == null)
+            return;
+
+        if (!MisJugadores.Contains(player))
+            MisJugadores.Add(player);
+
+        if (!ObjectoJugador.Contains(player.gameObject))
+            ObjectoJugador.Add(player.gameObject);
+    }
+
+    public void DesregistrarJugador(PlayerControllerSillaaSevilla player)
+    {
+        if (player == null)
+            return;
+
+        MisJugadores.Remove(player);
+        ObjectoJugador.Remove(player.gameObject);
     }
 
     private void FixedUpdate()
     {
+        if (minijuegoFinalizado)
+            return;
+
         switch (MyStat)
         {
             case Statjoc.StartRound:
                 RunNewRonda();
-                 break;
+                break;
+
             case Statjoc.Play:
                 RunPlay();
                 break;
+
             case Statjoc.InfoPlay:
                 InfoPlaying();
                 break;
+
             case Statjoc.ChooseChair:
                 RunInputs();
                 break;
+
             case Statjoc.Eleminated:
                 RunEleminated();
                 break;
-        }  
+        }
     }
 
-    //funcion para que los jugadores vuelvan a sus posiciones originales.
     void ResetPosPlayers()
     {
-        //ponemos a los persojnaes a su poscion original
         for (int i = 0; i < MisJugadores.Count; i++)
         {
-            MisJugadores[i].PosPlayer();
+            if (MisJugadores[i] != null)
+                MisJugadores[i].PosPlayer();
         }
-        //Liberamos las sillas
+
         for (int i = 0; i < MisSillas.Length; i++)
         {
-            MisSillas[i].Liberar();
+            if (MisSillas[i] != null)
+                MisSillas[i].Liberar();
         }
     }
 
     void RunNewRonda()
     {
-        HudObject[0].SetActive(true);
-       
+        ActivarHud(0, true);
+
         switch (ronda)
         {
             case 1:
-                MyTextronda.text = Textronda + ronda.ToString();
+                if (MyTextronda != null)
+                    MyTextronda.text = Textronda + ronda;
                 break;
+
             case 2:
-                MyTextronda.text = Textronda + ronda.ToString();
-                //desactivamos la silla del medio
-                MisSillas[0].gameObject.SetActive(false);
+                if (MyTextronda != null)
+                    MyTextronda.text = Textronda + ronda;
+
+                // Segunda ronda: quedan 3 jugadores, dejamos 2 sillas.
+                if (MisSillas.Length > 0 && MisSillas[0] != null)
+                    MisSillas[0].gameObject.SetActive(false);
+
                 ResetPosPlayers();
                 break;
+
             case 3:
-                MyTextronda.text = "Ultima Ronda";
-                //activamos la silla del medio
-                MisSillas[0].gameObject.SetActive(true);
-                //desactivamos las otras sillas
-                MisSillas[1].gameObject.SetActive(false);
-                MisSillas[2].gameObject.SetActive(false);
+                if (MyTextronda != null)
+                    MyTextronda.text = "Última Ronda";
+
+                // Final: quedan 2 jugadores, dejamos 1 silla.
+                if (MisSillas.Length > 0 && MisSillas[0] != null)
+                    MisSillas[0].gameObject.SetActive(true);
+
+                if (MisSillas.Length > 1 && MisSillas[1] != null)
+                    MisSillas[1].gameObject.SetActive(false);
+
+                if (MisSillas.Length > 2 && MisSillas[2] != null)
+                    MisSillas[2].gameObject.SetActive(false);
+
                 ResetPosPlayers();
                 break;
         }
-        
-       
-         //Time controller
+
         if (timeRonda > 0)
         {
             timeRonda -= Time.deltaTime;
         }
         else
         {
-            //resetamos el tiempo
-            timeRonda = 3.0f;
-            //cambaimos el estado
+            timeRonda = 1.5f;
+
+            if (timeLine != null)
+                timeLine.RenaudarAnimation();
+
             MyStat = Statjoc.Play;
         }
     }
 
     void RunPlay()
     {
-        HudObject[0].SetActive(false);
-        //activar musica
+        ActivarHud(0, false);
 
-      
-
-
-        //time Contorller
         if (timeplay > 0)
         {
             timeplay -= Time.deltaTime;
         }
         else
         {
-            //resteamos el timepo
             timeplay = 15.0f;
-            //cambaio el estado
+
+            if (timeLine != null)
+                timeLine.PausarAnimation();
+
             MyStat = Statjoc.InfoPlay;
         }
     }
 
     void InfoPlaying()
     {
-        HudObject[0].SetActive(true);
-        MyTextronda.text = "Escoge una silla";
+        if (timeLine != null)
+            timeLine.ActivarMusicSpecial();
+
+        ActivarHud(0, true);
+
+        if (MyTextronda != null)
+            MyTextronda.text = "Escoge una silla";
+
         if (timeinfoplaying > 0)
         {
             timeinfoplaying -= Time.deltaTime;
         }
         else
         {
-            timeinfoplaying = 2.0f;
-            HudObject[0].SetActive(false);
+            timeinfoplaying = 1.5f;
+
+            ActivarHud(0, false);
+
             MyStat = Statjoc.ChooseChair;
         }
     }
+
     void RunInputs()
     {
-        //desactivarmusica
-        //ativar los inputs del juego
         for (int i = 0; i < MisJugadores.Count; i++)
-            MisJugadores[i].MoveEnable();
+        {
+            if (MisJugadores[i] != null)
+                MisJugadores[i].MoveEnable();
+        }
 
         if (timeChoose > 0)
         {
@@ -183,122 +243,222 @@ public class SillaASevillaManager : MonoBehaviour
         }
         else
         {
-            timeChoose = 8.0f;
+            timeChoose = 5.0f;
+
+            if (timeLine != null)
+                timeLine.DesactivarMusicSpecial();
+
             MyStat = Statjoc.Eleminated;
         }
     }
 
-    void RemovePlayer(int indice)
-    {
-        GameObject player = ObjectoJugador[indice];
-
-        PlayerSillaaSevilla MiPlayer = new PlayerSillaaSevilla(MisJugadores[indice].id,ronda);
-        MiRegstroEleminados.Add(MiPlayer);
-       
-        ObjectoJugador.RemoveAt(indice);
-        MisJugadores.RemoveAt(indice);
-
-        Destroy(player);
-    }
-
     void RunEleminated()
     {
-        //bloquemos las acciones en caso necesario que no se haya bloquedo todo
-        for (int i = 0; i < MisJugadores.Count; i++)
-            MisJugadores[i].MoveDisabled();
-
-
-        //comprbamos que jugador no esta sentado en niguna silla, y se elemina el jugador
         for (int i = 0; i < MisJugadores.Count; i++)
         {
-            if (!MisJugadores[i].Sit)
-            {
-                switch (MisJugadores[i].GetId())
-                {
-                    case 1:
-                        HudObject[1].SetActive(true);
-                        break;
-                    case 2:
-                        HudObject[2].SetActive(true);
-                        break;
-                    case 3:
-                        HudObject[3].SetActive(true);
-                        break;
-                    case 4:
-                        HudObject[4].SetActive(true);
-                        break;
-                }
-                RemovePlayer(i);
-            }
+            if (MisJugadores[i] != null)
+                MisJugadores[i].MoveDisabled();
         }
 
+        EliminarJugadoresSinSilla();
 
-        //time controller
         if (timeeleminated > 0)
         {
             timeeleminated -= Time.deltaTime;
         }
         else
         {
-            if (ronda < 3)
+            timeeleminated = 1.0f;
+
+            if (MisJugadores.Count <= 1 || ronda >= 3)
             {
-                //comprobamos que si quedan m�s de un jugador en pie
-                if (MisJugadores.Count > 1)
-                { 
-                    //sumamos la varibale de ronda, ya que vamos a la sigunte ronda
-                    ronda++;
-                    timeeleminated = 1.0f;
-                    MyStat = Statjoc.StartRound;
-                }
-                //en caso de que no quede m�s de uno
-                else
+                RegistrarGanadorSiExiste();
+                FinalizarMinijuego();
+                return;
+            }
+
+            ronda++;
+            MyStat = Statjoc.StartRound;
+        }
+    }
+
+    void EliminarJugadoresSinSilla()
+    {
+        for (int i = MisJugadores.Count - 1; i >= 0; i--)
+        {
+            PlayerControllerSillaaSevilla jugador = MisJugadores[i];
+
+            if (jugador == null)
+            {
+                MisJugadores.RemoveAt(i);
+                ObjectoJugador.RemoveAt(i);
+                continue;
+            }
+
+            if (!jugador.Sit)
+            {
+                int posicionFinal = ObtenerPosicionFinalSegunRonda(ronda);
+
+                MostrarHudEliminado(jugador.GetId());
+
+                RegistrarEliminado(jugador.GetId(), posicionFinal);
+
+                GameObject obj = jugador.gameObject;
+
+                MisJugadores.RemoveAt(i);
+                ObjectoJugador.RemoveAt(i);
+
+                Destroy(obj);
+            }
+        }
+    }
+
+    int ObtenerPosicionFinalSegunRonda(int rondaActual)
+    {
+        switch (rondaActual)
+        {
+            case 1:
+                return 4;
+
+            case 2:
+                return 3;
+
+            case 3:
+                return 2;
+
+            default:
+                return 4;
+        }
+    }
+
+    void RegistrarEliminado(int idJugador, int posicionFinal)
+    {
+        if (idJugador < 1 || idJugador > 4)
+            return;
+
+        MiRegstroEleminados.Add(new PlayerSillaaSevilla(idJugador, posicionFinal));
+
+        Debug.Log($"Jugador {idJugador} eliminado. Posición final: {posicionFinal}");
+    }
+
+    void RegistrarGanadorSiExiste()
+    {
+        if (MisJugadores.Count == 1 && MisJugadores[0] != null)
+        {
+            int idGanador = MisJugadores[0].GetId();
+
+            bool yaRegistrado = false;
+
+            for (int i = 0; i < MiRegstroEleminados.Count; i++)
+            {
+                if (MiRegstroEleminados[i].VerId() == idGanador)
                 {
-                    //comprobamos al menos que quede uno en pie 
-                    if (MisJugadores.Count == 1)
-                    {
-                        //comprobamos que la condicon de jugador de pie, para ponerle la primera posicion
-                        //if (MisJugadores[0].id == Caracter.id)
-                            //Caratecet.pos = 1;
-                    }
-                    //en caso contrario, dependera si es la rona 1 o 2
-                    else
-                    {
-                        //Si no queda nadie, lo que se hara los ultimos en eleminarse ponerle la primera posicion.
-                        for (int i = 0; i < MiRegstroEleminados.Count; i++)
-                        {
-                            switch (MiRegstroEleminados[i].VerPos())
-                            {
-                                //si es la primera ronda, pondremos a todos los jugadores como ganadores
-                                case 1:
-                                    //carater.pos = 
-                                    break;
-                                //si es la segunda ronda quein haya sido elimindo primero 
-                                case 2:
-                                    //comprabremos quien ha sido eleminado desde la ronda 1 y quien de la segunda ronda 
-                                    if (MiRegstroEleminados[i].VerPos() == 1)
-                                    {
-                                        //los de la primera ronda seran ascendio ha segunda posicion
-                                    }
-                                    else
-                                    {
-                                        //los que han quedado en la segunda se pasaran a primero
-                                    }
-                                    break;
-                            }
-                        }
-                    }
+                    yaRegistrado = true;
+                    break;
                 }
             }
-            if (ronda == 3)
+
+            if (!yaRegistrado)
             {
-                //ver quien queda de piea que sera el ganador
-                if (MisJugadores.Count == 1)
-                {
-                    //comprobamos que la condicon de jugador de pie, para ponerle la primera posicion
-                    //if (MisJugadores[0].id == Caracter.id)
-                    //Caratecet.pos = 1;
-                }
+                MiRegstroEleminados.Add(new PlayerSillaaSevilla(idGanador, 1));
+                Debug.Log($"Jugador {idGanador} gana Silla a Sevilla.");
             }
-        } // fin del time contoller
+        }
+        else if (MisJugadores.Count == 0)
+        {
+            Debug.LogWarning("No queda ningún jugador vivo. Se finalizará usando solo los eliminados registrados.");
+        }
+    }
+
+    void MostrarHudEliminado(int idJugador)
+    {
+        switch (idJugador)
+        {
+            case 1:
+                ActivarHud(1, true);
+                break;
+
+            case 2:
+                ActivarHud(2, true);
+                break;
+
+            case 3:
+                ActivarHud(3, true);
+                break;
+
+            case 4:
+                ActivarHud(4, true);
+                break;
+        }
+    }
+
+    void ActivarHud(int index, bool activo)
+    {
+        if (HudObject == null)
+            return;
+
+        if (index < 0 || index >= HudObject.Length)
+            return;
+
+        if (HudObject[index] != null)
+            HudObject[index].SetActive(activo);
+    }
+
+    void GuardarResultadosEnDatosMinijuego()
+    {
+        DatosMinijuego.ResetDatos();
+        DatosMinijuego.cantidadJugadores = 4;
+
+        for (int i = 0; i < MiRegstroEleminados.Count; i++)
+        {
+            int idJugador = MiRegstroEleminados[i].VerId();
+            int posicion = MiRegstroEleminados[i].VerPos();
+
+            int index = idJugador - 1;
+
+            if (index < 0 || index >= DatosMinijuego.posiciones.Length)
+                continue;
+
+            DatosMinijuego.ids[index] = idJugador;
+            DatosMinijuego.posiciones[index] = posicion;
+            DatosMinijuego.puntos[index] = 5 - posicion;
+            DatosMinijuego.monedas[index] = 0;
+            DatosMinijuego.estrellas[index] = 0;
+
+            Debug.Log($"DatosMinijuego: Player{idJugador} posición={posicion}");
+        }
+    }
+
+    void FinalizarMinijuego()
+    {
+        if (minijuegoFinalizado)
+            return;
+
+        minijuegoFinalizado = true;
+
+        GuardarResultadosEnDatosMinijuego();
+
+        Scene escenaActual = gameObject.scene;
+
+        DatosMinijuego.escenaRecompensas = nombreEscenaRecompensas;
+
+        SceneManager.LoadSceneAsync(nombreEscenaRecompensas, LoadSceneMode.Additive).completed += (op) =>
+        {
+            ManagerFinMinijuego managerNueva = Object.FindObjectOfType<ManagerFinMinijuego>();
+
+            if (managerNueva != null)
+            {
+                managerNueva.minigame = ManagerFinMinijuego.TipoMiniGame.OtherMinigames;
+            }
+            else
+            {
+                Debug.LogWarning("No se encontró ManagerFinMinijuego en la escena de recompensas.");
+            }
+
+            if (escenaActual.IsValid() && escenaActual.isLoaded)
+            {
+                SceneManager.UnloadSceneAsync(escenaActual);
+            }
+        };
     }
 }

@@ -1,78 +1,95 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.TextCore.Text;
 
 public class PlayerControllerSillaaSevilla : MonoBehaviour
 {
+    [Header("Datos")]
     public int id;
     public bool Sit = false;
     public bool IA;
+
     private UnityEngine.InputSystem.PlayerInput MiInput; 
     InputAction Action;
     IASillaASevilla MiIA;
 
     ChairController SillaMia;
 
-    bool PlayerQuiet, ActionEnCurso;
+    bool PlayerQuiet;
+    bool ActionEnCurso;
 
     [SerializeField] SillaASevillaManager MiManagerContoller;
 
     Vector3 MiPosition;
 
+    private void Awake()
+    {
+        MiInput = GetComponent<UnityEngine.InputSystem.PlayerInput>();
+        MiIA = GetComponent<IASillaASevilla>();
+    }
+
+    private void OnEnable()
+    {
+        if (MiManagerContoller != null)
+            MiManagerContoller.RegistraJugador(this);
+    }
+
+    private void OnDisable()
+    {
+        if (MiManagerContoller != null)
+            MiManagerContoller.DesregistrarJugador(this);
+    }
+
     private void Start()
     {
-        //id = WhoAmI();
-        //IA = YoureARobot();
-        MiInput = GetComponent<UnityEngine.InputSystem.PlayerInput>();
-        Action = MiInput.currentActionMap.FindAction("Sit");
-        MiIA = GetComponent<IASillaASevilla>();
+        if (MiInput != null && MiInput.actions != null)
+            Action = MiInput.currentActionMap.FindAction("Sit");
+
         PlayerQuiet = true;
         ActionEnCurso = false;
-        MiPosition = this.gameObject.transform.position;
-    } 
 
+        MiPosition = transform.position;
 
-    //Aqu� cunaod activemos el script de la ia, se llamar a la funcion de la ia, para que pueda coger una silla por un periodo tiempo.
+        if (!IA && Action == null)
+            Debug.LogWarning($"{gameObject.name} no encontró la acción 'Sit'.");
+    }
+
     private void Update()
     {
         if (!PlayerQuiet)
         {
-            if (!this.GetIA())
+            if (!GetIA())
             {
-                if (Action.triggered)
-                {
+                if (Action != null && Action.triggered)
                     ActionEnCurso = true;
-                }
             }
             else
+            {
                 ActionEnCurso = true;
+            }
         }
-        
+
         if (ActionEnCurso)
         {
             if (GetIA())
-                MiIA.MoveIA();
+            {
+                if (MiIA != null)
+                    MiIA.MoveIA();
+            }
             else
+            {
                 playerAction();
+            }
         }
-    }
-    private void OnEnable()
-    {
-        MiManagerContoller.RegistraJugador(this);
     }
 
     public void PosPlayer()
     {
         transform.position = MiPosition;
-        Sit = false;
-    }
 
-    //dos funiones para activar los inputs y desconterlos
-    //tambien incluimos excepciones en caso de que el player controller sea ia o no
-    // Si es Ia actimvaremos su propio escript y desactivaremos el dicho escript
+        Sit = false;
+        SillaMia = null;
+        ActionEnCurso = false;
+    }
 
     public void MoveEnable()
     {
@@ -83,18 +100,6 @@ public class PlayerControllerSillaaSevilla : MonoBehaviour
     {
         PlayerQuiet = true;
         ActionEnCurso = false;
-    }
-
-    //Aqu� habria que llamar al character para pedir que id tiene este jugador
-    int WhoAmI()
-    {
-        return 0; //Character.GetCharId();
-    }
-
-    //aqu� para saber si es un jugador o es ia
-    bool YoureARobot()
-    {
-        return false; //Character.isPlayer;
     }
 
     public int GetId()
@@ -109,35 +114,49 @@ public class PlayerControllerSillaaSevilla : MonoBehaviour
 
     public void playerAction()
     {
+        if (Sit)
+            return;
+
         ChairController[] sillas = Object.FindObjectsOfType<ChairController>();
+
         ChairController mejorSilla = null;
         float distMin = Mathf.Infinity;
 
-        if (!Sit)
+        foreach (ChairController s in sillas)
         {
-            foreach (ChairController s in sillas)
+            if (s == null || !s.gameObject.activeInHierarchy)
+                continue;
+
+            if (s.EstaLibre())
             {
-                if (s.EstaLibre())
+                float d = Vector3.Distance(transform.position, s.transform.position);
+
+                if (d < distMin)
                 {
-                    float d = Vector3.Distance(transform.position, s.transform.position);
-                    if (d < distMin)
-                    {
-                        distMin = d;
-                        mejorSilla = s;
-                    }
+                    distMin = d;
+                    mejorSilla = s;
                 }
             }
+        }
 
-            if (mejorSilla != null)
-            {
-                SillaMia = mejorSilla;
-                SillaMia.Ocupar(this);
-                // Mover al jugador a la posici�n (puedes usar NavMesh o Lerp)
+        if (mejorSilla != null)
+        {
+            SillaMia = mejorSilla;
+            SillaMia.Ocupar(this);
+
+            if (SillaMia.puntoParaSentarse != null)
                 transform.position = SillaMia.puntoParaSentarse.position;
-                Debug.Log(gameObject.name + " se ha sentado.");
-                MoveDisabled();
-            }
+            else
+                transform.position = SillaMia.transform.position;
+
+            Debug.Log(gameObject.name + " se ha sentado.");
+
+            MoveDisabled();
         }
     }
-    public bool TieneSilla() => SillaMia != null;
+
+    public bool TieneSilla()
+    {
+        return SillaMia != null;
+    }
 }
