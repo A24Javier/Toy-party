@@ -6510,6 +6510,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Path3
       objectReference: {fileID: 0}
+    - target: {fileID: 3282952432640197736, guid: ebded4510029c454eb2053d30cdae031,
+        type: 3}
+      propertyPath: m_TagString
+      value: Path
+      objectReference: {fileID: 0}
     - target: {fileID: 4227939459741527646, guid: ebded4510029c454eb2053d30cdae031,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9281,6 +9286,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Path2
       objectReference: {fileID: 0}
+    - target: {fileID: 3282952432640197736, guid: ebded4510029c454eb2053d30cdae031,
+        type: 3}
+      propertyPath: m_TagString
+      value: Path
+      objectReference: {fileID: 0}
     - target: {fileID: 4227939459741527646, guid: ebded4510029c454eb2053d30cdae031,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9564,6 +9574,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Path1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3282952432640197736, guid: ebded4510029c454eb2053d30cdae031,
+        type: 3}
+      propertyPath: m_TagString
+      value: Path
       objectReference: {fileID: 0}
     - target: {fileID: 4227939459741527646, guid: ebded4510029c454eb2053d30cdae031,
         type: 3}
