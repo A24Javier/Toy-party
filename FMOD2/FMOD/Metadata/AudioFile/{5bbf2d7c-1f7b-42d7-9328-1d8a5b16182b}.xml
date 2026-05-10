@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{5bbf2d7c-1f7b-42d7-9328-1d8a5b16182b}">
+		<property name="assetPath">
+			<value>MusicaAccessiblidadEscogerSilla.mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>84.793469387755096</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{69e06601-e423-42a0-9497-3a0c87fd3e99}</destination>
+		</relationship>
+	</object>
+</objects>

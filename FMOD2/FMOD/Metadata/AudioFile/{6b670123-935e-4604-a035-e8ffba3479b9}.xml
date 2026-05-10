@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{6b670123-935e-4604-a035-e8ffba3479b9}">
+		<property name="assetPath">
+			<value>Pasos.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>24</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>3.048</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{69e06601-e423-42a0-9497-3a0c87fd3e99}</destination>
+		</relationship>
+	</object>
+</objects>

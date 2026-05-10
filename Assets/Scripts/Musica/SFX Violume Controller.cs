@@ -1,20 +1,31 @@
 using UnityEngine;
 using UnityEngine.UI;
 using FMODUnity;
-public class SFXViolumeController : MonoBehaviour
-{
-    [SerializeField] private Slider volumeSlider;
 
+public class VolumeController : MonoBehaviour
+{
+    [Header("Sliders")]
+    [SerializeField] private Slider sfxSlider;
+    [SerializeField] private Slider musicSlider;
+
+    private FMOD.Studio.VCA sfxVCA;
     private FMOD.Studio.VCA musicVCA;
 
     void Start()
     {
-        musicVCA = RuntimeManager.GetVCA("vca:/SFX");
+        sfxVCA = RuntimeManager.GetVCA("vca:/SFX");
+        musicVCA = RuntimeManager.GetVCA("vca:/Music");
 
-        volumeSlider.onValueChanged.AddListener(SetVolume);
+        sfxSlider.onValueChanged.AddListener(SetSFXVolume);
+        musicSlider.onValueChanged.AddListener(SetMusicVolume);
     }
 
-    public void SetVolume(float value)
+    public void SetSFXVolume(float value)
+    {
+        sfxVCA.setVolume(value);
+    }
+
+    public void SetMusicVolume(float value)
     {
         musicVCA.setVolume(value);
     }
