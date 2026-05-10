@@ -131,6 +131,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1319531930}
     m_Modifications:
+    - target: {fileID: 1658350930934138368, guid: e323c6b199d6fa445aa6b91d7f11dd2b,
+        type: 3}
+      propertyPath: m_text
+      value: Jorddy Alejandro
+      objectReference: {fileID: 0}
     - target: {fileID: 2951910006397422950, guid: e323c6b199d6fa445aa6b91d7f11dd2b,
         type: 3}
       propertyPath: m_Pivot.x
@@ -330,7 +335,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1773046504}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.2551539
+  m_Size: 0.25515386
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -813,6 +818,27 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1319531930}
     m_Modifications:
+    - target: {fileID: 1658350930934138368, guid: e323c6b199d6fa445aa6b91d7f11dd2b,
+        type: 3}
+      propertyPath: m_text
+      value: Jonathan Ausach
+      objectReference: {fileID: 0}
+    - target: {fileID: 1885244973795526384, guid: e323c6b199d6fa445aa6b91d7f11dd2b,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -200
+      objectReference: {fileID: 0}
+    - target: {fileID: 1885244973795526384, guid: e323c6b199d6fa445aa6b91d7f11dd2b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2389775592743663918, guid: e323c6b199d6fa445aa6b91d7f11dd2b,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7bc95eeddbcd5114cb550af4f8115015,
+        type: 3}
     - target: {fileID: 2951910006397422950, guid: e323c6b199d6fa445aa6b91d7f11dd2b,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1300,6 +1326,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1319531930}
     m_Modifications:
+    - target: {fileID: 1658350930934138368, guid: e323c6b199d6fa445aa6b91d7f11dd2b,
+        type: 3}
+      propertyPath: m_text
+      value: 'Naiara Reyes '
+      objectReference: {fileID: 0}
     - target: {fileID: 2951910006397422950, guid: e323c6b199d6fa445aa6b91d7f11dd2b,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1508,6 +1539,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1319531930}
     m_Modifications:
+    - target: {fileID: 1658350930934138368, guid: e323c6b199d6fa445aa6b91d7f11dd2b,
+        type: 3}
+      propertyPath: m_text
+      value: Khelley Olivo
+      objectReference: {fileID: 0}
     - target: {fileID: 2951910006397422950, guid: e323c6b199d6fa445aa6b91d7f11dd2b,
         type: 3}
       propertyPath: m_Pivot.x
