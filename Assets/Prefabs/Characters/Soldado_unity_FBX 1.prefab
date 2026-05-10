@@ -5042,6 +5042,7 @@ MonoBehaviour:
   powerJump: 1
   timeJump: 1
   stepSfx: {fileID: 8300000, guid: 86544560de2afd14fbe90bf898a1d226, type: 3}
+  stepSfxString: pasos
   movesWithoutFinish:
   - KeyCode: 49
     DebugAction:
@@ -5300,6 +5301,7 @@ MonoBehaviour:
   powerJump: 1
   timeJump: 1
   stepSfx: {fileID: 0}
+  stepSfxString: pasos
 --- !u!82 &1273897301557829862
 AudioSource:
   m_ObjectHideFlags: 0

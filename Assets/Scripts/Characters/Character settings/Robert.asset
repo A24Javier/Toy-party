@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce9f02cbfd83a7346834f8b9ea29acb8, type: 3}
   m_Name: Robert
   m_EditorClassIdentifier: 
-  characterPrefab: {fileID: 1830928126585884430, guid: dc48736f50eb89d44ad1b2b1aa48a2a6,
+  characterPrefab: {fileID: 8961941132602416924, guid: 0d851e7d9f0d69f4ab0e8662256cc64e,
     type: 3}
   characterAbility: {fileID: 11400000, guid: 09d00b8d0d63fce489b57bcf8dd90a86, type: 2}
   CharNameTraduction:
@@ -33,8 +33,8 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  _characterName: Roberto
-  _characterDescription: TBD
+  _characterName: Robert
+  _characterDescription: Una roca amb ulls. Li encanta sortir disparat.
   characterSprite: {fileID: 21300000, guid: 54ce99243a923b74b95b82b0c1807247, type: 3}
   references:
     version: 2

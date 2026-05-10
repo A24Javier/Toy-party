@@ -1429,6 +1429,18 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!114 &385611326 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 549131567609840246, guid: ca7b9e2bf79fd294b88881e3c8534959,
+    type: 3}
+  m_PrefabInstance: {fileID: 6570842567148769017}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 799d131b1f10bcf4a80e0869d0cf5a93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &396273027
 GameObject:
   m_ObjectHideFlags: 0
@@ -1467,6 +1479,7 @@ MonoBehaviour:
   _maxNpcTime: 3
   _maxChangeNumAttemps: 100
   _upDistance: 0.22
+  stepSfxString: pasos
 --- !u!4 &396273029
 Transform:
   m_ObjectHideFlags: 0
@@ -6872,7 +6885,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5180bfa45a2b5f34393ed19c20086c72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volumeSlider: {fileID: 8965031677867367635}
+  sfxSlider: {fileID: 1669704310}
+  musicSlider: {fileID: 1669704311}
 --- !u!114 &1652481562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6885,13 +6899,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b74354426deef144c82925796c1aa625, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuMusic:
-    Guid:
-      Data1: -1900781796
-      Data2: 1096114861
-      Data3: -831055175
-      Data4: -671431318
-    Path: event:/Musica_Menu
+  musics: []
 --- !u!4 &1652481563
 Transform:
   m_ObjectHideFlags: 0
@@ -6907,6 +6915,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1669704310 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6160940617133317707, guid: da4ecc58358df6947ab3bb08e1179ee3,
+    type: 3}
+  m_PrefabInstance: {fileID: 8965031677867367629}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1669704311 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6224128470826677080, guid: da4ecc58358df6947ab3bb08e1179ee3,
+    type: 3}
+  m_PrefabInstance: {fileID: 8965031677867367629}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1777826996
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9513,16 +9545,16 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GamepadController, Assembly-CSharp
-        m_MethodName: GoToButton
-        m_Mode: 2
+      - m_Target: {fileID: 385611326}
+        m_TargetAssemblyTypeName: Sondido, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
         m_Arguments:
-          m_ObjectArgument: {fileID: 7848141310897622891}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Button
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &559817944487762997
@@ -10801,6 +10833,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 385611326}
+        m_TargetAssemblyTypeName: Sondido, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: boton
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1291837043672479386
@@ -12940,7 +12984,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 272081995274323010}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 385611326}
+        m_TargetAssemblyTypeName: Sondido, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: boton
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2274317864876490145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12995,6 +13051,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 385611326}
+        m_TargetAssemblyTypeName: Sondido, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: boton
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &2275649544003107388
@@ -17385,7 +17453,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2869679440779169358}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 385611326}
+        m_TargetAssemblyTypeName: Sondido, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: boton
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4605791279847909132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17944,7 +18024,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7507820329256824570}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 385611326}
+        m_TargetAssemblyTypeName: Sondido, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: boton
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4908702313961680498
 GameObject:
   m_ObjectHideFlags: 0
@@ -18685,6 +18777,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 385611326}
+        m_TargetAssemblyTypeName: Sondido, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Button
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &5286555718271757008
@@ -20381,6 +20485,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 385611326}
+        m_TargetAssemblyTypeName: Sondido, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: boton
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5953695178800710542
 GameObject:
   m_ObjectHideFlags: 0
@@ -20697,7 +20813,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2283352955817963038}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 385611326}
+        m_TargetAssemblyTypeName: Sondido, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: boton
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!224 &6197232200374000448
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21236,6 +21364,74 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1843599850142588835}
   m_CullTransparentMesh: 1
+--- !u!1001 &6570842567148769017
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 755970955179255012, guid: ca7b9e2bf79fd294b88881e3c8534959,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 755970955179255012, guid: ca7b9e2bf79fd294b88881e3c8534959,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 755970955179255012, guid: ca7b9e2bf79fd294b88881e3c8534959,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 755970955179255012, guid: ca7b9e2bf79fd294b88881e3c8534959,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 755970955179255012, guid: ca7b9e2bf79fd294b88881e3c8534959,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 755970955179255012, guid: ca7b9e2bf79fd294b88881e3c8534959,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 755970955179255012, guid: ca7b9e2bf79fd294b88881e3c8534959,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 755970955179255012, guid: ca7b9e2bf79fd294b88881e3c8534959,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 755970955179255012, guid: ca7b9e2bf79fd294b88881e3c8534959,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 755970955179255012, guid: ca7b9e2bf79fd294b88881e3c8534959,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3339213134169654070, guid: ca7b9e2bf79fd294b88881e3c8534959,
+        type: 3}
+      propertyPath: m_Name
+      value: FMOD
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ca7b9e2bf79fd294b88881e3c8534959, type: 3}
 --- !u!1 &6572402548179310308
 GameObject:
   m_ObjectHideFlags: 0
@@ -23830,6 +24026,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 385611326}
+        m_TargetAssemblyTypeName: Sondido, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: boton
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8144313433679352248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23978,7 +24186,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5857529687741430326}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 385611326}
+        m_TargetAssemblyTypeName: Sondido, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: boton
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &8189359151047775667
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -24925,7 +25145,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5669038935543767071}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 385611326}
+        m_TargetAssemblyTypeName: Sondido, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: boton
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8897021462563891365
 GameObject:
   m_ObjectHideFlags: 0
@@ -25824,18 +26056,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8965031677867367629}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8965031677867367635 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6160940617133317707, guid: da4ecc58358df6947ab3bb08e1179ee3,
-    type: 3}
-  m_PrefabInstance: {fileID: 8965031677867367629}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8965031677867367636 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7244727646729126086, guid: da4ecc58358df6947ab3bb08e1179ee3,
@@ -26031,7 +26251,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5610060417840481261}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 385611326}
+        m_TargetAssemblyTypeName: Sondido, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: boton
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &9055442837477746041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26739,3 +26971,4 @@ SceneRoots:
   - {fileID: 396273029}
   - {fileID: 1652481563}
   - {fileID: 1062670940}
+  - {fileID: 6570842567148769017}

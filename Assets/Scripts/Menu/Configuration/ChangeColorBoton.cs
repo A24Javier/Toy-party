@@ -8,6 +8,23 @@ public class ChangeColorBoton : MonoBehaviour
     public Button boton2;
     public Button boton3;
 
+    [SerializeField]
+    private bool activateStart = false;
+
+    void Start()
+    {
+        if (!activateStart)
+            return;
+
+        Sondido fmodSound = FindFirstObjectByType<Sondido>();
+        if(fmodSound != null)
+        {
+            boton1.onClick.AddListener(delegate { fmodSound?.Play("boton"); });
+            boton2.onClick.AddListener(delegate { fmodSound?.Play("boton"); });
+            boton3.onClick.AddListener(delegate { fmodSound?.Play("boton"); });
+        }
+    }
+
     public void ChangeColor()
     {
         Color colorOscuro = new Color32(0, 0, 0, 237);

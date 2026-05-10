@@ -169,12 +169,20 @@ public class DiceScript : MonoBehaviour
     private GameObject _instanciedDice;
     private List<TMP_Text> _diceNums = new List<TMP_Text>();
 
+    private Sondido fmodSound;
+    [SerializeField] private string diceSfxString = "dado";
+
     public static DiceScript Instance;
 
     void Awake()
     {
         if(Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
+    }
+
+    void Start()
+    {
+        fmodSound = FindFirstObjectByType<Sondido>();
     }
 
     public void SetupDice(Dice dice, bool isNPC)
@@ -281,7 +289,7 @@ public class DiceScript : MonoBehaviour
     private IEnumerator ShowDiceNum(int diceNum)
     {
         //_instanciedDice.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-
+        fmodSound.Play(diceSfxString);
         yield return _instanciedDice.transform.DORotate(Vector3.zero, 0.2f);
         GetComponentInChildren<Animator>().SetBool("show", true);
 

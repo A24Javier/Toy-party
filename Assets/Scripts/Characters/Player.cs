@@ -1,8 +1,6 @@
 ﻿using DG.Tweening;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
-
 
 public class Player : Character
 {
@@ -20,7 +18,9 @@ public class Player : Character
 
     // Sounds
     private AudioSource audioSource;
+    private Sondido fmodSound;
     [SerializeField] private AudioClip stepSfx;
+    [SerializeField] private string stepSfxString = "pasos";
 
     // Debug
     private bool isDebug = false;
@@ -66,6 +66,7 @@ public class Player : Character
 
     void Start()
     {
+        fmodSound = FindFirstObjectByType<Sondido>();
         //inventory.AddItem(randomTP);
         animator = GetComponent<Animator>();
         board = GameObject.FindObjectOfType<Board>();
@@ -119,7 +120,8 @@ public class Player : Character
 
         for (int i = 0; i < steps; i++)
         {
-            audioSource.Play();
+            fmodSound.Play(stepSfxString);
+            //audioSource.Play();
             runningParticles.Play();
             // Asignamos directamente al campo de la clase para Look()
             newBox = actualBox.GetNewBox(0);
@@ -222,7 +224,8 @@ public class Player : Character
     public IEnumerator PathSelected(Vector3 destination1, Box box)
     {
         UIManager.instance.DeactivatePathDecision();
-        audioSource.Play();
+        //audioSource.Play();
+        fmodSound.Play(stepSfxString);
         newBox = box;
 
         destination1 += upToBox;

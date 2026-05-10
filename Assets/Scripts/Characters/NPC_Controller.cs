@@ -22,10 +22,13 @@ public class NPC_Controller : Character
 
     // Sounds
     private AudioSource audioSource;
+    private Sondido fmodSound;
     [SerializeField] private AudioClip stepSfx;
+    [SerializeField] private string stepSfxString = "pasos";
 
     void Start()
     {
+        fmodSound = FindFirstObjectByType<Sondido>();
         animator = GetComponent<Animator>();
         board = FindObjectOfType<Board>();
         actualBox = board.GetCasilla(0);
@@ -138,7 +141,8 @@ public class NPC_Controller : Character
         animator.SetBool("isRunning", true);
         for (int i = 0; i < steps; i++)
         {
-            audioSource.Play();
+            //audioSource.Play();
+            fmodSound.Play(stepSfxString);
             runningParticles.Play();
             newBox = actualBox.GetNewBox(0);
 
@@ -208,7 +212,8 @@ public class NPC_Controller : Character
                 }
                 destination = newBox.GetThisBoxTransf().position;
                 animToThis = newBox.GetAnimToThis();
-                audioSource.Play();
+                //audioSource.Play();
+                fmodSound.Play(stepSfxString);
 
                 if (animToThis == "NoAnim")
                 {

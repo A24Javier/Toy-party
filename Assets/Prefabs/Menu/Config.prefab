@@ -636,6 +636,7 @@ MonoBehaviour:
   boton1: {fileID: 7244727646729126086}
   boton2: {fileID: 7487001386706456264}
   boton3: {fileID: 4312554436008364647}
+  activateStart: 1
 --- !u!1 &767197871767660348
 GameObject:
   m_ObjectHideFlags: 0
@@ -821,6 +822,7 @@ MonoBehaviour:
   boton1: {fileID: 7487001386706456264}
   boton2: {fileID: 4312554436008364647}
   boton3: {fileID: 7244727646729126086}
+  activateStart: 0
 --- !u!1 &804984530499130876
 GameObject:
   m_ObjectHideFlags: 0
@@ -5544,6 +5546,7 @@ MonoBehaviour:
   boton1: {fileID: 4312554436008364647}
   boton2: {fileID: 7487001386706456264}
   boton3: {fileID: 7244727646729126086}
+  activateStart: 0
 --- !u!1 &6493142253711902015
 GameObject:
   m_ObjectHideFlags: 0
