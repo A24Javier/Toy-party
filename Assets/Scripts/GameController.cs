@@ -60,13 +60,49 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-        // Coge el valor de jugadores a crear almacenado en PlayerPrefs y lo almacena en 'playersToCreate'
-        playersToCreate = PlayerPrefs.GetInt("PlayersToCreate");
-        playersToCreate = 1; // BORRAR EN UN FUTURO
-        characters = new Character[MAX_PLAYERS];
-        CreatePlayers();
+        if (PartySession.instance != null &&
+            PartySession.instance.characters[0] != null &&
+            PartySession.instance.boardState != null &&
+            PartySession.instance.boardState.idOrder != null &&
+            PartySession.instance.boardState.idOrder.Length == 4)
+        {
+            RestoreGameFromSession();
+        }
+        else
+        {
+            playersToCreate = PlayerPrefs.GetInt("PlayersToCreate");
+            playersToCreate = 1; // BORRAR EN UN FUTURO
+            characters = new Character[MAX_PLAYERS];
+            CreatePlayers();
 
-        StartCoroutine(Box.InitStarSystemNextFrame());
+            StartCoroutine(Box.InitStarSystemNextFrame());
+        }
+    }
+
+    public int GetActualTurn()
+    {
+        return actualTurn;
+    }
+
+    public int GetActualRound()
+    {
+        return actualRound;
+    }
+
+    public int[] GetIdOrderCopy()
+    {
+        int[] copy = new int[idOrder.Length];
+        for (int i = 0; i < idOrder.Length; i++)
+            copy[i] = idOrder[i];
+        return copy;
+    }
+
+    public bool[] GetIsPlayerOrderCopy()
+    {
+        bool[] copy = new bool[isPlayer.Length];
+        for (int i = 0; i < isPlayer.Length; i++)
+            copy[i] = isPlayer[i];
+        return copy;
     }
 
     /// <summary>
@@ -319,12 +355,9 @@ public class GameController : MonoBehaviour
         if (actualTurn % 4 == 0)
         {
             Debug.Log("Ronda de minijuego");
-            // Ronda de minijuego
-            //MinigameController.instance.SelectMinigame("AllVSAll");
 
             actualRound++;
 
-            // Activamos el evento de OnRoundEnded
             OnRoundEnded?.Invoke();
 
             yield return new WaitForSeconds(2f);
@@ -336,21 +369,17 @@ public class GameController : MonoBehaviour
                 if (PlayerStats.Instance?.PStats != null)
                     PlayerStats.Instance.PStats.MinigamesPlayed++;
 
-                //MinigameFlow.instance.StartRandom(MinigameType.OneVSOne);
-                StartMovement();
+                MinigameFlow.instance.StartRoundEndMinigame();
                 yield break;
             }
-
         }
         else
         {
-            if(actualRound < MAX_ROUNDS)
+            if (actualRound < MAX_ROUNDS)
             {
-                // Que tire el siguiente jugador
                 yield return new WaitForSeconds(2f);
                 StartMovement();
             }
-            
         }
 
         if (actualRound >= MAX_ROUNDS)
@@ -429,4 +458,79 @@ public class GameController : MonoBehaviour
         camFollow.SetBoxRotation(newRotationY);
     }
 
+    private void RestoreGameFromSession()
+    {
+        characters = new Character[MAX_PLAYERS];
+
+        players.Clear();
+        npcs.Clear();
+
+        for (int i = 0; i < PartySession.instance.characters.Length; i++)
+        {
+            CharacterSnapshot snap = PartySession.instance.characters[i];
+
+            GameObject prefabToUse = null;
+
+            // Aquí tienes que decidir qué prefab corresponde a cada snapshot
+            // Si todos se restauran con el mismo personaje/prefab, usa tu sistema actual.
+            // Si cada personaje tiene un setting distinto, habrá que guardar ese dato también.
+        }
+
+        actualTurn = PartySession.instance.boardState.actualTurn;
+        actualRound = PartySession.instance.boardState.actualRound;
+
+        int[] savedIdOrder = PartySession.instance.boardState.idOrder;
+        bool[] savedIsPlayer = PartySession.instance.boardState.isPlayerOrder;
+
+        for (int i = 0; i < 4; i++)
+        {
+            idOrder[i] = savedIdOrder[i];
+            isPlayer[i] = savedIsPlayer[i];
+        }
+
+        StartCoroutine(Box.InitStarSystemNextFrame());
+        StartMovement();
+    }
+
+    public Character GetCharacterById(int characterId)
+    {
+        if (characters == null)
+            return null;
+
+        for (int i = 0; i < characters.Length; i++)
+        {
+            if (characters[i] != null && characters[i].characterId == characterId)
+                return characters[i];
+        }
+
+        return null;
+    }
+
+    public void StartNextTurnAfterMinigame()
+    {
+        if (actualRound >= MAX_ROUNDS)
+        {
+            if (gameEnded)
+                return;
+
+            gameEnded = true;
+            DeactivateFastTimeScale();
+            UIManager.instance.ShowLeaderboard(characters);
+            return;
+        }
+
+        StartMovement();
+    }
+    public Character GetCharacterByCharacterId(int characterId)
+    {
+        for (int i = 0; i < characters.Length; i++)
+        {
+            if (characters[i] != null && characters[i].characterId == characterId)
+            {
+                return characters[i];
+            }
+        }
+
+        return null;
+    }
 }

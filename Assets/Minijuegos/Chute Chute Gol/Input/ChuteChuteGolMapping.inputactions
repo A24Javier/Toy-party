@@ -1,0 +1,94 @@
+{
+    "name": "ChuteChuteGolMapping",
+    "maps": [
+        {
+            "name": "Chuete",
+            "id": "7c7a7766-19e0-4920-b8ce-d7fa03d4b7e6",
+            "actions": [
+                {
+                    "name": "Chute1",
+                    "type": "Button",
+                    "id": "bb38f7ad-f9dc-4d38-956e-6ebbb08b96f9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Chute2",
+                    "type": "Button",
+                    "id": "d55e478c-8978-4414-84a0-6f89d4d8a78d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Chute3",
+                    "type": "Button",
+                    "id": "3674d285-a91c-40c8-87b7-3fceb04aee7b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Chute4",
+                    "type": "Button",
+                    "id": "a0888dbd-7e65-4999-8944-ce4fb7ee2a1a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "bec34b48-1e50-417b-936b-7e9d87d23ddf",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Chute1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f1f1b9b4-03f9-4840-a18e-205ea741040b",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Chute2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a429ad61-a785-466a-af4b-05d8b439d4e9",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Chute3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4a4f0592-809e-4c08-96ac-fe2bc7540e82",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Chute4",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

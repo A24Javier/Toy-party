@@ -13,8 +13,11 @@ MonoBehaviour:
   m_Name: StripSlack
   m_EditorClassIdentifier: 
   minigameName: Strip Slack
-  description: Dos jugadores se pelean mediante una cuerda para tirar al otro jugador
-  previewImage: {fileID: 0}
+  description: "En este minijuego tienes que darle al bot\xF3n izquierdo del rat\xF3n,
+    har\xE1 que el cursor blanco del HUD se mueva y tienes que mantener el cursor
+    dentro del cuadro para aumentar la fuerza del jugador. Cuando acabe el tiempo,
+    quien haya obtenido m\xE1s fuerza ser\xE1 el ganador del juego."
+  previewImage: {fileID: 21300000, guid: 612d2752058d4e74582f8dcd6f8530af, type: 3}
   sceneName: Strip Slack
   previewMusic: {fileID: 0}
   type: 3

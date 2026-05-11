@@ -53,6 +53,9 @@ public class DeviceDetector : MonoBehaviour
 
     private void ApplyText()
     {
+        if (deviceText == null)
+            return;
+
         deviceText.text = (currentScheme == Scheme.Gamepad)
             ? "USANDO: GAMEPAD "
             : "USANDO: TECLADO ";

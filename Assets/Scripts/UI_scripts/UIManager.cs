@@ -100,13 +100,19 @@ public class UIManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            return;
         }
 
-        panelMinigameSelection.alpha = 0;
+        if (panelMinigameSelection != null)
+            panelMinigameSelection.alpha = 0;
+
         ControlActionPanel(false);
         ControlSelectPlayer(false);
         ControlStarCouponMsg(false);
-        itemsPanel.alpha = 0;
+
+        if (itemsPanel != null)
+            itemsPanel.alpha = 0;
+
         HideLeaderboard();
     }
 
@@ -235,13 +241,23 @@ public class UIManager : MonoBehaviour
 
     public void ChangeCharacterUI(Character character)
     {
-        string coinsTraduction = coinsLocal.GetLocalizedString();
-        characterTextCoins.text = string.Concat(coinsTraduction, character.GetCoins());
+        if (character == null)
+            return;
 
-        string starsTraduction = starsLocal.GetLocalizedString();
-        characterTextStars.text = string.Concat(starsTraduction, character.GetStars());
+        if (characterTextCoins != null)
+        {
+            string coinsTraduction = coinsLocal != null ? coinsLocal.GetLocalizedString() : "Coins: ";
+            characterTextCoins.text = string.Concat(coinsTraduction, character.GetCoins());
+        }
 
-        characterImage.sprite = character.GetCharImage();
+        if (characterTextStars != null)
+        {
+            string starsTraduction = starsLocal != null ? starsLocal.GetLocalizedString() : "Stars: ";
+            characterTextStars.text = string.Concat(starsTraduction, character.GetStars());
+        }
+
+        if (characterImage != null)
+            characterImage.sprite = character.GetCharImage();
     }
 
     public void FunctionUpdateTextCoins(Character character, int coins)
@@ -416,7 +432,9 @@ public class UIManager : MonoBehaviour
     // Método vacío para la selección de minijuegos (por implementar más tarde)
     public void ShowPossibleMinigamesList(List<string> possibleMinigames)
     {
-        int[] selectedMinigames = new int[MAX_MINIGAMES_SELECTION];
+        Debug.LogWarning("ShowPossibleMinigamesList está obsoleto con el flujo actual de MinigameFlow + LoadingScene.");
+
+        /*int[] selectedMinigames = new int[MAX_MINIGAMES_SELECTION];
         panelMinigameSelection.alpha = 1;
 
         // Quitar minijuegos hasta quedarnos solo con 5 seleccionados aleatoriamente
@@ -452,7 +470,7 @@ public class UIManager : MonoBehaviour
         int end = UnityEngine.Random.Range(0, possibleMinigames.Count);
         MinigameController.instance.SetMinigameToLoad(possibleMinigames[end]);
 
-        StartCoroutine(MinigameRoulette(end, images));
+        StartCoroutine(MinigameRoulette(end, images));*/
     }
 
     private IEnumerator MinigameRoulette(int end, Image[] images)
@@ -519,14 +537,19 @@ public class UIManager : MonoBehaviour
 
     public void ControlActionPanel(bool open)
     {
-        actionPanel.alpha = open ? 1 : 0;
-        actionPanel.interactable = open;
-        actionPanel.blocksRaycasts = open;
+        if (actionPanel != null)
+        {
+            actionPanel.alpha = open ? 1 : 0;
+            actionPanel.interactable = open;
+            actionPanel.blocksRaycasts = open;
+        }
 
-        abilityButtGroup.interactable = open;
+        if (abilityButtGroup != null)
+            abilityButtGroup.interactable = open;
+
         ChangeAbilityUI();
 
-        if(actualCharacter != null)
+        if (actualCharacter != null && yourTurnAnimator != null)
             yourTurnAnimator.SetBool("show", actualCharacter.isPlayer);
 
         if (open)
@@ -561,6 +584,9 @@ public class UIManager : MonoBehaviour
 
     public void ControlStarCouponMsg(bool open)
     {
+        if (starCouponMsgGroup == null)
+            return;
+
         starCouponMsgGroup.alpha = open ? 1 : 0;
         starCouponMsgGroup.interactable = open;
         starCouponMsgGroup.blocksRaycasts = open;
@@ -643,6 +669,9 @@ public class UIManager : MonoBehaviour
 
     private void HideLeaderboard()
     {
+        if (leaderboardGroup == null)
+            return;
+
         leaderboardGroup.alpha = 0f;
         leaderboardGroup.interactable = false;
         leaderboardGroup.blocksRaycasts = false;
@@ -655,6 +684,9 @@ public class UIManager : MonoBehaviour
 
     private void ControlSelectPlayer(bool show)
     {
+        if (selectPlayerGroup == null)
+            return;
+
         selectPlayerGroup.alpha = show ? 1f : 0f;
         selectPlayerGroup.interactable = show;
 

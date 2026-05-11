@@ -36,8 +36,12 @@ public class BindingRebindRowUI : MonoBehaviour
 
     void OnEnable()
     {
-        rebindButton.onClick.RemoveAllListeners();
-        rebindButton.onClick.AddListener(StartRebind);
+        if (rebindButton != null)
+        {
+            rebindButton.onClick.RemoveAllListeners();
+            rebindButton.onClick.AddListener(StartRebind);
+        }
+
         RefreshBindingText();
     }
 
@@ -167,6 +171,9 @@ public class BindingRebindRowUI : MonoBehaviour
 
     private void RefreshBindingText()
     {
+        if (actionRef == null || actionRef.action == null || bindingText == null)
+            return;
+
         var action = actionRef.action;
         int idx = FindBindingIndex(action);
         if (idx < 0) return;
