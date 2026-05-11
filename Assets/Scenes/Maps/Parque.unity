@@ -5134,6 +5134,7 @@ MonoBehaviour:
   - {fileID: 2133535085}
   - {fileID: 1037387521}
   - {fileID: 2070890876}
+  characters: []
   camFollow: {fileID: 274694548}
   OnRoundEnded:
     m_PersistentCalls:
