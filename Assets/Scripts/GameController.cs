@@ -24,7 +24,7 @@ public class GameController : MonoBehaviour
 
     private List<Player> players = new List<Player>();
     private List<NPC_Controller> npcs = new List<NPC_Controller>();
-    private Character[] characters;
+    public Character[] characters;
 
     private Character characterOfTurn;
     private Player playerOfTurn;
@@ -60,23 +60,32 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
+        playersToCreate = PlayerPrefs.GetInt("PlayersToCreate");
+        playersToCreate = 1;
+        characters = new Character[MAX_PLAYERS];
+        CreatePlayers();
+
+        StartCoroutine(Box.InitStarSystemNextFrame());
+    }
+
+    private void OnEnable()
+    {
         if (PartySession.instance != null &&
-            PartySession.instance.characters[0] != null &&
+            PartySession.instance.characters.Length > 0 &&
             PartySession.instance.boardState != null &&
             PartySession.instance.boardState.idOrder != null &&
             PartySession.instance.boardState.idOrder.Length == 4)
         {
+            Debug.Log("Hace RestoreSession");
             RestoreGameFromSession();
         }
         else
         {
-            playersToCreate = PlayerPrefs.GetInt("PlayersToCreate");
-            playersToCreate = 1; // BORRAR EN UN FUTURO
-            characters = new Character[MAX_PLAYERS];
-            CreatePlayers();
-
-            StartCoroutine(Box.InitStarSystemNextFrame());
+            Debug.Log("Hace StartMovement");
+            StartMovement();
         }
+
+        MouseParticles.Instance.RefreshCamera();
     }
 
     public int GetActualTurn()
@@ -369,7 +378,8 @@ public class GameController : MonoBehaviour
                 if (PlayerStats.Instance?.PStats != null)
                     PlayerStats.Instance.PStats.MinigamesPlayed++;
 
-                MinigameFlow.instance.StartRoundEndMinigame();
+                PartySession.instance.AddCharacters();
+                MinigameFlow.instance.StartMinigameByType(MinigameType.AllVSAll);
                 yield break;
             }
         }
@@ -462,8 +472,8 @@ public class GameController : MonoBehaviour
     {
         characters = new Character[MAX_PLAYERS];
 
-        players.Clear();
-        npcs.Clear();
+        //players.Clear();
+        //npcs.Clear();
 
         for (int i = 0; i < PartySession.instance.characters.Length; i++)
         {

@@ -219,6 +219,14 @@ MonoBehaviour:
     m_Localized: "Cr\xE8dits"
     m_Metadata:
       m_Items: []
+  - m_Id: 35164917085216768
+    m_Localized: Programador
+    m_Metadata:
+      m_Items: []
+  - m_Id: 35165152087875584
+    m_Localized: "Animaci\xF3, Modelatge Texturitzat, Escenaris i Sons"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

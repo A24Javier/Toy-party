@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e63a4bcfe3fc4a4da6c692745887b06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _canvasRectTransform: {fileID: 0}
+  _canvasRectTransform: {fileID: 2118299640}
   _virtualMouseVisual: {fileID: 1235456511}
 --- !u!114 &93032973
 MonoBehaviour:
@@ -402,7 +402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e90c0870dc4bb9946b86067552434acd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  credit: 
+  credit: Habitacion
 --- !u!1 &338816104
 GameObject:
   m_ObjectHideFlags: 0
@@ -1109,7 +1109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e90c0870dc4bb9946b86067552434acd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  credit: 
+  credit: Garaje
 --- !u!1 &1181554259
 GameObject:
   m_ObjectHideFlags: 0
@@ -1352,7 +1352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e90c0870dc4bb9946b86067552434acd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  credit: 
+  credit: Parque
 --- !u!1 &1235456508
 GameObject:
   m_ObjectHideFlags: 0

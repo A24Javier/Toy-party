@@ -7477,6 +7477,7 @@ MonoBehaviour:
   _maxNpcTime: 3
   _maxChangeNumAttemps: 100
   _upDistance: 0.22
+  diceSfxString: dado
 --- !u!4 &1489692278
 Transform:
   m_ObjectHideFlags: 0
@@ -9075,99 +9076,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a9fec058cc4dc441b54c4ac5db80ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &1878328028
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2122139765170146371, guid: d148874faf219064e9164a60a939af7b,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 451.19873
-      objectReference: {fileID: 0}
-    - target: {fileID: 2122139765170146371, guid: d148874faf219064e9164a60a939af7b,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 294.46793
-      objectReference: {fileID: 0}
-    - target: {fileID: 2122139765170146371, guid: d148874faf219064e9164a60a939af7b,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -81.44974
-      objectReference: {fileID: 0}
-    - target: {fileID: 2122139765170146371, guid: d148874faf219064e9164a60a939af7b,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2122139765170146371, guid: d148874faf219064e9164a60a939af7b,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2122139765170146371, guid: d148874faf219064e9164a60a939af7b,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2122139765170146371, guid: d148874faf219064e9164a60a939af7b,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2122139765170146371, guid: d148874faf219064e9164a60a939af7b,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2122139765170146371, guid: d148874faf219064e9164a60a939af7b,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2122139765170146371, guid: d148874faf219064e9164a60a939af7b,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2562515256955175413, guid: d148874faf219064e9164a60a939af7b,
-        type: 3}
-      propertyPath: m_Name
-      value: ConfigurationController
-      objectReference: {fileID: 0}
-    - target: {fileID: 3382660285895899417, guid: d148874faf219064e9164a60a939af7b,
-        type: 3}
-      propertyPath: qualityDropdown
-      value: 
-      objectReference: {fileID: 8662339585171592223}
-    - target: {fileID: 3382660285895899417, guid: d148874faf219064e9164a60a939af7b,
-        type: 3}
-      propertyPath: brightnessSlider
-      value: 
-      objectReference: {fileID: 8662574090087043927}
-    - target: {fileID: 3382660285895899417, guid: d148874faf219064e9164a60a939af7b,
-        type: 3}
-      propertyPath: fullscreenToggle
-      value: 
-      objectReference: {fileID: 5632590395447197397}
-    - target: {fileID: 3382660285895899417, guid: d148874faf219064e9164a60a939af7b,
-        type: 3}
-      propertyPath: brightnessOverlay
-      value: 
-      objectReference: {fileID: 8427963108495482224}
-    - target: {fileID: 3382660285895899417, guid: d148874faf219064e9164a60a939af7b,
-        type: 3}
-      propertyPath: resolutionDropdown
-      value: 
-      objectReference: {fileID: 1807302325967318024}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d148874faf219064e9164a60a939af7b, type: 3}
 --- !u!114 &1918942606 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4169857230862816535, guid: 6fcc5160f77530740b07e815f84e1ce5,
@@ -9723,7 +9631,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5180bfa45a2b5f34393ed19c20086c72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volumeSlider: {fileID: 6213110227037591862}
+  sfxSlider: {fileID: 0}
+  musicSlider: {fileID: 0}
 --- !u!114 &2141705014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9736,13 +9645,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b74354426deef144c82925796c1aa625, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuMusic:
-    Guid:
-      Data1: -1900781796
-      Data2: 1096114861
-      Data3: -831055175
-      Data4: -671431318
-    Path: event:/Musica_Menu
+  musics: []
 --- !u!4 &2141705015
 Transform:
   m_ObjectHideFlags: 0
@@ -11991,6 +11894,7 @@ MonoBehaviour:
   boton1: {fileID: 7232292937597651381}
   boton2: {fileID: 4062296775816219930}
   boton3: {fileID: 7436315332170483643}
+  activateStart: 0
 --- !u!114 &887516261425799335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14609,6 +14513,7 @@ MonoBehaviour:
   boton1: {fileID: 7436315332170483643}
   boton2: {fileID: 7232292937597651381}
   boton3: {fileID: 4062296775816219930}
+  activateStart: 0
 --- !u!1 &1828973597450210691
 GameObject:
   m_ObjectHideFlags: 0
@@ -19644,6 +19549,7 @@ MonoBehaviour:
   boton1: {fileID: 4062296775816219930}
   boton2: {fileID: 7232292937597651381}
   boton3: {fileID: 7436315332170483643}
+  activateStart: 0
 --- !u!1 &4012042239322352773
 GameObject:
   m_ObjectHideFlags: 0
@@ -35758,7 +35664,6 @@ SceneRoots:
   - {fileID: 94622447}
   - {fileID: 605337067}
   - {fileID: 2141705015}
-  - {fileID: 1878328028}
   - {fileID: 1489692278}
   - {fileID: 132477953}
   - {fileID: 241589901}

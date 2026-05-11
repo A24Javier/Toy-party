@@ -218,6 +218,14 @@ MonoBehaviour:
     m_Localized: Credits
     m_Metadata:
       m_Items: []
+  - m_Id: 35164917085216768
+    m_Localized: Programmer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 35165152087875584
+    m_Localized: Animation, Modeling, Texturing, Scenery and Sound
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

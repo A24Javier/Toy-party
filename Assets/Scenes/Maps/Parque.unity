@@ -744,7 +744,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 2039
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -6269,99 +6269,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1184552252
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2122139765170146371, guid: d148874faf219064e9164a60a939af7b,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 451.19873
-      objectReference: {fileID: 0}
-    - target: {fileID: 2122139765170146371, guid: d148874faf219064e9164a60a939af7b,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 294.46793
-      objectReference: {fileID: 0}
-    - target: {fileID: 2122139765170146371, guid: d148874faf219064e9164a60a939af7b,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -81.44974
-      objectReference: {fileID: 0}
-    - target: {fileID: 2122139765170146371, guid: d148874faf219064e9164a60a939af7b,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2122139765170146371, guid: d148874faf219064e9164a60a939af7b,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2122139765170146371, guid: d148874faf219064e9164a60a939af7b,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2122139765170146371, guid: d148874faf219064e9164a60a939af7b,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2122139765170146371, guid: d148874faf219064e9164a60a939af7b,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2122139765170146371, guid: d148874faf219064e9164a60a939af7b,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2122139765170146371, guid: d148874faf219064e9164a60a939af7b,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2562515256955175413, guid: d148874faf219064e9164a60a939af7b,
-        type: 3}
-      propertyPath: m_Name
-      value: ConfigurationController
-      objectReference: {fileID: 0}
-    - target: {fileID: 3382660285895899417, guid: d148874faf219064e9164a60a939af7b,
-        type: 3}
-      propertyPath: qualityDropdown
-      value: 
-      objectReference: {fileID: 9031777445581003088}
-    - target: {fileID: 3382660285895899417, guid: d148874faf219064e9164a60a939af7b,
-        type: 3}
-      propertyPath: brightnessSlider
-      value: 
-      objectReference: {fileID: 9031471471333776920}
-    - target: {fileID: 3382660285895899417, guid: d148874faf219064e9164a60a939af7b,
-        type: 3}
-      propertyPath: fullscreenToggle
-      value: 
-      objectReference: {fileID: 5425541578458444698}
-    - target: {fileID: 3382660285895899417, guid: d148874faf219064e9164a60a939af7b,
-        type: 3}
-      propertyPath: brightnessOverlay
-      value: 
-      objectReference: {fileID: 8185219230626533439}
-    - target: {fileID: 3382660285895899417, guid: d148874faf219064e9164a60a939af7b,
-        type: 3}
-      propertyPath: resolutionDropdown
-      value: 
-      objectReference: {fileID: 2050630610808758599}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d148874faf219064e9164a60a939af7b, type: 3}
 --- !u!1001 &1219600034
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6688,7 +6595,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1281642257}
   - component: {fileID: 1281642256}
-  - component: {fileID: 1281642255}
+  - component: {fileID: 1281642259}
+  - component: {fileID: 1281642258}
   m_Layer: 0
   m_Name: MinigameController
   m_TagString: Untagged
@@ -6696,19 +6604,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
   m_IsActive: 1
---- !u!114 &1281642255
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1281642254}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a53058dfdb5f1a4e9e86d06881142b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  database: {fileID: 11400000, guid: ee9ce038f1e0abc4ba7dd8d0969867d1, type: 2}
 --- !u!114 &1281642256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6722,7 +6617,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   database: {fileID: 11400000, guid: ee9ce038f1e0abc4ba7dd8d0969867d1, type: 2}
-  loadingSceneName: LoadingScreen
 --- !u!4 &1281642257
 Transform:
   m_ObjectHideFlags: 0
@@ -6738,6 +6632,39 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1281642258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1281642254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8386576a6b32ab45add9aa35dde6f29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characters: []
+  boardState:
+    actualTurn: 0
+    actualRound: 0
+    idOrder: 
+    isPlayerOrder: 
+--- !u!114 &1281642259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1281642254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d81b420c3b483294694dc3624815366a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boardSceneName: Parque
+  loadingSceneName: LoadingScreen
+  rewardsSceneName: NivelRecompensasMinijuegos
 --- !u!1 &1286800203 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -2630180736958393380, guid: 4bb0332bba46f6047b5b7c264f086e76,
@@ -35813,5 +35740,4 @@ SceneRoots:
   - {fileID: 1011641309}
   - {fileID: 818279407}
   - {fileID: 1446767891}
-  - {fileID: 1184552252}
   - {fileID: 1651188139}

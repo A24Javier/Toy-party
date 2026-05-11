@@ -3182,7 +3182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e63a4bcfe3fc4a4da6c692745887b06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _canvasRectTransform: {fileID: 0}
+  _canvasRectTransform: {fileID: 1409639434}
   _virtualMouseVisual: {fileID: 179981488}
 --- !u!114 &2030315849
 MonoBehaviour:

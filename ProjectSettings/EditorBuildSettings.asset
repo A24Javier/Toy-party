@@ -38,6 +38,36 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SelectCharacterMenu.unity
     guid: 23685381a80720644a3ad7aef705d552
+  - enabled: 1
+    path: Assets/Scenes/Maps/Parque.unity
+    guid: 7ff9068e085a0ba489ef49ce97b9a92b
+  - enabled: 1
+    path: Assets/Scenes/Maps/Habitacion.unity
+    guid: 011c03503818fba409e81d50d3b07f29
+  - enabled: 1
+    path: Assets/Scenes/Maps/Garaje.unity
+    guid: eb0d4c1bb6aaae44dbd4f860e9d0d1ea
+  - enabled: 1
+    path: Assets/Scenes/ChangeToMinigame/LoadingScreen.unity
+    guid: bce1322f31c2f8c46bfe0839296eb7e8
+  - enabled: 1
+    path: Assets/Scenes/Minigames/FrutaAlHoyo.unity
+    guid: bbc8930197546cf42b744e7f47c7ef50
+  - enabled: 1
+    path: Assets/Scenes/Minigames/Strip Slack.unity
+    guid: fccce3ec27e6e044f8749b199f612fb4
+  - enabled: 1
+    path: Assets/Minijuegos/Splash Splash shoot/Splash Splash shoot.unity
+    guid: dfd32fd398345b44d93411b1038eff73
+  - enabled: 1
+    path: Assets/Minijuegos/Silla a Sevilla/Silla a Sevilla.unity
+    guid: 6609f83a3e6401e42beeb5e1a01ed577
+  - enabled: 1
+    path: Assets/Scenes/Minigames/Chute chute gol.unity
+    guid: bdf51ba846c63484e9a3f031b3fec009
+  - enabled: 1
+    path: Assets/Minijuegos/HudFinMinijuego/NivelRecompensasMinijuegos.unity
+    guid: c53550e25d7f1314bb7c1e6b342fdb32
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 886295bc59622a340a49270447d47c32,
       type: 2}

@@ -215,6 +215,14 @@ MonoBehaviour:
     m_Key: UI.UnoVSUno
     m_Metadata:
       m_Items: []
+  - m_Id: 35164917085216768
+    m_Key: UI.Creditos.Programador
+    m_Metadata:
+      m_Items: []
+  - m_Id: 35165152087875584
+    m_Key: UI.Creditos.A3D
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
 public class MouseParticles : MonoBehaviour
@@ -38,9 +39,20 @@ public class MouseParticles : MonoBehaviour
         RefreshCamera();
     }
 
-    private void RefreshCamera()
+    public void RefreshCamera()
     {
-        particleCamera = Camera.main;
+        UniversalAdditionalCameraData data = Camera.main.GetUniversalAdditionalCameraData();
+
+        if(data.cameraStack.Count > 0)
+        {
+            particleCamera = data?.cameraStack[0];
+            isEfectoActivado = true;
+        }
+        else
+        {
+            particleCamera = null;
+            isEfectoActivado = false;
+        }
     }
 
     void Update()
