@@ -1722,6 +1722,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4748116457748050494, guid: da4ecc58358df6947ab3bb08e1179ee3,
         type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4748116457748050494, guid: da4ecc58358df6947ab3bb08e1179ee3,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4748116457748050494, guid: da4ecc58358df6947ab3bb08e1179ee3,
+        type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -1733,7 +1743,7 @@ PrefabInstance:
     - target: {fileID: 4801541563226784388, guid: da4ecc58358df6947ab3bb08e1179ee3,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5074534689038513058, guid: da4ecc58358df6947ab3bb08e1179ee3,
         type: 3}
@@ -1893,7 +1903,7 @@ PrefabInstance:
     - target: {fileID: 7739496627755892590, guid: da4ecc58358df6947ab3bb08e1179ee3,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8225437876464572005, guid: da4ecc58358df6947ab3bb08e1179ee3,
         type: 3}
@@ -1978,6 +1988,12 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!1 &246461215 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7739496627755892590, guid: da4ecc58358df6947ab3bb08e1179ee3,
+    type: 3}
+  m_PrefabInstance: {fileID: 246461210}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &274694547
 GameObject:
   m_ObjectHideFlags: 0
@@ -8415,7 +8431,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 079ed43b3431f03419c2fe7f8a4f71f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panel: {fileID: 0}
+  panel: {fileID: 246461215}
   FristClick:
     m_PersistentCalls:
       m_Calls:
@@ -13589,8 +13605,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294803529
-  m_fontColor: {r: 0.28627458, g: 0.5018109, b: 0.99215686, a: 1}
+    rgba: 4278221823
+  m_fontColor: {r: 1, g: 0.48235294, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
