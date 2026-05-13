@@ -227,6 +227,10 @@ MonoBehaviour:
     m_Localized: "Animaci\xF3, Modelatge Texturitzat, Escenaris i Sons"
     m_Metadata:
       m_Items: []
+  - m_Id: 35973725252898816
+    m_Localized: Llengua
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
