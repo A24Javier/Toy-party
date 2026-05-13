@@ -1,0 +1,101 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5021604930982824974
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7034973495542469260}
+  - component: {fileID: 5293709407570643252}
+  m_Layer: 0
+  m_Name: FMODMusic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7034973495542469260
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5021604930982824974}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.3630037, y: 8.319823, z: -5.933058}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5293709407570643252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5021604930982824974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b74354426deef144c82925796c1aa625, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musics:
+  - Guid:
+      Data1: 774276206
+      Data2: 1271616428
+      Data3: 145668251
+      Data4: 2053870315
+    Path: event:/ChuteChuteGolSoundFondo
+  - Guid:
+      Data1: -1239568956
+      Data2: 1226482779
+      Data3: -1970053727
+      Data4: 375616073
+    Path: event:/Musica_Menu
+  - Guid:
+      Data1: 1748307380
+      Data2: 1082536090
+      Data3: 195079059
+      Data4: 568834708
+    Path: event:/MusicaAccessiblidadEscogerSilla
+  - Guid:
+      Data1: -1598278944
+      Data2: 1297813048
+      Data3: -940793452
+      Data4: 1386210937
+    Path: event:/MusicaBaileMinijuego
+  - Guid:
+      Data1: 2068148256
+      Data2: 1204174707
+      Data3: -1348296784
+      Data4: -1482148432
+    Path: event:/MusicaGanar
+  - Guid:
+      Data1: 1197376967
+      Data2: 1306937104
+      Data3: -820124002
+      Data4: -761088120
+    Path: event:/MusicaPerder
+  - Guid:
+      Data1: -313039447
+      Data2: 1328638109
+      Data3: -1780280940
+      Data4: 293828469
+    Path: event:/RelayRaceSoundFondo
+  - Guid:
+      Data1: 1802390992
+      Data2: 1113338274
+      Data3: 320534201
+      Data4: 1671178568
+    Path: event:/SplashSplashShootMusicaFondo
+  - Guid:
+      Data1: -1744342699
+      Data2: 1256106996
+      Data3: 1020860057
+      Data4: -1923639204
+    Path: event:/StripSlackMusicaFondo
