@@ -223,6 +223,10 @@ MonoBehaviour:
     m_Key: UI.Creditos.A3D
     m_Metadata:
       m_Items: []
+  - m_Id: 35973725252898816
+    m_Key: UI.Idioma
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
