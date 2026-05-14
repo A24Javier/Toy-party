@@ -772,7 +772,7 @@ public class UIManager : MonoBehaviour
                     selectPlayerBtns[index].onClick.AddListener(delegate { chars[index].actualBox = absBox; chars[index].transform.position = absBox.transform.position; charItem.usingAbility = false; });
 
                     break;
-
+                /*
                 case "OneVSOne":
                     selectPlayerBtns[index].onClick.AddListener(delegate
                     {
@@ -780,6 +780,7 @@ public class UIManager : MonoBehaviour
                     });
 
                     break;
+                */
             }
         }
 
@@ -817,6 +818,7 @@ public class UIManager : MonoBehaviour
         minigameTimeAnimator.SetBool("show", true);
         yield return new WaitForSeconds(3f);
         minigameTimeAnimator.SetBool("show", false);
-        ConfigureSelectPlayer(GameController.instance.GetCharacterOfTurn(), "OneVSOne");
+        MinigameFlow.instance.StartMinigameByType(MinigameType.OneVSOne);
+        //ConfigureSelectPlayer(GameController.instance.GetCharacterOfTurn(), "OneVSOne");
     }
 }
