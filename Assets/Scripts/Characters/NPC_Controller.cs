@@ -138,12 +138,12 @@ public class NPC_Controller : Character
 
     protected override IEnumerator MoveCharacterBoard(int steps)
     {
-        animator.SetBool("isRunning", true);
+        animator.SetBool("Run", true);
         for (int i = 0; i < steps; i++)
         {
             //audioSource.Play();
             fmodSound.Play(stepSfxString);
-            runningParticles.Play();
+            runningParticles?.Play();
             newBox = actualBox.GetNewBox(0);
 
             Vector3 destination = newBox.GetThisBoxTransf().position; //+ upToBox;
@@ -159,8 +159,8 @@ public class NPC_Controller : Character
             }
             else if (animToThis == "Jump")
             {
-                runningParticles.Stop();
-                animator.SetBool("isJumping", true);
+                runningParticles?.Stop();
+                animator.SetBool("Jump", true);
                 powerJump = actualBox.powerJump;
                 timeJump = actualBox.timeJump;
                 transform.DOJump(destination, powerJump, 1, timeJump);
@@ -169,7 +169,7 @@ public class NPC_Controller : Character
                 {
                     yield return null;
                 }
-                animator.SetBool("isJumping", false);
+                animator.SetBool("Jump", false);
             }
 
             transform.position = destination;
@@ -194,14 +194,14 @@ public class NPC_Controller : Character
 
             if (actualBox.PossiblesBoxesCount() >= 2) // Activar sistema encrucijada, pero random
             {
-                runningParticles.Stop();
-                animator.SetBool("isRunning", false);
+                runningParticles?.Stop();
+                animator.SetBool("Run", false);
                 
                 int randPath = Random.Range(0, actualBox.PossiblesBoxesCount());
 
                 yield return new WaitForSeconds(TIME_WAIT_PATH); // Hace como que esta eligiendo
 
-                animator.SetBool("isRunning", true);
+                animator.SetBool("Run", true);
                 newBox = actualBox.GetBoxTransf(randPath).GetComponent<Box>();
 
                 int attemps = 0;
@@ -217,7 +217,7 @@ public class NPC_Controller : Character
 
                 if (animToThis == "NoAnim")
                 {
-                    runningParticles.Stop();
+                    runningParticles?.Stop();
                     while (Vector3.Distance(transform.position, destination) > 0.05f)
                     {
                         transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
@@ -226,7 +226,7 @@ public class NPC_Controller : Character
                 }
                 else if (animToThis == "Jump")
                 {
-                    animator.SetBool("isJumping", true);
+                    animator.SetBool("Jump", true);
                     powerJump = actualBox.powerJump;
                     timeJump = actualBox.timeJump;
                     transform.DOJump(destination, powerJump, 1, timeJump);
@@ -235,7 +235,7 @@ public class NPC_Controller : Character
                     {
                         yield return null;
                     }
-                    animator.SetBool("isJumping", false);
+                    animator.SetBool("Jump", false);
                 }
 
                 transform.position = actualBox.GetBoxTransf(randPath).position;
@@ -257,8 +257,8 @@ public class NPC_Controller : Character
                     waitingStarShop = true;
                     pendingStepsAfterShop = remaining;
 
-                    runningParticles.Stop();
-                    animator.SetBool("isRunning", false);
+                    runningParticles?.Stop();
+                    animator.SetBool("Run", false);
 
                     // Abre tienda (y se reanudará desde UIManager)
                     actualBox.ActivateEffect(this);
@@ -269,9 +269,9 @@ public class NPC_Controller : Character
             }
         }
 
-        runningParticles.Stop();
-        // Nos aseguramos de que "isRunning" se desactiva (ya que sin esto a veces no lo hace)
-        animator.SetBool("isRunning", false);
+        runningParticles?.Stop();
+        // Nos aseguramos de que "Run" se desactiva (ya que sin esto a veces no lo hace)
+        animator.SetBool("Run", false);
         yield return null;
         actualBox.ActivateEffect(this);
         UIManager.instance.DeactivatePathDecision();

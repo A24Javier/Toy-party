@@ -80,11 +80,11 @@ public class Box : MonoBehaviour
     [SerializeField] private GameObject prefabCoins;
     [SerializeField] private GameObject prefabParticleLose;
 
-    private const string ANIM_KEY_WIN_COINS = "isCelebrating";
-    private const string ANIM_KEY_LOSE_COINS = "isMourning";
+    private const string ANIM_KEY_WIN_COINS = "Feliz";
+    private const string ANIM_KEY_LOSE_COINS = "Tristeza";
 
-    private const string ANIM_NAME_WIN_COINS = "Victory";
-    private const string ANIM_NAME_LOSE_COINS = "Defeat";
+    private const string ANIM_NAME_WIN_COINS = "Happy";
+    private const string ANIM_NAME_LOSE_COINS = "Sad";
 
     [Header("Star System")]
     [SerializeField] private Renderer[] boxRenderers;

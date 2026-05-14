@@ -182,7 +182,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4998442654464304753
 Transform:
   m_ObjectHideFlags: 0
@@ -351,6 +351,7 @@ MonoBehaviour:
   boxRenderers: []
   blueBoxMat: {fileID: 2100000, guid: 08e7644ca9179e5458a6fa1eca187243, type: 2}
   starBoxMat: {fileID: 2100000, guid: 502b92fc7bb667542b4ccd96799f0565, type: 2}
+  starGO: {fileID: 0}
 --- !u!65 &5433810204708980235
 BoxCollider:
   m_ObjectHideFlags: 0

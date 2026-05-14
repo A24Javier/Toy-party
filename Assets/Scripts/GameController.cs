@@ -85,7 +85,7 @@ public class GameController : MonoBehaviour
             StartMovement();
         }
 
-        MouseParticles.Instance.RefreshCamera();
+        MouseParticles.Instance?.RefreshCamera();
     }
 
     public int GetActualTurn()
