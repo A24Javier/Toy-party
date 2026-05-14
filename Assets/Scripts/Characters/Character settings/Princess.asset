@@ -35,7 +35,7 @@ MonoBehaviour:
     m_LocalVariables: []
   _characterName: Princesa arcoiris
   _characterDescription: TBD
-  characterSprite: {fileID: 21300000, guid: de3878fda6de28946b9aee46f846017f, type: 3}
+  characterSprite: {fileID: 21300000, guid: 13df40d8f4dc711409d6ca248046d714, type: 3}
   references:
     version: 2
     RefIds: []
