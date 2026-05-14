@@ -5527,8 +5527,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5180bfa45a2b5f34393ed19c20086c72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sfxSlider: {fileID: 0}
-  musicSlider: {fileID: 0}
+  sfxSlider: {fileID: 366092048}
+  musicSlider: {fileID: 870258373}
 --- !u!114 &501608170
 MonoBehaviour:
   m_ObjectHideFlags: 0

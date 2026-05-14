@@ -116,13 +116,13 @@ public class Player : Character
 
     protected override IEnumerator MoveCharacterBoard(int steps)
     {
-        animator.SetBool("isRunning", true);
+        animator.SetBool("Run", true);
 
         for (int i = 0; i < steps; i++)
         {
             fmodSound.Play(stepSfxString);
             //audioSource.Play();
-            runningParticles.Play();
+            runningParticles?.Play();
             // Asignamos directamente al campo de la clase para Look()
             newBox = actualBox.GetNewBox(0);
 
@@ -139,8 +139,8 @@ public class Player : Character
             }
             else if(animToThis == "Jump")
             {
-                runningParticles.Stop();
-                animator.SetBool("isJumping", true);
+                runningParticles?.Stop();
+                animator.SetBool("Jump", true);
                 powerJump = actualBox.powerJump;
                 timeJump = actualBox.timeJump;
                 transform.DOJump(destination, powerJump, 1, timeJump);
@@ -148,7 +148,7 @@ public class Player : Character
                 {
                     yield return null;
                 }
-                animator.SetBool("isJumping", false);
+                animator.SetBool("Jump", false);
             }
 
             transform.position = destination;
@@ -176,8 +176,8 @@ public class Player : Character
             if (actualBox.PossiblesBoxesCount() >= 2)
             {
                 // Pausamos el movimiento y dejamos que el jugador elija
-                runningParticles.Stop();
-                animator.SetBool("isRunning", false);
+                runningParticles?.Stop();
+                animator.SetBool("Run", false);
                 isSelectingPath = true;
 
                 UIManager.instance.SetActualPlayer(this);
@@ -190,7 +190,7 @@ public class Player : Character
                 }
 
                 // Reanudamos movimiento
-                animator.SetBool("isRunning", true);
+                animator.SetBool("Run", true);
             }
             if (Box.GetCurrentStarBox() == actualBox || actualBox.type == BoxType.Shop)
             {
@@ -201,8 +201,8 @@ public class Player : Character
                     waitingStarShop = true;
                     pendingStepsAfterShop = remaining;
 
-                    runningParticles.Stop();
-                    animator.SetBool("isRunning", false);
+                    runningParticles?.Stop();
+                    animator.SetBool("Run", false);
 
                     // Abre tienda (y se reanudará desde UIManager)
                     actualBox.ActivateEffect(this);
@@ -213,9 +213,9 @@ public class Player : Character
 
         }
 
-        runningParticles.Stop();
+        runningParticles?.Stop();
         // Activamos efectos de la última casilla
-        animator.SetBool("isRunning", false);
+        animator.SetBool("Run", false);
         if (!isDebug) { newBox.ActivateEffect(this); }
         else { isDebug = false; }
     }
@@ -241,7 +241,7 @@ public class Player : Character
         }
         else if(animToThis == "Jump")
         {
-            animator.SetBool("isJumping", true);
+            animator.SetBool("Jump", true);
             powerJump = actualBox.powerJump;
             timeJump = actualBox.timeJump;
             transform.DOJump(destination1, powerJump, 1, timeJump);
@@ -249,7 +249,7 @@ public class Player : Character
             {
                 yield return null;
             }
-            animator.SetBool("isJumping", false);
+            animator.SetBool("Jump", false);
         }
 
         actualBox = box;

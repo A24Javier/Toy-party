@@ -4841,32 +4841,32 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 3274a20872e52c749808c31c8e608274,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3274a20872e52c749808c31c8e608274,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3274a20872e52c749808c31c8e608274,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3274a20872e52c749808c31c8e608274,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.52671796
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3274a20872e52c749808c31c8e608274,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.05629284
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3274a20872e52c749808c31c8e608274,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.6438817
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3274a20872e52c749808c31c8e608274,
         type: 3}
@@ -5052,8 +5052,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.06, y: 0.06, z: 0.08264043}
-  m_Center: {x: 0.023627508, y: 0.018614272, z: -0.0060734753}
+  m_Size: {x: 0.059999995, y: 0.060000002, z: 0.08536374}
+  m_Center: {x: 0.023627508, y: 0.018614342, z: -0.0074351435}
 --- !u!54 &3082885720829492797
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5063,7 +5063,7 @@ Rigidbody:
   m_GameObject: {fileID: 8071619806424391183}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 20
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
