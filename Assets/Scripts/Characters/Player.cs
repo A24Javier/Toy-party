@@ -131,7 +131,7 @@ public class Player : Character
 
             if (animToThis == "NoAnim")
             {
-                while (Vector3.Distance(transform.position, destination) > 0.05f)
+                while (Vector3.Distance(transform.position, destination) > 0.07f)
                 {
                     transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
                     yield return null;
@@ -144,14 +144,14 @@ public class Player : Character
                 powerJump = actualBox.powerJump;
                 timeJump = actualBox.timeJump;
                 transform.DOJump(destination, powerJump, 1, timeJump);
-                while (Vector3.Distance(transform.position, destination) > 0.05f)
+                while (Vector3.Distance(transform.position, destination) > 0.07f)
                 {
                     yield return null;
                 }
                 animator.SetBool("Jump", false);
             }
 
-            transform.position = destination;
+            transform.position = destination+(Vector3.up*0.05f);
             actualBox = newBox;
 
             // Guardamos la rotación de cámara de esta casilla
@@ -233,7 +233,7 @@ public class Player : Character
 
         if(animToThis == "NoAnim")
         {
-            while (Vector3.Distance(transform.position, destination1) > 0.05f)
+            while (Vector3.Distance(transform.position, destination1) > 0.07f)
             {
                 transform.position = Vector3.MoveTowards(transform.position, destination1, speed * Time.deltaTime);
                 yield return null;
@@ -245,7 +245,7 @@ public class Player : Character
             powerJump = actualBox.powerJump;
             timeJump = actualBox.timeJump;
             transform.DOJump(destination1, powerJump, 1, timeJump);
-            while (Vector3.Distance(transform.position, destination1) > 0.05f)
+            while (Vector3.Distance(transform.position, destination1) > 0.07f)
             {
                 yield return null;
             }

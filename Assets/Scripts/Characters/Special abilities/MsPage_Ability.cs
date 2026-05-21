@@ -22,8 +22,10 @@ public class MsPage_Ability : AbilityFunction
             }
 
             float rand = Random.Range(0, 101);
-            // Hacer animación de pintar
 
+            MsPage_AbilityCoroutine.Instance?.StartCoroutineAbility(mspage);
+            
+            /*
             if (rand >= 0 && rand <= 47.5f) // Dibuja y gana 4 monedas
             {
                 UIManager.instance.FunctionUpdateTextCoins(mspage, 4);
@@ -37,6 +39,7 @@ public class MsPage_Ability : AbilityFunction
             {
                 UIManager.instance.ConfigureSelectPlayer(mspage, "TP_OtherPlayer");
             }
+            */
         }
         
     }

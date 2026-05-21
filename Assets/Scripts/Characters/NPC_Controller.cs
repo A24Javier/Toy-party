@@ -151,7 +151,7 @@ public class NPC_Controller : Character
 
             if (animToThis == "NoAnim")
             {
-                while (Vector3.Distance(transform.position, destination) > 0.05f)
+                while (Vector3.Distance(transform.position, destination) > 0.07f)
                 {
                     transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
                     yield return null;
@@ -165,14 +165,14 @@ public class NPC_Controller : Character
                 timeJump = actualBox.timeJump;
                 transform.DOJump(destination, powerJump, 1, timeJump);
 
-                while(Vector3.Distance(transform.position, destination) > 0.05f)
+                while(Vector3.Distance(transform.position, destination) > 0.07f)
                 {
                     yield return null;
                 }
                 animator.SetBool("Jump", false);
             }
 
-            transform.position = destination;
+            transform.position = destination + (Vector3.up * 0.05f);
             actualBox = newBox;
 
             // GUARDAR ROTACIÓN DE CÁMARA DE ESTA CASILLA
@@ -218,7 +218,7 @@ public class NPC_Controller : Character
                 if (animToThis == "NoAnim")
                 {
                     runningParticles?.Stop();
-                    while (Vector3.Distance(transform.position, destination) > 0.05f)
+                    while (Vector3.Distance(transform.position, destination) > 0.07f)
                     {
                         transform.position = Vector3.MoveTowards(transform.position, destination, speed * Time.deltaTime);
                         yield return null;
@@ -231,14 +231,14 @@ public class NPC_Controller : Character
                     timeJump = actualBox.timeJump;
                     transform.DOJump(destination, powerJump, 1, timeJump);
 
-                    while (Vector3.Distance(transform.position, destination) > 0.05f)
+                    while (Vector3.Distance(transform.position, destination) > 0.07f)
                     {
                         yield return null;
                     }
                     animator.SetBool("Jump", false);
                 }
 
-                transform.position = actualBox.GetBoxTransf(randPath).position;
+                transform.position = actualBox.GetBoxTransf(randPath).position + (Vector3.up*0.05f);
                 actualBox = newBox;
 
                 if (actualBox != null)
