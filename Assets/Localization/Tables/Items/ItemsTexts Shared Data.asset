@@ -19,36 +19,72 @@ MonoBehaviour:
     m_Key: Item.Superglue
     m_Metadata:
       m_Items: []
+  - m_Id: 20249385924009984
+    m_Key: Item.Superglue.Description
+    m_Metadata:
+      m_Items: []
   - m_Id: 390203154432
     m_Key: Item.DamagedPortal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20250456545271808
+    m_Key: Item.DamagedPortal.Description
     m_Metadata:
       m_Items: []
   - m_Id: 491332018176
     m_Key: Item.StarCoupon
     m_Metadata:
       m_Items: []
+  - m_Id: 20250660447166464
+    m_Key: Item.StarCoupon.Description
+    m_Metadata:
+      m_Items: []
   - m_Id: 655815843840
     m_Key: Item.VacuumCleaner
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20251505599422464
+    m_Key: Item.VacuumCleaner.Description
     m_Metadata:
       m_Items: []
   - m_Id: 1162051559424
     m_Key: Item.BaterieAAA
     m_Metadata:
       m_Items: []
+  - m_Id: 20251564781051904
+    m_Key: Item.BaterieAAA.Description
+    m_Metadata:
+      m_Items: []
   - m_Id: 1213536641024
     m_Key: Item.Portal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20251617138548736
+    m_Key: Item.Portal.Description
     m_Metadata:
       m_Items: []
   - m_Id: 4038966616064
     m_Key: Item.D20Dice
     m_Metadata:
       m_Items: []
+  - m_Id: 20251661149380608
+    m_Key: Item.D20Dice.Description
+    m_Metadata:
+      m_Items: []
   - m_Id: 4311084670976
     m_Key: Item.ElectionDice
     m_Metadata:
       m_Items: []
+  - m_Id: 20251716895875072
+    m_Key: Item.ElectionDice.Description
+    m_Metadata:
+      m_Items: []
   - m_Id: 4579692093440
     m_Key: Item.SlowDice
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20251761800093696
+    m_Key: Item.SlowDice.Description
     m_Metadata:
       m_Items: []
   m_Metadata:

@@ -54,6 +54,10 @@ MonoBehaviour:
     m_Localized: Dado lento
     m_Metadata:
       m_Items: []
+  - m_Id: 20249385924009984
+    m_Localized: "Resta 3 a la pr\xF3xima tirada del rival seleccionado"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

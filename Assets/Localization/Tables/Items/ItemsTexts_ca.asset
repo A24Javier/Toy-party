@@ -54,6 +54,10 @@ MonoBehaviour:
     m_Localized: Dau lent
     m_Metadata:
       m_Items: []
+  - m_Id: 20249385924009984
+    m_Localized: Resta 3 a la propera tirada del rival seleccionat
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

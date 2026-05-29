@@ -54,6 +54,10 @@ MonoBehaviour:
     m_Localized: Slow Dice
     m_Metadata:
       m_Items: []
+  - m_Id: 20249385924009984
+    m_Localized: "Subtract 3 from the selected rival\u2019s next roll"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
