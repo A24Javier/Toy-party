@@ -58,6 +58,39 @@ MonoBehaviour:
     m_Localized: "Subtract 3 from the selected rival\u2019s next roll"
     m_Metadata:
       m_Items: []
+  - m_Id: 20250456545271808
+    m_Localized: It teleports you to a random board square.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20250660447166464
+    m_Localized: It allows you to get a free star if you land on a star square
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20251505599422464
+    m_Localized: Steal 3 coins from the selected opponent
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20251564781051904
+    m_Localized: Add 3 to your next roll
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20251617138548736
+    m_Localized: It teleports you to the selected opponent's square.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20251661149380608
+    m_Localized: It allows you to roll a 20-sided die on the next roll
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20251716895875072
+    m_Localized: It allows you to roll a 6-sided die that moves extremely slowly
+      on the next roll.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20251761800093696
+    m_Localized: "Et permet tirar un dau de 6 que va lent a la seg\xFCent tirada"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
