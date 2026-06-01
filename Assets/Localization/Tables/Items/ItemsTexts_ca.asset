@@ -58,6 +58,41 @@ MonoBehaviour:
     m_Localized: Resta 3 a la propera tirada del rival seleccionat
     m_Metadata:
       m_Items: []
+  - m_Id: 20250456545271808
+    m_Localized: Et teletransporta a una casella aleatoria
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20250660447166464
+    m_Localized: "Et permet tenir una estrella gratu\xEFta si caus en una casella
+      d'estrella"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20251505599422464
+    m_Localized: "\rRoba 3 monedes al rival seleccionat"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20251564781051904
+    m_Localized: Afegeix 3 a la teva propera tirada
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20251617138548736
+    m_Localized: Et teletransporta a la casella del rival seleccionat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20251661149380608
+    m_Localized: "Et permet tirar un dau de 20 a la seg\xFCent tirada"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20251716895875072
+    m_Localized: "Et permet tirar un dau de 6 que va extremadament lent a la seg\xFCent
+      tirada"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20251761800093696
+    m_Localized: It allows you to roll a 6-sided die that moves slowly on the next
+      roll.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

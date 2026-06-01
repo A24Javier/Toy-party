@@ -58,6 +58,39 @@ MonoBehaviour:
     m_Localized: "Resta 3 a la pr\xF3xima tirada del rival seleccionado"
     m_Metadata:
       m_Items: []
+  - m_Id: 20250456545271808
+    m_Localized: Te teletransporta a una casilla aleatoria
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20250660447166464
+    m_Localized: Te permite tener una estrella gratis si caes en una casilla de estrella
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20251505599422464
+    m_Localized: Roba 3 monedas al rival seleccionado
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20251564781051904
+    m_Localized: "A\xF1ade 3 a tu pr\xF3xima tirada"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20251617138548736
+    m_Localized: Te teletransporta a la casilla del rival seleccionado
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20251661149380608
+    m_Localized: Te permite tirar un dado de 20 en la siguiente tirada
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20251716895875072
+    m_Localized: Te permite tirar un dado de 6 que va extremadamente lento en la
+      siguiente tirada
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20251761800093696
+    m_Localized: Te permite tirar un dado de 6 que va lento en la siguiente tirada
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

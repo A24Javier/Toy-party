@@ -231,6 +231,10 @@ MonoBehaviour:
     m_Localized: Llengua
     m_Metadata:
       m_Items: []
+  - m_Id: 42430156973514752
+    m_Localized: Ara!
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
