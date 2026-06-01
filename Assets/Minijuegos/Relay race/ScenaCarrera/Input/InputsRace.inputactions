@@ -1,0 +1,34 @@
+{
+    "name": "InputsRace",
+    "maps": [
+        {
+            "name": "Salto",
+            "id": "f0501f0f-4d14-4e52-9a1e-58ed951ac131",
+            "actions": [
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "c68703d4-f327-4f01-a762-22be4f931036",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "2b6d8b5c-dcd2-4fc6-a844-bf01dc3950d0",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
