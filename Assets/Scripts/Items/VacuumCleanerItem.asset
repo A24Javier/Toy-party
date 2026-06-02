@@ -22,7 +22,17 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
+  ItemLocalDescription:
+    m_TableReference:
+      m_TableCollectionName: GUID:e93c0a20c3100744a96dc1cde5fb00e5
+    m_TableEntryReference:
+      m_KeyId: 20251505599422464
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   _itemName: Vacuum Cleaner
+  _itemDescription: Steal 3 coins from the selected opponent
   itemPrice: 0
   itemFunction: {fileID: 11400000, guid: 2a185001e6676604493f8c1f22b8d90d, type: 2}
   references:

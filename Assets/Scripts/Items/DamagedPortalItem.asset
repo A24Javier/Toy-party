@@ -22,7 +22,17 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  _itemName: Portal danyat
+  ItemLocalDescription:
+    m_TableReference:
+      m_TableCollectionName: GUID:e93c0a20c3100744a96dc1cde5fb00e5
+    m_TableEntryReference:
+      m_KeyId: 20250456545271808
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  _itemName: Damaged portal
+  _itemDescription: It teleports you to a random board square.
   itemPrice: 8
   itemFunction: {fileID: 11400000, guid: 6d985a6acc2ff7e49ad6df4ec4f5d21c, type: 2}
   references:

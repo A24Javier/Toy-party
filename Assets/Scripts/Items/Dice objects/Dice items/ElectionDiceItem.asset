@@ -22,6 +22,18 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
+  ItemLocalDescription:
+    m_TableReference:
+      m_TableCollectionName: GUID:e93c0a20c3100744a96dc1cde5fb00e5
+    m_TableEntryReference:
+      m_KeyId: 20251716895875072
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  _itemName: Election Dice
+  _itemDescription: It allows you to roll a 6-sided die that moves extremely slowly
+    on the next roll.
   itemPrice: 8
   itemFunction: {fileID: 11400000, guid: 87c480d8ed556bb48b82c92b665c70e6, type: 2}
   references:

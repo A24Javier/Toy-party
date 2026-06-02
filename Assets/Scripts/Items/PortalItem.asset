@@ -22,7 +22,17 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
+  ItemLocalDescription:
+    m_TableReference:
+      m_TableCollectionName: GUID:e93c0a20c3100744a96dc1cde5fb00e5
+    m_TableEntryReference:
+      m_KeyId: 20251617138548736
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   _itemName: Portal
+  _itemDescription: It teleports you to the selected opponent's square.
   itemPrice: 12
   itemFunction: {fileID: 11400000, guid: 215c963a6f00c02429498baee2b5eefc, type: 2}
   references:

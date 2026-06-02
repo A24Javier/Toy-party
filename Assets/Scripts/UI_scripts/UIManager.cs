@@ -8,6 +8,7 @@ using System.Linq;
 using UnityEngine.SceneManagement;
 using UnityEngine.Localization;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 public class UIManager : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image actualDiceImage;
     [SerializeField] private Button[] itemsButtons;
     [SerializeField] private Sprite nullObjSpr;
+    [SerializeField] private TMP_Text objectDescText;
 
     // Jugador y personaje actuales
     public Player actualPlayer;
@@ -524,6 +526,12 @@ public class UIManager : MonoBehaviour
                         DeleteItem(i);
                     }
                 });
+
+                EventTrigger eventTrigger = itemsButtons[i].GetComponent<EventTrigger>();
+
+                eventTrigger.triggers.Add(AddOnPointerEnter(newItem.ItemDescription));
+                eventTrigger.triggers.Add(AddOnPointerExit());
+
                 break;
             }
         }
@@ -533,6 +541,31 @@ public class UIManager : MonoBehaviour
     {
         itemsButtons[buttonIndex].onClick.RemoveAllListeners();
         itemsButtons[buttonIndex].image.sprite = null;
+    }
+
+    private EventTrigger.Entry AddOnPointerEnter(string description)
+    {
+        EventTrigger.Entry entry = new EventTrigger.Entry();
+        entry.eventID = EventTriggerType.PointerEnter;
+
+        entry.callback.AddListener((data) => 
+        {
+            objectDescText.text = description;
+        });
+
+        return entry;
+    }
+    private EventTrigger.Entry AddOnPointerExit()
+    {
+        EventTrigger.Entry entry = new EventTrigger.Entry();
+        entry.eventID = EventTriggerType.PointerExit;
+
+        entry.callback.AddListener((data) =>
+        {
+            objectDescText.text = "";
+        });
+
+        return entry;
     }
 
     public void ControlActionPanel(bool open)

@@ -22,7 +22,17 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  _itemName: Cola
+  ItemLocalDescription:
+    m_TableReference:
+      m_TableCollectionName: GUID:e93c0a20c3100744a96dc1cde5fb00e5
+    m_TableEntryReference:
+      m_KeyId: 20249385924009984
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  _itemName: Superglue
+  _itemDescription: "Subtract 3 from the selected rival\u2019s next roll"
   itemPrice: 5
   itemFunction: {fileID: 11400000, guid: f1485d53645240744b2c764515d7180a, type: 2}
   references:
