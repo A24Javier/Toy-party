@@ -1406,6 +1406,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minigame: 0
+  nombreEscenaRecompensas: NivelRecompensasMinijuegos
   GlobalHUD: {fileID: 924357819}
   playersScena:
   - {fileID: 1337704476}
@@ -1438,6 +1439,7 @@ MonoBehaviour:
   MonedaPosPlayer2: {fileID: 1114121634}
   MonedaPosPlayer3: {fileID: 1399817478}
   MonedaPosPlayer4: {fileID: 1572399048}
+  tiempoAntesDeVolver: 3
 --- !u!4 &214981277
 Transform:
   m_ObjectHideFlags: 0
@@ -4816,7 +4818,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   man: {fileID: 214981276}
-  Recompnesa: 0
+  recompensa: 0
   playerPos: Player1
   id: 0
   posicion: 1
@@ -5896,7 +5898,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   man: {fileID: 214981276}
-  Recompnesa: 0
+  recompensa: 0
   playerPos: Player3
   id: 0
   posicion: 2
@@ -7268,7 +7270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   man: {fileID: 214981276}
-  Recompnesa: 0
+  recompensa: 0
   playerPos: Player2
   id: 0
   posicion: 1
@@ -7604,7 +7606,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   man: {fileID: 214981276}
-  Recompnesa: 0
+  recompensa: 0
   playerPos: Player4
   id: 0
   posicion: 2

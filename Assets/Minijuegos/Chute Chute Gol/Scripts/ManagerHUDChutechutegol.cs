@@ -4,6 +4,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ManagerHUDChutechutegol : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class ManagerHUDChutechutegol : MonoBehaviour
     [SerializeField] TextMeshProUGUI TextTime;
     [SerializeField] GameObject[] TimesPlayers;
     [SerializeField] TextMeshProUGUI[] PlayerTime;
+    [SerializeField] Image[] PerfilPlayer;
 
     [Header("Posiciones")]
     [SerializeField] Transform[] PlayersPos;
@@ -451,7 +453,7 @@ public class ManagerHUDChutechutegol : MonoBehaviour
         }
 
         PuntsUI();
-
+        ActulizarImagePerfil();
         if (MiDirector != null)
             MiDirector.ReniciarTimeLines();
 
@@ -511,6 +513,28 @@ public class ManagerHUDChutechutegol : MonoBehaviour
 
                 case 4:
                     if (Punts.Length > 0) Punts[0].text = players[i].GetPunts().ToString();
+                    break;
+            }
+        }
+    }
+
+    void ActulizarImagePerfil()
+    {
+        for (int i = 0; i < players.Count; i++)
+        {
+            switch (players[i].getTurn())
+            {
+                case 0:
+                    //PerfilPlayer[1].sprite = players[i].GetSprite();
+                    break;
+                case 1:
+                    //PerfilPlayer[2].sprite = players[i].GetSprite();
+                    break;
+                case 2:
+                    //PerfilPlayer[3].sprite = players[i].GetSprite();
+                    break;
+                case 4:
+                    //PerfilPlayer[0].sprite = players[i].GetSprite();
                     break;
             }
         }

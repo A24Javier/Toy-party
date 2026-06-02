@@ -242,7 +242,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 2fe28fa4bc8cff942aebe6eff206f179, type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: 2fe28fa4bc8cff942aebe6eff206f179,
+    type: 3}
   m_NotificationBehavior: 0
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -277,8 +278,16 @@ MonoBehaviour:
   player: 2
   PerfilImg: {fileID: 0}
   MoverCursor: {fileID: 101836311}
-  ManagerStripSlack: {fileID: 1079560158}
   CuadroForce: {fileID: 1848729598}
+  ManagerStripSlack: {fileID: 1079560158}
+  fuerzaPorClick: 40
+  gravedad: 100
+  limiteMaximo: 340
+  dificultadIA: 0.6
+  timeDurationPosition: 5
+  MaxLimiteCuadro: 270
+  DarForce: 4.5
+  LimitForce: 0
 --- !u!1 &48592230
 GameObject:
   m_ObjectHideFlags: 0
@@ -1602,7 +1611,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: d02f98ef0e7909146837927fe48dee9d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1768,7 +1777,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 2fe28fa4bc8cff942aebe6eff206f179, type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: 2fe28fa4bc8cff942aebe6eff206f179,
+    type: 3}
   m_NotificationBehavior: 0
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -1803,8 +1813,16 @@ MonoBehaviour:
   player: 1
   PerfilImg: {fileID: 0}
   MoverCursor: {fileID: 2027974154}
-  ManagerStripSlack: {fileID: 1079560158}
   CuadroForce: {fileID: 890015151}
+  ManagerStripSlack: {fileID: 1079560158}
+  fuerzaPorClick: 40
+  gravedad: 100
+  limiteMaximo: 340
+  dificultadIA: 0.6
+  timeDurationPosition: 5
+  MaxLimiteCuadro: 270
+  DarForce: 4.5
+  LimitForce: 0
 --- !u!1 &1076975417
 GameObject:
   m_ObjectHideFlags: 0
@@ -1927,7 +1945,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df6c4feb3c56f244fad1ea26e720a439, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeJoc: 30
   TextTime: {fileID: 410111253}
+  nombreEscenaRecompensas: NivelRecompensasMinijuegos
 --- !u!95 &1079560159
 Animator:
   serializedVersion: 5
@@ -2318,7 +2338,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0d1b7d2ec5593fa44a446cc511d2fd4a, type: 2}
+  - {fileID: 2100000, guid: 11ab5f4813c8c9d42996ace1f3fb8669, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2347,7 +2367,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1734583781}
-  m_Mesh: {fileID: 8604929671362957451, guid: 9f66e7a019a85d34d8440680fbc6f89f, type: 3}
+  m_Mesh: {fileID: 8604929671362957451, guid: d0eea7d4d1704d94a92bd9022f652299, type: 3}
 --- !u!1 &1848729597
 GameObject:
   m_ObjectHideFlags: 0
@@ -2523,6 +2543,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2115432186}
   - component: {fileID: 2115432185}
+  - component: {fileID: 2115432187}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -2607,6 +2628,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &2115432187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2115432184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
