@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Localization;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.Localization.Settings;
 
 public class UIManager : MonoBehaviour
 {
@@ -23,6 +24,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text characterTextStars;
     [SerializeField] private Image characterImage;
 
+    [SerializeField] private LocalizedString yourTurnLocalize;
+    [SerializeField] private TMP_Text yourTurnText;
     [SerializeField] private Animator yourTurnAnimator;
 
     [Header("Elementos Inventario")]
@@ -583,12 +586,26 @@ public class UIManager : MonoBehaviour
         ChangeAbilityUI();
 
         if (actualCharacter != null && yourTurnAnimator != null)
-            yourTurnAnimator.SetBool("show", actualCharacter.isPlayer);
+            StartCoroutine(TurnAnimatorCoroutine(actualCharacter.characterName));
 
         if (open)
         {
             LoadInventory();
         }
+    }
+
+    private IEnumerator TurnAnimatorCoroutine(string username)
+    {
+        string languageCode = LocalizationSettings.SelectedLocale.Identifier.Code;
+
+        if(languageCode != "en")
+            yourTurnText.text = $"{yourTurnLocalize.GetLocalizedString()} {username}";
+        else
+            yourTurnText.text = $"{username} {yourTurnLocalize.GetLocalizedString()}";
+
+        yourTurnAnimator.SetBool("show", true);
+        yield return new WaitForSeconds(3f);
+        yourTurnAnimator.SetBool("show", false);
     }
 
     public void ControlItemPanel()

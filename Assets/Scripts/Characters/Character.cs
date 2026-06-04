@@ -7,6 +7,7 @@ public abstract class Character : MonoBehaviour
 {
     // Character info
     public int characterId;
+    public string characterName;
     public int coins;
     public int stars;
     public Sprite characterImage;
@@ -19,6 +20,7 @@ public abstract class Character : MonoBehaviour
     public bool waitingStarShop = false;
     public int pendingStepsAfterShop = 0;
     public int characterSettingIndex;
+    public CharacterSetting characterSetting { get; private set; }
 
     // Character values
     public float speed = 0.001f;
@@ -87,6 +89,9 @@ public abstract class Character : MonoBehaviour
         Ability charAbility = charSetting.characterAbility;
         ability = charAbility;
         characterImage = charSetting.characterSprite;
+        characterName = charSetting.CharacterName;
+
+        characterSetting = charSetting;
 
         for (int i = 0; i < ability.PassiveBuffs.Length; i++)
         {

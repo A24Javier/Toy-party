@@ -15184,8 +15184,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5180bfa45a2b5f34393ed19c20086c72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sfxSlider: {fileID: 0}
-  musicSlider: {fileID: 0}
+  sfxSlider: {fileID: 709045866}
+  musicSlider: {fileID: 1662716132}
 --- !u!114 &1652481562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29387,6 +29387,16 @@ MonoBehaviour:
     m_LocalVariables: []
   characterTextStars: {fileID: 4331490676073719243}
   characterImage: {fileID: 2795598878649887933}
+  yourTurnLocalize:
+    m_TableReference:
+      m_TableCollectionName: GUID:b1a26859b342c9b41a15a4b58d54c8fa
+    m_TableEntryReference:
+      m_KeyId: 43865206143295488
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  yourTurnText: {fileID: 6992647850102378023}
   yourTurnAnimator: {fileID: 3964912791590516378}
   actionPanel: {fileID: 1794141353413374339}
   actionButtonsPanel: {fileID: 5511040483299649048}
@@ -30247,7 +30257,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -30918,7 +30928,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 120}
-  m_SizeDelta: {x: 400, y: 120}
+  m_SizeDelta: {x: 750, y: 120}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &7498765684598011942
 CanvasRenderer:
