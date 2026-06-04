@@ -22,6 +22,17 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
+  ItemLocalDescription:
+    m_TableReference:
+      m_TableCollectionName: GUID:e93c0a20c3100744a96dc1cde5fb00e5
+    m_TableEntryReference:
+      m_KeyId: 20251761800093696
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  _itemName: Slow Dice
+  _itemDescription: "Et permet tirar un dau de 6 que va lent a la seg\xFCent tirada"
   itemPrice: 6
   itemFunction: {fileID: 11400000, guid: 66cbe0ff78ef34247ab3274520a8f827, type: 2}
   references:

@@ -8,6 +8,8 @@ using System.Linq;
 using UnityEngine.SceneManagement;
 using UnityEngine.Localization;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
+using UnityEngine.Localization.Settings;
 
 public class UIManager : MonoBehaviour
 {
@@ -22,6 +24,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text characterTextStars;
     [SerializeField] private Image characterImage;
 
+    [SerializeField] private LocalizedString yourTurnLocalize;
+    [SerializeField] private TMP_Text yourTurnText;
     [SerializeField] private Animator yourTurnAnimator;
 
     [Header("Elementos Inventario")]
@@ -31,6 +35,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image actualDiceImage;
     [SerializeField] private Button[] itemsButtons;
     [SerializeField] private Sprite nullObjSpr;
+    [SerializeField] private TMP_Text objectDescText;
 
     // Jugador y personaje actuales
     public Player actualPlayer;
@@ -524,6 +529,12 @@ public class UIManager : MonoBehaviour
                         DeleteItem(i);
                     }
                 });
+
+                EventTrigger eventTrigger = itemsButtons[i].GetComponent<EventTrigger>();
+
+                eventTrigger.triggers.Add(AddOnPointerEnter(newItem.ItemDescription));
+                eventTrigger.triggers.Add(AddOnPointerExit());
+
                 break;
             }
         }
@@ -533,6 +544,31 @@ public class UIManager : MonoBehaviour
     {
         itemsButtons[buttonIndex].onClick.RemoveAllListeners();
         itemsButtons[buttonIndex].image.sprite = null;
+    }
+
+    private EventTrigger.Entry AddOnPointerEnter(string description)
+    {
+        EventTrigger.Entry entry = new EventTrigger.Entry();
+        entry.eventID = EventTriggerType.PointerEnter;
+
+        entry.callback.AddListener((data) => 
+        {
+            objectDescText.text = description;
+        });
+
+        return entry;
+    }
+    private EventTrigger.Entry AddOnPointerExit()
+    {
+        EventTrigger.Entry entry = new EventTrigger.Entry();
+        entry.eventID = EventTriggerType.PointerExit;
+
+        entry.callback.AddListener((data) =>
+        {
+            objectDescText.text = "";
+        });
+
+        return entry;
     }
 
     public void ControlActionPanel(bool open)
@@ -550,12 +586,26 @@ public class UIManager : MonoBehaviour
         ChangeAbilityUI();
 
         if (actualCharacter != null && yourTurnAnimator != null)
-            yourTurnAnimator.SetBool("show", actualCharacter.isPlayer);
+            StartCoroutine(TurnAnimatorCoroutine(actualCharacter.characterName));
 
         if (open)
         {
             LoadInventory();
         }
+    }
+
+    private IEnumerator TurnAnimatorCoroutine(string username)
+    {
+        string languageCode = LocalizationSettings.SelectedLocale.Identifier.Code;
+
+        if(languageCode != "en")
+            yourTurnText.text = $"{yourTurnLocalize.GetLocalizedString()} {username}";
+        else
+            yourTurnText.text = $"{username} {yourTurnLocalize.GetLocalizedString()}";
+
+        yourTurnAnimator.SetBool("show", true);
+        yield return new WaitForSeconds(3f);
+        yourTurnAnimator.SetBool("show", false);
     }
 
     public void ControlItemPanel()

@@ -22,7 +22,17 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  _itemName: Pila AAA
+  ItemLocalDescription:
+    m_TableReference:
+      m_TableCollectionName: GUID:e93c0a20c3100744a96dc1cde5fb00e5
+    m_TableEntryReference:
+      m_KeyId: 20251564781051904
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  _itemName: Baterie AAA
+  _itemDescription: Add 3 to your next roll
   itemPrice: 5
   itemFunction: {fileID: 11400000, guid: d91057c6f41141a41bec0c836ea9b361, type: 2}
   references:
