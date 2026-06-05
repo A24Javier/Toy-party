@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37144f0498529e54582ff5046ec0ea0f, type: 3}
-  m_Name: Peon
+  m_Name: Princesa
   m_EditorClassIdentifier: 
-  Nombre: 
-  ImgPerfil: {fileID: 0}
+  Nombre: Princesa Arcoiris
+  ImgPerfil: {fileID: 21300000, guid: 13df40d8f4dc711409d6ca248046d714, type: 3}
   AnimatorSS: {fileID: 0}
   AniamtorSSS: {fileID: 0}
   AnimatorRR: {fileID: 0}

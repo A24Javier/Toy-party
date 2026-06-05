@@ -10,7 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37144f0498529e54582ff5046ec0ea0f, type: 3}
-  m_Name: Soldado
+  m_Name: Piedra
   m_EditorClassIdentifier: 
-  Nombre: 
-  ImgPerfil: {fileID: 0}
+  Nombre: Robert
+  ImgPerfil: {fileID: 21300000, guid: 54ce99243a923b74b95b82b0c1807247, type: 3}
+  AnimatorSS: {fileID: 0}
+  AniamtorSSS: {fileID: 0}
+  AnimatorRR: {fileID: 0}
+  AnimatorSaS: {fileID: 0}
+  AnimatorCCG: {fileID: 0}
+  AnimatorST: {fileID: 0}
+  AnimatorVictoria: {fileID: 0}
