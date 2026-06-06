@@ -15,9 +15,4 @@ MonoBehaviour:
   IDPersonaje: 0
   ImgPerfil: {fileID: 21300000, guid: efb170b71040bb24ca2342d821c06cea, type: 3}
   Animator: {fileID: 9100000, guid: eeb1abd6be5026b4cabfec1dc06de099, type: 2}
-  PrefabPersonaje: {fileID: 919132149155446097, guid: 4c98001cd33d76e419630481351099c9,
-    type: 3}
-  Mat: {fileID: 2100000, guid: 8ea8ac75a8ca05b428c93a66d4ecb309, type: 2}
-  Scalar: {x: 20, y: 20, z: 20}
-  Rotacion: {x: 0, y: 90, z: 0}
-  Pos: {x: 0, y: 0.5, z: 0.5}
+  Modelo: {fileID: 919132149155446097, guid: 4c98001cd33d76e419630481351099c9, type: 3}

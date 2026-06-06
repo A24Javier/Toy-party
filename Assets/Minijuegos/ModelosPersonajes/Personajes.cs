@@ -12,7 +12,9 @@ public class Personajes : ScriptableObject
     [Header("Animator Controller")]
     public RuntimeAnimatorController Animator;
     [Header("Modelo")]
-    public GameObject PrefabPersonaje;
+    public Mesh Malla;
     [Header("Material")]
     public Material Mat;
+    [Header("Scala")]
+    public Vector3 Scalar;
 }
