@@ -21,9 +21,6 @@ public class ManagerSplashSplashShoot : MonoBehaviour
     [Header("UI Munición")]
     public Sprite[] Mun;
 
-    [Header("Audio")]
-    [SerializeField] private AudioSource MusicGame;
-
     private Vector3[] PosicionObjeto =
     {
         new Vector3(-26f, 12.6f, 20f),
@@ -36,6 +33,12 @@ public class ManagerSplashSplashShoot : MonoBehaviour
 
     private bool finalizando = false;
     private int siguientePosicionEliminado = 4;
+
+    [SerializeField] ScalaPersonajes Mod;
+    private void Awake()
+    {
+        Mod.InicializarMinijuego(2);
+    }
 
     private void Start()
     {
@@ -214,9 +217,6 @@ public class ManagerSplashSplashShoot : MonoBehaviour
             timeGame = 0;
             GameTerminated = true;
 
-            if (MusicGame != null)
-                MusicGame.Stop();
-
             AsignarPosicionesPorTiempo();
             FinalizarMinijuego();
         }
@@ -246,9 +246,6 @@ public class ManagerSplashSplashShoot : MonoBehaviour
                 ganador.GetInfo().SetPosicionFinal(1);
 
             GameTerminated = true;
-
-            if (MusicGame != null)
-                MusicGame.Stop();
 
             FinalizarMinijuego();
         }
