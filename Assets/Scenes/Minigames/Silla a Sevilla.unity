@@ -6275,7 +6275,7 @@ PrefabInstance:
     - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
         type: 3}
       propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[2].posicionOffset.z
-      value: -0.5
+      value: -0.3
       objectReference: {fileID: 0}
     - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
         type: 3}

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerRecompensas : MonoBehaviour
 {
@@ -19,6 +20,15 @@ public class PlayerRecompensas : MonoBehaviour
     public int estrellas = 0;
     public int moneda = 0;
 
+    [SerializeField] ModelController MiModelo;
+    public int player;
+    public int idPersonaje;
+    Image img;
+
+    private void Start()
+    {
+        MiModelo.AsignarModeloAJugador(idPersonaje, player, img);
+    }
     private void OnEnable()
     {
         if (man != null)

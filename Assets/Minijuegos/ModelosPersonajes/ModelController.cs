@@ -58,12 +58,15 @@ public class ModelController : MonoBehaviour
         nuevoModelo.tag = etiquetaModelo;
 
         Vector3 escalaFinal, posicionFinal, rotacionFinal;
-        scalaPersonajesScript.ObtenerTransformaciones(idPersonaje, out escalaFinal, out posicionFinal, out rotacionFinal);
+        scalaPersonajesScript.ObtenerTransformaciones(idPersonaje, out escalaFinal, out posicionFinal, out rotacionFinal,numeroJugador);
 
         // Reseteamos posición y rotación local
         nuevoModelo.transform.localPosition = posicionFinal;
         nuevoModelo.transform.localRotation = Quaternion.Euler(rotacionFinal);
         nuevoModelo.transform.localScale = escalaFinal;
+
+        if (scalaPersonajesScript.juegoActual == ScalaPersonajes.Minijuegos.HudRecompnesas)
+            nuevoModelo.gameObject.AddComponent<CapsuleCollider>();
 
         // 5. CAMBIAR EL MATERIAL
         SkinnedMeshRenderer skinnedRenderer = nuevoModelo.GetComponentInChildren<SkinnedMeshRenderer>();
@@ -94,5 +97,7 @@ public class ModelController : MonoBehaviour
         {
             animatorComponent.gameObject.AddComponent<AnimatorMinijuegosController>();
         }
+
+
     }
 }
