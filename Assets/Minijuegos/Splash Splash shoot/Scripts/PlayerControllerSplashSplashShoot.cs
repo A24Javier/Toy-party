@@ -35,11 +35,6 @@ public class PlayerControllerSplashSplashShoot : MonoBehaviour
 
     private int municionObject;
 
-    [SerializeField] ModelController MiModelo;
-    public int player;
-    public int Personaje;
-    [SerializeField] Image perfil;
-
     private void Awake()
     {
         MiInfoSplash = GetComponent<PlayerInfoSplash>();
@@ -66,7 +61,6 @@ public class PlayerControllerSplashSplashShoot : MonoBehaviour
         {
             PrepararInput();
         }
-        MiModelo.AsignarModeloAJugador(Personaje,player,perfil);
     }
 
     private void PrepararInput()

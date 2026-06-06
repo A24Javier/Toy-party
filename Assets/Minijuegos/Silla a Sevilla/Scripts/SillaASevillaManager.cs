@@ -40,11 +40,6 @@ public class SillaASevillaManager : MonoBehaviour
 
     bool minijuegoFinalizado = false;
 
-    [SerializeField] ScalaPersonajes Mod;
-    private void Awake()
-    {
-        Mod.InicializarMinijuego(3);
-    }
     private void Start()
     {
         MyStat = Statjoc.StartRound;
