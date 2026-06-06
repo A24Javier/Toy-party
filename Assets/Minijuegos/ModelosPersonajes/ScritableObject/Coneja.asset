@@ -12,12 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37144f0498529e54582ff5046ec0ea0f, type: 3}
   m_Name: Coneja
   m_EditorClassIdentifier: 
-  Nombre: MsPage
+  IDPersonaje: 0
   ImgPerfil: {fileID: 21300000, guid: efb170b71040bb24ca2342d821c06cea, type: 3}
-  AnimatorSS: {fileID: 0}
-  AniamtorSSS: {fileID: 0}
-  AnimatorRR: {fileID: 0}
-  AnimatorSaS: {fileID: 0}
-  AnimatorCCG: {fileID: 0}
-  AnimatorST: {fileID: 0}
-  AnimatorVictoria: {fileID: 0}
+  Animator: {fileID: 9100000, guid: eeb1abd6be5026b4cabfec1dc06de099, type: 2}
+  Modelo: {fileID: 919132149155446097, guid: 4c98001cd33d76e419630481351099c9, type: 3}

@@ -12,12 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37144f0498529e54582ff5046ec0ea0f, type: 3}
   m_Name: Princesa
   m_EditorClassIdentifier: 
-  Nombre: Princesa Arcoiris
+  IDPersonaje: 3
   ImgPerfil: {fileID: 21300000, guid: 13df40d8f4dc711409d6ca248046d714, type: 3}
-  AnimatorSS: {fileID: 0}
-  AniamtorSSS: {fileID: 0}
-  AnimatorRR: {fileID: 0}
-  AnimatorSaS: {fileID: 0}
-  AnimatorCCG: {fileID: 0}
-  AnimatorST: {fileID: 0}
-  AnimatorVictoria: {fileID: 0}
+  Animator: {fileID: 9100000, guid: c5f3cb482ebf7fc449b23e03060100d8, type: 2}
+  Modelo: {fileID: 0}

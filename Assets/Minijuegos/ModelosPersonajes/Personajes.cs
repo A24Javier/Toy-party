@@ -5,20 +5,16 @@ using UnityEngine;
 [CreateAssetMenu(menuName = ("Personajes"))]
 public class Personajes : ScriptableObject
 {
-    public string Nombre;
+    [Header("ID")]
+    public int IDPersonaje;
+    [Header("Sprite")]
     public Sprite ImgPerfil;
-    [Header("Strip Slack")]
-    public RuntimeAnimatorController AnimatorSS;
-    [Header("Spalsh Splash Shoot")]
-    public RuntimeAnimatorController AniamtorSSS;
-    [Header("Relay Race")]
-    public RuntimeAnimatorController AnimatorRR;
-    [Header("Silla a Sevilla")]
-    public RuntimeAnimatorController AnimatorSaS;
-    [Header("Chute Chute Gol")]
-    public RuntimeAnimatorController AnimatorCCG;
-    [Header("Speedy Track")]
-    public RuntimeAnimatorController AnimatorST;
-    [Header("Hud MiniRecompnesas")]
-    public RuntimeAnimatorController AnimatorVictoria;
+    [Header("Animator Controller")]
+    public RuntimeAnimatorController Animator;
+    [Header("Modelo")]
+    public Mesh Malla;
+    [Header("Material")]
+    public Material Mat;
+    [Header("Scala")]
+    public Vector3 Scalar;
 }

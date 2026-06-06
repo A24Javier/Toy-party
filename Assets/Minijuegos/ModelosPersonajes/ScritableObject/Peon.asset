@@ -12,12 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37144f0498529e54582ff5046ec0ea0f, type: 3}
   m_Name: Peon
   m_EditorClassIdentifier: 
-  Nombre: Peon
+  IDPersonaje: 1
   ImgPerfil: {fileID: 21300000, guid: 2db1f6ae29aba7346aec312b38f4bd8f, type: 3}
-  AnimatorSS: {fileID: 0}
-  AniamtorSSS: {fileID: 0}
-  AnimatorRR: {fileID: 0}
-  AnimatorSaS: {fileID: 0}
-  AnimatorCCG: {fileID: 0}
-  AnimatorST: {fileID: 0}
-  AnimatorVictoria: {fileID: 0}
+  Animator: {fileID: 9100000, guid: 4a4faa9866c1c604bb43ccd41db7394a, type: 2}
+  Modelo: {fileID: 919132149155446097, guid: 765da41dda7f5974596c52732694f235, type: 3}
