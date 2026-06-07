@@ -15,13 +15,6 @@ public class ManagerStripSlack : MonoBehaviour
 
     private bool minijuegoFinalizado = false;
 
-    [SerializeField] ScalaPersonajes Mod;
-
-    private void Awake()
-    {
-        Mod.InicializarMinijuego(1);
-    }
-
     public PlayerControllerStripSlack GetPlayer(int i)
     {
         return players[i];
