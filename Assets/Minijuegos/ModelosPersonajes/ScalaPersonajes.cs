@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ScalaPersonajes : MonoBehaviour
 {
-    public enum Minijuegos { StripSlack, SplashSplashShoot, SillaSevilla, RelayRace, ChuteChuteGol }
-
+    public enum Minijuegos { StripSlack, SplashSplashShoot, SillaSevilla, RelayRace, ChuteChuteGol, SpeedyTrack, HudRecompensas}
+    public Minijuegos JuegoActual;
     // Esta estructura nos permite empaquetar los datos de configuración visual
     [System.Serializable]
     public struct AjustesVisuales
@@ -34,8 +34,8 @@ public class ScalaPersonajes : MonoBehaviour
     // Llamar en el awake de cada minijuego pasándole el enum directamente o el número
     public void InicializarMinijuego(int numGame)
     {
-        Minijuegos juegoSeleccionado = (Minijuegos)(numGame - 1);
-        CargarAjustesDelJuego(juegoSeleccionado);
+        JuegoActual = (Minijuegos)(numGame - 1);
+        CargarAjustesDelJuego(JuegoActual);
     }
 
     void CargarAjustesDelJuego(Minijuegos juego)
@@ -56,7 +56,7 @@ public class ScalaPersonajes : MonoBehaviour
     }
 
     // Esta es la función que usará tu ModelController para saber qué Vector3 aplicar
-    public void ObtenerTransformaciones(int idPersonaje, out Vector3 escala, out Vector3 posicion, out Vector3 rotacion)
+    public void ObtenerTransformaciones(int idPersonaje, out Vector3 escala, out Vector3 posicion, out Vector3 rotacion, int numeroJugador)
     {
         // Si el personaje actual tiene ajustes específicos para este minijuego, los aplicamos
         if (ajustesActualesActivos.TryGetValue(idPersonaje, out AjustesVisuales ajustes))
@@ -71,6 +71,25 @@ public class ScalaPersonajes : MonoBehaviour
             escala = Vector3.one;
             posicion = Vector3.zero;
             rotacion = Vector3.zero;
+        }
+
+        
+
+        if (JuegoActual == Minijuegos.StripSlack)
+        {
+            float rotacionY = 0;
+            if (numeroJugador == 1)
+            {
+                // Sumamos o sobreescribimos el eje Y para que mire a la derecha
+                rotacionY = 90f;
+            }
+            else if (numeroJugador == 2)
+            {
+                // Sumamos o sobreescribimos el eje Y para que mire a la izquierda
+                rotacionY = -90f;
+            }
+
+            rotacion.y += rotacionY;
         }
     }
 }

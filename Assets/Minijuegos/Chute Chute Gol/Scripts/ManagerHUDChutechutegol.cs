@@ -61,6 +61,13 @@ public class ManagerHUDChutechutegol : MonoBehaviour
     bool incio;
     bool minijuegoFinalizado;
 
+    [SerializeField] ScalaPersonajes Mod;
+
+    private void Awake()
+    {
+        Mod.InicializarMinijuego(5);
+    }
+
     private void Start()
     {
         timeDurationForDelantero = tiempoTurno;
@@ -104,6 +111,8 @@ public class ManagerHUDChutechutegol : MonoBehaviour
         Inicio();
         ChangeTransfrom();
 
+        ActulizarImagePerfil();
+        
         chuteGol = ChuteGol.ChuteDelantero;
     }
 
@@ -525,16 +534,16 @@ public class ManagerHUDChutechutegol : MonoBehaviour
             switch (players[i].getTurn())
             {
                 case 0:
-                    //PerfilPlayer[1].sprite = players[i].GetSprite();
+                    PerfilPlayer[1].sprite = players[i].GetSprite();
                     break;
                 case 1:
-                    //PerfilPlayer[2].sprite = players[i].GetSprite();
+                    PerfilPlayer[2].sprite = players[i].GetSprite();
                     break;
                 case 2:
-                    //PerfilPlayer[3].sprite = players[i].GetSprite();
+                    PerfilPlayer[3].sprite = players[i].GetSprite();
                     break;
                 case 4:
-                    //PerfilPlayer[0].sprite = players[i].GetSprite();
+                    PerfilPlayer[0].sprite = players[i].GetSprite();
                     break;
             }
         }

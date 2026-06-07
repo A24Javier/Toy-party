@@ -2150,7 +2150,7 @@ MonoBehaviour:
   textMun: {fileID: 506250100}
   MiModelo: {fileID: 19528098}
   player: 3
-  Personaje: 0
+  Personaje: 2
   perfil: {fileID: 1317974225}
 --- !u!114 &562570151
 MonoBehaviour:
@@ -2953,7 +2953,7 @@ MonoBehaviour:
   textMun: {fileID: 1115820295}
   MiModelo: {fileID: 19528098}
   player: 2
-  Personaje: 0
+  Personaje: 1
   perfil: {fileID: 1839085877}
 --- !u!114 &747202195
 MonoBehaviour:
@@ -3245,6 +3245,126 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
+        type: 3}
+      propertyPath: listaConfiguraciones.Array.data[0].minijuego
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
+        type: 3}
+      propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[0].escala.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
+        type: 3}
+      propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[0].escala.y
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
+        type: 3}
+      propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[0].escala.z
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
+        type: 3}
+      propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[1].escala.x
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
+        type: 3}
+      propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[1].escala.y
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
+        type: 3}
+      propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[1].escala.z
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
+        type: 3}
+      propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[2].escala.x
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
+        type: 3}
+      propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[2].escala.y
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
+        type: 3}
+      propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[2].escala.z
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
+        type: 3}
+      propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[3].escala.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
+        type: 3}
+      propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[3].escala.y
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
+        type: 3}
+      propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[3].escala.z
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
+        type: 3}
+      propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[4].escala.x
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
+        type: 3}
+      propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[4].escala.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
+        type: 3}
+      propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[4].escala.z
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
+        type: 3}
+      propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[2].rotacion.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
+        type: 3}
+      propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[2].rotacion.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
+        type: 3}
+      propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[2].rotacion.z
+      value: -80
+      objectReference: {fileID: 0}
+    - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
+        type: 3}
+      propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[0].posicionOffset.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
+        type: 3}
+      propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[1].posicionOffset.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
+        type: 3}
+      propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[2].posicionOffset.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
+        type: 3}
+      propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[3].posicionOffset.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
+        type: 3}
+      propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[4].posicionOffset.y
+      value: -0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 4290233577221908527, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
         type: 3}
       propertyPath: m_Name
@@ -5578,7 +5698,7 @@ MonoBehaviour:
   textMun: {fileID: 657186652}
   MiModelo: {fileID: 19528098}
   player: 4
-  Personaje: 0
+  Personaje: 3
   perfil: {fileID: 325982840}
 --- !u!114 &1570371012
 MonoBehaviour:
@@ -5865,7 +5985,7 @@ MonoBehaviour:
   textMun: {fileID: 1940863698}
   MiModelo: {fileID: 19528098}
   player: 1
-  Personaje: 0
+  Personaje: 4
   perfil: {fileID: 403938389}
 --- !u!114 &1673917393
 MonoBehaviour:

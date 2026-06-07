@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayersChuteGol : MonoBehaviour
 {
@@ -19,6 +20,11 @@ public class PlayersChuteGol : MonoBehaviour
     [SerializeField] private ManagerHUDChutechutegol Manager;
 
     private Animator MyAnim;
+
+    [SerializeField] ModelController MiModelo;
+    public int idPersonaje;
+    public int player;
+    public Image img;
 
     private void Awake()
     {
@@ -59,6 +65,7 @@ public class PlayersChuteGol : MonoBehaviour
                 Debug.LogError($"PlayersChuteGol: no se encontró la acción {actionName} en {gameObject.name}.");
             }
         }
+        MiModelo.AsignarModeloAJugador(idPersonaje, player, img);
     }
 
     private void Update()
@@ -218,4 +225,6 @@ public class PlayersChuteGol : MonoBehaviour
     {
         return MiInfo;
     }
+
+    public Sprite GetSprite() { return img.sprite; }
 }

@@ -67,6 +67,13 @@ public class ManagerFinMinijuego : MonoBehaviour
 
     private bool recompensasCompletas = false;
 
+    [SerializeField] ScalaPersonajes Mod;
+
+    private void Awake()
+    {
+        Mod.InicializarMinijuego(7);
+    }
+
     public void AñadirRec(PlayerRecompensas playerR)
     {
         if (playerR != null && !players.Contains(playerR))
