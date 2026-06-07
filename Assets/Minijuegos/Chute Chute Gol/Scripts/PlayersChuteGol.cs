@@ -21,7 +21,7 @@ public class PlayersChuteGol : MonoBehaviour
 
     private Animator MyAnim;
 
-    [SerializeField] ModelController MiModelo;
+    [SerializeField] public ModelController MiModelo;
     public int idPersonaje;
     public int player;
     public Image img;
@@ -142,9 +142,9 @@ public class PlayersChuteGol : MonoBehaviour
         return NomAction ?? "";
     }
 
-    public void SetNom()
+    public void SetNom(string action)
     {
-        NomAction = "";
+        NomAction = action;
     }
 
     public Animator GetAnim()

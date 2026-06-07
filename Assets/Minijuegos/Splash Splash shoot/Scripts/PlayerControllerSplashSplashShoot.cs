@@ -22,8 +22,7 @@ public class PlayerControllerSplashSplashShoot : MonoBehaviour
     [SerializeField] private Image[] Lifes;
     [SerializeField] private Sprite LifeSprite;
 
-    [Header("Manager")]
-    [SerializeField] private ManagerSplashSplashShoot ManagerJoc;
+    private ManagerSplashSplashShoot ManagerJoc;
 
     [Header("Disparo")]
     [SerializeField] private GameObject Shoot;
@@ -34,6 +33,11 @@ public class PlayerControllerSplashSplashShoot : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textMun;
 
     private int municionObject;
+
+    [SerializeField] ModelController MiModelo;
+    public int player;
+    public int Personaje;
+    [SerializeField] Image perfil;
 
     private void Awake()
     {
@@ -61,6 +65,7 @@ public class PlayerControllerSplashSplashShoot : MonoBehaviour
         {
             PrepararInput();
         }
+        MiModelo.AsignarModeloAJugador(Personaje,player,perfil);
     }
 
     private void PrepararInput()
@@ -91,6 +96,8 @@ public class PlayerControllerSplashSplashShoot : MonoBehaviour
 
     private void OnEnable()
     {
+        ManagerJoc = FindFirstObjectByType<ManagerSplashSplashShoot>();
+
         if (ManagerJoc != null)
             ManagerJoc.AddPlayer(this);
     }
@@ -98,7 +105,16 @@ public class PlayerControllerSplashSplashShoot : MonoBehaviour
     private void OnDisable()
     {
         if (ManagerJoc != null)
+            ManagerJoc.PlayerEliminado(this);
+    }
+
+    //por si acaso lo metemos 
+    private void OnDestroy()
+    {
+        if (ManagerJoc != null)
+        {
             ManagerJoc.RemovePlayer(this);
+        }
     }
 
     private void Update()

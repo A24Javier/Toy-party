@@ -21,9 +21,6 @@ public class ManagerSplashSplashShoot : MonoBehaviour
     [Header("UI Munición")]
     public Sprite[] Mun;
 
-    [Header("Audio")]
-    [SerializeField] private AudioSource MusicGame;
-
     private Vector3[] PosicionObjeto =
     {
         new Vector3(-26f, 12.6f, 20f),
@@ -36,6 +33,12 @@ public class ManagerSplashSplashShoot : MonoBehaviour
 
     private bool finalizando = false;
     private int siguientePosicionEliminado = 4;
+
+    [SerializeField] ScalaPersonajes Mod;
+    private void Awake()
+    {
+        Mod.InicializarMinijuego(2);
+    }
 
     private void Start()
     {
@@ -181,19 +184,16 @@ public class ManagerSplashSplashShoot : MonoBehaviour
 
     public void PlayerEliminado(PlayerControllerSplashSplashShoot player)
     {
-        if (player == null || player.GetInfo() == null)
-            return;
-
-        if (!Players.Contains(player))
-            return;
+        if (player == null || player.GetInfo() == null) return;
+        if (!Players.Contains(player)) return;
 
         player.GetInfo().SetEliminado(true);
         player.GetInfo().SetPosicionFinal(siguientePosicionEliminado);
 
         siguientePosicionEliminado--;
-
         Players.Remove(player);
 
+        // Comprobamos si queda solo un jugador en pie para acabar la partida
         UltimoJugador();
     }
 
@@ -202,20 +202,21 @@ public class ManagerSplashSplashShoot : MonoBehaviour
         if (GameTerminated || finalizando)
             return;
 
+        if (Players.Count == 0)
+            return;
+
         if (timeGame > 1)
         {
             InvokeGota();
             timeGame -= Time.deltaTime;
             UpdateHudTime(timeGame);
+
             UltimoJugador();
         }
         else
         {
             timeGame = 0;
             GameTerminated = true;
-
-            if (MusicGame != null)
-                MusicGame.Stop();
 
             AsignarPosicionesPorTiempo();
             FinalizarMinijuego();
@@ -246,9 +247,6 @@ public class ManagerSplashSplashShoot : MonoBehaviour
                 ganador.GetInfo().SetPosicionFinal(1);
 
             GameTerminated = true;
-
-            if (MusicGame != null)
-                MusicGame.Stop();
 
             FinalizarMinijuego();
         }
@@ -314,7 +312,7 @@ public class ManagerSplashSplashShoot : MonoBehaviour
         }
         else
         {
-            Debug.LogError("ManagerSplashSplashShoot: no existe MinigameController. No se puede abrir NivelRecompensasMinijuegos.");
+            Debug.LogWarning("ManagerSplashSplashShoot: no existe MinigameController. No se puede abrir NivelRecompensasMinijuegos.");
         }
     }
 

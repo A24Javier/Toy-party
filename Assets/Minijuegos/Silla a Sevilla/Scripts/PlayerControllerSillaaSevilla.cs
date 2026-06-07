@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerControllerSillaaSevilla : MonoBehaviour
 {
@@ -7,6 +8,9 @@ public class PlayerControllerSillaaSevilla : MonoBehaviour
     public int id;
     public bool Sit = false;
     public bool IA;
+    public Image perfil;
+    public int NumPerosnaje;
+    public int Player;
 
     private UnityEngine.InputSystem.PlayerInput MiInput; 
     InputAction Action;
@@ -20,6 +24,8 @@ public class PlayerControllerSillaaSevilla : MonoBehaviour
     [SerializeField] SillaASevillaManager MiManagerContoller;
 
     Vector3 MiPosition;
+
+    [SerializeField] ModelController MiModelo;
 
     private void Awake()
     {
@@ -51,6 +57,7 @@ public class PlayerControllerSillaaSevilla : MonoBehaviour
 
         if (!IA && Action == null)
             Debug.LogWarning($"{gameObject.name} no encontró la acción 'Sit'.");
+        MiModelo.AsignarModeloAJugador(NumPerosnaje, Player, perfil);
     }
 
     private void Update()

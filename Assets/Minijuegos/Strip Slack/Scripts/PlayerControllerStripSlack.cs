@@ -10,7 +10,8 @@ public class PlayerControllerStripSlack : MonoBehaviour
     public int player;
 
     private float force;
-    private string personaje = "";
+    //estas variables son para el modelo del personaje
+    public int personaje;
 
     [Header("UI")]
     [SerializeField] private Image PerfilImg;
@@ -44,6 +45,9 @@ public class PlayerControllerStripSlack : MonoBehaviour
     [SerializeField] private float LimitForce = 0f;
 
     private float impulsoActual = 0f;
+
+    [Header("Instancia script cargaModelo")]
+    [SerializeField] ModelController MiModelo;
 
     private void Awake()
     {
@@ -101,6 +105,7 @@ public class PlayerControllerStripSlack : MonoBehaviour
         {
             Debug.LogWarning($"{gameObject.name} no encontró la acción 'Force'.");
         }
+        MiModelo.AsignarModeloAJugador(GetPersonaje(), player, PerfilImg);
     }
 
     private void Update()
@@ -282,12 +287,12 @@ public class PlayerControllerStripSlack : MonoBehaviour
         return force;
     }
 
-    public void SetPersonaje(string nom)
+    public void SetPersonaje(int IDPersonaje)
     {
-        personaje = nom;
+        personaje = IDPersonaje;
     }
 
-    public string GetPersonaje()
+    public int GetPersonaje()
     {
         return personaje;
     }

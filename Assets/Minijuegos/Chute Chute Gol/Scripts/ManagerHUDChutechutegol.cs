@@ -1,3 +1,4 @@
+using MongoDB.Bson.Serialization.Serializers;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -63,6 +64,9 @@ public class ManagerHUDChutechutegol : MonoBehaviour
 
     [SerializeField] ScalaPersonajes Mod;
 
+    private string ultimaActionDelantero = "";
+    private string ultimaActionPortero = "";
+
     private void Awake()
     {
         Mod.InicializarMinijuego(5);
@@ -77,7 +81,6 @@ public class ManagerHUDChutechutegol : MonoBehaviour
         incio = true;
         inputEnable = false;
         PuntosON = false;
-        CourrtineActive = false;
         minijuegoFinalizado = false;
 
         for (int i = 0; i < Punts.Length; i++)
@@ -370,24 +373,6 @@ public class ManagerHUDChutechutegol : MonoBehaviour
             TimesPlayers[0].SetActive(false);
 
         ComprobarAcciones();
-
-        if (CourrtineActive)
-        {
-            CourrtineActive = false;
-            StartCoroutine(EsperarResolucion());
-        }
-    }
-
-    IEnumerator EsperarResolucion()
-    {
-        if (MiDirector != null)
-        {
-            yield return new WaitUntil(() => MiDirector.continueScript);
-            MiDirector.PausarAnimationPorteroPelota();
-        }
-
-        PuntsUI();
-        CambioStat();
     }
 
     void ComprobarAcciones()
@@ -395,6 +380,7 @@ public class ManagerHUDChutechutegol : MonoBehaviour
         string actionPortero = "";
         string actionDelantero = "";
 
+        // 1. Recolectamos las acciones actuales de los jugadores
         for (int i = 0; i < players.Count; i++)
         {
             if (players[i] == null) continue;
@@ -405,46 +391,78 @@ public class ManagerHUDChutechutegol : MonoBehaviour
                 actionDelantero = players[i].GetNomAction();
         }
 
+        // 2. Si AMBOS han elegido, disparamos el Timeline de forma segura
         if (!string.IsNullOrEmpty(actionDelantero) && !string.IsNullOrEmpty(actionPortero))
         {
+            // Almacenamos las acciones para procesarlas al final de la animación
+            ultimaActionDelantero = actionDelantero;
+            ultimaActionPortero = actionPortero;
+
+            // Calculamos internamente si el portero detuvo el balón
+            PorteroParo = string.Equals(actionDelantero, actionPortero, System.StringComparison.OrdinalIgnoreCase);
+
             if (MiDirector != null)
+            {
+                // Pasamos las acciones al Director para que arme el estado (Gol o Parada)
                 MiDirector.SetActions(actionDelantero, actionPortero);
+
+                // Iniciamos la animación (Timeline)
+                MiDirector.StartAction();
+            }
+
+            // [IMPORTANTE]: Aquí debes limpiar el string de tus jugadores para evitar bucles repetidos
+            // Ejemplo: 
+            foreach(var p in players) { p.SetNom(""); }
         }
+    }
 
-        Debug.Log(actionDelantero + " - " + actionPortero);
-
-        PorteroParo = string.Equals(actionDelantero, actionPortero, System.StringComparison.OrdinalIgnoreCase);
+    public void FinalizarAnimacionYDarPuntos()
+    {
 
         if (MiDirector != null)
-            MiDirector.StartAction();
+        {
+            MiDirector.PausarAnimationPorteroPelota();
+        }
 
         if (PuntosON)
-            AsignarPuntos(actionDelantero, actionPortero);
+        {
+            AsignarPuntos(ultimaActionDelantero, ultimaActionPortero);
+        }
+
+        PuntsUI();
+        
+        CambioStat();
     }
 
     void AsignarPuntos(string actionDelantero, string actionPortero)
     {
         if (PorteroParo)
         {
-            if (!string.IsNullOrEmpty(actionDelantero) && !string.IsNullOrEmpty(actionPortero))
+            // Si hay parada, sumamos puntos solo al portero
+            foreach (var p in players)
             {
-                foreach (var p in players)
-                {
-                    if (p.GetPortero())
-                        UpdatePunts(p);
-                }
+                if (p != null && p.GetPortero())
+                    UpdatePunts(p);
             }
         }
         else
         {
+            // Si hay gol, sumamos puntos al delantero (turno 0)
             foreach (var p in players)
             {
-                if (p.getTurn() == 0)
+                if (p != null && p.getTurn() == 0)
                     UpdatePunts(p);
             }
         }
 
+        if (MiDirector != null)
+        {
+            MiDirector.ReniciarTimeLines(); // Pone todos los Timelines al punto 0 y vacía variables
+        }
+
+        // Reseteamos los controladores de estado para la siguiente ronda
         PuntosON = false;
+        PorteroParo = false;
     }
 
     void Cambio()
@@ -457,7 +475,7 @@ public class ManagerHUDChutechutegol : MonoBehaviour
                 players[i].SetTurn((players[i].getTurn() + 1) % totalEstados);
             }
 
-            players[i].SetNom();
+            players[i].SetNom("");
             players[i].NewAction();
         }
 
@@ -535,18 +553,52 @@ public class ManagerHUDChutechutegol : MonoBehaviour
             {
                 case 0:
                     PerfilPlayer[1].sprite = players[i].GetSprite();
+                    rotacionModelo(players[i], 0);
                     break;
                 case 1:
                     PerfilPlayer[2].sprite = players[i].GetSprite();
+                    rotacionModelo(players[i], 1);
                     break;
                 case 2:
                     PerfilPlayer[3].sprite = players[i].GetSprite();
+                    rotacionModelo(players[i], 2);
                     break;
                 case 4:
                     PerfilPlayer[0].sprite = players[i].GetSprite();
+                    rotacionModelo(players[i], 4);
                     break;
             }
         }
+        
+    }
+
+    void rotacionModelo(PlayersChuteGol MyPlayer, int turno)
+    {
+        float rotacionY = 0f;
+
+        // Aquí manejas la lógica de los turnos de forma general para todos los personajes
+        if (turno == 0)
+        {
+            rotacionY = 0f; // Mirar al frente en el turno 0
+        }
+        else if (turno == 1 || turno == 2)
+        {
+            rotacionY = 90f; // Mirar a la derecha en los turnos 1 y 2
+        }
+        else if (turno == 4)
+        {
+            rotacionY = 180f; // Mirar a la izquierda en el turno 4
+        }
+
+        // SI UN PERSONAJE TIENE UNA EXCEPCIÓN (Por ejemplo, el personaje 0 se comporta al revés)
+        if (MyPlayer.idPersonaje == 2)
+        {
+            // Puedes alterar la rotación aquí solo para él si lo necesitas
+            rotacionY += 90f; 
+        }
+
+        // Llamamos al gestor que creamos en el paso anterior para aplicar la rotación por ID
+        MyPlayer.MiModelo.RotarPersonajeEnTiempoDeJuego(MyPlayer.idPersonaje, rotacionY);
     }
 
     public void RegistroPlayer(PlayersChuteGol MiJugador)

@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-
 public class PlayerRecompensas : MonoBehaviour
 {
     [SerializeField] private ManagerFinMinijuego man;
@@ -24,7 +23,6 @@ public class PlayerRecompensas : MonoBehaviour
     [SerializeField] ModelController MiModelo;
     public int IDPersonaje;
     public int player;
-
     Image img;
 
     private void Start()

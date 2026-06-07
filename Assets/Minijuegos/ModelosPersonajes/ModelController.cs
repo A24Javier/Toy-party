@@ -12,8 +12,23 @@ public class ModelController : MonoBehaviour
     // Estos son los objetos que ya están en la escena y tienen el SkinnedMeshRenderer base
     [SerializeField] private Transform[] contenedoresJugadores;
 
-    public void AsignarModeloAJugador(int idPersonaje, int numeroJugador)
+    [Header("Configuración de Seguridad")]
+    [Tooltip("El script solo borrará los hijos que tengan esta etiqueta para no romper el minijuego.")]
+    [SerializeField] private string etiquetaModelo = "Player";
+
+    [SerializeField] private ScalaPersonajes scalaPersonajesScript;
+
+    private Dictionary<int, GameObject> instanciasActivas = new Dictionary<int, GameObject>();
+
+    public void AsignarModeloAJugador(int idPersonaje, int numeroJugador, Image Perfil)
     {
+
+        if (instanciasActivas.ContainsKey(idPersonaje))
+        {
+            Destroy(instanciasActivas[idPersonaje]);
+            instanciasActivas.Remove(idPersonaje);
+        }
+       
         // 1. Validaciones iniciales de índices
         if (idPersonaje < 0 || idPersonaje >= listaPersonajes.Count) return;
         int indiceArray = numeroJugador - 1;
@@ -24,22 +39,16 @@ public class ModelController : MonoBehaviour
 
         // 2. Obtener los datos del ScriptableObject
         Personajes datos = listaPersonajes[idPersonaje];
+        if (datos.PrefabPersonaje == null) return;
 
-        // 3. CAMBIAR MESH Y MATERIAL (Buscamos en los hijos del contenedor)
-        SkinnedMeshRenderer skinnedRenderer = contenedorObjetivo.GetComponentInChildren<SkinnedMeshRenderer>();
-
-        if (skinnedRenderer != null)
+        if (Perfil != null && datos.ImgPerfil != null)
         {
-            if (datos.Malla != null) skinnedRenderer.sharedMesh = datos.Malla;
-            if (datos.Mat != null) skinnedRenderer.material = datos.Mat;
-        }
-        else
-        {
-            Debug.LogError($"No se encontró un SkinnedMeshRenderer en el Jugador {numeroJugador}. ¡Asegúrate de que el prefab base lo tenga!");
+            Perfil.sprite = datos.ImgPerfil;
         }
 
-        // 4. CAMBIAR LA ESCALA DEL OBJETO
-        if (skinnedRenderer != null)
+        // 3. LIMPIEZA QUIRÚRGICA (NUEVO)
+        // En lugar de borrar todo, solo borramos el hijo que sea el "Modelo Visual" anterior
+        for (int i = contenedorObjetivo.childCount - 1; i >= 0; i--)
         {
             Transform hijo = contenedorObjetivo.GetChild(i);
 
@@ -48,29 +57,28 @@ public class ModelController : MonoBehaviour
             {
                 Destroy(hijo.gameObject);
             }
+            // Si no tiene la etiqueta (tu objeto del minijuego), el script lo ignora y lo deja vivo
         }
 
         // 4. INSTANCIAR EL NUEVO PREFAB
         GameObject nuevoModelo = Instantiate(datos.PrefabPersonaje, contenedorObjetivo);
 
+        // Nos aseguramos de que el nuevo modelo clonado tenga la etiqueta correcta para el futuro
         nuevoModelo.tag = etiquetaModelo;
 
         Vector3 escalaFinal, posicionFinal, rotacionFinal;
+        scalaPersonajesScript.ObtenerTransformaciones(idPersonaje, out escalaFinal, out posicionFinal, out rotacionFinal, numeroJugador);
 
-        scalaPersonajesScript.ObtenerTransformaciones(
-            idPersonaje,
-            out escalaFinal,
-            out posicionFinal,
-            out rotacionFinal,
-            numeroJugador
-        );
-
+        // Reseteamos posición y rotación local
         nuevoModelo.transform.localPosition = posicionFinal;
         nuevoModelo.transform.localRotation = Quaternion.Euler(rotacionFinal);
         nuevoModelo.transform.localScale = escalaFinal;
 
         if (scalaPersonajesScript.JuegoActual == ScalaPersonajes.Minijuegos.HudRecompensas)
             nuevoModelo.gameObject.AddComponent<CapsuleCollider>();
+
+        if (scalaPersonajesScript.JuegoActual == ScalaPersonajes.Minijuegos.SplashSplashShoot)
+            nuevoModelo.gameObject.AddComponent<CourritneAction>();
 
         // 5. CAMBIAR EL MATERIAL
         SkinnedMeshRenderer skinnedRenderer = nuevoModelo.GetComponentInChildren<SkinnedMeshRenderer>();
@@ -91,17 +99,32 @@ public class ModelController : MonoBehaviour
             animatorComponent = nuevoModelo.GetComponentInChildren<Animator>();
         }
 
-        // 5. ASIGNAR EL ANIMATOR CONTROLLER (El cerebro de las animaciones)
-        Animator animatorComponent2 = contenedorObjetivo.GetComponentInChildren<Animator>();
-        if (animatorComponent2 != null && datos.Animator != null)
+        if (animatorComponent != null && datos.Animator != null)
         {
-            animatorComponent2.runtimeAnimatorController = datos.Animator;
+            animatorComponent.runtimeAnimatorController = datos.Animator;
         }
 
-        // 6. INYECTAR EL SCRIPT DE CONTROL DE ANIMACIONES
-        if (skinnedRenderer != null && skinnedRenderer.gameObject.GetComponent<AnimatorMinijuegosController>() == null)
+        // 8. INYECTAR EL SCRIPT DE CONTROL DE ANIMACIONES
+        if (animatorComponent != null && nuevoModelo.GetComponent<AnimatorMinijuegosController>() == null)
         {
-            skinnedRenderer.gameObject.AddComponent<AnimatorMinijuegosController>();
+            animatorComponent.gameObject.AddComponent<AnimatorMinijuegosController>();
+        }
+
+        instanciasActivas.Add(idPersonaje, nuevoModelo);
+    }
+
+    public void RotarPersonajeEnTiempoDeJuego(int idPersonaje, float nuevaRotacionY)
+    {
+        if (instanciasActivas.TryGetValue(idPersonaje, out GameObject personajeClonado))
+        {
+            // Modificamos su rotación local en el eje Y
+            Vector3 rotacionActual = personajeClonado.transform.localEulerAngles;
+            rotacionActual.y = nuevaRotacionY;
+            personajeClonado.transform.localEulerAngles = rotacionActual;
+        }
+        else
+        {
+            Debug.LogWarning($"No se puede rotar: El personaje con ID {idPersonaje} no está instanciado en el juego.");
         }
     }
 }

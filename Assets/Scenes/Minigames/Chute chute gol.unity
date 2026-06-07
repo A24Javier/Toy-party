@@ -967,6 +967,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 214042625}
   m_CullTransparentMesh: 1
+--- !u!1 &227610043
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 227610045}
+  - component: {fileID: 227610044}
+  m_Layer: 0
+  m_Name: DarPuntos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &227610044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227610043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 118f58cdbaae2064eb1af70711fdf474, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 480464195}
+          m_TargetAssemblyTypeName: ConrtoladorTimeLineChuteChuteGol, Assembly-CSharp
+          m_MethodName: TerminarJugadaYAsignarPuntos
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!4 &227610045
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227610043}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -11.959334, y: -0.90103006, z: -14.927223}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &230048698
 GameObject:
   m_ObjectHideFlags: 0
@@ -1019,8 +1081,8 @@ PlayableDirector:
     value: {fileID: 1605455344}
   - key: {fileID: 8222976003331811066, guid: d412585560d83e442a8a4195221cf816, type: 2}
     value: {fileID: 0}
-  - key: {fileID: 5717775322713933495, guid: d412585560d83e442a8a4195221cf816, type: 2}
-    value: {fileID: 772257700}
+  - key: {fileID: 7602253719130676203, guid: d412585560d83e442a8a4195221cf816, type: 2}
+    value: {fileID: 227610044}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &230048701
@@ -1651,8 +1713,8 @@ PlayableDirector:
   m_SceneBindings:
   - key: {fileID: 219846180757710201, guid: 8b2bb8e0f9f2278429c87a596806349b, type: 2}
     value: {fileID: 889775405}
-  - key: {fileID: 5895556227772340236, guid: 8b2bb8e0f9f2278429c87a596806349b, type: 2}
-    value: {fileID: 772257700}
+  - key: {fileID: -2504651355755804896, guid: 8b2bb8e0f9f2278429c87a596806349b, type: 2}
+    value: {fileID: 227610044}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &430943778
@@ -1762,7 +1824,6 @@ MonoBehaviour:
   Man: {fileID: 1751175807}
   Parada: {fileID: 1998623828}
   Gol: {fileID: 1703611184}
-  continueScript: 0
 --- !u!4 &480464196
 Transform:
   m_ObjectHideFlags: 0
@@ -1896,8 +1957,8 @@ PlayableDirector:
   m_SceneBindings:
   - key: {fileID: 2165859497675278801, guid: f52b2e6be75f3604d8ae89caee5290d9, type: 2}
     value: {fileID: 889775405}
-  - key: {fileID: 4792850050785985998, guid: f52b2e6be75f3604d8ae89caee5290d9, type: 2}
-    value: {fileID: 772257700}
+  - key: {fileID: -7267870172844483806, guid: f52b2e6be75f3604d8ae89caee5290d9, type: 2}
+    value: {fileID: 227610044}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &495622815
@@ -2228,8 +2289,8 @@ PlayableDirector:
     value: {fileID: 0}
   - key: {fileID: -9026366278559085533, guid: 842cf5882a0874b40918ce0d209a28dd, type: 2}
     value: {fileID: 1605455344}
-  - key: {fileID: -267220436841015067, guid: 842cf5882a0874b40918ce0d209a28dd, type: 2}
-    value: {fileID: 772257700}
+  - key: {fileID: 4065737536580037230, guid: 842cf5882a0874b40918ce0d209a28dd, type: 2}
+    value: {fileID: 227610044}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &692220780
@@ -2299,8 +2360,8 @@ PlayableDirector:
     value: {fileID: 1605455344}
   - key: {fileID: 947918181747309182, guid: 526a41aae00f9f84db64170c66ccf40c, type: 2}
     value: {fileID: 0}
-  - key: {fileID: -3153582955367861938, guid: 526a41aae00f9f84db64170c66ccf40c, type: 2}
-    value: {fileID: 772257700}
+  - key: {fileID: 7703513752445553094, guid: 526a41aae00f9f84db64170c66ccf40c, type: 2}
+    value: {fileID: 227610044}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &693569104
@@ -2403,6 +2464,41 @@ PrefabInstance:
         type: 3}
       propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[4].escala.z
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
+        type: 3}
+      propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[2].rotacion.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
+        type: 3}
+      propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[2].rotacion.z
+      value: -70
+      objectReference: {fileID: 0}
+    - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
+        type: 3}
+      propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[0].posicionOffset.y
+      value: -0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
+        type: 3}
+      propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[1].posicionOffset.y
+      value: -0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
+        type: 3}
+      propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[2].posicionOffset.y
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
+        type: 3}
+      propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[3].posicionOffset.y
+      value: -0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
+        type: 3}
+      propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[4].posicionOffset.y
+      value: -1.2
       objectReference: {fileID: 0}
     - target: {fileID: 4290233577221908527, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
         type: 3}
@@ -2895,7 +2991,7 @@ MonoBehaviour:
   NomAction: 
   Manager: {fileID: 1751175807}
   MiModelo: {fileID: 1011600885}
-  idPersonaje: 2
+  idPersonaje: 4
   player: 3
   img: {fileID: 606706364}
 --- !u!95 &780960753
@@ -3042,7 +3138,7 @@ MonoBehaviour:
   NomAction: 
   Manager: {fileID: 1751175807}
   MiModelo: {fileID: 1011600885}
-  idPersonaje: 3
+  idPersonaje: 2
   player: 4
   img: {fileID: 2040702358}
 --- !u!95 &808648206
@@ -3378,8 +3474,8 @@ PlayableDirector:
     value: {fileID: 0}
   - key: {fileID: 1151934118243742839, guid: 7b65efdc464421e4d939d2ff8bcb24b5, type: 2}
     value: {fileID: 1605455344}
-  - key: {fileID: 992005187338601752, guid: 7b65efdc464421e4d939d2ff8bcb24b5, type: 2}
-    value: {fileID: 772257700}
+  - key: {fileID: 6352462642663029532, guid: 7b65efdc464421e4d939d2ff8bcb24b5, type: 2}
+    value: {fileID: 227610044}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &928364293
@@ -3686,8 +3782,8 @@ PlayableDirector:
     value: {fileID: 1605455344}
   - key: {fileID: -8455139330544441997, guid: 6b78120f326306d48a6ef9541b650956, type: 2}
     value: {fileID: 0}
-  - key: {fileID: 7231770462632157309, guid: 6b78120f326306d48a6ef9541b650956, type: 2}
-    value: {fileID: 772257700}
+  - key: {fileID: -2606640968066605441, guid: 6b78120f326306d48a6ef9541b650956, type: 2}
+    value: {fileID: 227610044}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &1020059600
@@ -3753,8 +3849,8 @@ PlayableDirector:
   m_SceneBindings:
   - key: {fileID: -8876224617602695335, guid: 4de9e94b68094d04e95342372326127d, type: 2}
     value: {fileID: 889775405}
-  - key: {fileID: -549843637824731134, guid: 4de9e94b68094d04e95342372326127d, type: 2}
-    value: {fileID: 772257700}
+  - key: {fileID: -7254206324716844672, guid: 4de9e94b68094d04e95342372326127d, type: 2}
+    value: {fileID: 227610044}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &1026826819
@@ -4186,8 +4282,8 @@ PlayableDirector:
     value: {fileID: 0}
   - key: {fileID: -6348699878013016186, guid: 48e0c88a50f62424089bee5afffd31b1, type: 2}
     value: {fileID: 1605455344}
-  - key: {fileID: 6125424560110552662, guid: 48e0c88a50f62424089bee5afffd31b1, type: 2}
-    value: {fileID: 772257700}
+  - key: {fileID: 6796877844724388744, guid: 48e0c88a50f62424089bee5afffd31b1, type: 2}
+    value: {fileID: 227610044}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &1329426509
@@ -5151,8 +5247,8 @@ PlayableDirector:
     value: {fileID: 0}
   - key: {fileID: 6206799644005294339, guid: 116daee0d4d987b40acc078dbfcade37, type: 2}
     value: {fileID: 1605455344}
-  - key: {fileID: 3799164061518936961, guid: 116daee0d4d987b40acc078dbfcade37, type: 2}
-    value: {fileID: 772257700}
+  - key: {fileID: -974353016136945069, guid: 116daee0d4d987b40acc078dbfcade37, type: 2}
+    value: {fileID: 227610044}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &1725203376
@@ -5222,8 +5318,8 @@ PlayableDirector:
     value: {fileID: 1605455344}
   - key: {fileID: -7030484499681391565, guid: 2ffeaefd46e055445ab02ccc4a4a7908, type: 2}
     value: {fileID: 0}
-  - key: {fileID: -6027589165722321560, guid: 2ffeaefd46e055445ab02ccc4a4a7908, type: 2}
-    value: {fileID: 772257700}
+  - key: {fileID: 7831654664975939735, guid: 2ffeaefd46e055445ab02ccc4a4a7908, type: 2}
+    value: {fileID: 227610044}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &1727318061
@@ -5433,8 +5529,8 @@ PlayableDirector:
   m_SceneBindings:
   - key: {fileID: 146297103411505869, guid: 4b928dfef0025cc48a2aa6573059db1d, type: 2}
     value: {fileID: 889775405}
-  - key: {fileID: -1046421957140313366, guid: 4b928dfef0025cc48a2aa6573059db1d, type: 2}
-    value: {fileID: 772257700}
+  - key: {fileID: -1238037416434934962, guid: 4b928dfef0025cc48a2aa6573059db1d, type: 2}
+    value: {fileID: 227610044}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &1742516383
@@ -6125,3 +6221,4 @@ SceneRoots:
   - {fileID: 772257701}
   - {fileID: 1011600884}
   - {fileID: 712019604}
+  - {fileID: 227610045}
