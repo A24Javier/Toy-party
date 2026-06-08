@@ -34,10 +34,12 @@ public class ManagerSplashSplashShoot : MonoBehaviour
     private bool finalizando = false;
     private int siguientePosicionEliminado = 4;
 
-    [SerializeField] ScalaPersonajes Mod;
+    [SerializeField] private ScalaPersonajes Mod;
+
     private void Awake()
     {
-        Mod.InicializarMinijuego(2);
+        if (Mod != null)
+            Mod.InicializarMinijuego(2);
     }
 
     private void Start()
@@ -184,8 +186,14 @@ public class ManagerSplashSplashShoot : MonoBehaviour
 
     public void PlayerEliminado(PlayerControllerSplashSplashShoot player)
     {
-        if (player == null || player.GetInfo() == null) return;
-        if (!Players.Contains(player)) return;
+        if (GameTerminated || finalizando)
+            return;
+
+        if (player == null || player.GetInfo() == null)
+            return;
+
+        if (!Players.Contains(player))
+            return;
 
         player.GetInfo().SetEliminado(true);
         player.GetInfo().SetPosicionFinal(siguientePosicionEliminado);
@@ -193,7 +201,6 @@ public class ManagerSplashSplashShoot : MonoBehaviour
         siguientePosicionEliminado--;
         Players.Remove(player);
 
-        // Comprobamos si queda solo un jugador en pie para acabar la partida
         UltimoJugador();
     }
 
@@ -210,7 +217,6 @@ public class ManagerSplashSplashShoot : MonoBehaviour
             InvokeGota();
             timeGame -= Time.deltaTime;
             UpdateHudTime(timeGame);
-
             UltimoJugador();
         }
         else
@@ -318,7 +324,11 @@ public class ManagerSplashSplashShoot : MonoBehaviour
 
     private void PrepararDatosRecompensas()
     {
-        AsegurarArraysDatosMinijuego();
+        DatosMinijuego.ResetDatos();
+        DatosMinijuego.cantidadJugadores = 4;
+        DatosMinijuego.escenaRecompensas = "NivelRecompensasMinijuegos";
+
+        LimpiarResultadosDatosMinijuego();
 
         List<PlayerControllerSplashSplashShoot> ordenados = new List<PlayerControllerSplashSplashShoot>();
 
@@ -346,12 +356,21 @@ public class ManagerSplashSplashShoot : MonoBehaviour
         {
             PlayerInfoSplash info = ordenados[i].GetInfo();
 
-            int index = info.GetID() - 1;
+            int idJugador = info.GetID();
 
-            if (index < 0 || index >= 4)
-                index = i;
+            if (idJugador < 1 || idJugador > 4)
+                idJugador = i + 1;
 
-            DatosMinijuego.posiciones[index] = info.GetPosicionFinal();
+            int index = idJugador - 1;
+
+            int posicion = info.GetPosicionFinal();
+
+            if (posicion <= 0)
+                posicion = i + 1;
+
+            DatosMinijuego.ids[index] = idJugador;
+            DatosMinijuego.posiciones[index] = posicion;
+            DatosMinijuego.puntos[index] = (info.GetLife() * 100) + info.GetMunicion();
             DatosMinijuego.estrellas[index] = 0;
             DatosMinijuego.monedas[index] = 0;
         }
@@ -359,15 +378,15 @@ public class ManagerSplashSplashShoot : MonoBehaviour
         Debug.Log("ManagerSplashSplashShoot: datos preparados para NivelRecompensasMinijuegos.");
     }
 
-    private void AsegurarArraysDatosMinijuego()
+    private void LimpiarResultadosDatosMinijuego()
     {
-        if (DatosMinijuego.posiciones == null || DatosMinijuego.posiciones.Length < 4)
-            DatosMinijuego.posiciones = new int[4];
-
-        if (DatosMinijuego.estrellas == null || DatosMinijuego.estrellas.Length < 4)
-            DatosMinijuego.estrellas = new int[4];
-
-        if (DatosMinijuego.monedas == null || DatosMinijuego.monedas.Length < 4)
-            DatosMinijuego.monedas = new int[4];
+        for (int i = 0; i < 4; i++)
+        {
+            DatosMinijuego.ids[i] = 0;
+            DatosMinijuego.posiciones[i] = 0;
+            DatosMinijuego.puntos[i] = 0;
+            DatosMinijuego.monedas[i] = 0;
+            DatosMinijuego.estrellas[i] = 0;
+        }
     }
 }

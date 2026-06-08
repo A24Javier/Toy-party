@@ -65,7 +65,10 @@ public class PlayerControllerSplashSplashShoot : MonoBehaviour
         {
             PrepararInput();
         }
-        MiModelo.AsignarModeloAJugador(Personaje,player,perfil);
+        if (MiModelo != null)
+        {
+            MiModelo.AsignarModeloAJugador(Personaje, player, perfil);
+        }
     }
 
     private void PrepararInput()
@@ -105,16 +108,14 @@ public class PlayerControllerSplashSplashShoot : MonoBehaviour
     private void OnDisable()
     {
         if (ManagerJoc != null)
-            ManagerJoc.PlayerEliminado(this);
+            ManagerJoc.RemovePlayer(this);
     }
 
     //por si acaso lo metemos 
     private void OnDestroy()
     {
         if (ManagerJoc != null)
-        {
             ManagerJoc.RemovePlayer(this);
-        }
     }
 
     private void Update()

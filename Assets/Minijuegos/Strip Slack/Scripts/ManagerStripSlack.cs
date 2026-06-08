@@ -15,11 +15,12 @@ public class ManagerStripSlack : MonoBehaviour
 
     private bool minijuegoFinalizado = false;
 
-    [SerializeField] ScalaPersonajes Mod;
+    [SerializeField] private ScalaPersonajes Mod;
 
     private void Awake()
     {
-        Mod.InicializarMinijuego(1);
+        if (Mod != null)
+            Mod.InicializarMinijuego(1);
     }
 
     public PlayerControllerStripSlack GetPlayer(int i)
@@ -94,6 +95,8 @@ public class ManagerStripSlack : MonoBehaviour
         DatosMinijuego.cantidadJugadores = 2;
         DatosMinijuego.escenaRecompensas = nombreEscenaRecompensas;
 
+        LimpiarResultadosDatosMinijuego();
+
         if (players.Count < 2)
         {
             Debug.LogError("Strip Slack necesita mínimo 2 jugadores registrados.");
@@ -134,6 +137,18 @@ public class ManagerStripSlack : MonoBehaviour
         Debug.Log("Strip Slack finalizado:");
         Debug.Log($"Jugador {idPlayer1} fuerza={fuerzaPlayer1} posición={posicionPlayer1}");
         Debug.Log($"Jugador {idPlayer2} fuerza={fuerzaPlayer2} posición={posicionPlayer2}");
+    }
+
+    private void LimpiarResultadosDatosMinijuego()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            DatosMinijuego.ids[i] = 0;
+            DatosMinijuego.posiciones[i] = 0;
+            DatosMinijuego.puntos[i] = 0;
+            DatosMinijuego.monedas[i] = 0;
+            DatosMinijuego.estrellas[i] = 0;
+        }
     }
 
     private int ObtenerIDSeguro(PlayerControllerStripSlack player, int idPorDefecto)
