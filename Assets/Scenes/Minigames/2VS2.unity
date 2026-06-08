@@ -167,6 +167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 0
   IA: 0
+  posicion: 0
   idPersonaje: 0
 --- !u!4 &322466608
 Transform:
@@ -228,6 +229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 0
   IA: 0
+  posicion: 0
   idPersonaje: 0
 --- !u!4 &567743571
 Transform:
@@ -394,11 +396,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 547477779
+      Data2: 1202883122
+      Data3: -1196837486
+      Data4: -1905683577
+    Path: event:/MusicSpeedyTrack
   Event: 
   EventPlayTrigger: 11
   EventStopTrigger: 12
@@ -408,8 +410,8 @@ MonoBehaviour:
   NonRigidbodyVelocity: 0
   Params: []
   OverrideAttenuation: 0
-  OverrideMinDistance: -1
-  OverrideMaxDistance: -1
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!4 &785691312
 Transform:
   m_ObjectHideFlags: 0
@@ -470,6 +472,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 0
   IA: 0
+  posicion: 0
   idPersonaje: 0
 --- !u!4 &996415937
 Transform:
@@ -531,6 +534,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 0
   IA: 0
+  posicion: 0
   idPersonaje: 0
 --- !u!4 &1092548505
 Transform:
@@ -668,7 +672,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ba0638a2f08cdc4eb8c472e949fe40d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MiJuego: 0
+  MiJuego: 1
   Musica:
   - {fileID: 1935090652}
   - {fileID: 785691310}
