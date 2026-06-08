@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerRunController : MonoBehaviour
 {
     private PlayerInfoRelayRace _infoRelayRace;
 
-    //private PlayerInput _playerInput;
-    //private InputAction _jumpAction;
+    private PlayerInput _playerInput;
+    private InputAction _jumpAction;
 
-    [SerializeField]
-    private InputActionReference _jumpAction;
+    // [SerlizeField] private InputActionReference _jumpAction;
 
     private bool _jumpPressed = false;
 
@@ -22,20 +22,21 @@ public class PlayerRunController : MonoBehaviour
     public Rigidbody GetRB() { return _rb; }
     public PlayerInfoRelayRace GetInfoJugador() { return _infoRelayRace; }
 
+    [Header("CargarModelos")]
+    [SerializeField] ModelController MiModelo;
+    public int idPersonaje;
+    public int player;
+    public Image img;
 
     private void Start()
     {
         _infoRelayRace = GetComponent<PlayerInfoRelayRace>();
-        /*
+        
         _playerInput = GetComponent<PlayerInput>();
         _playerInput.Enable();
 
         _jumpAction = _playerInput.FindAction("Jump");
         _jumpAction.Enable();
-        */
-
-        _jumpAction.action.performed += OnJumpPerformed;
-        _jumpAction.action.Enable();
 
         _rb = GetComponent<Rigidbody>();
     }
@@ -83,6 +84,7 @@ public class PlayerRunController : MonoBehaviour
     {
         if (_jumpPressed)
         {
+
             if (_infoRelayRace.GetSuelo())
                 Jump();
 
@@ -99,7 +101,7 @@ public class PlayerRunController : MonoBehaviour
         _infoRelayRace.SetSuelo(false);
     }
 
-    private void OnJumpPerformed(InputAction.CallbackContext ctx)
+    private void OnJumpPerformed()
     {
         _jumpPressed = true;
     }
