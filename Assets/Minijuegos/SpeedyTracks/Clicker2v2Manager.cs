@@ -29,6 +29,14 @@ public class Clicker2v2Manager : MonoBehaviour
 
     public bool GameTerminated { get; private set; }
 
+    [Header("Modelos")]
+    [SerializeField] ScalaPersonajes Mod;
+
+    private void Awake()
+    {
+        Mod.InicializarMinijuego(6);
+    }
+
     private void Start()
     {
         GameTerminated = false;

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerClicker : MonoBehaviour
 {
@@ -21,8 +22,14 @@ public class PlayerClicker : MonoBehaviour
 
     private bool puedeJugar = true;
 
+    [Header("Modelo")]
+    [SerializeField] ModelController MiModelo;
+    public int idPerosnaje;
+    public int player;
+    Image img;
     private void Start()
     {
+        MiModelo.AsignarModeloAJugador(idPerosnaje,player,img);
         if (esNPC)
         {
             StartCoroutine(NPCRutina());

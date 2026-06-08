@@ -259,29 +259,36 @@ public class SillaASevillaManager : MonoBehaviour
 
     void RunEleminated()
     {
+        // Desactivamos el movimiento en el primer frame de este estado
         for (int i = 0; i < MisJugadores.Count; i++)
         {
             if (MisJugadores[i] != null)
                 MisJugadores[i].MoveDisabled();
         }
 
-        EliminarJugadoresSinSilla();
-
         if (timeeleminated > 0)
         {
+            // Mientras el temporizador corre, solo restamos tiempo.
+            // NO llamamos a eliminar repetidamente.
             timeeleminated -= Time.deltaTime;
         }
         else
         {
+            // ¡El segundo ha terminado! Ahora procesamos los resultados UNA SOLA VEZ.
             timeeleminated = 1.0f;
 
-            if (MisJugadores.Count <= 1 || ronda >= 3)
+            // 1. Eliminamos al que se quedó sin silla
+            EliminarJugadoresSinSilla();
+
+            // 2. Comprobamos si el minijuego debe terminar
+            if (MisJugadores.Count <= 1)
             {
                 RegistrarGanadorSiExiste();
                 FinalizarMinijuego();
                 return;
             }
 
+            // Si aún quedan más jugadores, avanzamos de ronda
             ronda++;
             MyStat = Statjoc.StartRound;
         }
