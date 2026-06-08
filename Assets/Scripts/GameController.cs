@@ -143,6 +143,7 @@ public class GameController : MonoBehaviour
             newPlayer.enabled = true;
             newPlayer.isPlayer = true;
             newPlayer.SetCharSetting(_charactersSettings[playerSetting]);
+            newPlayer.characterSettingIndex = playerSetting;
             newPlayerGO.transform.position = spawns[setId].position;
             newPlayer.savedCameraRotationY = spawns[setId].transform.localRotation.eulerAngles.y;
 
@@ -191,6 +192,7 @@ public class GameController : MonoBehaviour
                 newNPC.enabled = true;
                 newNPC.isPlayer = false;
                 newNPC.SetCharSetting(_charactersSettings[npcsCharSettings[i]]);
+                newNPC.characterSettingIndex = npcsCharSettings[i];
                 newNPCGO.transform.position = spawns[setId].position;
                 newNPC.savedCameraRotationY = spawns[setId].transform.localRotation.eulerAngles.y;
 

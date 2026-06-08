@@ -15,11 +15,17 @@ public class ManagerStripSlack : MonoBehaviour
 
     private bool minijuegoFinalizado = false;
 
-    [SerializeField] ScalaPersonajes Mod;
+    [SerializeField] private ScalaPersonajes Mod;
 
     private void Awake()
     {
-        Mod.InicializarMinijuego(1);
+        if (Mod != null)
+            Mod.InicializarMinijuego(1);
+    }
+
+    private void Start()
+    {
+        CargarDatosDesdePartySession();
     }
 
     public PlayerControllerStripSlack GetPlayer(int i)
@@ -94,6 +100,8 @@ public class ManagerStripSlack : MonoBehaviour
         DatosMinijuego.cantidadJugadores = 2;
         DatosMinijuego.escenaRecompensas = nombreEscenaRecompensas;
 
+        LimpiarResultadosDatosMinijuego();
+
         if (players.Count < 2)
         {
             Debug.LogError("Strip Slack necesita mínimo 2 jugadores registrados.");
@@ -136,6 +144,18 @@ public class ManagerStripSlack : MonoBehaviour
         Debug.Log($"Jugador {idPlayer2} fuerza={fuerzaPlayer2} posición={posicionPlayer2}");
     }
 
+    private void LimpiarResultadosDatosMinijuego()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            DatosMinijuego.ids[i] = 0;
+            DatosMinijuego.posiciones[i] = 0;
+            DatosMinijuego.puntos[i] = 0;
+            DatosMinijuego.monedas[i] = 0;
+            DatosMinijuego.estrellas[i] = 0;
+        }
+    }
+
     private int ObtenerIDSeguro(PlayerControllerStripSlack player, int idPorDefecto)
     {
         if (player == null)
@@ -170,5 +190,34 @@ public class ManagerStripSlack : MonoBehaviour
         }
 
         MinigameController.instance.OpenRewardScene();
+    }
+
+    private void CargarDatosDesdePartySession()
+    {
+        if (PartySession.instance == null || PartySession.instance.characters == null)
+        {
+            Debug.LogWarning("ManagerStripSlack: no existe PartySession o no hay characters.");
+            return;
+        }
+
+        for (int i = 0; i < players.Count && i < PartySession.instance.characters.Length; i++)
+        {
+            CharacterSnapshot snap = PartySession.instance.characters[i];
+
+            if (snap == null)
+                continue;
+
+            players[i].id = snap.characterId + 1;
+            players[i].player = i + 1;
+            players[i].EsIA = !snap.isPlayer;
+            players[i].SetPersonaje(snap.characterSettingIndex);
+
+            Debug.Log(
+                $"StripSlack carga jugador {players[i].player}: " +
+                $"characterId={snap.characterId}, " +
+                $"personaje={snap.characterSettingIndex}, " +
+                $"isPlayer={snap.isPlayer}"
+            );
+        }
     }
 }

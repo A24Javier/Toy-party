@@ -86,22 +86,7 @@ public class MinigameFlow : MonoBehaviour
             return;
         }
 
-        for (int i = 0; i < GameController.instance.GetCharactersInParty(); i++)
-        {
-            Character c = GameController.instance.GetCharacter(i);
-
-            if (c == null)
-                continue;
-
-            PartySession.instance.characters[i] = new CharacterSnapshot
-            {
-                characterId = c.characterId,
-                coins = c.coins,
-                stars = c.stars,
-                isPlayer = c.isPlayer,
-                characterImage = c.characterImage
-            };
-        }
+        PartySession.instance.AddCharacters();
     }
 
     public void StartMinigameByType(MinigameType type)

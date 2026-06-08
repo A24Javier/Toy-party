@@ -67,11 +67,12 @@ public class ManagerFinMinijuego : MonoBehaviour
 
     private bool recompensasCompletas = false;
 
-    [SerializeField] ScalaPersonajes Mod;
+    [SerializeField] private ScalaPersonajes Mod;
 
     private void Awake()
     {
-        Mod.InicializarMinijuego(7);
+        if (Mod != null)
+            Mod.InicializarMinijuego(7);
     }
 
     public void AñadirRec(PlayerRecompensas playerR)
@@ -97,6 +98,8 @@ public class ManagerFinMinijuego : MonoBehaviour
 
     private IEnumerator FlujoFinMinijuego()
     {
+        DetectarTipoMinijuegoDesdeDatos();
+
         PrepararEscena();
 
         yield return null;
@@ -124,6 +127,18 @@ public class ManagerFinMinijuego : MonoBehaviour
         VolverAlJuegoBase();
     }
 
+    private void DetectarTipoMinijuegoDesdeDatos()
+    {
+        if (DatosMinijuego.cantidadJugadores <= 2)
+        {
+            minigame = TipoMiniGame.unoVSuno;
+        }
+        else
+        {
+            minigame = TipoMiniGame.OtherMinigames;
+        }
+    }
+
     private void PrepararEscena()
     {
         if (GlobalHUD != null)
@@ -139,47 +154,35 @@ public class ManagerFinMinijuego : MonoBehaviour
             }
         }
 
+        for (int i = 0; i < playersScena.Length; i++)
+        {
+            if (playersScena[i] != null)
+            {
+                playersScena[i].SetActive(false);
+            }
+        }
+
         if (minigame == TipoMiniGame.unoVSuno)
         {
             if (playersScena.Length > 0 && playersScena[0] != null)
-            {
                 playersScena[0].SetActive(true);
-            }
 
             if (playersScena.Length > 1 && playersScena[1] != null)
-            {
                 playersScena[1].SetActive(true);
-            }
-
-            if (playersScena.Length > 2 && playersScena[2] != null)
-            {
-                playersScena[2].SetActive(false);
-            }
-
-            if (playersScena.Length > 3 && playersScena[3] != null)
-            {
-                playersScena[3].SetActive(false);
-            }
 
             if (huds.Length > 0 && huds[0] != null)
-            {
                 huds[0].SetActive(true);
-            }
         }
         else
         {
             for (int i = 0; i < playersScena.Length; i++)
             {
                 if (playersScena[i] != null)
-                {
                     playersScena[i].SetActive(true);
-                }
             }
 
             if (huds.Length > 1 && huds[1] != null)
-            {
                 huds[1].SetActive(true);
-            }
         }
     }
 
@@ -206,35 +209,70 @@ public class ManagerFinMinijuego : MonoBehaviour
 
     private void CogerInfo()
     {
+        List<int> indicesDatosValidos = ObtenerIndicesDatosValidos();
+
         for (int i = 0; i < players.Count; i++)
         {
-            int indexJugador = i;
+            int indexDatos = i;
 
-            players[i].id = indexJugador + 1;
-            players[i].playerPos = "Player" + (indexJugador + 1);
+            if (i < indicesDatosValidos.Count)
+                indexDatos = indicesDatosValidos[i];
 
-            if (indexJugador >= 0 && indexJugador < DatosMinijuego.posiciones.Length)
-            {
-                players[i].posicion = DatosMinijuego.posiciones[indexJugador];
-                players[i].estrellas = DatosMinijuego.estrellas[indexJugador];
-                players[i].moneda = DatosMinijuego.monedas[indexJugador];
-            }
-            else
-            {
-                players[i].posicion = indexJugador + 1;
-                players[i].estrellas = 0;
-                players[i].moneda = 0;
-            }
+            int idJugador = DatosMinijuego.ids[indexDatos];
 
-            players[i].Recompensa = false;
+            if (idJugador <= 0)
+                idJugador = indexDatos + 1;
+
+            players[i].id = idJugador;
+            players[i].playerPos = "Player" + (i + 1);
+
+            players[i].posicion = DatosMinijuego.posiciones[indexDatos];
+            players[i].estrellas = DatosMinijuego.estrellas[indexDatos];
+            players[i].moneda = DatosMinijuego.monedas[indexDatos];
+
+            players[i].recompensa = false;
 
             Debug.Log(
                 $"Recompensas cargadas para {players[i].playerPos}: " +
+                $"id={players[i].id}, " +
                 $"posición={players[i].posicion}, " +
                 $"estrellas={players[i].estrellas}, " +
                 $"monedas iniciales={players[i].moneda}"
             );
         }
+    }
+
+    private List<int> ObtenerIndicesDatosValidos()
+    {
+        List<int> indices = new List<int>();
+
+        int cantidad = Mathf.Clamp(DatosMinijuego.cantidadJugadores, 1, 4);
+
+        for (int i = 0; i < 4; i++)
+        {
+            bool idValido = DatosMinijuego.ids[i] > 0;
+            bool posicionValida = DatosMinijuego.posiciones[i] > 0;
+
+            if (idValido && posicionValida)
+            {
+                indices.Add(i);
+            }
+        }
+
+        if (indices.Count == 0)
+        {
+            for (int i = 0; i < cantidad; i++)
+            {
+                indices.Add(i);
+            }
+        }
+
+        if (indices.Count > cantidad)
+        {
+            indices.RemoveRange(cantidad, indices.Count - cantidad);
+        }
+
+        return indices;
     }
 
     private void OneStat()
@@ -257,13 +295,13 @@ public class ManagerFinMinijuego : MonoBehaviour
                 return;
             }
 
-            PosPlayer1.text = players[0].posicion.ToString();
-            CanitdadEstrellaPlayer1.text = players[0].estrellas.ToString();
-            CantidadMonedasPlayer1.text = players[0].moneda.ToString();
+            if (PosPlayer1 != null) PosPlayer1.text = players[0].posicion.ToString();
+            if (CanitdadEstrellaPlayer1 != null) CanitdadEstrellaPlayer1.text = players[0].estrellas.ToString();
+            if (CantidadMonedasPlayer1 != null) CantidadMonedasPlayer1.text = players[0].moneda.ToString();
 
-            PosPlayer2.text = players[1].posicion.ToString();
-            CanitdadEstrellaPlayer2.text = players[1].estrellas.ToString();
-            CantidadMonedasPlayer2.text = players[1].moneda.ToString();
+            if (PosPlayer2 != null) PosPlayer2.text = players[1].posicion.ToString();
+            if (CanitdadEstrellaPlayer2 != null) CanitdadEstrellaPlayer2.text = players[1].estrellas.ToString();
+            if (CantidadMonedasPlayer2 != null) CantidadMonedasPlayer2.text = players[1].moneda.ToString();
         }
         else
         {
@@ -273,21 +311,21 @@ public class ManagerFinMinijuego : MonoBehaviour
                 return;
             }
 
-            Player1Pos.text = players[0].posicion.ToString();
-            Player1CantEstrellas.text = players[0].estrellas.ToString();
-            Player1CantMoney.text = players[0].moneda.ToString();
+            if (Player1Pos != null) Player1Pos.text = players[0].posicion.ToString();
+            if (Player1CantEstrellas != null) Player1CantEstrellas.text = players[0].estrellas.ToString();
+            if (Player1CantMoney != null) Player1CantMoney.text = players[0].moneda.ToString();
 
-            Player2Pos.text = players[1].posicion.ToString();
-            Player2CantEstrellas.text = players[1].estrellas.ToString();
-            Player2CantMoney.text = players[1].moneda.ToString();
+            if (Player2Pos != null) Player2Pos.text = players[1].posicion.ToString();
+            if (Player2CantEstrellas != null) Player2CantEstrellas.text = players[1].estrellas.ToString();
+            if (Player2CantMoney != null) Player2CantMoney.text = players[1].moneda.ToString();
 
-            Player3Pos.text = players[2].posicion.ToString();
-            Player3CantEstrellas.text = players[2].estrellas.ToString();
-            Player3CantMoney.text = players[2].moneda.ToString();
+            if (Player3Pos != null) Player3Pos.text = players[2].posicion.ToString();
+            if (Player3CantEstrellas != null) Player3CantEstrellas.text = players[2].estrellas.ToString();
+            if (Player3CantMoney != null) Player3CantMoney.text = players[2].moneda.ToString();
 
-            Player4Pos.text = players[3].posicion.ToString();
-            Player4CantEstrellas.text = players[3].estrellas.ToString();
-            Player4CantMoney.text = players[3].moneda.ToString();
+            if (Player4Pos != null) Player4Pos.text = players[3].posicion.ToString();
+            if (Player4CantEstrellas != null) Player4CantEstrellas.text = players[3].estrellas.ToString();
+            if (Player4CantMoney != null) Player4CantMoney.text = players[3].moneda.ToString();
         }
     }
 
@@ -300,12 +338,12 @@ public class ManagerFinMinijuego : MonoBehaviour
             if (jugador == null)
                 continue;
 
-            if (!jugador.Recompensa)
+            if (!jugador.recompensa)
             {
                 int monedasGanadas = ObtenerCantidadRecompensa(jugador.posicion);
 
                 jugador.moneda += monedasGanadas;
-                jugador.Recompensa = true;
+                jugador.recompensa = true;
 
                 GuardarMonedasEnDatosMinijuego(jugador.id, jugador.moneda);
                 AplicarMonedasAlTablero(jugador.id, monedasGanadas);
@@ -342,11 +380,32 @@ public class ManagerFinMinijuego : MonoBehaviour
             return;
         }
 
-        Character character = GameController.instance.GetCharacter(idJugador - 1);
+        Character character = null;
+
+        int indexDirecto = idJugador - 1;
+
+        if (indexDirecto >= 0 && indexDirecto < GameController.instance.GetCharactersInParty())
+        {
+            character = GameController.instance.GetCharacter(indexDirecto);
+        }
 
         if (character == null)
         {
-            Debug.LogWarning("ManagerFinMinijuego: no se encontró Character con índice " + (idJugador - 1));
+            for (int i = 0; i < GameController.instance.GetCharactersInParty(); i++)
+            {
+                Character c = GameController.instance.GetCharacter(i);
+
+                if (c != null && c.characterId == idJugador)
+                {
+                    character = c;
+                    break;
+                }
+            }
+        }
+
+        if (character == null)
+        {
+            Debug.LogWarning("ManagerFinMinijuego: no se encontró Character para idJugador " + idJugador);
             return;
         }
 
