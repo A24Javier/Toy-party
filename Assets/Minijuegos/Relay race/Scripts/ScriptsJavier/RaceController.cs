@@ -23,7 +23,7 @@ public class RaceController : MonoBehaviour
     private Vector3 _relayCamOffset;
 
     [SerializeField]
-    private Camera _mainCamera;
+    Camera _mainCamera;
 
     private Transform[] _relayPositions;
 
@@ -54,11 +54,14 @@ public class RaceController : MonoBehaviour
     [Header("Other")]
     public static RaceController Instance;
 
+    [SerializeField] ScalaPersonajes Mod;
+
     void Awake()
     {
         _textCooldown.text = "";
         if(Instance != this && Instance != null) { Destroy(gameObject); return; }
         Instance = this;
+        Mod.InicializarMinijuego(4);
     }
 
     public void Initialize()
@@ -93,7 +96,7 @@ public class RaceController : MonoBehaviour
         StartCoroutine(ShowRelays());
     }
 
-    // Función que muestra un poco el escenario y todos los relays (donde se
+    // Funciï¿½n que muestra un poco el escenario y todos los relays (donde se
     // efectua el cambio de personaje)
     private IEnumerator ShowRelays()
     {

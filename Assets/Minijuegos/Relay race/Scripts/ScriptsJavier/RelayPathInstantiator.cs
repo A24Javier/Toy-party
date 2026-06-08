@@ -5,7 +5,7 @@ using UnityEngine;
 /*
  * Este script se encarga unicamente de generar
  * el recorrido.
- * También tiene una función para eliminar todo
+ * Tambiï¿½n tiene una funciï¿½n para eliminar todo
  * el recorrido instanciado, en caso de que sea
  * necesario.
  */

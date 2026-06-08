@@ -94,11 +94,9 @@ GameObject:
   - component: {fileID: 7477486822306342609}
   - component: {fileID: 8443586211335111664}
   - component: {fileID: 1763528153276034867}
-  - component: {fileID: 81978827392748935}
-  - component: {fileID: 1496004844371760581}
   m_Layer: 0
-  m_Name: Player
-  m_TagString: Player
+  m_Name: Meta
+  m_TagString: Meta
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -167,32 +165,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 114
   m_CollisionDetection: 1
---- !u!114 &81978827392748935
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9090904266625611913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e459e0af5567b347a868aa73517c336, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Id: 0
-  Ia: 0
-  CanMove: 0
---- !u!114 &1496004844371760581
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9090904266625611913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c5247fb15d297d4bb89a304acfe9615, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _jumpAction: {fileID: -4331442205180563044, guid: 21f764de826355f4fbd1e43f905ca2b9,
-    type: 3}
