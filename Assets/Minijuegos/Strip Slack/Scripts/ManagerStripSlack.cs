@@ -23,6 +23,11 @@ public class ManagerStripSlack : MonoBehaviour
             Mod.InicializarMinijuego(1);
     }
 
+    private void Start()
+    {
+        CargarDatosDesdePartySession();
+    }
+
     public PlayerControllerStripSlack GetPlayer(int i)
     {
         return players[i];
@@ -185,5 +190,34 @@ public class ManagerStripSlack : MonoBehaviour
         }
 
         MinigameController.instance.OpenRewardScene();
+    }
+
+    private void CargarDatosDesdePartySession()
+    {
+        if (PartySession.instance == null || PartySession.instance.characters == null)
+        {
+            Debug.LogWarning("ManagerStripSlack: no existe PartySession o no hay characters.");
+            return;
+        }
+
+        for (int i = 0; i < players.Count && i < PartySession.instance.characters.Length; i++)
+        {
+            CharacterSnapshot snap = PartySession.instance.characters[i];
+
+            if (snap == null)
+                continue;
+
+            players[i].id = snap.characterId + 1;
+            players[i].player = i + 1;
+            players[i].EsIA = !snap.isPlayer;
+            players[i].SetPersonaje(snap.characterSettingIndex);
+
+            Debug.Log(
+                $"StripSlack carga jugador {players[i].player}: " +
+                $"characterId={snap.characterId}, " +
+                $"personaje={snap.characterSettingIndex}, " +
+                $"isPlayer={snap.isPlayer}"
+            );
+        }
     }
 }
