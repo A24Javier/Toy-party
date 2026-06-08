@@ -8246,6 +8246,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: FMODMusic
       objectReference: {fileID: 0}
+    - target: {fileID: 5293709407570643252, guid: 11e8cc3dcc9c8504299640cdf51996c2,
+        type: 3}
+      propertyPath: musics.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293709407570643252, guid: 11e8cc3dcc9c8504299640cdf51996c2,
+        type: 3}
+      propertyPath: musics.Array.data[9].Path
+      value: event:/SpeedyTrack
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293709407570643252, guid: 11e8cc3dcc9c8504299640cdf51996c2,
+        type: 3}
+      propertyPath: musics.Array.data[9].Guid.Data1
+      value: -1099228162
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293709407570643252, guid: 11e8cc3dcc9c8504299640cdf51996c2,
+        type: 3}
+      propertyPath: musics.Array.data[9].Guid.Data2
+      value: 1157839278
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293709407570643252, guid: 11e8cc3dcc9c8504299640cdf51996c2,
+        type: 3}
+      propertyPath: musics.Array.data[9].Guid.Data3
+      value: -1967337084
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293709407570643252, guid: 11e8cc3dcc9c8504299640cdf51996c2,
+        type: 3}
+      propertyPath: musics.Array.data[9].Guid.Data4
+      value: -712981318
+      objectReference: {fileID: 0}
     - target: {fileID: 7034973495542469260, guid: 11e8cc3dcc9c8504299640cdf51996c2,
         type: 3}
       propertyPath: m_LocalPosition.x
