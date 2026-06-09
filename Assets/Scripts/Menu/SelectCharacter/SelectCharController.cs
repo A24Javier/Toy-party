@@ -49,7 +49,11 @@ public class SelectCharController : MonoBehaviour
         Transform charTransf = _charactersPreview[_charIndex].transform;
         charTransf.parent = _fatherPreview;
         charTransf.localPosition = Vector3.zero;
-        charTransf.localRotation = Quaternion.Euler(Vector3.zero);
+
+        if (charTransf.gameObject.name == "Robert")
+            charTransf.localRotation = Quaternion.Euler(new Vector3(0f, 90f, 0f));
+        else
+            charTransf.localRotation = Quaternion.Euler(Vector3.zero);
 
     }
 

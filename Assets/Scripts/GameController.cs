@@ -82,7 +82,10 @@ public class GameController : MonoBehaviour
         else
         {
             Debug.Log("Hace StartMovement");
-            StartMovement();
+            //StartMovement();
+
+            if(actualRound > 0)
+                StartCoroutine(WaitUntilSceneReady());
         }
 
         MouseParticles.Instance?.RefreshCamera();
@@ -381,7 +384,18 @@ public class GameController : MonoBehaviour
                     PlayerStats.Instance.PStats.MinigamesPlayed++;
 
                 PartySession.instance.AddCharacters();
-                MinigameFlow.instance.StartMinigameByType(MinigameType.AllVSAll);
+
+                float randomMinigame = Random.value;
+                MinigameType minigameType = MinigameType.AllVSAll;
+
+                if (randomMinigame < 0.4f)
+                    minigameType = MinigameType.AllVSAll;
+                else if (randomMinigame >= 0.4f && randomMinigame < 0.7f)
+                    minigameType = MinigameType.TwoVSTwo;
+                else
+                    minigameType = MinigameType.ThreeVSOne;
+
+                MinigameFlow.instance.StartMinigameByType(minigameType);
                 yield break;
             }
         }
@@ -544,5 +558,11 @@ public class GameController : MonoBehaviour
         }
 
         return null;
+    }
+
+    private IEnumerator WaitUntilSceneReady()
+    {
+        yield return new WaitForSeconds(2f);
+        StartMovement();
     }
 }
