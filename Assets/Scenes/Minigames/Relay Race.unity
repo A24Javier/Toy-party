@@ -469,7 +469,7 @@ MonoBehaviour:
   _prefabRelay: {fileID: 399884407292595132, guid: 043c88c0e7322154c9f4ae9d17608b8b,
     type: 3}
   _pathParent: {fileID: 1058354257}
-  _pathLength: 15
+  _pathLength: 8
   _relays: 2
   _distanceBetweenPaths: 10
   _startPosition: {x: 0, y: 0, z: 0}
