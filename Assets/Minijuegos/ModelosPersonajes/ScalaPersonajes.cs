@@ -82,11 +82,15 @@ public class ScalaPersonajes : MonoBehaviour
             {
                 // Sumamos o sobreescribimos el eje Y para que mire a la derecha
                 rotacionY = 90f;
+                if (idPersonaje == 3)
+                    posicion.z = -0.2f;
             }
             else if (numeroJugador == 2)
             {
                 // Sumamos o sobreescribimos el eje Y para que mire a la izquierda
                 rotacionY = -90f;
+                if (idPersonaje == 3)
+                    posicion.z = 0.2f;
             }
 
             rotacion.y += rotacionY;

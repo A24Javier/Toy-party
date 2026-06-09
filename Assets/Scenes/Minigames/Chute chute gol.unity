@@ -2423,32 +2423,32 @@ PrefabInstance:
     - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
         type: 3}
       propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[2].escala.x
-      value: 13
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
         type: 3}
       propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[2].escala.y
-      value: 13
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
         type: 3}
       propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[2].escala.z
-      value: 13
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
         type: 3}
       propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[3].escala.x
-      value: 20
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
         type: 3}
       propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[3].escala.y
-      value: 20
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
         type: 3}
       propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[3].escala.z
-      value: 20
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
         type: 3}
@@ -2468,12 +2468,42 @@ PrefabInstance:
     - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
         type: 3}
       propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[2].rotacion.x
-      value: -90
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
         type: 3}
       propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[2].rotacion.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
+        type: 3}
+      propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[3].rotacion.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
+        type: 3}
+      propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[3].rotacion.z
       value: -70
+      objectReference: {fileID: 0}
+    - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
+        type: 3}
+      propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[2].idPersonaje
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
+        type: 3}
+      propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[3].idPersonaje
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
+        type: 3}
+      propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[2].nombrePersonaje
+      value: Princesa
+      objectReference: {fileID: 0}
+    - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
+        type: 3}
+      propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[3].nombrePersonaje
+      value: Robert
       objectReference: {fileID: 0}
     - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
         type: 3}
@@ -2488,12 +2518,12 @@ PrefabInstance:
     - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
         type: 3}
       propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[2].posicionOffset.y
-      value: -0.5
+      value: -0.6
       objectReference: {fileID: 0}
     - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
         type: 3}
       propertyPath: listaConfiguraciones.Array.data[0].ajustesDePersonajes.Array.data[3].posicionOffset.y
-      value: -0.6
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1157109319895277685, guid: 3c5aa5bbe56a3c84ba1229234adeed49,
         type: 3}
@@ -3559,6 +3589,18 @@ PrefabInstance:
       propertyPath: scalaPersonajesScript
       value: 
       objectReference: {fileID: 712019605}
+    - target: {fileID: 8352535962908984104, guid: 73277cbce199b164eb4720b95c44a328,
+        type: 3}
+      propertyPath: listaPersonajes.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 59c95842836ffa2488ed9af948f61216,
+        type: 2}
+    - target: {fileID: 8352535962908984104, guid: 73277cbce199b164eb4720b95c44a328,
+        type: 3}
+      propertyPath: listaPersonajes.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: af059ec5cf92546438b426aa241fcdef,
+        type: 2}
     - target: {fileID: 8352535962908984104, guid: 73277cbce199b164eb4720b95c44a328,
         type: 3}
       propertyPath: contenedoresJugadores.Array.data[0]
@@ -4680,7 +4722,7 @@ MonoBehaviour:
   NomAction: 
   Manager: {fileID: 1751175807}
   MiModelo: {fileID: 1011600885}
-  idPersonaje: 0
+  idPersonaje: 3
   player: 1
   img: {fileID: 1636779169}
 --- !u!114 &1605455343

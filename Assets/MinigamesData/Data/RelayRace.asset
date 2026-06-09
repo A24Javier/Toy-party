@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e98bb328c117435458ad3024cccb920f, type: 3}
+  m_Name: RelayRace
+  m_EditorClassIdentifier: 
+  minigameName: Relay Race
+  description: El Primer Equipo en llegar a la Meta Gana, pero tendras que saltar
+    un numero de obstaculos con la Tecla Espacio Para Llegar a la Meta.
+  previewImage: {fileID: 21300000, guid: 1c165fbb67f3a364c935b03c888dccb8, type: 3}
+  sceneName: Relay Race
+  previewMusic: {fileID: 0}
+  type: 1

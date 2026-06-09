@@ -6,13 +6,20 @@ public class PlayerInfoRelayRace : MonoBehaviour
 {
     public int Id;
     public bool Ia;
-    private float _fuerzaSalto = 6f;
+    public int pos;
+    public int equipo;
+    public int miembro;
+    private float _fuerzaSalto = 10f;
 
     private float _speed = 3f;
-    private const float MAX_SPEED = 8f;
+    private float MAX_SPEED = 8f;
 
     private float _acceleration = 16f;
-    public float Acceleration => _acceleration;
+    public float Acceleration
+    {
+        get { return _acceleration; }
+        set { _acceleration = value; }
+    }
 
     private bool _isGrounded;
 
@@ -32,5 +39,6 @@ public class PlayerInfoRelayRace : MonoBehaviour
     public void SetID(int id) => this.Id = id;
     public void SetIa(bool ia) => this.Ia = ia;
 
+    public void SetMaxSpeed(float nuevoValor) => this.MAX_SPEED = nuevoValor;
     public void SetSuelo(bool suelo) => this._isGrounded = suelo; 
 }

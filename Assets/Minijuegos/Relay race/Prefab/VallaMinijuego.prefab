@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 5631620823440451017}
   - component: {fileID: 7621073553454829827}
   - component: {fileID: 766124173764436910}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: VallaMinijuego
-  m_TagString: Untagged
+  m_TagString: Valla
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 8269596779778093270}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_LocalPosition: {x: -9.499405, y: 0.4714101, z: 103.48514}
+  m_LocalScale: {x: 100, y: 120, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -99,9 +99,9 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.08349749, y: 0.0004037241, z: 0.0094295}
-  m_Center: {x: -0.00008432388, y: 0.00011704177, z: 0.0000006508827}
+  m_Size: {x: 0.08349749, y: 0.0033084096, z: 0.008559172}
+  m_Center: {x: -0.00008432388, y: 0.00013272197, z: -0.0004345137}

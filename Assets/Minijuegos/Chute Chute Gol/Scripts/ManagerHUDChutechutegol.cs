@@ -591,7 +591,7 @@ public class ManagerHUDChutechutegol : MonoBehaviour
         }
 
         // SI UN PERSONAJE TIENE UNA EXCEPCIÓN (Por ejemplo, el personaje 0 se comporta al revés)
-        if (MyPlayer.idPersonaje == 2)
+        if (MyPlayer.idPersonaje == 3)
         {
             // Puedes alterar la rotación aquí solo para él si lo necesitas
             rotacionY += 90f; 

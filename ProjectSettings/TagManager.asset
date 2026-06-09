@@ -18,6 +18,15 @@ TagManager:
   - Path
   - CM vcam
   - Star
+  - Floor
+  - PlayerSplash
+  - gotaPro
+  - shoot
+  - Meta
+  - Suelo
+  - PlayerRec
+  - LineaCambio
+  - Valla
   layers:
   - Default
   - TransparentFX
@@ -31,7 +40,7 @@ TagManager:
   - Player
   - npc
   - Particles
-  - 
+  - Valla
   - 
   - 
   - 

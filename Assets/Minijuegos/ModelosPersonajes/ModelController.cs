@@ -79,7 +79,7 @@ public class ModelController : MonoBehaviour
 
         if (scalaPersonajesScript.JuegoActual == ScalaPersonajes.Minijuegos.SplashSplashShoot)
             nuevoModelo.gameObject.AddComponent<CourritneAction>();
-
+        
         // 5. CAMBIAR EL MATERIAL
         SkinnedMeshRenderer skinnedRenderer = nuevoModelo.GetComponentInChildren<SkinnedMeshRenderer>();
         if (skinnedRenderer != null && datos.Mat != null)
