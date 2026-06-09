@@ -71,6 +71,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Minigames/Relay Race.unity
     guid: 563653e4a334cbf4db0587f6a8340cb1
+  - enabled: 1
+    path: Assets/Scenes/Minigames/SpeedyTracks.unity
+    guid: f3f19e74768397340bdb0a2c1ef88d6f
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 886295bc59622a340a49270447d47c32,
       type: 2}
