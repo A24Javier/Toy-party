@@ -34,16 +34,37 @@ public class PlayerControllerSplashSplashShoot : MonoBehaviour
 
     private int municionObject;
 
-    [SerializeField] ModelController MiModelo;
-    public int player;
-    public int Personaje;
-    [SerializeField] Image perfil;
+    [Header("Modelo")]
+    [SerializeField] private ModelController MiModelo;
+    public int player;       // Slot del minijuego: 1, 2, 3, 4
+    public int Personaje;    // Skin/personaje que viene de PartySession
+    [SerializeField] private Image perfil;
 
     private void Awake()
     {
         MiInfoSplash = GetComponent<PlayerInfoSplash>();
         rb = GetComponent<Rigidbody>();
         inputJugadores = GetComponent<UnityEngine.InputSystem.PlayerInput>();
+    }
+
+    private void OnEnable()
+    {
+        ManagerJoc = FindFirstObjectByType<ManagerSplashSplashShoot>();
+
+        if (ManagerJoc != null)
+            ManagerJoc.AddPlayer(this);
+    }
+
+    private void OnDisable()
+    {
+        if (ManagerJoc != null)
+            ManagerJoc.RemovePlayer(this);
+    }
+
+    private void OnDestroy()
+    {
+        if (ManagerJoc != null)
+            ManagerJoc.RemovePlayer(this);
     }
 
     private void Start()
@@ -57,18 +78,60 @@ public class PlayerControllerSplashSplashShoot : MonoBehaviour
         MiInfoSplash.SetLife(3);
         MiInfoSplash.SetMunicion(MiInfoSplash.GetMunMax());
         MiInfoSplash.SetSpped(8);
+        MiInfoSplash.SetEliminado(false);
+        MiInfoSplash.SetPosicionFinal(0);
 
         imbatible = false;
         timeImbatible = tiempoImbatibleMax;
 
-        if (!MiInfoSplash.GetIA())
-        {
-            PrepararInput();
-        }
+        // No cargamos aquí modelo ni input final.
+        // Lo hará el manager cuando lea PartySession y sepa si este slot es jugador o IA.
+    }
+
+    public void CargarDatosDesdeSnapshot(CharacterSnapshot snap)
+    {
+        if (snap == null || MiInfoSplash == null)
+            return;
+
+        Personaje = snap.characterSettingIndex;
+
+        MiInfoSplash.SetID(snap.characterId + 1);
+        MiInfoSplash.SetIA(!snap.isPlayer);
+        MiInfoSplash.SetEliminado(false);
+        MiInfoSplash.SetPosicionFinal(0);
+
+        ConfigurarInputSegunIA();
+        AplicarModeloVisual();
+
+        Debug.Log(
+            $"Splash slot {player}: " +
+            $"idJugador={snap.characterId + 1}, " +
+            $"skin={snap.characterSettingIndex}, " +
+            $"esIA={!snap.isPlayer}"
+        );
+    }
+
+    public void AplicarModeloVisual()
+    {
         if (MiModelo != null)
         {
             MiModelo.AsignarModeloAJugador(Personaje, player, perfil);
         }
+    }
+
+    private void ConfigurarInputSegunIA()
+    {
+        if (MiInfoSplash == null)
+            return;
+
+        if (MiInfoSplash.GetIA())
+        {
+            actionMove = null;
+            actionShoot = null;
+            return;
+        }
+
+        PrepararInput();
     }
 
     private void PrepararInput()
@@ -95,27 +158,6 @@ public class PlayerControllerSplashSplashShoot : MonoBehaviour
 
         if (actionMove == null)
             Debug.LogWarning($"{gameObject.name} no encontró la acción 'MovePlayer'.");
-    }
-
-    private void OnEnable()
-    {
-        ManagerJoc = FindFirstObjectByType<ManagerSplashSplashShoot>();
-
-        if (ManagerJoc != null)
-            ManagerJoc.AddPlayer(this);
-    }
-
-    private void OnDisable()
-    {
-        if (ManagerJoc != null)
-            ManagerJoc.RemovePlayer(this);
-    }
-
-    //por si acaso lo metemos 
-    private void OnDestroy()
-    {
-        if (ManagerJoc != null)
-            ManagerJoc.RemovePlayer(this);
     }
 
     private void Update()

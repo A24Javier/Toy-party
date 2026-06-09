@@ -95,6 +95,7 @@ public class ManagerHUDChutechutegol : MonoBehaviour
             return;
         }
 
+        CargarDatosDesdePartySession();
         ElegirPorteroInicial();
 
         if (MiDirector != null)
@@ -598,8 +599,7 @@ public class ManagerHUDChutechutegol : MonoBehaviour
         }
 
         // Llamamos al gestor que creamos en el paso anterior para aplicar la rotación por ID
-        MyPlayer.MiModelo.RotarPersonajeEnTiempoDeJuego(MyPlayer.idPersonaje, rotacionY);
-    }
+        MyPlayer.MiModelo.RotarPersonajeJugador(MyPlayer.player, rotacionY);    }
 
     public void RegistroPlayer(PlayersChuteGol MiJugador)
     {
@@ -680,28 +680,16 @@ public class ManagerHUDChutechutegol : MonoBehaviour
 
     void FinalizarMinijuego()
     {
-        Scene escenaActual = gameObject.scene;
-
         DatosMinijuego.escenaRecompensas = nombreEscenaRecompensas;
 
-        SceneManager.LoadSceneAsync(nombreEscenaRecompensas, LoadSceneMode.Additive).completed += (op) =>
+        if (MinigameController.instance != null)
         {
-            ManagerFinMinijuego managerNueva = Object.FindObjectOfType<ManagerFinMinijuego>();
-
-            if (managerNueva != null)
-            {
-                managerNueva.minigame = ManagerFinMinijuego.TipoMiniGame.OtherMinigames;
-            }
-            else
-            {
-                Debug.LogWarning("No se encontró ManagerFinMinijuego en la escena de recompensas.");
-            }
-
-            if (escenaActual.IsValid() && escenaActual.isLoaded)
-            {
-                SceneManager.UnloadSceneAsync(escenaActual);
-            }
-        };
+            MinigameController.instance.OpenRewardScene();
+        }
+        else
+        {
+            Debug.LogError("ManagerHUDChutechutegol: no existe MinigameController.");
+        }
     }
 
     void SetCameraDepth(int camaraPrincipal)
@@ -720,4 +708,31 @@ public class ManagerHUDChutechutegol : MonoBehaviour
             MisCamaras[0].depth = -2;
         }
     }
+
+    private void CargarDatosDesdePartySession()
+{
+    if (PartySession.instance == null || PartySession.instance.characters == null)
+    {
+        Debug.LogWarning("ManagerHUDChutechutegol: no existe PartySession.");
+        return;
+    }
+
+    foreach (PlayersChuteGol p in players)
+    {
+        if (p == null)
+            continue;
+
+        int slotIndex = p.player - 1;
+
+        if (slotIndex < 0 || slotIndex >= PartySession.instance.characters.Length)
+        {
+            Debug.LogWarning("ManagerHUDChutechutegol: player fuera de rango: " + p.player);
+            continue;
+        }
+
+        CharacterSnapshot snap = PartySession.instance.characters[slotIndex];
+
+        p.CargarDatosDesdeSnapshot(snap);
+    }
+}
 }

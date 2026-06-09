@@ -69,6 +69,7 @@ public class SillaASevillaManager : MonoBehaviour
             timeLine.PausarAnimation();
             timeLine.DesactivarMusicSpecial();
         }
+        CargarDatosDesdePartySession();
     }
 
     public void RegistraJugador(PlayerControllerSillaaSevilla player)
@@ -450,27 +451,42 @@ public class SillaASevillaManager : MonoBehaviour
 
         GuardarResultadosEnDatosMinijuego();
 
-        Scene escenaActual = gameObject.scene;
-
         DatosMinijuego.escenaRecompensas = nombreEscenaRecompensas;
 
-        SceneManager.LoadSceneAsync(nombreEscenaRecompensas, LoadSceneMode.Additive).completed += (op) =>
+        if (MinigameController.instance != null)
         {
-            ManagerFinMinijuego managerNueva = Object.FindObjectOfType<ManagerFinMinijuego>();
+            MinigameController.instance.OpenRewardScene();
+        }
+        else
+        {
+            Debug.LogError("SillaASevillaManager: no existe MinigameController.");
+        }
+    }
 
-            if (managerNueva != null)
+    private void CargarDatosDesdePartySession()
+    {
+        if (PartySession.instance == null || PartySession.instance.characters == null)
+        {
+            Debug.LogWarning("SillaASevillaManager: no existe PartySession.");
+            return;
+        }
+
+        foreach (PlayerControllerSillaaSevilla p in MisJugadores)
+        {
+            if (p == null)
+                continue;
+
+            int slotIndex = p.Player - 1;
+
+            if (slotIndex < 0 || slotIndex >= PartySession.instance.characters.Length)
             {
-                managerNueva.minigame = ManagerFinMinijuego.TipoMiniGame.OtherMinigames;
-            }
-            else
-            {
-                Debug.LogWarning("No se encontró ManagerFinMinijuego en la escena de recompensas.");
+                Debug.LogWarning("SillaASevillaManager: Player fuera de rango: " + p.Player);
+                continue;
             }
 
-            if (escenaActual.IsValid() && escenaActual.isLoaded)
-            {
-                SceneManager.UnloadSceneAsync(escenaActual);
-            }
-        };
+            CharacterSnapshot snap = PartySession.instance.characters[slotIndex];
+
+            p.CargarDatosDesdeSnapshot(snap);
+        }
     }
 }

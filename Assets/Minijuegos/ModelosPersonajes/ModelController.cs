@@ -23,10 +23,12 @@ public class ModelController : MonoBehaviour
     public void AsignarModeloAJugador(int idPersonaje, int numeroJugador, Image Perfil)
     {
 
-        if (instanciasActivas.ContainsKey(idPersonaje))
+        int keyJugador = numeroJugador;
+
+        if (instanciasActivas.ContainsKey(keyJugador))
         {
-            Destroy(instanciasActivas[idPersonaje]);
-            instanciasActivas.Remove(idPersonaje);
+            Destroy(instanciasActivas[keyJugador]);
+            instanciasActivas.Remove(keyJugador);
         }
        
         // 1. Validaciones iniciales de índices
@@ -110,7 +112,7 @@ public class ModelController : MonoBehaviour
             animatorComponent.gameObject.AddComponent<AnimatorMinijuegosController>();
         }
 
-        instanciasActivas.Add(idPersonaje, nuevoModelo);
+        instanciasActivas.Add(keyJugador, nuevoModelo);
     }
 
     public void RotarPersonajeEnTiempoDeJuego(int idPersonaje, float nuevaRotacionY)
@@ -125,6 +127,20 @@ public class ModelController : MonoBehaviour
         else
         {
             Debug.LogWarning($"No se puede rotar: El personaje con ID {idPersonaje} no está instanciado en el juego.");
+        }
+    }
+
+    public void RotarPersonajeJugador(int numeroJugador, float nuevaRotacionY)
+    {
+        if (instanciasActivas.TryGetValue(numeroJugador, out GameObject personajeClonado))
+        {
+            Vector3 rotacionActual = personajeClonado.transform.localEulerAngles;
+            rotacionActual.y = nuevaRotacionY;
+            personajeClonado.transform.localEulerAngles = rotacionActual;
+        }
+        else
+        {
+            Debug.LogWarning($"No se puede rotar: no hay modelo instanciado para el jugador {numeroJugador}.");
         }
     }
 }

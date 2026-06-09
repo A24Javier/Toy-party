@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -42,16 +43,62 @@ public class ManagerSplashSplashShoot : MonoBehaviour
             Mod.InicializarMinijuego(2);
     }
 
-    private void Start()
+    private IEnumerator Start()
     {
         GameTerminated = false;
         finalizando = false;
         siguientePosicionEliminado = 4;
+
+        yield return null;
+
+        CargarDatosDesdePartySession();
     }
 
     private void Update()
     {
         TimeController();
+    }
+
+    private void CargarDatosDesdePartySession()
+    {
+        if (PartySession.instance == null || PartySession.instance.characters == null)
+        {
+            Debug.LogWarning("ManagerSplashSplashShoot: no existe PartySession o no hay datos de personajes.");
+            AplicarFallbackInspector();
+            return;
+        }
+
+        foreach (PlayerControllerSplashSplashShoot playerController in TodosLosPlayers)
+        {
+            if (playerController == null)
+                continue;
+
+            int slotIndex = playerController.player - 1;
+
+            if (slotIndex < 0 || slotIndex >= PartySession.instance.characters.Length)
+            {
+                Debug.LogWarning($"ManagerSplashSplashShoot: player {playerController.player} fuera de rango.");
+                continue;
+            }
+
+            CharacterSnapshot snap = PartySession.instance.characters[slotIndex];
+
+            if (snap == null)
+                continue;
+
+            playerController.CargarDatosDesdeSnapshot(snap);
+        }
+    }
+
+    private void AplicarFallbackInspector()
+    {
+        foreach (PlayerControllerSplashSplashShoot playerController in TodosLosPlayers)
+        {
+            if (playerController == null)
+                continue;
+
+            playerController.AplicarModeloVisual();
+        }
     }
 
     public void RegistrarGota(Transform gota)
@@ -330,49 +377,33 @@ public class ManagerSplashSplashShoot : MonoBehaviour
 
         LimpiarResultadosDatosMinijuego();
 
-        List<PlayerControllerSplashSplashShoot> ordenados = new List<PlayerControllerSplashSplashShoot>();
-
         foreach (PlayerControllerSplashSplashShoot p in TodosLosPlayers)
         {
-            if (p != null && p.GetInfo() != null)
-                ordenados.Add(p);
-        }
+            if (p == null || p.GetInfo() == null)
+                continue;
 
-        ordenados.Sort((a, b) =>
-        {
-            int posA = a.GetInfo().GetPosicionFinal();
-            int posB = b.GetInfo().GetPosicionFinal();
+            int slotIndex = p.player - 1;
 
-            if (posA == 0)
-                posA = 99;
+            if (slotIndex < 0 || slotIndex >= 4)
+                continue;
 
-            if (posB == 0)
-                posB = 99;
-
-            return posA.CompareTo(posB);
-        });
-
-        for (int i = 0; i < ordenados.Count && i < 4; i++)
-        {
-            PlayerInfoSplash info = ordenados[i].GetInfo();
+            PlayerInfoSplash info = p.GetInfo();
 
             int idJugador = info.GetID();
 
             if (idJugador < 1 || idJugador > 4)
-                idJugador = i + 1;
-
-            int index = idJugador - 1;
+                idJugador = slotIndex + 1;
 
             int posicion = info.GetPosicionFinal();
 
             if (posicion <= 0)
-                posicion = i + 1;
+                posicion = 4;
 
-            DatosMinijuego.ids[index] = idJugador;
-            DatosMinijuego.posiciones[index] = posicion;
-            DatosMinijuego.puntos[index] = (info.GetLife() * 100) + info.GetMunicion();
-            DatosMinijuego.estrellas[index] = 0;
-            DatosMinijuego.monedas[index] = 0;
+            DatosMinijuego.ids[slotIndex] = idJugador;
+            DatosMinijuego.posiciones[slotIndex] = posicion;
+            DatosMinijuego.puntos[slotIndex] = (info.GetLife() * 100) + info.GetMunicion();
+            DatosMinijuego.estrellas[slotIndex] = 0;
+            DatosMinijuego.monedas[slotIndex] = 0;
         }
 
         Debug.Log("ManagerSplashSplashShoot: datos preparados para NivelRecompensasMinijuegos.");

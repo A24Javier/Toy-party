@@ -65,7 +65,6 @@ public class PlayersChuteGol : MonoBehaviour
                 Debug.LogError($"PlayersChuteGol: no se encontró la acción {actionName} en {gameObject.name}.");
             }
         }
-        MiModelo.AsignarModeloAJugador(idPersonaje, player, img);
     }
 
     private void Update()
@@ -227,4 +226,32 @@ public class PlayersChuteGol : MonoBehaviour
     }
 
     public Sprite GetSprite() { return img.sprite; }
+
+    public void CargarDatosDesdeSnapshot(CharacterSnapshot snap)
+    {
+        if (snap == null || MiInfo == null)
+            return;
+
+        MiInfo.SetID(snap.characterId + 1);
+        MiInfo.SetIa(!snap.isPlayer);
+
+        idPersonaje = snap.characterSettingIndex;
+
+        AplicarModeloVisual();
+
+        Debug.Log(
+            $"Chute slot {player}: " +
+            $"idJugador={snap.characterId + 1}, " +
+            $"skin={idPersonaje}, " +
+            $"IA={!snap.isPlayer}"
+        );
+    }
+
+    public void AplicarModeloVisual()
+    {
+        if (MiModelo != null)
+        {
+            MiModelo.AsignarModeloAJugador(idPersonaje, player, img);
+        }
+    }
 }

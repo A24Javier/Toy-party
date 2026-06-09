@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+
 public class PlayerRecompensas : MonoBehaviour
 {
     [SerializeField] private ManagerFinMinijuego man;
@@ -19,16 +20,11 @@ public class PlayerRecompensas : MonoBehaviour
     public int estrellas = 0;
     public int moneda = 0;
 
-    //modelo
-    [SerializeField] ModelController MiModelo;
+    [Header("Modelo")]
+    [SerializeField] private ModelController MiModelo;
     public int IDPersonaje;
     public int player;
-    Image img;
-
-    private void Start()
-    {
-        MiModelo.AsignarModeloAJugador(IDPersonaje, player, img);
-    }
+    [SerializeField] private Image img;
 
     private void OnEnable()
     {
@@ -43,6 +39,14 @@ public class PlayerRecompensas : MonoBehaviour
         if (man != null)
         {
             man.RemoveRec(this);
+        }
+    }
+
+    public void AplicarModeloVisual()
+    {
+        if (MiModelo != null)
+        {
+            MiModelo.AsignarModeloAJugador(IDPersonaje, player, img);
         }
     }
 

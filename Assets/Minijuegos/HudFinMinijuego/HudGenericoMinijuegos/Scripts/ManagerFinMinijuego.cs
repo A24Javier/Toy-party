@@ -226,6 +226,24 @@ public class ManagerFinMinijuego : MonoBehaviour
             players[i].id = idJugador;
             players[i].playerPos = "Player" + (i + 1);
 
+            players[i].player = i + 1;
+
+            int partyIndex = idJugador - 1;
+
+            if (PartySession.instance != null &&
+                PartySession.instance.characters != null &&
+                partyIndex >= 0 &&
+                partyIndex < PartySession.instance.characters.Length &&
+                PartySession.instance.characters[partyIndex] != null)
+            {
+                players[i].IDPersonaje = PartySession.instance.characters[partyIndex].characterSettingIndex;
+                players[i].AplicarModeloVisual();
+            }
+            else
+            {
+                Debug.LogWarning("ManagerFinMinijuego: no se pudo cargar skin para idJugador " + idJugador);
+            }
+
             players[i].posicion = DatosMinijuego.posiciones[indexDatos];
             players[i].estrellas = DatosMinijuego.estrellas[indexDatos];
             players[i].moneda = DatosMinijuego.monedas[indexDatos];

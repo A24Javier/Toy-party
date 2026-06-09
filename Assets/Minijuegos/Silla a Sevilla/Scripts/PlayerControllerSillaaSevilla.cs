@@ -47,17 +47,9 @@ public class PlayerControllerSillaaSevilla : MonoBehaviour
 
     private void Start()
     {
-        if (MiInput != null && MiInput.actions != null)
-            Action = MiInput.currentActionMap.FindAction("Sit");
-
         PlayerQuiet = true;
         ActionEnCurso = false;
-
         MiPosition = transform.position;
-
-        if (!IA && Action == null)
-            Debug.LogWarning($"{gameObject.name} no encontró la acción 'Sit'.");
-        MiModelo.AsignarModeloAJugador(NumPerosnaje, Player, perfil);
     }
 
     private void Update()
@@ -165,5 +157,52 @@ public class PlayerControllerSillaaSevilla : MonoBehaviour
     public bool TieneSilla()
     {
         return SillaMia != null;
+    }
+
+    public void CargarDatosDesdeSnapshot(CharacterSnapshot snap)
+    {
+        if (snap == null)
+            return;
+
+        id = snap.characterId + 1;
+        IA = !snap.isPlayer;
+        NumPerosnaje = snap.characterSettingIndex;
+
+        ConfigurarInputSegunIA();
+        AplicarModeloVisual();
+
+        Debug.Log(
+            $"Silla slot {Player}: " +
+            $"idJugador={id}, " +
+            $"skin={NumPerosnaje}, " +
+            $"IA={IA}"
+        );
+    }
+
+    private void ConfigurarInputSegunIA()
+    {
+        if (IA)
+        {
+            Action = null;
+            return;
+        }
+
+        if (MiInput != null && MiInput.currentActionMap != null)
+        {
+            Action = MiInput.currentActionMap.FindAction("Sit");
+        }
+
+        if (!IA && Action == null)
+        {
+            Debug.LogWarning($"{gameObject.name} no encontró la acción 'Sit'.");
+        }
+    }
+
+    public void AplicarModeloVisual()
+    {
+        if (MiModelo != null)
+        {
+            MiModelo.AsignarModeloAJugador(NumPerosnaje, Player, perfil);
+        }
     }
 }

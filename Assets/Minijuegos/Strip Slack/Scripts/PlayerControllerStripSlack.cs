@@ -7,11 +7,13 @@ public class PlayerControllerStripSlack : MonoBehaviour
     [Header("Datos")]
     public int id;
     public bool EsIA;
-    public int player;
+    public int player; // Slot del minijuego: 1 o 2
 
     private float force;
-    //estas variables son para el modelo del personaje
+
+    [Header("Modelo")]
     public int personaje;
+    [SerializeField] private ModelController MiModelo;
 
     [Header("UI")]
     [SerializeField] private Image PerfilImg;
@@ -46,31 +48,9 @@ public class PlayerControllerStripSlack : MonoBehaviour
 
     private float impulsoActual = 0f;
 
-    [Header("Instancia script cargaModelo")]
-    [SerializeField] ModelController MiModelo;
-
     private void Awake()
     {
         MiInput = GetComponent<UnityEngine.InputSystem.PlayerInput>();
-
-        if (MiInput == null)
-        {
-            Debug.LogWarning($"{gameObject.name} no tiene UnityEngine.InputSystem.PlayerInput.");
-            return;
-        }
-
-        if (MiInput.currentActionMap == null)
-        {
-            Debug.LogWarning($"{gameObject.name} tiene PlayerInput, pero currentActionMap es null.");
-            return;
-        }
-
-        MiAction = MiInput.currentActionMap.FindAction("Force");
-
-        if (MiAction == null)
-        {
-            Debug.LogWarning($"{gameObject.name} no encontró la acción 'Force'.");
-        }
     }
 
     private void OnEnable()
@@ -96,16 +76,66 @@ public class PlayerControllerStripSlack : MonoBehaviour
             id = player;
         }
 
-        if (!EsIA && MiInput == null)
+        // El manager asignará EsIA, id y personaje desde PartySession.
+        // Por eso aquí no cargamos modelo todavía.
+    }
+
+    public void CargarDatosDesdeSnapshot(CharacterSnapshot snap)
+    {
+        if (snap == null)
+            return;
+
+        id = snap.characterId + 1;
+        EsIA = !snap.isPlayer;
+        SetPersonaje(snap.characterSettingIndex);
+
+        ConfigurarInputSegunIA();
+        AplicarModeloVisual();
+
+        Debug.Log(
+            $"StripSlack slot {player}: " +
+            $"idJugador={id}, " +
+            $"skin={snap.characterSettingIndex}, " +
+            $"EsIA={EsIA}"
+        );
+    }
+
+    private void ConfigurarInputSegunIA()
+    {
+        if (EsIA)
         {
-            Debug.LogWarning($"{gameObject.name} no tiene PlayerInput y no es IA.");
+            MiAction = null;
+            return;
         }
 
-        if (!EsIA && MiAction == null)
+        if (MiInput == null)
+        {
+            Debug.LogWarning($"{gameObject.name} no tiene UnityEngine.InputSystem.PlayerInput.");
+            return;
+        }
+
+        if (MiInput.currentActionMap == null)
+        {
+            Debug.LogWarning($"{gameObject.name} tiene PlayerInput, pero currentActionMap es null.");
+            return;
+        }
+
+        MiInput.currentActionMap.Enable();
+
+        MiAction = MiInput.currentActionMap.FindAction("Force");
+
+        if (MiAction == null)
         {
             Debug.LogWarning($"{gameObject.name} no encontró la acción 'Force'.");
         }
-        MiModelo.AsignarModeloAJugador(GetPersonaje(), player, PerfilImg);
+    }
+
+    public void AplicarModeloVisual()
+    {
+        if (MiModelo != null)
+        {
+            MiModelo.AsignarModeloAJugador(GetPersonaje(), player, PerfilImg);
+        }
     }
 
     private void Update()
@@ -177,12 +207,10 @@ public class PlayerControllerStripSlack : MonoBehaviour
 
         if (player == 1)
         {
-            // Jugador 1 empieza a la derecha y empuja hacia la izquierda.
             xFinal = limiteMaximo - impulsoActual;
         }
         else
         {
-            // Jugador 2 empieza a la izquierda y empuja hacia la derecha.
             xFinal = -limiteMaximo + impulsoActual;
         }
 

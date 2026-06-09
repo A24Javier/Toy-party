@@ -51,6 +51,7 @@ public class Clicker2v2Manager : MonoBehaviour
         turnoB = jugadorB1;
 
         ConfigurarJugadores();
+        CargarDatosDesdePartySession();
         ActualizarUI();
     }
 
@@ -70,6 +71,7 @@ public class Clicker2v2Manager : MonoBehaviour
         jugador.manager = this;
         jugador.equipoId = equipo;
         jugador.idJugador = id;
+        jugador.player = id;
     }
 
     public void RegistrarClick(PlayerClicker jugador)
@@ -215,5 +217,38 @@ public class Clicker2v2Manager : MonoBehaviour
 
             textoTurnos.text = $"Turno A: {nombreTurnoA}\nTurno B: {nombreTurnoB}";
         }
+    }
+
+    private void CargarDatosDesdePartySession()
+    {
+        CargarJugadorDesdePartySession(jugadorA1);
+        CargarJugadorDesdePartySession(jugadorA2);
+        CargarJugadorDesdePartySession(jugadorB1);
+        CargarJugadorDesdePartySession(jugadorB2);
+    }
+
+    private void CargarJugadorDesdePartySession(PlayerClicker jugador)
+    {
+        if (jugador == null)
+            return;
+
+        if (PartySession.instance == null || PartySession.instance.characters == null)
+        {
+            Debug.LogWarning("Clicker2v2Manager: no existe PartySession.");
+            jugador.AplicarModeloVisual();
+            return;
+        }
+
+        int slotIndex = jugador.player - 1;
+
+        if (slotIndex < 0 || slotIndex >= PartySession.instance.characters.Length)
+        {
+            Debug.LogWarning("Clicker2v2Manager: player fuera de rango: " + jugador.player);
+            return;
+        }
+
+        CharacterSnapshot snap = PartySession.instance.characters[slotIndex];
+
+        jugador.CargarDatosDesdeSnapshot(snap);
     }
 }

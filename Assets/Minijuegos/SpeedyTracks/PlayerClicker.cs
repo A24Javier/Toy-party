@@ -29,7 +29,6 @@ public class PlayerClicker : MonoBehaviour
     Image img;
     private void Start()
     {
-        MiModelo.AsignarModeloAJugador(idPerosnaje,player,img);
         if (esNPC)
         {
             StartCoroutine(NPCRutina());
@@ -72,5 +71,32 @@ public class PlayerClicker : MonoBehaviour
     public void StopPlayer()
     {
         puedeJugar = false;
+    }
+
+    public void CargarDatosDesdeSnapshot(CharacterSnapshot snap)
+    {
+        if (snap == null)
+            return;
+
+        idJugador = snap.characterId + 1;
+        esNPC = !snap.isPlayer;
+        idPerosnaje = snap.characterSettingIndex;
+
+        AplicarModeloVisual();
+         
+        Debug.Log(
+            $"Clicker slot {player}: " +
+            $"idJugador={idJugador}, " +
+            $"skin={idPerosnaje}, " +
+            $"esNPC={esNPC}"
+        );
+    }
+
+    public void AplicarModeloVisual()
+    {
+        if (MiModelo != null)
+        {
+            MiModelo.AsignarModeloAJugador(idPerosnaje, player, img);
+        }
     }
 }
